@@ -21,12 +21,12 @@
   background: var(--color-accent-500);
   box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
 
-  &:active {
-    background: var(--color-accent-700);
-  }
-
   &:hover {
     background: var(--color-accent-300);
+  }
+
+  &:active {
+    background: var(--color-accent-700);
   }
 
   &:focus-visible {
