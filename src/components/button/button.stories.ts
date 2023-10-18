@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
- 
+
 import { Button } from './'
- 
+
 const meta = {
   title: 'Components/Button',
   component: Button,
@@ -13,10 +13,10 @@ const meta = {
     },
   },
 } satisfies Meta<typeof Button>
- 
+
 export default meta
 type Story = StoryObj<typeof meta>
- 
+
 export const Primary: Story = {
   args: {
     variant: 'primary',
@@ -24,12 +24,22 @@ export const Primary: Story = {
     disabled: false,
   },
 }
- 
+
 export const Secondary: Story = {
   args: {
     variant: 'secondary',
     children: 'Secondary Button',
     disabled: false,
+  },
+}
+export const PrimaryWithIcon: Story = {
+  args: {
+    variant: 'primary',
+    children: 'Primary Button',
+    disabled: false,
+    IconID: 'log-out',
+    height: '16',
+    width: '16',
   },
 }
 export const Tertiary: Story = {
@@ -46,7 +56,17 @@ export const Link: Story = {
     disabled: false,
   },
 }
- 
+export const SecondaryWithIcon: Story = {
+  args: {
+    variant: 'primary',
+    children: 'Primary Button',
+    disabled: false,
+    IconID: 'log-out',
+    height: '16',
+    width: '16',
+  },
+}
+
 export const FullWidth: Story = {
   args: {
     variant: 'primary',
