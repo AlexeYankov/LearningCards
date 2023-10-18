@@ -86,7 +86,24 @@
 }
 
 .link {
-  background-color: yellow;
+  color: var(--color-accent-500);
+
+  &:hover {
+    color: var(--color-accent-300);
+  }
+
+  &:active {
+    color: var(--color-accent-700);
+  }
+
+  &:focus-visible {
+    padding: 6px 15px;
+    border-radius: 20px;
+  }
+
+  &:disabled {
+    color: var(--color-accent-900);
+  }
 }
 
 .fullWidth {
