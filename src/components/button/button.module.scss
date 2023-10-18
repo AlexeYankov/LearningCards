@@ -1,19 +1,57 @@
+.button {
+  all: unset;
+
+  cursor: pointer;
+
+  display: inline-flex;
+  justify-content: center;
+
+  padding: 6px 28px;
+
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  font-style: normal;
+  line-height: var(--line-height-m);
+  color: var(--color-light-100);
+
+  border-radius: 4px;
+}
+
 .primary {
-    background-color: red;
+  background: var(--color-accent-500);
+  box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+
+  &:active {
+    background: var(--color-accent-700);
   }
-   
-  .secondary {
-    background-color: green;
+
+  &:hover {
+    background: var(--color-accent-300);
   }
-   
-  .tertiary {
-    background-color: blue;
+
+  &:focus-visible {
+    background: var(--color-accent-500);
+    outline: 2px solid var(--color-info-700);
   }
-   
-  .link {
-    background-color: yellow;
+
+  &:disabled {
+    color: var(--color-light-900);
+    background: var(--color-accent-900);
   }
-   
-  .fullWidth {
-    width: 100%;
-  }
+}
+
+.secondary {
+  background-color: green;
+}
+
+.tertiary {
+  background-color: blue;
+}
+
+.link {
+  background-color: yellow;
+}
+
+.fullWidth {
+  width: 100%;
+}
