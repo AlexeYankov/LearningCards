@@ -26,12 +26,9 @@ export const TextField = <T extends ElementType = 'input'>(
   const [icon, setIcon] = useState('eye-outline')
 
   const onClickHandler = () => {
-    if (toggleType === 'password') {
-      setToggleType('text')
-      setIcon('eye-off-outline')
-    } else {
-      setToggleType(`password`)
-      setIcon('eye-outline')
+    if (!disabled) {
+      setToggleType(prevType => (prevType === 'password' ? 'text' : 'password'))
+      setIcon(prevIcon => (prevIcon === 'eye-outline' ? 'eye-off-outline' : 'eye-outline'))
     }
   }
   return (

@@ -45,3 +45,17 @@ export const Password: Story = {
     height: '20',
   },
 }
+
+export const PasswordWithError: Story = {
+  args: {
+    type: 'password',
+    disabled: false,
+    label: 'Input',
+    placeholder: 'password',
+    value: 'some password',
+    IconID: 'eye-outline',
+    width: '20',
+    height: '20',
+    error: 'Error!',
+  },
+}
