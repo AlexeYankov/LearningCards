@@ -55,7 +55,7 @@ export const TextField = <T extends ElementType = 'input'>(
             </div>
           )}
         </div>
-        {error ? <span className={s.errorRed}>{error}</span> : ''}
+        {error && <span className={s.errorRed}>{error}</span>}
       </label>
     </div>
   )
