@@ -45,3 +45,16 @@ export const Password: Story = {
     height: '20',
   },
 }
+
+export const Search: Story = {
+  args: {
+    type: 'search',
+    disabled: false,
+    label: 'Input',
+    placeholder: 'Input search',
+    IconStart: 'search-outline',
+    IconEnd: 'close-outline',
+    width: '16',
+    height: '16',
+  },
+}

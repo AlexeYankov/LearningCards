@@ -23,7 +23,7 @@
 .input {
   width: 100%;
   height: 36px;
-  padding: 6px 12px;
+  padding: 6px 40px 6px 12px;
 
   font-size: 16px;
   font-weight: var(--font-weight-regular);
@@ -46,7 +46,7 @@
 
   &:focus,
   &:active:not(:disabled) {
-    color: var(--color-dark-100);
+    color: var(--color-light-100);
     border-color: var(--color-light-100);
   }
 
@@ -81,4 +81,51 @@
   svg {
     fill: var(--color-dark-300);
   }
+}
+
+.searchIcon {
+  svg {
+    cursor: pointer;
+
+    position: absolute;
+
+    width: 16px;
+    height: 16px;
+
+    fill: var(--color-light-100);
+  }
+
+  svg:first-child {
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+  }
+
+  svg:last-child {
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
+}
+
+.input[type='search'] {
+  padding-left: 40px;
+}
+
+input[type='text']::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.input[type='search']::-webkit-search-cancel-button {
+  display: none;
+}
+
+.input[type='search']::-ms-clear {
+  display: none;
+}
+
+.input[type='search']::-webkit-search-decoration {
+  display: none;
 }

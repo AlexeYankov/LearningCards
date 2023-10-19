@@ -19,17 +19,26 @@ export const TextField = <T extends ElementType = 'input'>(
     error,
     placeholder,
     disabled,
+    IconStart,
+    IconEnd,
     ...rest
   } = props
 
   const [toggleType, setToggleType] = useState(type)
   const [icon, setIcon] = useState(IconID)
+  const [search, setSearch] = useState()
+  const [text, setText] = useState(value)
 
   const onClickHandler = () => {
     if (!disabled) {
       setToggleType(prevType => (prevType === 'password' ? 'text' : 'password'))
       setIcon(prevIcon => (prevIcon === 'eye-outline' ? 'eye-off-outline' : 'eye-outline'))
     }
+  }
+
+  const clearSearch = () => {
+    setSearch(search)
+    setText('')
   }
 
   const disabledLabelClass = disabled ? s.disabledLabel : ''
@@ -44,16 +53,31 @@ export const TextField = <T extends ElementType = 'input'>(
           <Component
             className={`${s.input} ${isShowErrorClass}`}
             type={type !== toggleType ? 'text' : type}
-            value={value}
+            value={text}
+            onChange={e => {
+              setText(e.currentTarget.value)
+            }}
             placeholder={placeholder}
             disabled={disabled}
             {...rest}
           />
-          {IconID && (
+          {type === 'password' && IconID && (
             <div className={`${s.passwordIcon} ${disabledIconClass}`} onClick={onClickHandler}>
               <svg width={width} height={height} viewBox={viewBox}>
                 <use xlinkHref={`${sprite}#${icon}`} />
               </svg>
+            </div>
+          )}
+          {type === 'search' && (
+            <div className={`${s.searchIcon} ${disabledIconClass}`}>
+              <svg width={width} height={height} viewBox={viewBox}>
+                <use xlinkHref={`${sprite}#${IconStart}`} />
+              </svg>
+              {!!text && (
+                <svg width={width} height={height} viewBox={viewBox} onClick={clearSearch}>
+                  <use xlinkHref={`${sprite}#${IconEnd}`} />
+                </svg>
+              )}
             </div>
           )}
         </div>
@@ -77,4 +101,6 @@ type TextFieldProps<T extends ElementType = 'input'> = {
   label?: string
   error?: string | null
   placeholder?: string
+  IconStart?: string
+  IconEnd?: string
 } & ComponentPropsWithoutRef<T>
