@@ -29,5 +29,6 @@ export const Error: Story = {
     label: 'Input',
     placeholder: 'Error',
     error: 'Error!',
+    value: 'error value',
   },
 }

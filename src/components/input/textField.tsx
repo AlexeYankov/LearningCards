@@ -5,6 +5,8 @@ export const TextField = <T extends ElementType = 'input'>(
   props: TextFieldProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof TextFieldProps<T>>
 ) => {
   const {
+    value,
+    setValue,
     as: Component = 'input',
     type = 'text',
     className,
@@ -26,9 +28,10 @@ export const TextField = <T extends ElementType = 'input'>(
           <Component
             className={`${s.input} ${error ? s.error : ''}`}
             type={type}
-            {...rest}
+            value={value}
             placeholder={placeholder}
             disabled={disabled}
+            {...rest}
           />
         </div>
         {error ? <span className={s.errorRed}>{error}</span> : ''}
@@ -38,8 +41,10 @@ export const TextField = <T extends ElementType = 'input'>(
 }
 
 type TextFieldProps<T extends ElementType = 'input'> = {
+  value?: string
+  setValue?: (value: string) => void
   as?: T
-  children: ReactNode
+  children?: ReactNode
   className?: string
   type?: 'text' | 'password' | 'search'
   width?: string
