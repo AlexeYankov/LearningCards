@@ -32,3 +32,16 @@ export const Error: Story = {
     value: 'error value',
   },
 }
+
+export const Password: Story = {
+  args: {
+    type: 'password',
+    disabled: false,
+    label: 'Input',
+    placeholder: 'password',
+    value: 'some password',
+    IconID: 'eye-outline',
+    width: '20',
+    height: '20',
+  },
+}

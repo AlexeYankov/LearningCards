@@ -15,6 +15,7 @@
 }
 
 .inputContainer {
+  position: relative;
   display: flex;
   align-items: center;
 }
@@ -60,4 +61,18 @@
 
 .errorRed {
   color: var(--color-danger-300);
+}
+
+.passwordIcon {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+
+  width: 20px;
+  height: 20px;
+
+  svg {
+    cursor: pointer;
+    fill: var(--color-light-100);
+  }
 }
