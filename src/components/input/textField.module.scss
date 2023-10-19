@@ -76,3 +76,9 @@
     fill: var(--color-light-100);
   }
 }
+
+.disabledIcon {
+  svg {
+    fill: var(--color-dark-300);
+  }
+}

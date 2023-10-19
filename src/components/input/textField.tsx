@@ -23,7 +23,7 @@ export const TextField = <T extends ElementType = 'input'>(
   } = props
 
   const [toggleType, setToggleType] = useState(type)
-  const [icon, setIcon] = useState('eye-outline')
+  const [icon, setIcon] = useState(IconID)
 
   const onClickHandler = () => {
     if (!disabled) {
@@ -31,13 +31,18 @@ export const TextField = <T extends ElementType = 'input'>(
       setIcon(prevIcon => (prevIcon === 'eye-outline' ? 'eye-off-outline' : 'eye-outline'))
     }
   }
+
+  const disabledLabelClass = disabled ? s.disabledLabel : ''
+  const disabledIconClass = disabled ? s.disabledIcon : ''
+  const isShowErrorClass = error ? s.error : ''
+
   return (
     <div className={s.box}>
       <label>
-        <div className={`${s.label} ${disabled ? s.disabledLabel : ''}`}> {label}</div>
+        <div className={`${s.label} ${disabledLabelClass}`}> {label}</div>
         <div className={s.inputContainer}>
           <Component
-            className={`${s.input} ${error ? s.error : ''}`}
+            className={`${s.input} ${isShowErrorClass}`}
             type={type !== toggleType ? 'text' : type}
             value={value}
             placeholder={placeholder}
@@ -45,7 +50,7 @@ export const TextField = <T extends ElementType = 'input'>(
             {...rest}
           />
           {IconID && (
-            <div className={s.passwordIcon} onClick={onClickHandler}>
+            <div className={`${s.passwordIcon} ${disabledIconClass}`} onClick={onClickHandler}>
               <svg width={width} height={height} viewBox={viewBox}>
                 <use xlinkHref={`${sprite}#${icon}`} />
               </svg>
