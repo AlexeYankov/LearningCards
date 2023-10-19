@@ -38,8 +38,14 @@
     border-color: var(--color-dark-300);
   }
 
+  &.error {
+    color: var(--color-danger-300);
+    border-color: var(--color-danger-300);
+  }
+
   &:focus,
   &:active:not(:disabled) {
+    color: var(--color-dark-100);
     border-color: var(--color-light-100);
   }
 
@@ -50,4 +56,8 @@
 
 .disabledLabel {
   color: var(--color-dark-300);
+}
+
+.errorRed {
+  color: var(--color-danger-300);
 }

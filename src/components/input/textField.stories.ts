@@ -21,3 +21,13 @@ export const Default: Story = {
     placeholder: 'Input',
   },
 }
+
+export const Error: Story = {
+  args: {
+    type: 'text',
+    disabled: false,
+    label: 'Input',
+    placeholder: 'Error',
+    error: 'Error!',
+  },
+}

@@ -24,14 +24,14 @@ export const TextField = <T extends ElementType = 'input'>(
         <div className={`${s.label} ${disabled ? s.disabledLabel : ''}`}> {label}</div>
         <div className={s.inputContainer}>
           <Component
-            className={s.input}
+            className={`${s.input} ${error ? s.error : ''}`}
             type={type}
             {...rest}
             placeholder={placeholder}
             disabled={disabled}
           />
         </div>
-        {error && <span>{error}</span>}
+        {error ? <span className={s.errorRed}>{error}</span> : ''}
       </label>
     </div>
   )
