@@ -32,4 +32,22 @@
   border: 1px solid var(--color-dark-300);
   border-radius: 2px;
   outline: none;
+
+  &:disabled {
+    color: var(--color-dark-300);
+    border-color: var(--color-dark-300);
+  }
+
+  &:focus,
+  &:active:not(:disabled) {
+    border-color: var(--color-light-100);
+  }
+
+  &:hover:not(&:disabled) {
+    background-color: var(--color-dark-700);
+  }
+}
+
+.disabledLabel {
+  color: var(--color-dark-300);
 }

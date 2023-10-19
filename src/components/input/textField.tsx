@@ -15,14 +15,21 @@ export const TextField = <T extends ElementType = 'input'>(
     label,
     error,
     placeholder,
+    disabled,
     ...rest
   } = props
   return (
     <div className={s.box}>
       <label>
-        <div className={s.label}> {label}</div>
+        <div className={`${s.label} ${disabled ? s.disabledLabel : ''}`}> {label}</div>
         <div className={s.inputContainer}>
-          <Component className={s.input} type={type} {...rest} placeholder={placeholder} />
+          <Component
+            className={s.input}
+            type={type}
+            {...rest}
+            placeholder={placeholder}
+            disabled={disabled}
+          />
         </div>
         {error && <span>{error}</span>}
       </label>
