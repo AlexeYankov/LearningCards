@@ -11,7 +11,7 @@ export const DropDownMenu = () => {
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content align={'end'} className={s.content} sideOffset={5}>
+        <DropdownMenu.Content loop align={'end'} className={s.content} sideOffset={12}>
           <DropdownMenu.Item className={`${s.item} `}>
             <div className={s.inner}>
               <img className={s.img} src={profileImage} alt="" />
@@ -41,6 +41,7 @@ export const DropDownMenu = () => {
               <div>Sign Out</div>
             </div>
           </DropdownMenu.Item>
+          <DropdownMenu.Arrow className={s.arrow} />
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
