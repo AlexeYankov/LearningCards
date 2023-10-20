@@ -89,3 +89,19 @@ export const Overline: Story = {
     children: `Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH`,
   },
 }
+
+export const Link1: Story = {
+  args: {
+    as: 'a',
+    variant: 'link1',
+    children: `Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH`,
+  },
+}
+
+export const Link2: Story = {
+  args: {
+    as: 'a',
+    variant: 'link2',
+    children: `Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH`,
+  },
+}
