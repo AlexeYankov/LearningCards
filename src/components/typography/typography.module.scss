@@ -1,0 +1,12 @@
+body {
+  background-color: var(--color-light-100);
+}
+
+.typography {
+  &.large {
+    font-size: 26px;
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-l);
+    color: var(--color-dark-900);
+  }
+}
