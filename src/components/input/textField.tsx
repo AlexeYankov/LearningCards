@@ -45,7 +45,6 @@ export const TextField = <T extends ElementType = 'input'>(
   const disabledLabelClass = disabled ? s.disabledLabel : ''
   const disabledIconClass = disabled ? s.disabledIcon : ''
   const isShowErrorClass = error ? s.error : ''
-  const isShowIconDisabled = disabled ? s.disabledIcon : ''
 
   return (
     <div className={s.box}>
@@ -63,7 +62,7 @@ export const TextField = <T extends ElementType = 'input'>(
           />
           {type === 'password' && IconID && (
             <PasswordIcon
-              className={`${s.passwordIcon} ${isShowIconDisabled}`}
+              className={`${s.passwordIcon} ${disabledIconClass}`}
               width={width}
               height={height}
               viewBox={viewBox}
