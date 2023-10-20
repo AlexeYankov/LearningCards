@@ -5,6 +5,15 @@ const meta = {
   title: 'Components/Typography',
   component: Typography,
   tags: ['autodocs'],
+  parameters: {
+    backgrounds: {
+      default: 'black',
+      values: [
+        { name: 'white', value: '#fff' },
+        { name: 'black', value: '#000' },
+      ],
+    },
+  },
 } satisfies Meta<typeof Typography>
 
 export default meta

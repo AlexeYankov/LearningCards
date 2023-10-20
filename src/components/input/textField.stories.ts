@@ -8,6 +8,15 @@ const meta = {
   argTypes: {
     type: ['text', 'password', 'search'],
   },
+  parameters: {
+    backgrounds: {
+      default: 'black',
+      values: [
+        { name: 'white', value: '#fff' },
+        { name: 'black', value: '#000' },
+      ],
+    },
+  },
 } satisfies Meta<typeof TextField>
 
 export default meta

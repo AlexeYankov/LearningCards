@@ -12,6 +12,15 @@ const meta = {
       control: { type: 'radio' },
     },
   },
+  parameters: {
+    backgrounds: {
+      default: 'black',
+      values: [
+        { name: 'white', value: '#fff' },
+        { name: 'black', value: '#000' },
+      ],
+    },
+  },
 } satisfies Meta<typeof Button>
 
 export default meta
