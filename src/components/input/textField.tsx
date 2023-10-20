@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode, useState } from 'react'
 import s from './textField.module.scss'
-import sprite from '@/asserts/sprite.svg'
+import { PasswordIcon } from '@/asserts/icons/components/PasswordIcon.tsx'
+import { SearchIcon } from '@/asserts/icons/components/SearchIcon.tsx'
 
 export const TextField = <T extends ElementType = 'input'>(
   props: TextFieldProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof TextFieldProps<T>>
@@ -26,7 +27,7 @@ export const TextField = <T extends ElementType = 'input'>(
 
   const [toggleType, setToggleType] = useState(type)
   const [icon, setIcon] = useState(IconID)
-  const [search, setSearch] = useState()
+  const [search, setSearch] = useState('')
   const [text, setText] = useState(value)
 
   const onClickHandler = () => {
@@ -44,6 +45,7 @@ export const TextField = <T extends ElementType = 'input'>(
   const disabledLabelClass = disabled ? s.disabledLabel : ''
   const disabledIconClass = disabled ? s.disabledIcon : ''
   const isShowErrorClass = error ? s.error : ''
+  const isShowIconDisabled = disabled ? s.disabledIcon : ''
 
   return (
     <div className={s.box}>
@@ -54,31 +56,32 @@ export const TextField = <T extends ElementType = 'input'>(
             className={`${s.input} ${isShowErrorClass}`}
             type={type !== toggleType ? 'text' : type}
             value={text}
-            onChange={e => {
-              setText(e.currentTarget.value)
-            }}
+            onChange={e => setText(e.currentTarget.value)}
             placeholder={placeholder}
             disabled={disabled}
             {...rest}
           />
           {type === 'password' && IconID && (
-            <div className={`${s.passwordIcon} ${disabledIconClass}`} onClick={onClickHandler}>
-              <svg width={width} height={height} viewBox={viewBox}>
-                <use xlinkHref={`${sprite}#${icon}`} />
-              </svg>
-            </div>
+            <PasswordIcon
+              className={`${s.passwordIcon} ${isShowIconDisabled}`}
+              width={width}
+              height={height}
+              viewBox={viewBox}
+              IconID={icon}
+              setToggle={onClickHandler}
+            />
           )}
           {type === 'search' && (
-            <div className={`${s.searchIcon} ${disabledIconClass}`}>
-              <svg width={width} height={height} viewBox={viewBox}>
-                <use xlinkHref={`${sprite}#${IconStart}`} />
-              </svg>
-              {!!text && (
-                <svg width={width} height={height} viewBox={viewBox} onClick={clearSearch}>
-                  <use xlinkHref={`${sprite}#${IconEnd}`} />
-                </svg>
-              )}
-            </div>
+            <SearchIcon
+              className={`${s.searchIcon} ${disabledIconClass}`}
+              clearSearch={clearSearch}
+              IconStart={IconStart}
+              IconEnd={IconEnd}
+              value={text}
+              width={width}
+              height={height}
+              viewBox={viewBox}
+            />
           )}
         </div>
         {error && <span className={s.errorRed}>{error}</span>}
