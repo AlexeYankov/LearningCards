@@ -41,3 +41,51 @@ export const Heading3: Story = {
     children: `Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH`,
   },
 }
+
+export const Body1: Story = {
+  args: {
+    as: 'p',
+    variant: 'body1',
+    children: `Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH`,
+  },
+}
+
+export const Body2: Story = {
+  args: {
+    as: 'p',
+    variant: 'body2',
+    children: `Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH`,
+  },
+}
+
+export const Subtitle1: Story = {
+  args: {
+    as: 'p',
+    variant: 'subtitle1',
+    children: `Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH`,
+  },
+}
+
+export const Subtitle2: Story = {
+  args: {
+    as: 'p',
+    variant: 'subtitle2',
+    children: `Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH`,
+  },
+}
+
+export const Caption: Story = {
+  args: {
+    as: 'span',
+    variant: 'caption',
+    children: `Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH`,
+  },
+}
+
+export const Overline: Story = {
+  args: {
+    as: 'p',
+    variant: 'overline',
+    children: `Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH`,
+  },
+}
