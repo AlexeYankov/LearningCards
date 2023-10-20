@@ -12,8 +12,32 @@ type Story = StoryObj<typeof meta>
 
 export const Large: Story = {
   args: {
-    as: 'h1',
+    as: 'span',
     variant: 'large',
-    children: `Carosserie Test ZürichStauffacherstrasse 318004 Zürich, ZH, CH`,
+    children: `Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH`,
+  },
+}
+
+export const Heading1: Story = {
+  args: {
+    as: 'h1',
+    variant: 'heading1',
+    children: `Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH`,
+  },
+}
+
+export const Heading2: Story = {
+  args: {
+    as: 'h2',
+    variant: 'heading2',
+    children: `Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH`,
+  },
+}
+
+export const Heading3: Story = {
+  args: {
+    as: 'h3',
+    variant: 'heading3',
+    children: `Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH`,
   },
 }

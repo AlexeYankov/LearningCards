@@ -3,10 +3,27 @@ body {
 }
 
 .typography {
+  color: var(--color-dark-900);
+
   &.large {
     font-size: 26px;
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-l);
-    color: var(--color-dark-900);
+  }
+
+  &.heading1 {
+    font-size: 20px;
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-l);
+  }
+
+  &.heading2 {
+    font-size: 18px;
+    font-weight: var(--font-weight-bold);
+  }
+
+  &.heading3 {
+    font-size: 16px;
+    font-weight: var(--font-weight-bold);
   }
 }
