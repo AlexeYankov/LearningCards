@@ -1,0 +1,103 @@
+/* reset */
+button {
+  all: unset;
+  cursor: pointer;
+  max-width: 50px;
+}
+
+.SelectTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 4px 4px 4px 4px;
+  font-size: 13px;
+  line-height: 1;
+  height: 24px;
+  border: 1px solid var(--color-dark-500);
+  background-color: var(--color-dark-700);
+  color: var(--color-light-100);
+  transition: all 0.35s;
+  span {
+    display: flex;
+    padding-left: 5px;
+    margin: 0px;
+    min-width: 50px;
+  }
+  span svg {
+    margin-left: -23px;
+  }
+}
+.SelectTrigger:hover {
+  // background-color: var(--mauve-3);
+}
+.SelectTrigger:focus {
+  // box-shadow: 0 0 0 2px red;
+  color: white;
+}
+.SelectTrigger:active {
+  color: white;
+}
+// .SelectTrigger[data-state] {
+//     border-radius: 4px 4px 4px 4px ;
+// }
+.SelectTrigger[data-placeholder] {
+  // color: var(--color-light-100);
+}
+
+.SelectIcon {
+  // color: Var(--color-light-100);
+  // width: 5px;
+}
+
+.SelectContent {
+  // position: relative;
+  // top: 35%;
+  border: 1px solid var(--color-dark-500);
+  border-top: none;
+  border-radius: 0px 0px 4px 4px;
+  // box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+}
+
+.SelectViewport {
+  // margin-top: 40%;
+  // margin-top: 31px;
+  background-color: var(--color-dark-700);
+  border-radius: 0px 0px 4px 4px;
+  width: 50px;
+  // padding-left: 10px;
+}
+
+.SelectItem {
+  display: flex;
+  cursor: pointer;
+  justify-content: flex-start;
+  padding-left: 5px;
+  font-size: 13px;
+  line-height: 1;
+  color: var(--color-light-100);
+  align-items: center;
+  height: 25px;
+
+  // border: 1px solid var(--color-dark-500);
+
+  user-select: none;
+}
+
+.SelectItem[data-disabled] {
+  color: var(--mauve-8);
+  pointer-events: none;
+}
+.SelectItem[data-highlighted] {
+  // padding: 0px 15px 0px 0px;
+  outline: none;
+  // width: 100%;
+  background-color: var(--color-accent-900);
+  color: var(--color-accent-300);
+}
+/* 111 */
+.SelectLabel {
+  // padding: 0 25px;
+  font-size: 12px;
+  line-height: 25px;
+  color: var(--mauve-11);
+}
