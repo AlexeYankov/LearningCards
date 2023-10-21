@@ -10,10 +10,10 @@ type PagesType = {
   arrowID: string
   color?: string
   currentPage?: number
-  startPagesFrom?: number
   height?: string
   pages: number
   reversedArrowID: string
+  startPagesFrom?: number
   viewBox?: string
   width?: string
 }
@@ -47,7 +47,7 @@ export const Pages = ({
         <use xlinkHref={`${sprite}#${arrowID}`} />
       </svg>
 
-      <PagesForRender page={page} setPage={setPage} pages={pages} />
+      <PagesForRender page={page} pages={pages} setPage={setPage} />
 
       <svg
         fill={color || 'black'}

@@ -6,19 +6,19 @@ import SelectDemo from './components/select/selectComponent'
 type PaginationType = {
   arrowColor: string
   arrowID: string
+  options: Array<number>
   pages: number
+  placeholder: number
   reversedArrowID: string
   variant?: string
-  options: Array<number>
-  placeholder: number
 }
 
 export const Pagination = ({
-  options,
-  placeholder,
   arrowColor,
   arrowID,
+  options,
   pages,
+  placeholder,
   reversedArrowID,
 }: PaginationType) => {
   return (

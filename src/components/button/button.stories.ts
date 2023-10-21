@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-
 import { Button } from './'
-
 
 const meta = {
   argTypes: {
@@ -11,6 +9,7 @@ const meta = {
       options: ['primary', 'secondary', 'tertiary', 'link'],
     },
   },
+  component: Button,
   parameters: {
     backgrounds: {
       default: 'black',
@@ -20,12 +19,12 @@ const meta = {
       ],
     },
   },
+  tags: ['autodocs'],
+  title: 'Components/Button',
 } satisfies Meta<typeof Button>
-
 
 export default meta
 type Story = StoryObj<typeof meta>
-
 
 export const Primary: Story = {
   args: {
@@ -34,7 +33,6 @@ export const Primary: Story = {
     variant: 'primary',
   },
 }
-
 
 export const Secondary: Story = {
   args: {
@@ -45,21 +43,11 @@ export const Secondary: Story = {
 }
 export const PrimaryWithIcon: Story = {
   args: {
-    variant: 'primary',
+    IconID: 'log-out',
     children: 'Primary Button',
     disabled: false,
-    IconID: 'log-out',
     height: '16',
-    width: '16',
-  },
-}
-export const PrimaryWithIcon: Story = {
-  args: {
     variant: 'primary',
-    children: 'Primary Button',
-    disabled: false,
-    IconID: 'log-out',
-    height: '16',
     width: '16',
   },
 }
@@ -79,11 +67,11 @@ export const Link: Story = {
 }
 export const SecondaryWithIcon: Story = {
   args: {
-    variant: 'primary',
+    IconID: 'log-out',
     children: 'Primary Button',
     disabled: false,
-    IconID: 'log-out',
     height: '16',
+    variant: 'primary',
     width: '16',
   },
 }
@@ -96,4 +84,3 @@ export const FullWidth: Story = {
     variant: 'primary',
   },
 }
-

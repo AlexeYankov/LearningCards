@@ -1,21 +1,22 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
-import s from './button.module.scss'
 import sprite from '@/asserts/sprite.svg'
+
+import s from './button.module.scss'
 
 export const Button = <T extends ElementType = 'button'>(
   props: ButtonProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>
 ) => {
   const {
-    variant = 'primary',
-    fullWidth,
-    className,
+    IconID,
     as: Component = 'button',
     children,
+    className,
+    fullWidth,
+    height = '24px',
+    variant = 'primary',
     viewBox = '0 0 24 24',
     width = '24px',
-    height = '24px',
-    IconID,
     ...rest
   } = props
 
@@ -27,7 +28,7 @@ export const Button = <T extends ElementType = 'button'>(
       >
         {IconID && (
           <div className={s.buttonIcon}>
-            <svg width={width} height={height} viewBox={viewBox}>
+            <svg height={height} viewBox={viewBox} width={width}>
               <use xlinkHref={`${sprite}#${IconID}`} />
             </svg>
           </div>
@@ -39,14 +40,14 @@ export const Button = <T extends ElementType = 'button'>(
 }
 
 export type ButtonProps<T extends ElementType = 'button'> = {
+  IconID?: string
   as?: T
   children: ReactNode
   className?: string
   className?: string
   fullWidth?: boolean
-  variant?: 'link' | 'primary' | 'secondary' | 'tertiary'
-  width?: string
   height?: string
+  variant?: 'link' | 'primary' | 'secondary' | 'tertiary'
   viewBox?: string
-  IconID?: string
+  width?: string
 } & ComponentPropsWithoutRef<T>

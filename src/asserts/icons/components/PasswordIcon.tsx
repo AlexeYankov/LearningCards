@@ -1,25 +1,26 @@
-import sprite from '@/asserts/sprite.svg'
 import { FC } from 'react'
 
+import sprite from '@/asserts/sprite.svg'
+
 type PropsType = {
-  width?: string
-  height?: string
-  viewBox?: string
   IconID?: string
-  setToggle: () => void
   className: string
+  height?: string
+  setToggle: () => void
+  viewBox?: string
+  width?: string
 }
 
 export const PasswordIcon: FC<PropsType> = ({
-  width,
-  height,
-  viewBox,
   IconID,
   className,
+  height,
   setToggle,
+  viewBox,
+  width,
 }) => (
   <div className={className} onClick={setToggle}>
-    <svg width={width} height={height} viewBox={viewBox}>
+    <svg height={height} viewBox={viewBox} width={width}>
       <use xlinkHref={`${sprite}#${IconID}`} />
     </svg>
   </div>

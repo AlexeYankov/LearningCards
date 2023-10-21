@@ -1,13 +1,12 @@
-import { TextField } from './'
 import { Meta, StoryObj } from '@storybook/react'
 
+import { TextField } from './'
+
 const meta = {
-  title: 'Components/TextField',
-  component: TextField,
-  tags: ['autodocs'],
   argTypes: {
     type: ['text', 'password', 'search'],
   },
+  component: TextField,
   parameters: {
     backgrounds: {
       default: 'black',
@@ -17,6 +16,8 @@ const meta = {
       ],
     },
   },
+  tags: ['autodocs'],
+  title: 'Components/TextField',
 } satisfies Meta<typeof TextField>
 
 export default meta
@@ -24,46 +25,46 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    type: 'text',
     disabled: false,
     label: 'Input',
     placeholder: 'Input',
+    type: 'text',
   },
 }
 
 export const Error: Story = {
   args: {
-    type: 'text',
     disabled: false,
+    error: 'Error!',
     label: 'Input',
     placeholder: 'Error',
-    error: 'Error!',
+    type: 'text',
     value: 'error value',
   },
 }
 
 export const Password: Story = {
   args: {
-    type: 'password',
+    IconID: 'eye-outline',
     disabled: false,
+    height: '20',
     label: 'Input',
     placeholder: 'password',
+    type: 'password',
     value: 'some password',
-    IconID: 'eye-outline',
     width: '20',
-    height: '20',
   },
 }
 
 export const Search: Story = {
   args: {
-    type: 'search',
+    IconEnd: 'close-outline',
+    IconStart: 'search-outline',
     disabled: false,
+    height: '16',
     label: 'Input',
     placeholder: 'Input search',
-    IconStart: 'search-outline',
-    IconEnd: 'close-outline',
+    type: 'search',
     width: '16',
-    height: '16',
   },
 }

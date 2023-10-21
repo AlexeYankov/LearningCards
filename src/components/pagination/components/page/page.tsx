@@ -6,7 +6,7 @@ type PageType = {
   setPage: (value: number) => void
 }
 
-export const Page = ({ el, setPage, page }: PageType) => {
+export const Page = ({ el, page, setPage }: PageType) => {
   return (
     <button
       className={`${s.page} ${page === el ? s.currentPage : ''}`}

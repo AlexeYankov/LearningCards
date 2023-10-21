@@ -1,34 +1,35 @@
-import sprite from '@/asserts/sprite.svg'
 import { FC } from 'react'
 
+import sprite from '@/asserts/sprite.svg'
+
 type PropsType = {
-  width?: string
-  height?: string
-  viewBox?: string
-  clearSearch?: () => void
-  className?: string
-  IconStart?: string
   IconEnd?: string
+  IconStart?: string
+  className?: string
+  clearSearch?: () => void
+  height?: string
   value?: string
+  viewBox?: string
+  width?: string
 }
 
 export const SearchIcon: FC<PropsType> = ({
-  width,
-  viewBox,
-  className,
-  height,
-  clearSearch,
   IconEnd,
-  value,
   IconStart,
+  className,
+  clearSearch,
+  height,
+  value,
+  viewBox,
+  width,
 }) => {
   return (
     <div className={className}>
-      <svg width={width} height={height} viewBox={viewBox}>
+      <svg height={height} viewBox={viewBox} width={width}>
         <use xlinkHref={`${sprite}#${IconStart}`} />
       </svg>
       {!!value && (
-        <svg width={width} height={height} viewBox={viewBox} onClick={clearSearch}>
+        <svg height={height} onClick={clearSearch} viewBox={viewBox} width={width}>
           <use xlinkHref={`${sprite}#${IconEnd}`} />
         </svg>
       )}

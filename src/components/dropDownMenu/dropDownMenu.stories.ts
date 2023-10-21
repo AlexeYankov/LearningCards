@@ -1,10 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react'
-import { DropDownMenu } from './dropDownMenu.tsx'
+
+import { DropDownMenu } from './dropDownMenu'
 
 const meta = {
-  title: 'Components/DropDownMenu',
   component: DropDownMenu,
-  tags: ['autodocs'],
   parameters: {
     backgrounds: {
       default: 'black',
@@ -14,6 +13,8 @@ const meta = {
       ],
     },
   },
+  tags: ['autodocs'],
+  title: 'Components/DropDownMenu',
 } satisfies Meta<typeof DropDownMenu>
 
 export default meta

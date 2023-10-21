@@ -1,7 +1,8 @@
+import { useState } from 'react'
+
 import s from './select.module.scss'
 
 import sprite from '../../../../asserts/sprite.svg'
-import { useState } from 'react'
 
 type SelectType = {
   // ArrowID: string
@@ -25,6 +26,7 @@ export const Select = ({ options }: SelectType) => {
   const optionChangeHandler = () => {
     // setValue(options[0])
   }
+
   return (
     <div className={s.selectContainer}>
       <select onClick={optionChangeHandler}>
