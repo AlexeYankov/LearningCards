@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { ChevronDownIcon } from '@radix-ui/react-icons'
+import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons'
 import * as Select from '@radix-ui/react-select'
 
 import s from './selectRadix.module.scss'
@@ -10,16 +10,25 @@ type SelectItemProps = {
   className?: string
   disabled?: boolean
   value: string
+  width?: string
+  height?: string
+  reversed?: boolean
 }
 
 type SelectProps = {
   disabled?: boolean
+  reversed?: boolean
   options: Array<number>
+  width?: string
+  height?: string
   placeholder?: number
 }
 
-const SelectDemo = ({
+const SelectRadix = ({
   disabled,
+  width,
+  height,
+  reversed,
   options,
   placeholder = options[options.length - 1],
 }: SelectProps) => {
@@ -30,10 +39,14 @@ const SelectDemo = ({
       <Select.Trigger
         aria-label={'Food'}
         className={s.SelectTrigger}
-        style={isOpen ? { borderRadius: '4px 4px 0px 0px' } : {}}
+        style={
+          isOpen
+            ? { borderRadius: '4px 4px 0px 0px', maxWidth: `${width}`, minWidth: `${width}` }
+            : { maxWidth: `${width}`, minWidth: `${width}` }
+        }
       >
-        <Select.Value placeholder={placeholder} />
-        <Select.Icon className={s.SelectIcon}>
+        <Select.Value placeholder={placeholder}/>
+        <Select.Icon className={s.SelectIcon} style={{ marginLeft: "calc(100% - 25px)" }}>
           <ChevronDownIcon />
         </Select.Icon>
       </Select.Trigger>
@@ -43,7 +56,7 @@ const SelectDemo = ({
             <Select.Group>
               {options.map(el => {
                 return (
-                  <SelectItem key={crypto.randomUUID()} value={`${el}`}>
+                  <SelectItem key={crypto.randomUUID()} value={`${el}`} width={width}>
                     {el}
                   </SelectItem>
                 )
@@ -57,13 +70,18 @@ const SelectDemo = ({
 }
 
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
-  ({ children, className, ...props }, forwardedRef) => {
+  ({ children, width, className, ...props }, forwardedRef) => {
     return (
-      <Select.Item className={s.SelectItem} {...props} ref={forwardedRef}>
+      <Select.Item
+        className={s.SelectItem}
+        {...props}
+        ref={forwardedRef}
+        // style={{ maxWidth: `${width}` }}
+      >
         <Select.ItemText>{children}</Select.ItemText>
       </Select.Item>
     )
   }
 )
 
-export default SelectDemo
+export default SelectRadix

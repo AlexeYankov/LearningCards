@@ -23,10 +23,11 @@ export const PagesForRender = ({ page, pages, setPage }: PagesForRender) => {
   return (
     <>
       <Page el={1} page={page} setPage={setPage} />
-      {page > 2 ? <span>...&nbsp;</span> : ''}
+      {page > 2 ? <span>... </span> : ''}
       {PagesJSX}
       {pages > 5 && pages !== page && page + 1 !== pages && <span>...&nbsp;</span>}
       <Page el={pages} page={page} setPage={setPage} />
     </>
   )
 }
+
