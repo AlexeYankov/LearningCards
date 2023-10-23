@@ -1,8 +1,4 @@
-import { useState } from 'react'
-
 import s from './select.module.scss'
-
-import sprite from '../../../../asserts/sprite.svg'
 
 type SelectType = {
   // ArrowID: string
@@ -13,9 +9,8 @@ type SelectType = {
 }
 
 export const Select = ({ options }: SelectType) => {
-  const [startValue, setValue] = useState(options[options.length - 1])
   const optionsForRender = options.map(el => {
-    if (el !== startValue) {
+    if (el !== 100) {
       return (
         <option key={crypto.randomUUID()} value={el}>
           {el}
@@ -31,7 +26,7 @@ export const Select = ({ options }: SelectType) => {
     <div className={s.selectContainer}>
       <select onClick={optionChangeHandler}>
         <option key={crypto.randomUUID()} value={''}>
-          {startValue}
+          {100}
         </option>
         {optionsForRender}
 

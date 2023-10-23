@@ -7,6 +7,7 @@ type PagesForRender = {
 }
 
 export const PagesForRender = ({ page, pages, setPage }: PagesForRender) => {
+  //@ts-ignore
   const allPages = Array.from({ length: pages }, (v, i) => i + 1)
 
   delete allPages[0]
