@@ -34,7 +34,7 @@ export const EditableSpan = React.memo(function ({ onChange, value }: EditableSp
     }
   }
 
-  return editMode ? (
+  return editMode? (
     <span>
       <TextField
         autoFocus
