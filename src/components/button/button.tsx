@@ -44,7 +44,6 @@ export type ButtonProps<T extends ElementType = 'button'> = {
   as?: T
   children: ReactNode
   className?: string
-  className?: string
   fullWidth?: boolean
   height?: string
   variant?: 'link' | 'primary' | 'secondary' | 'tertiary'

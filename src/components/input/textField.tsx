@@ -56,7 +56,12 @@ export const TextField = <T extends ElementType = 'input'>(
           <Component
             className={`${s.input} ${isShowErrorClass}`}
             disabled={disabled}
-            onChange={e => setText(e.currentTarget.value)}
+            onChange={e => {
+              setText(e.currentTarget.value)
+              if (setValue) {
+                setValue(e.currentTarget.value)
+              }
+            }}
             placeholder={placeholder}
             type={type !== toggleType ? 'text' : type}
             value={text}
