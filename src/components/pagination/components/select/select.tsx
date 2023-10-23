@@ -2,8 +2,6 @@ import { useState } from 'react'
 
 import s from './select.module.scss'
 
-import sprite from '../../../../asserts/sprite.svg'
-
 type SelectType = {
   // ArrowID: string
   // height: number
@@ -13,7 +11,7 @@ type SelectType = {
 }
 
 export const Select = ({ options }: SelectType) => {
-  const [startValue, setValue] = useState(options[options.length - 1])
+  const [startValue, setValue] = useState(100)
   const optionsForRender = options.map(el => {
     if (el !== startValue) {
       return (
