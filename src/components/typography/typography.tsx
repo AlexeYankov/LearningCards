@@ -11,21 +11,23 @@ export const Typography = forwardRef<HTMLSpanElement, TypographyProps>((props, r
     </Component>
   )
 })
-export type TypographyProps<T extends ElementType = 'span'> = {
+export type TypographyProps<T extends ElementType = ElementType> = {
   as?: T
   children: ReactNode
   className?: string
-  variant?:
-    | 'body1'
-    | 'body2'
-    | 'caption'
-    | 'heading1'
-    | 'heading2'
-    | 'heading3'
-    | 'large'
-    | 'link1'
-    | 'link2'
-    | 'overline'
-    | 'subtitle1'
-    | 'subtitle2'
+  variant?: VariantType
 } & ComponentPropsWithoutRef<T>
+
+export type VariantType =
+  | 'body1'
+  | 'body2'
+  | 'caption'
+  | 'heading1'
+  | 'heading2'
+  | 'heading3'
+  | 'large'
+  | 'link1'
+  | 'link2'
+  | 'overline'
+  | 'subtitle1'
+  | 'subtitle2'
