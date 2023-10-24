@@ -4,6 +4,7 @@ import s from './dropDownMenu.module.scss'
 
 import profileImage from './../../asserts/profileImage.png'
 import sprite from './../../asserts/sprite.svg'
+import { Typography } from '@/components/typography'
 
 export const DropDownMenu = () => {
   return (
@@ -18,8 +19,12 @@ export const DropDownMenu = () => {
             <div className={s.inner}>
               <img alt={''} className={s.img} src={profileImage} />
               <div className={s.itemBox}>
-                <span>Ivan</span>
-                <span>j&johnson@gmail.com</span>
+                <Typography variant={'subtitle2'} as={'a'}>
+                  Ivan
+                </Typography>
+                <Typography className={s.email} variant={'caption'}>
+                  j&johnson@gmail.com
+                </Typography>
               </div>
             </div>
           </DropdownMenu.Item>
@@ -30,7 +35,7 @@ export const DropDownMenu = () => {
                   <use xlinkHref={`${sprite}#person-outline`} />
                 </svg>
               </div>
-              <div>My Profile</div>
+              <Typography variant={'caption'}>My Profile</Typography>
             </div>
           </DropdownMenu.Item>
           <DropdownMenu.Item className={` ${s.item}`}>
@@ -40,7 +45,7 @@ export const DropDownMenu = () => {
                   <use xlinkHref={`${sprite}#log-out`} />
                 </svg>
               </div>
-              <div>Sign Out</div>
+              <Typography variant={'caption'}>Sign Out</Typography>
             </div>
           </DropdownMenu.Item>
           <DropdownMenu.Arrow className={s.arrow} />
