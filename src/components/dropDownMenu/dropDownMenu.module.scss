@@ -82,13 +82,15 @@
   align-items: center;
 
   svg {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     margin-right: 6px;
     fill: var(--color-light-100);
   }
 }
 
 .arrow {
+  width: 16px;
+  height: 8px;
   fill: var(--color-dark-700);
 }

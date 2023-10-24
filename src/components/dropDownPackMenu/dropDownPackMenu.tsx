@@ -14,13 +14,7 @@ export const DropDownPackMenu = () => {
           <DropdownMenu.Item className={` ${s.item}`}>
             <div className={s.menuItem}>
               <div className={s.menuItemIcon}>
-                <svg
-                  fill={'none'}
-                  width={'100%'}
-                  height={'100%'}
-                  viewBox={'0 0 24 24'}
-                  xmlns={'http://www.w3.org/2000/svg'}
-                >
+                <svg fill={'none'} viewBox={'0 0 24 24'} xmlns={'http://www.w3.org/2000/svg'}>
                   <use xlinkHref={`${sprite}#play-circle-outline`} />
                 </svg>
               </div>
