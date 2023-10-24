@@ -4,7 +4,7 @@ import * as DropdownMenuRadix from '@radix-ui/react-dropdown-menu'
 import s from './dropDown.module.scss'
 import profileImage from '@/asserts/profileImage.png'
 
-export type DropDown = {
+export type DropDownWrapper = {
   align?: 'center' | 'end' | 'start'
   children: ReactNode
   className?: string
@@ -12,7 +12,7 @@ export type DropDown = {
   sideOffset?: number
 }
 
-export const DropDownWrapper: FC<DropDown> = ({
+export const DropDownWrapper: FC<DropDownWrapper> = ({
   className,
   children,
   trigger,
