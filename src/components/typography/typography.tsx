@@ -5,7 +5,7 @@ import s from './typography.module.scss'
 export const Typography = <T extends ElementType = 'span'>(
   props: TypographyProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof TypographyProps<T>>
 ) => {
-  const { as: Component = 'span', children, className, variant = 'body', ...rest } = props
+  const { as: Component = 'span', children, className, variant = 'body1', ...rest } = props
 
   return (
     <Component className={`${s.typography} ${s[variant]} ${className}`} {...rest}>
