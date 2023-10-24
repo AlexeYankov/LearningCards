@@ -19,7 +19,7 @@ export const DropDownMenu = () => {
             <div className={s.inner}>
               <img alt={''} className={s.img} src={profileImage} />
               <div className={s.itemBox}>
-                <Typography variant={'subtitle2'} as={'a'}>
+                <Typography variant={'subtitle2'} as={'p'}>
                   Ivan
                 </Typography>
                 <Typography className={s.email} variant={'caption'}>

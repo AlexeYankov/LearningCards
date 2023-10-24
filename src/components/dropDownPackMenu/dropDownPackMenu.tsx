@@ -3,6 +3,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import s from './dropDownPackMenu.module.scss'
 
 import sprite from './../../asserts/sprite.svg'
+import { Typography } from '@/components/typography'
 
 export const DropDownPackMenu = () => {
   return (
@@ -18,7 +19,7 @@ export const DropDownPackMenu = () => {
                   <use xlinkHref={`${sprite}#play-circle-outline`} />
                 </svg>
               </div>
-              <div>Learn</div>
+              <Typography variant={'caption'}>Learn</Typography>
             </div>
           </DropdownMenu.Item>
           <DropdownMenu.Item className={` ${s.item}`}>
@@ -28,7 +29,7 @@ export const DropDownPackMenu = () => {
                   <use xlinkHref={`${sprite}#edit-2-outline`} />
                 </svg>
               </div>
-              <div>Edit</div>
+              <Typography variant={'caption'}>Edit</Typography>
             </div>
           </DropdownMenu.Item>
           <DropdownMenu.Item className={` ${s.item}`}>
@@ -38,7 +39,7 @@ export const DropDownPackMenu = () => {
                   <use xlinkHref={`${sprite}#trash-outline`} />
                 </svg>
               </div>
-              <div>Delete</div>
+              <Typography variant={'caption'}>Delete</Typography>
             </div>
           </DropdownMenu.Item>
           <DropdownMenu.Arrow className={s.arrow} />
