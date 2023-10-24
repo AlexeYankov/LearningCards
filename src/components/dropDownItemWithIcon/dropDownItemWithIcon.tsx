@@ -29,9 +29,10 @@ export const DropDownItemWithIcon: FC<DropDownItemWithIcon> = ({
   text,
   variant = 'caption',
   icon,
+  className,
 }) => {
   return (
-    <DropdownRadix.Item className={`${s.item}`}>
+    <DropdownRadix.Item className={`${s.item} ${className}`}>
       <div className={s.menuItem}>
         <div className={s.menuItemIcon}>
           {icon}

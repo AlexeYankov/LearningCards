@@ -8,6 +8,16 @@
   border-radius: 50%;
 }
 
+.inner {
+  display: flex;
+  align-items: center;
+  min-width: 195px;
+}
+
 .email {
   color: var(--color-dark-100);
+}
+
+div.item {
+  padding-top: 0;
 }
