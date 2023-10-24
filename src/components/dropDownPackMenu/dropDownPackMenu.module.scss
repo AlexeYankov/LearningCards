@@ -1,32 +1,5 @@
-.trigger {
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 36px;
-  height: 36px;
-
-  background-color: var(--color-dark-500);
-  border: none;
-  border-radius: 50%;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-  min-width: 80px;
-  padding: 12px;
-
-  background-color: var(--color-dark-700);
-  border-radius: 4px;
-
-  :nth-child(3) {
-    border-bottom: none;
-  }
+div.content {
+  min-width: 100px;
 }
 
 .item {
@@ -76,10 +49,4 @@
     margin-right: 6px;
     fill: var(--color-light-100);
   }
-}
-
-.arrow {
-  width: 16px;
-  height: 8px;
-  fill: var(--color-dark-700);
 }

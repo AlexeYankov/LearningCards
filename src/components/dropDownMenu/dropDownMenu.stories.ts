@@ -20,8 +20,4 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const DropDownMenuDemo: Story = {
-  args: {
-    children: 'Large',
-  },
-}
+export const DropDownMenuDemo: Story = {}
