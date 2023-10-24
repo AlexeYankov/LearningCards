@@ -1,19 +1,16 @@
-import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ElementType, forwardRef, ReactNode } from 'react'
 
 import s from './typography.module.scss'
 
-export const Typography = <T extends ElementType = 'span'>(
-  props: TypographyProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof TypographyProps<T>>
-) => {
-  const { as: Component = 'span', children, className, variant = 'body1', ...rest } = props
+export const Typography = forwardRef<HTMLSpanElement, TypographyProps>((props, ref) => {
+  const { as: Component = 'span', children, className, variant = 'large', ...rest } = props
 
   return (
-    <Component className={`${s.typography} ${s[variant]} ${className}`} {...rest}>
+    <Component className={`${s.typography} ${s[variant]} ${className}`} ref={ref} {...rest}>
       {children}
     </Component>
   )
-}
-
+})
 export type TypographyProps<T extends ElementType = 'span'> = {
   as?: T
   children: ReactNode
