@@ -1,110 +1,115 @@
-import { ComponentPropsWithoutRef, ElementType, ReactNode, useState } from 'react'
-
-import { PasswordIcon } from '@/asserts/icons/components/PasswordIcon'
-import { SearchIcon } from '@/asserts/icons/components/SearchIcon'
+import {
+  ChangeEvent,
+  ComponentPropsWithoutRef,
+  ElementType,
+  forwardRef,
+  ReactNode,
+  useState,
+} from 'react'
 
 import s from './textField.module.scss'
+import { Search } from '@/asserts/icons/components/Search'
+import { Close } from '@/asserts/icons/components/Close'
 
-export const TextField = <T extends ElementType = 'input'>(
-  props: TextFieldProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof TextFieldProps<T>>
-) => {
-  const {
-    IconEnd,
-    IconID,
-    IconStart,
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
+  let {
     as: Component = 'input',
     className,
+    iconEnd,
+    iconStart,
     disabled,
-    error,
-    height = '24px',
+    errorMessage,
     label,
     placeholder,
     setValue,
     type = 'text',
+    search,
+    password,
     value,
-    viewBox = '0 0 24 24',
-    width = '24px',
+    onClearClick,
     ...rest
   } = props
 
-  const [toggleType, setToggleType] = useState(type)
-  const [icon, setIcon] = useState(IconID)
-  const [search, setSearch] = useState('')
-  const [text, setText] = useState(value)
-
-  const onClickHandler = () => {
-    if (!disabled) {
-      setToggleType(prevType => (prevType === 'password' ? 'text' : 'password'))
-      setIcon(prevIcon => (prevIcon === 'eye-outline' ? 'eye-off-outline' : 'eye-outline'))
-    }
-  }
-
-  const clearSearch = () => {
-    setSearch(search)
-    setText('')
-  }
+  const [text, setText] = useState('')
 
   const disabledLabelClass = disabled ? s.disabledLabel : ''
   const disabledIconClass = disabled ? s.disabledIcon : ''
-  const isShowErrorClass = error ? s.error : ''
+  const isShowErrorClass = errorMessage ? s.error : ''
+
+  const handleChangeText = (e: ChangeEvent<HTMLInputElement>) => {
+    setText(e.currentTarget.value)
+  }
+
+  const handleClearText = () => {
+    setText('')
+  }
+
+  if (search) {
+    iconStart = <Search size={20} />
+  }
+
+  const isShowClearButton = text.length <= 0
 
   return (
     <div className={s.box}>
       <label>
         <div className={`${s.label} ${disabledLabelClass}`}> {label}</div>
         <div className={s.inputContainer}>
+          {!!iconStart && (
+            <span className={`${s.iconStart} ${disabledIconClass}`}>{iconStart}</span>
+          )}
           <Component
             className={`${s.input} ${isShowErrorClass}`}
             disabled={disabled}
-            onChange={e => setText(e.currentTarget.value)}
+            onChange={handleChangeText}
             placeholder={placeholder}
-            type={type !== toggleType ? 'text' : type}
+            type={type}
             value={text}
+            ref={ref}
             {...rest}
           />
-          {type === 'password' && IconID && (
-            <PasswordIcon
-              IconID={icon}
-              className={`${s.passwordIcon} ${disabledIconClass}`}
-              height={height}
-              setToggle={onClickHandler}
-              viewBox={viewBox}
-              width={width}
-            />
+          {!isShowClearButton && search && (
+            <button
+              className={`${s.iconEnd} ${disabledIconClass}`}
+              onClick={handleClearText}
+              type={'button'}
+            >
+              <Close size={20} />
+            </button>
           )}
-          {type === 'search' && (
-            <SearchIcon
-              IconEnd={IconEnd}
-              IconStart={IconStart}
-              className={`${s.searchIcon} ${disabledIconClass}`}
-              clearSearch={clearSearch}
-              height={height}
-              value={text}
-              viewBox={viewBox}
-              width={width}
-            />
-          )}
+          {/*{type === 'password' && (*/}
+          {/*  <Component*/}
+          {/*    className={`${s.passwordIcon} ${disabledIconClass}`}*/}
+          {/*    type={'password'}*/}
+          {/*    icon={<Password />}*/}
+          {/*    onChange={() => {}}*/}
+          {/*    disabled={disabled}*/}
+          {/*    value={text}*/}
+          {/*    ref={ref}*/}
+          {/*    placeholder={placeholder}*/}
+          {/*    {...rest}*/}
+          {/*  />*/}
+          {/*)}*/}
         </div>
-        {error && <span className={s.errorRed}>{error}</span>}
+        {errorMessage && <span className={s.errorRed}>{errorMessage}</span>}
       </label>
     </div>
   )
-}
+})
 
 type TextFieldProps<T extends ElementType = 'input'> = {
-  IconEnd?: string
-  IconID?: string
-  IconStart?: string
   as?: T
   children?: ReactNode
   className?: string
-  error?: null | string
-  height?: string
+  iconEnd?: ReactNode
+  iconStart?: ReactNode
+  errorMessage?: null | string
   label?: string
   placeholder?: string
   setValue?: (value: string) => void
-  type: 'password' | 'search' | 'text'
+  type?: 'password' | 'text'
   value?: string
-  viewBox?: string
-  width?: string
+  search?: boolean
+  password?: boolean
+  onClearClick?: () => void
 } & ComponentPropsWithoutRef<T>
