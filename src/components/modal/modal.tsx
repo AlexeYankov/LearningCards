@@ -3,29 +3,40 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { Typography } from '@/components/typography'
 import { Close } from '@/asserts/icons/components/Close'
 import s from './modal.module.scss'
+import { Button } from '@/components/button'
 
 type Props = {}
 
 export const Modal: FC<Props> = ({}) => {
   return (
-    <Dialog.Root>
-      <Dialog.Trigger className={s.dialogTrigger} />
-      <Dialog.Portal>
-        <Dialog.Overlay />
-        <Dialog.Content>
-          <ModalTitle />
-          <Dialog.Description />
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
+    <div className={s.modal}>
+      <Dialog.Root>
+        <Dialog.Trigger className={s.dialogTrigger} asChild>
+          <Button variant={'primary'} type={'button'}>
+            Edit
+          </Button>
+        </Dialog.Trigger>
+        <Dialog.Portal>
+          <Dialog.Overlay className={s.dialogOverlay} />
+          <Dialog.Content className={s.dialogContent}>
+            <ModalTitle title={'Title'} />
+            <Dialog.Description />
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+    </div>
   )
 }
 
-export const ModalTitle = ({}) => {
+type ModalTitleProps = {
+  title: string
+}
+
+export const ModalTitle: FC<ModalTitleProps> = ({ title }) => {
   return (
     <Dialog.Title className={s.dialogTitle}>
       <Typography variant={'heading2'} as={'h2'}>
-        Title
+        {title}
       </Typography>
       <ModalClose />
     </Dialog.Title>

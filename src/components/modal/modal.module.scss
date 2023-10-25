@@ -2,6 +2,28 @@
   cursor: pointer;
 }
 
+.dialogOverlay {
+  position: fixed;
+  z-index: 3;
+  inset: 0;
+
+  opacity: 0.5;
+  background-color: var(--color-dark-900);
+}
+
+.dialogContent {
+  position: fixed;
+  z-index: 5;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+  max-width: 495px;
+
+  background-color: var(--color-light-900);
+}
+
 .dialogTitle {
   display: flex;
   align-items: center;
@@ -9,7 +31,7 @@
 
   padding: 18px 24px;
 
-  background: var(--color-dark-700);
+  background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
   border-radius: 2px 2px 0 0;
 
