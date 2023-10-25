@@ -23,14 +23,12 @@
   all: unset;
   cursor: pointer;
   display: flex;
+  border-color: transparent;
 
-  &:hover {
-    border-radius: 50%;
-    outline: 1px solid var(--color-light-700);
-  }
-
+  &:hover,
   &:focus-visible {
+    background-color: var(--color-dark-500);
     border-radius: 50%;
-    outline: 1px solid var(--color-light-700);
+    outline: 1px solid var(--color-dark-500);
   }
 }
