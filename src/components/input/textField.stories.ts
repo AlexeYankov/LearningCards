@@ -29,6 +29,8 @@ export const Default: Story = {
     label: 'Input',
     placeholder: 'Input',
     type: 'text',
+    password: false,
+    search: false,
   },
 }
 
@@ -40,19 +42,19 @@ export const Error: Story = {
     placeholder: 'Error',
     type: 'text',
     value: 'error value',
+    password: false,
+    search: false,
   },
 }
 
 export const Password: Story = {
   args: {
-    // IconID: 'eye-outline',
     disabled: false,
-    height: '20',
     label: 'Input',
     placeholder: 'password',
     type: 'password',
     value: 'some password',
-    width: '20',
+    password: true,
   },
 }
 

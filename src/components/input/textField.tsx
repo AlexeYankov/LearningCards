@@ -10,6 +10,7 @@ import {
 import s from './textField.module.scss'
 import { Search } from '@/asserts/icons/components/Search'
 import { Close } from '@/asserts/icons/components/Close'
+import { Password } from '@/asserts/icons/components/Password'
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
   let {
@@ -31,6 +32,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   } = props
 
   const [text, setText] = useState('')
+  const [valueType, setValueType] = useState(type)
 
   const disabledLabelClass = disabled ? s.disabledLabel : ''
   const disabledIconClass = disabled ? s.disabledIcon : ''
@@ -44,16 +46,21 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
     setText('')
   }
 
+  const handleChangeInputType = () => {
+    setValueType(prevType => (prevType === 'text' ? 'password' : 'text'))
+  }
+
   if (search) {
     iconStart = <Search size={20} />
   }
 
-  const isShowClearButton = text.length <= 0
+  const isShowClearButton = search && text.length <= 0
+  const passwordIcon = valueType === 'password' ? 'eye-outline' : 'eye-off-outline'
 
   return (
     <div className={s.box}>
       <label>
-        <div className={`${s.label} ${disabledLabelClass}`}> {label}</div>
+        <div className={`${s.label} ${disabledLabelClass}`}>{label}</div>
         <div className={s.inputContainer}>
           {!!iconStart && (
             <span className={`${s.iconStart} ${disabledIconClass}`}>{iconStart}</span>
@@ -63,7 +70,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
             disabled={disabled}
             onChange={handleChangeText}
             placeholder={placeholder}
-            type={type}
+            type={valueType}
             value={text}
             ref={ref}
             {...rest}
@@ -72,24 +79,20 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
             <button
               className={`${s.iconEnd} ${disabledIconClass}`}
               onClick={handleClearText}
-              type={'button'}
+              type="button"
             >
               <Close size={20} />
             </button>
           )}
-          {/*{type === 'password' && (*/}
-          {/*  <Component*/}
-          {/*    className={`${s.passwordIcon} ${disabledIconClass}`}*/}
-          {/*    type={'password'}*/}
-          {/*    icon={<Password />}*/}
-          {/*    onChange={() => {}}*/}
-          {/*    disabled={disabled}*/}
-          {/*    value={text}*/}
-          {/*    ref={ref}*/}
-          {/*    placeholder={placeholder}*/}
-          {/*    {...rest}*/}
-          {/*  />*/}
-          {/*)}*/}
+          {password && (
+            <button
+              className={`${s.iconEnd} ${disabledIconClass}`}
+              onClick={handleChangeInputType}
+              type="button"
+            >
+              <Password size={20} iconId={passwordIcon} />
+            </button>
+          )}
         </div>
         {errorMessage && <span className={s.errorRed}>{errorMessage}</span>}
       </label>

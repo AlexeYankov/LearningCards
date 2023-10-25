@@ -23,7 +23,7 @@
 .input {
   width: 100%;
   height: 36px;
-  padding: 6px 40px;
+  padding: 6px 12px;
 
   font-size: 16px;
   font-weight: var(--font-weight-regular);
@@ -55,6 +55,29 @@
   }
 }
 
+.iconStart {
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+
+    fill: var(--color-light-100);
+  }
+}
+
+.inputContainer:has(.iconStart) {
+  input {
+    padding: 0 40px;
+  }
+}
+
+.inputContainer:has(.iconEnd) {
+  input {
+    padding-right: 40px;
+  }
+}
+
 .disabledLabel {
   color: var(--color-dark-300);
 }
@@ -77,17 +100,6 @@
   }
 }
 
-.iconStart {
-  svg {
-    position: absolute;
-    top: 50%;
-    left: 12px;
-    transform: translateY(-50%);
-
-    fill: var(--color-light-100);
-  }
-}
-
 .iconEnd {
   svg {
     cursor: pointer;
@@ -102,6 +114,12 @@
 }
 
 span.disabledIcon {
+  svg {
+    fill: var(--color-dark-300);
+  }
+}
+
+button.disabledIcon {
   svg {
     fill: var(--color-dark-300);
   }
