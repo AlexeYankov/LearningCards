@@ -1,0 +1,36 @@
+.dialogTrigger {
+  cursor: pointer;
+}
+
+.dialogTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 24px;
+
+  background: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  border-radius: 2px 2px 0 0;
+
+  svg {
+    cursor: pointer;
+    fill: var(--color-light-100);
+  }
+}
+
+.dialogClose {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+
+  &:hover {
+    border-radius: 50%;
+    outline: 1px solid var(--color-light-700);
+  }
+
+  &:focus-visible {
+    border-radius: 50%;
+    outline: 1px solid var(--color-light-700);
+  }
+}
