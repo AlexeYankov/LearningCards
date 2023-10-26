@@ -59,7 +59,7 @@
   padding: 18px 24px;
   color: var(--color-light-100);
   background-color: var(--color-dark-700);
-  border: 1px solid var(--color-dark-500);
+  border: 1px solid var(--color-dark-00);
 }
 
 .contentComponents {
@@ -72,4 +72,29 @@
 
   background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
+
+  label:nth-child(1) {
+    color: var(--color-dark-100);
+  }
+}
+
+button.select {
+  height: 22px;
+  margin-top: 1px;
+  padding: 6px 0;
+  font-size: 16px;
+
+  span:nth-child(1) {
+    padding-left: 12px;
+  }
+
+  :nth-child(2) {
+    padding-right: 10px;
+  }
+}
+
+button.select[data-placeholder] {
+  border: none;
+  border-radius: 2px;
+  outline: 1px solid var(--color-dark-300);
 }

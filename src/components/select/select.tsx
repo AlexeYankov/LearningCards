@@ -26,6 +26,7 @@ type SelectProps = {
   placeholder?: string
   variant?: string
   label?: string
+  classname?: string
 }
 
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
@@ -51,28 +52,29 @@ export const Select = ({
   label,
   options,
   placeholder = 'select',
+  classname,
   ...rest
 }: SelectProps) => {
   return (
     <SelectRadix.Root {...rest}>
-      <SelectRadix.Trigger
-        aria-label={`${placeholder}`}
-        className={s.SelectTrigger + ' ' + `${reversed ? s.hoverActive : ''}`}
-        style={{
-          maxWidth: `calc(${width} - ${padding}*2)`,
-          minWidth: `calc(${width} - ${padding}*2)`,
-          width: `${width}`,
-          padding: `0px ${padding}`,
-        }}
-      >
-        <SelectRadix.Value placeholder={placeholder} />
-        <SelectRadix.Icon className={reversed ? s.rotate : s.SelectIcon}>
-          <ChevronDownIcon />
-        </SelectRadix.Icon>
-        <label htmlFor="" className={s.selectLabelforSelect}>
-          {label}
-        </label>
-      </SelectRadix.Trigger>
+      <label htmlFor="" className={s.selectLabelforSelect}>
+        {label}
+        <SelectRadix.Trigger
+          aria-label={`${placeholder}`}
+          className={s.SelectTrigger + ' ' + `${reversed ? s.hoverActive : ''} ${classname}`}
+          style={{
+            maxWidth: `calc(${width} - ${padding}*2)`,
+            minWidth: `calc(${width} - ${padding}*2)`,
+            width: `${width}`,
+            padding: `0px ${padding}`,
+          }}
+        >
+          <SelectRadix.Value placeholder={placeholder} />
+          <SelectRadix.Icon className={reversed ? s.rotate : s.SelectIcon}>
+            <ChevronDownIcon />
+          </SelectRadix.Icon>
+        </SelectRadix.Trigger>
+      </label>
       <SelectRadix.Portal>
         <SelectRadix.Content className={s.SelectContent} position={'popper'}>
           <SelectRadix.Viewport className={s.SelectViewport}>

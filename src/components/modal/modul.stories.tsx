@@ -5,6 +5,7 @@ import { ScrollBar } from '@/components/scrollbar'
 import { TextField } from '@/components/input'
 import { CheckBox } from '@/components/checkbox'
 import s from './modal.module.scss'
+import { Select } from '@/components/select'
 
 const meta = {
   argTypes: {},
@@ -81,7 +82,12 @@ export const ModalScrollbarDescriptionDemo: Story = {
 export const ModalWithComponentsDemo: Story = {
   render: () => (
     <Modal className={s.contentComponents}>
-      <TextField label={'Select-box'} placeholder={'Select-box'} />
+      <Select
+        label={'Select-box'}
+        options={['Select item 1', 'Select item 2', 'Select item 3']}
+        classname={s.select}
+        placeholder={'Select-box'}
+      />
       <TextField label={'Input'} placeholder={'Input'} />
       <TextField label={'Input'} placeholder={'Input'} />
       <CheckBox
