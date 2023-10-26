@@ -7,15 +7,25 @@ type PagesForRender = {
 }
 
 export const PagesForRender = ({ page, pages, setPage }: PagesForRender) => {
+  //@ts-ignore
   const allPages = Array.from({ length: pages }, (v, i) => i + 1)
 
   delete allPages[0]
   delete allPages[pages - 1]
   const PagesJSX = allPages.map(el => {
-    if (1 === page && el <= 5) {
+    if (el <= 5 && page <= 5) {
       return <Page el={el} key={crypto.randomUUID()} page={page} setPage={setPage} />
     }
-    if (page !== 1 && page + 1 <= el + 2 && el - 3 <= page - 2) {
+    if (el + 5 > pages && page + 5 > pages) {
+      return <Page el={el} key={crypto.randomUUID()} page={page} setPage={setPage} />
+    }
+    if (
+      page !== 1 &&
+      page + 1 <= el + 2 &&
+      el - 3 <= page - 2 &&
+      page !== 5 &&
+      pages - 4 !== page
+    ) {
       return <Page el={el} key={crypto.randomUUID()} page={page} setPage={setPage} />
     }
   })
@@ -23,11 +33,10 @@ export const PagesForRender = ({ page, pages, setPage }: PagesForRender) => {
   return (
     <>
       <Page el={1} page={page} setPage={setPage} />
-      {page > 2 ? <span>... </span> : ''}
+      {page > 5 ? <span>...&nbsp;</span> : ''}
       {PagesJSX}
-      {pages > 5 && pages !== page && page + 1 !== pages && <span>...&nbsp;</span>}
+      {page + 5 <= pages && <span>...&nbsp;</span>}
       <Page el={pages} page={page} setPage={setPage} />
     </>
   )
 }
-
