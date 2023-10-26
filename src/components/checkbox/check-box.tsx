@@ -8,8 +8,8 @@ export const CheckBox = <T extends ElementType = 'input'>(
   props: CheckBoxProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof CheckBoxProps<T>>
 ) => {
   const {
-    IconID,
-    SelectedIconID,
+    IconID = 'checkbox-unselected',
+    SelectedIconID = 'checkbox-selected',
     as: Component = 'input',
     className,
     controlledBy,
@@ -20,7 +20,7 @@ export const CheckBox = <T extends ElementType = 'input'>(
     setControlledBy,
     theme = 'white',
     viewBox = '0 0 24 24',
-    width = '100%',
+    width = '20px',
     ...rest
   } = props
   const [isChecked, setChecked] = useState(controlledBy)
