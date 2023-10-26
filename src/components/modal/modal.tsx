@@ -53,7 +53,7 @@ export const ModalTitle: FC<ModalTitleProps> = ({ title }) => {
 
 export const ModalClose = () => {
   return (
-    <DialogRadix.Close className={s.dialogClose} asChild aria-label="Close">
+    <DialogRadix.Close className={s.dialogClose} aria-label="Close">
       <Close size={24} />
     </DialogRadix.Close>
   )
