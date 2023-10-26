@@ -1,28 +1,18 @@
-.react-aria-Slider {
-    --label-color: var(--color-light-100);
-    --track-color: var(--color-accent-500);
-    --thumb-color: var(--color-accent-500);
-    --thumb-color-dragging: var(--color-accent-500);
-    --focus-ring-color: red;
 
+.react-aria-Slider {
     display: grid;
-    grid-template-areas: "label output"
-                       "track track";
+    grid-template-areas:
+    'label output'
+    'track track';
     grid-template-columns: 1fr auto;
     max-width: 300px;
     color: var(--color-light-100);
-
-    /*.react-aria-Label {*/
-    /*    grid-area: label;*/
-
-    /*}*/
 
     .react-aria-SliderOutput {
         grid-area: output;
         display: flex;
         width: 259px;
         justify-content: space-between;
-
     }
 
     .value1 {
@@ -34,9 +24,7 @@
         border: 1px solid var(--color-dark-300, #4C4C4C);
         justify-content: center;
         padding: 5px;
-
     }
-
 
     .value2 {
         display: flex;
@@ -52,15 +40,13 @@
     .react-aria-SliderTrack {
         grid-area: track;
         position: relative;
-        /* track line */
-
         margin: -24px 42px;
+
         &:before {
             content: '';
             display: block;
             position: absolute;
             background: var(--color-accent-500);
-
         }
     }
 
@@ -71,7 +57,6 @@
         background: var(--color-light-100);
         border: 2px solid var(--spectrum-alias-background-color-default);
         box-shadow: 0 0 0 4px var(--color-accent-500);
-
     }
 
     &[data-orientation=horizontal] {
@@ -97,7 +82,6 @@
 
         .react-aria-SliderThumb {
             top: 50%;
-
         }
     }
 
@@ -108,7 +92,6 @@
         .react-aria-Label,
         .react-aria-SliderOutput {
             display: none;
-
         }
 
         .react-aria-SliderTrack {
@@ -120,20 +103,17 @@
                 height: 100%;
                 left: 50%;
                 transform: translateX(-50%);
-
             }
         }
 
         .react-aria-SliderThumb {
             left: 50%;
-
         }
     }
 
     &[data-disabled] {
         .react-aria-SliderTrack {
             opacity: 0.4;
-
         }
     }
 }
