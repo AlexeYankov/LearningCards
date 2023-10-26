@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 import { Modal, ModalDescription, ModalTitle } from './modal'
 import { Typography } from '@/components/typography'
+import { ScrollBar } from '@/components/scrollbar'
 
 const meta = {
   argTypes: {},
@@ -21,6 +22,8 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+const loremText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamdsa`
+
 export const ModalDemo: Story = {
   args: {
     children: <Modal />,
@@ -30,8 +33,7 @@ export const ModalDemo: Story = {
       <ModalTitle title={'Title'} />
       <ModalDescription>
         <Typography variant={'body1'} as={'p'}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniamdsa
+          {loremText}
         </Typography>
       </ModalDescription>
     </Modal>
@@ -50,10 +52,32 @@ export const ModalDescriptionDemo: Story = {
   render: () => (
     <Modal>
       <ModalDescription>
-        <Typography variant={'body1'} as={'p'}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniamdsa
-        </Typography>
+        <ScrollBar maxHeight="40vh">
+          <Typography variant={'body1'} as={'p'}>
+            <p>{loremText}</p>
+          </Typography>
+        </ScrollBar>
+      </ModalDescription>
+    </Modal>
+  ),
+}
+
+export const ModalScrollbarDescriptionDemo: Story = {
+  render: () => (
+    <Modal>
+      <ModalDescription>
+        <ScrollBar maxHeight="40vh">
+          <Typography variant={'body1'} as={'p'}>
+            <p>{loremText}</p>
+            <p>{loremText}</p>
+            <p>{loremText}</p>
+            <p>{loremText}</p>
+            <p>{loremText}</p>
+            <p>{loremText}</p>
+            <p>{loremText}</p>
+            <p>{loremText}</p>
+          </Typography>
+        </ScrollBar>
       </ModalDescription>
     </Modal>
   ),

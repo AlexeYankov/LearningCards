@@ -4,6 +4,7 @@ import { Typography } from '@/components/typography'
 import { Close } from '@/asserts/icons/components/Close'
 import s from './modal.module.scss'
 import { Button } from '@/components/button'
+import { ScrollBar } from '@/components/scrollbar'
 
 export const Modal = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<typeof DialogRadix.Root>>(
   (props, ref) => {
@@ -45,10 +46,8 @@ export const ModalTitle: FC<ModalTitleProps> = ({ title }) => {
 
 export const ModalClose = () => {
   return (
-    <DialogRadix.Close aria-label="Close">
-      <button className={s.dialogClose}>
-        <Close size={24} />
-      </button>
+    <DialogRadix.Close className={s.dialogClose} aria-label="Close">
+      <Close size={24} />
     </DialogRadix.Close>
   )
 }
@@ -58,5 +57,9 @@ type ModalDescriptionProps = {
 }
 
 export const ModalDescription: FC<ModalDescriptionProps> = ({ children }) => {
-  return <DialogRadix.Description className={s.description}>{children}</DialogRadix.Description>
+  return (
+    <DialogRadix.Description className={s.description}>
+      <ScrollBar maxHeight={'40vh'} children={children} />
+    </DialogRadix.Description>
+  )
 }
