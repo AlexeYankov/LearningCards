@@ -1,13 +1,13 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Typography } from '@/components/typography'
 import { Close } from '@/asserts/icons/components/Close'
 import s from './modal.module.scss'
 import { Button } from '@/components/button'
 
-type Props = {}
+type Props = { children?: ReactNode }
 
-export const Modal: FC<Props> = ({}) => {
+export const Modal: FC<Props> = ({ children }) => {
   return (
     <div className={s.modal}>
       <Dialog.Root>
@@ -18,10 +18,7 @@ export const Modal: FC<Props> = ({}) => {
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay className={s.dialogOverlay} />
-          <Dialog.Content className={s.dialogContent}>
-            <ModalTitle title={'Title'} />
-            <Dialog.Description />
-          </Dialog.Content>
+          <Dialog.Content className={s.dialogContent}>{children}</Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
     </div>
@@ -29,7 +26,7 @@ export const Modal: FC<Props> = ({}) => {
 }
 
 type ModalTitleProps = {
-  title: string
+  title?: string
 }
 
 export const ModalTitle: FC<ModalTitleProps> = ({ title }) => {
@@ -45,10 +42,18 @@ export const ModalTitle: FC<ModalTitleProps> = ({ title }) => {
 
 export const ModalClose = () => {
   return (
-    <Dialog.Close asChild>
+    <Dialog.Close>
       <button className={s.dialogClose}>
         <Close size={24} />
       </button>
     </Dialog.Close>
   )
+}
+
+type ModalDescriptionProps = {
+  children?: ReactNode
+}
+
+export const ModalDescription: FC<ModalDescriptionProps> = ({ children }) => {
+  return <Dialog.Description className={s.description}>{children}</Dialog.Description>
 }
