@@ -27,7 +27,6 @@ type SelectProps = {
   variant?: string
   label?: string
   classname?: string
-  classNameViewPort?: string
   classNameSelectItem?: string
 }
 
@@ -55,7 +54,6 @@ export const Select = ({
   options,
   placeholder = 'select',
   classname,
-  classNameViewPort,
   classNameSelectItem,
   ...rest
 }: SelectProps) => {
@@ -82,7 +80,7 @@ export const Select = ({
       <SelectRadix.Portal>
         <SelectRadix.Content className={`${s.SelectContent}`} position={'popper'}>
           <SelectRadix.Viewport className={s.SelectViewport}>
-            <SelectRadix.Group className={classNameViewPort}>
+            <SelectRadix.Group>
               {options.map((el, i) => {
                 return (
                   <SelectItem

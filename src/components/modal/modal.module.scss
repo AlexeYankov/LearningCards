@@ -97,13 +97,9 @@ button.select[data-placeholder] {
   border-radius: 2px;
 }
 
-div.viewPort {
-  outline: 1px solid var(--color-dark-300) !important;
-}
-
-.selectItem {
-  height: unset !important;
+div.selectItem {
+  height: unset;
   padding: 10px 12px;
-  font-size: 16px !important;
+  font-size: 16px;
   line-height: 24px;
 }
