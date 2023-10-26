@@ -61,3 +61,15 @@
   background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
 }
+
+.contentComponents {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+
+  padding: 24px;
+
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+}

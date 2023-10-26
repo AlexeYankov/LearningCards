@@ -6,28 +6,33 @@ import s from './modal.module.scss'
 import { Button } from '@/components/button'
 import { ScrollBar } from '@/components/scrollbar'
 
-export const Modal = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<typeof DialogRadix.Root>>(
-  (props, ref) => {
-    const { modal, children, open, onOpenChange, ...rest } = props
-    return (
-      <div className={s.modal}>
-        <DialogRadix.Root open={open} onOpenChange={onOpenChange}>
-          <DialogRadix.Trigger className={s.dialogTrigger} asChild>
-            <Button variant={'primary'} type={'button'}>
-              Edit
-            </Button>
-          </DialogRadix.Trigger>
-          <DialogRadix.Portal>
-            <DialogRadix.Overlay className={s.dialogOverlay} />
-            <DialogRadix.Content className={s.dialogContent} {...rest} ref={ref}>
-              {children}
-            </DialogRadix.Content>
-          </DialogRadix.Portal>
-        </DialogRadix.Root>
-      </div>
-    )
-  }
-)
+type ModalProps = {
+  className?: string
+}
+
+export const Modal = forwardRef<
+  HTMLDivElement,
+  ComponentPropsWithoutRef<typeof DialogRadix.Root> & ModalProps
+>((props, ref) => {
+  const { modal, children, open, className, onOpenChange, ...rest } = props
+  return (
+    <div className={s.modal}>
+      <DialogRadix.Root open={open} onOpenChange={onOpenChange}>
+        <DialogRadix.Trigger className={s.dialogTrigger} asChild>
+          <Button variant={'primary'} type={'button'}>
+            Edit
+          </Button>
+        </DialogRadix.Trigger>
+        <DialogRadix.Portal>
+          <DialogRadix.Overlay className={s.dialogOverlay} />
+          <DialogRadix.Content className={`${s.dialogContent} ${className}`} {...rest} ref={ref}>
+            {children}
+          </DialogRadix.Content>
+        </DialogRadix.Portal>
+      </DialogRadix.Root>
+    </div>
+  )
+})
 
 type ModalTitleProps = {
   title?: string

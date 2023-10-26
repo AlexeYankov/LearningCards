@@ -2,6 +2,9 @@ import { Meta, StoryObj } from '@storybook/react'
 import { Modal, ModalDescription, ModalTitle } from './modal'
 import { Typography } from '@/components/typography'
 import { ScrollBar } from '@/components/scrollbar'
+import { TextField } from '@/components/input'
+import { CheckBox } from '@/components/checkbox'
+import s from './modal.module.scss'
 
 const meta = {
   argTypes: {},
@@ -23,22 +26,6 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 const loremText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamdsa`
-
-export const ModalDemo: Story = {
-  args: {
-    children: <Modal />,
-  },
-  render: () => (
-    <Modal>
-      <ModalTitle title={'Title'} />
-      <ModalDescription>
-        <Typography variant={'body1'} as={'p'}>
-          {loremText}
-        </Typography>
-      </ModalDescription>
-    </Modal>
-  ),
-}
 
 export const ModalTitleDemo: Story = {
   render: () => (
@@ -67,7 +54,7 @@ export const ModalScrollbarDescriptionDemo: Story = {
     <Modal>
       <ModalDescription>
         <ScrollBar maxHeight="40vh">
-          <Typography variant={'body1'} as={'p'}>
+          <Typography variant={'body1'} as={'span'}>
             <p>{loremText}</p>
             <p>{loremText}</p>
             <p>{loremText}</p>
@@ -79,6 +66,24 @@ export const ModalScrollbarDescriptionDemo: Story = {
           </Typography>
         </ScrollBar>
       </ModalDescription>
+    </Modal>
+  ),
+}
+
+export const ModalWithComponentsDemo: Story = {
+  render: () => (
+    <Modal className={s.contentComponents}>
+      <TextField label={'Select-box'} placeholder={'Select-box'} />
+      <TextField label={'Input'} placeholder={'Input'} />
+      <TextField label={'Input'} placeholder={'Input'} />
+      <CheckBox
+        IconID={'checkbox-unselected'}
+        SelectedIconID={'checkbox-selected'}
+        disabled={false}
+        height={'24'}
+        label={'Check-box'}
+        width={'24'}
+      />
     </Modal>
   ),
 }
