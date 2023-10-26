@@ -1,12 +1,10 @@
-import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ElementType, forwardRef, ReactNode } from 'react'
 
 import sprite from '@/asserts/sprite.svg'
 
 import s from './button.module.scss'
 
-export const Button = <T extends ElementType = 'button'>(
-  props: ButtonProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>
-) => {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const {
     IconID,
     as: Component = 'button',
@@ -24,6 +22,7 @@ export const Button = <T extends ElementType = 'button'>(
     <>
       <Component
         className={`${s.button} ${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className}`}
+        ref={ref}
         {...rest}
       >
         {IconID && (
@@ -37,7 +36,7 @@ export const Button = <T extends ElementType = 'button'>(
       </Component>
     </>
   )
-}
+})
 
 export type ButtonProps<T extends ElementType = 'button'> = {
   IconID?: string
