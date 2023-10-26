@@ -87,6 +87,8 @@ export const ModalWithComponentsDemo: Story = {
         options={['Select item 1', 'Select item 2', 'Select item 3']}
         classname={s.select}
         placeholder={'Select-box'}
+        classNameViewPort={s.viewPort}
+        classNameSelectItem={s.selectItem}
       />
       <TextField label={'Input'} placeholder={'Input'} />
       <TextField label={'Input'} placeholder={'Input'} />

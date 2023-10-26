@@ -27,13 +27,15 @@ type SelectProps = {
   variant?: string
   label?: string
   classname?: string
+  classNameViewPort?: string
+  classNameSelectItem?: string
 }
 
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
   ({ children, width, padding, className, ...props }, forwardedRef) => {
     return (
       <SelectRadix.Item
-        className={s.SelectItem}
+        className={`${s.SelectItem} ${className}`}
         ref={forwardedRef}
         style={{ padding: `0px ${padding}` }}
         {...props}
@@ -53,6 +55,8 @@ export const Select = ({
   options,
   placeholder = 'select',
   classname,
+  classNameViewPort,
+  classNameSelectItem,
   ...rest
 }: SelectProps) => {
   return (
@@ -76,12 +80,17 @@ export const Select = ({
         </SelectRadix.Trigger>
       </label>
       <SelectRadix.Portal>
-        <SelectRadix.Content className={s.SelectContent} position={'popper'}>
+        <SelectRadix.Content className={`${s.SelectContent}`} position={'popper'}>
           <SelectRadix.Viewport className={s.SelectViewport}>
-            <SelectRadix.Group>
+            <SelectRadix.Group className={classNameViewPort}>
               {options.map((el, i) => {
                 return (
-                  <SelectItem key={crypto.randomUUID()} value={el + i} padding={padding}>
+                  <SelectItem
+                    className={classNameSelectItem}
+                    key={crypto.randomUUID()}
+                    value={el + i}
+                    padding={padding}
+                  >
                     {el}
                   </SelectItem>
                 )

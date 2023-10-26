@@ -79,9 +79,9 @@
 }
 
 button.select {
-  height: 22px;
+  height: unset;
   margin-top: 1px;
-  padding: 6px 0;
+  padding: 8px 0;
   font-size: 16px;
 
   span:nth-child(1) {
@@ -94,7 +94,16 @@ button.select {
 }
 
 button.select[data-placeholder] {
-  border: none;
   border-radius: 2px;
-  outline: 1px solid var(--color-dark-300);
+}
+
+div.viewPort {
+  outline: 1px solid var(--color-dark-300) !important;
+}
+
+.selectItem {
+  height: unset !important;
+  padding: 10px 12px;
+  font-size: 16px !important;
+  line-height: 24px;
 }
