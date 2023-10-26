@@ -41,7 +41,7 @@ export const ModalDescriptionDemo: Story = {
       <ModalDescription>
         <ScrollBar maxHeight="40vh">
           <Typography variant={'body1'} as={'p'}>
-            <p>{loremText}</p>
+            {loremText}
           </Typography>
         </ScrollBar>
       </ModalDescription>
@@ -54,15 +54,23 @@ export const ModalScrollbarDescriptionDemo: Story = {
     <Modal>
       <ModalDescription>
         <ScrollBar maxHeight="40vh">
-          <Typography variant={'body1'} as={'span'}>
-            <p>{loremText}</p>
-            <p>{loremText}</p>
-            <p>{loremText}</p>
-            <p>{loremText}</p>
-            <p>{loremText}</p>
-            <p>{loremText}</p>
-            <p>{loremText}</p>
-            <p>{loremText}</p>
+          <Typography variant={'body1'} as={'p'}>
+            {loremText}
+          </Typography>
+          <Typography variant={'body1'} as={'p'}>
+            {loremText}
+          </Typography>
+          <Typography variant={'body1'} as={'p'}>
+            {loremText}
+          </Typography>
+          <Typography variant={'body1'} as={'p'}>
+            {loremText}
+          </Typography>
+          <Typography variant={'body1'} as={'p'}>
+            {loremText}
+          </Typography>
+          <Typography variant={'body1'} as={'p'}>
+            {loremText}
           </Typography>
         </ScrollBar>
       </ModalDescription>

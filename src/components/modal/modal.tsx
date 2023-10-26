@@ -40,18 +40,20 @@ type ModalTitleProps = {
 
 export const ModalTitle: FC<ModalTitleProps> = ({ title }) => {
   return (
-    <DialogRadix.Title className={s.dialogTitle}>
-      <Typography variant={'heading2'} as={'h2'}>
-        {title}
-      </Typography>
-      <ModalClose />
+    <DialogRadix.Title className={s.dialogTitle} asChild>
+      <div>
+        <Typography variant={'heading2'} as={'h2'}>
+          {title}
+        </Typography>
+        <ModalClose />
+      </div>
     </DialogRadix.Title>
   )
 }
 
 export const ModalClose = () => {
   return (
-    <DialogRadix.Close className={s.dialogClose} aria-label="Close">
+    <DialogRadix.Close className={s.dialogClose} asChild aria-label="Close">
       <Close size={24} />
     </DialogRadix.Close>
   )
@@ -63,8 +65,10 @@ type ModalDescriptionProps = {
 
 export const ModalDescription: FC<ModalDescriptionProps> = ({ children }) => {
   return (
-    <DialogRadix.Description className={s.description}>
-      <ScrollBar maxHeight={'40vh'} children={children} />
+    <DialogRadix.Description className={s.description} asChild>
+      <div>
+        <ScrollBar maxHeight={'40vh'} children={children} />
+      </div>
     </DialogRadix.Description>
   )
 }
