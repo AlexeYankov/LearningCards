@@ -10,9 +10,6 @@ type SelectItemProps = {
   className?: string
   disabled?: boolean
   value: string
-  width?: string
-  height?: string
-  padding?: string
   reversed?: boolean
 }
 
@@ -20,9 +17,6 @@ type SelectProps = {
   disabled?: boolean
   reversed?: boolean
   options: Array<string>
-  width?: string
-  height?: string
-  padding?: string
   placeholder?: string
   variant?: string
   label?: string
@@ -30,14 +24,9 @@ type SelectProps = {
 }
 
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
-  ({ children, width, padding, className, ...props }, forwardedRef) => {
+  ({ children, className, ...props }, forwardedRef) => {
     return (
-      <SelectRadix.Item
-        className={`${s.SelectItem} ${className}`}
-        ref={forwardedRef}
-        style={{ padding: `0px ${padding}` }}
-        {...props}
-      >
+      <SelectRadix.Item className={`${s.SelectItem} ${className}`} ref={forwardedRef} {...props}>
         <SelectRadix.ItemText>{children}</SelectRadix.ItemText>
       </SelectRadix.Item>
     )
@@ -45,9 +34,6 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
 )
 
 export const Select = ({
-  width,
-  height,
-  padding,
   reversed,
   label,
   options,
@@ -55,6 +41,7 @@ export const Select = ({
   classname,
   ...rest
 }: SelectProps) => {
+  console.log(classname)
   return (
     <SelectRadix.Root {...rest}>
       <label htmlFor="" className={s.box}>
@@ -63,7 +50,7 @@ export const Select = ({
           aria-label={`${placeholder}`}
           className={s.SelectTrigger + ' ' + `${reversed ? s.hoverActive : ''} `}
         >
-          <div className={s.selectTriggerBox}>
+          <div className={`${s.selectTriggerBox} ${classname}`}>
             <SelectRadix.Value placeholder={placeholder} />
             <SelectRadix.Icon className={reversed ? s.rotate : s.SelectIcon}>
               <ChevronDownIcon />
@@ -77,7 +64,7 @@ export const Select = ({
             <SelectRadix.Group>
               {options.map((el, i) => {
                 return (
-                  <SelectItem key={crypto.randomUUID()} value={el + i} padding={padding}>
+                  <SelectItem key={crypto.randomUUID()} value={el + i}>
                     {el}
                   </SelectItem>
                 )
