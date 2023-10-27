@@ -19,7 +19,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
   } = props
 
   return (
-    <>
+    <div className={s.box}>
       <Component
         className={`${s.button} ${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className}`}
         ref={ref}
@@ -34,14 +34,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
         )}
         {children}
       </Component>
-    </>
+    </div>
   )
 })
 
 export type ButtonProps<T extends ElementType = 'button'> = {
   IconID?: string
   as?: T
-  children: ReactNode
+  children?: ReactNode
   className?: string
   fullWidth?: boolean
   height?: string

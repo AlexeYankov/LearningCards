@@ -6,6 +6,8 @@ import { TextField } from '@/components/input'
 import { CheckBox } from '@/components/checkbox'
 import s from './modal.module.scss'
 import { Select } from '@/components/select'
+import { Button } from '@/components/button'
+import img from './../../asserts/Mask.png'
 
 const meta = {
   argTypes: {},
@@ -90,6 +92,57 @@ export const ModalWithComponentsDemo: Story = {
         classNameSelectItem={s.selectItem}
       />
       <TextField label={'Input'} placeholder={'Input'} />
+      <TextField label={'Input'} placeholder={'Input'} />
+      <CheckBox
+        IconID={'checkbox-unselected'}
+        SelectedIconID={'checkbox-selected'}
+        disabled={false}
+        height={'24'}
+        label={'Check-box'}
+        width={'24'}
+      />
+    </Modal>
+  ),
+}
+
+export const ModalWithImageDemo: Story = {
+  render: () => (
+    <Modal className={s.contentComponents}>
+      <Select
+        label={'Select-box'}
+        options={['Select item 1', 'Select item 2', 'Select item 3']}
+        classname={s.select}
+        placeholder={'Select-box'}
+        classNameSelectItem={s.selectItem}
+      />
+      <Typography variant={'subtitle2'} as={'p'}>
+        Question:
+      </Typography>
+      <img className={s.img} src={img} alt="card image" />
+      <Button
+        className={s.buttonModal}
+        variant={'secondary'}
+        IconID={'image-outline'}
+        width={'16'}
+        height={'16'}
+        fullWidth
+      >
+        Change Cover
+      </Button>
+      <Typography variant={'subtitle2'} as={'p'}>
+        Answer:
+      </Typography>
+      <img className={s.img} src={img} alt="card image" />
+      <Button
+        className={s.buttonModal}
+        variant={'secondary'}
+        IconID={'image-outline'}
+        width={'16'}
+        height={'16'}
+        fullWidth
+      >
+        Change Cover
+      </Button>
       <TextField label={'Input'} placeholder={'Input'} />
       <CheckBox
         IconID={'checkbox-unselected'}
