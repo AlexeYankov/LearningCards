@@ -155,3 +155,28 @@ export const ModalWithImageDemo: Story = {
     </Modal>
   ),
 }
+
+export const ModalPrimaryButton: Story = {
+  render: () => (
+    <Modal className={s.contentBtn}>
+      <div>
+        <Button className={s.buttonModal} variant={'primary'}>
+          Button primary
+        </Button>
+      </div>
+    </Modal>
+  ),
+}
+
+export const ModalButtons: Story = {
+  render: () => (
+    <Modal className={`${s.contentBtn} ${s.contentBtns}`}>
+      <Button variant="secondary" classNameBtnBox={s.btnBox}>
+        Button secondary
+      </Button>
+      <Button variant="primary" classNameBtnBox={s.btnBox}>
+        Button primary
+      </Button>
+    </Modal>
+  ),
+}

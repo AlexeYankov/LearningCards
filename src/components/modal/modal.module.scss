@@ -108,3 +108,22 @@ div.selectItem {
   width: 100%;
   object-fit: cover;
 }
+
+.contentBtn {
+  display: flex;
+  justify-content: flex-end;
+
+  padding: 12px 24px 36px;
+
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  border-top: none;
+}
+
+div.btnBox {
+  width: unset;
+}
+
+.contentBtns {
+  justify-content: space-between;
+}

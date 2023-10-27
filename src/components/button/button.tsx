@@ -15,11 +15,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     variant = 'primary',
     viewBox = '0 0 24 24',
     width = '24px',
+    classNameBtnBox,
     ...rest
   } = props
 
   return (
-    <div className={s.box}>
+    <div className={`${s.box} ${classNameBtnBox}`}>
       <Component
         className={`${s.button} ${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className}`}
         ref={ref}
@@ -48,4 +49,5 @@ export type ButtonProps<T extends ElementType = 'button'> = {
   variant?: 'link' | 'primary' | 'secondary' | 'tertiary'
   viewBox?: string
   width?: string
+  classNameBtnBox?: string
 } & ComponentPropsWithoutRef<T>
