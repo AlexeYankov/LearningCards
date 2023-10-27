@@ -1,7 +1,7 @@
 import { Typography } from '@/components/typography'
 import { Button } from '@/components/button'
 import s from './createNewPassword.module.scss'
-import { TextField } from '@/components/input'
+import { TextField } from '../../textField'
 
 export const CreateNewPassword = () => {
   return (

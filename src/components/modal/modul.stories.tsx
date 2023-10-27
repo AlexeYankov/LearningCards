@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react'
 import { Modal, ModalDescription, ModalTitle } from './modal'
 import { Typography } from '@/components/typography'
 import { ScrollBar } from '@/components/scrollbar'
-import { TextField } from '@/components/input'
+import { TextField } from '../textField'
 import { CheckBox } from '@/components/checkbox'
 import s from './modal.module.scss'
 import { Select } from '@/components/select'
@@ -215,6 +215,59 @@ export const ModalAddNewPack: Story = {
         </Button>
         <Button variant="primary" classNameBtnBox={s.btnBox}>
           Add New Pack
+        </Button>
+      </div>
+    </Modal>
+  ),
+}
+
+export const ModalAddNewCard: Story = {
+  render: () => (
+    <Modal>
+      <ModalTitle title={'Add New Card'} />
+      <div className={s.contentComponents}>
+        <Select
+          label={'Choose a question format'}
+          options={['Select item 1', 'Select item 2', 'Select item 3']}
+          classname={s.select}
+          placeholder={'Picture'}
+          classNameSelectItem={s.selectItem}
+        />
+        <Typography variant={'subtitle2'} as={'p'}>
+          Question:
+        </Typography>
+        <img className={s.img} src={img} alt="card image" />
+        <Button
+          className={s.buttonModal}
+          variant={'secondary'}
+          IconID={'image-outline'}
+          width={'16'}
+          height={'16'}
+          fullWidth
+        >
+          Change Cover
+        </Button>
+        <Typography variant={'subtitle2'} as={'p'}>
+          Answer:
+        </Typography>
+        <img className={s.img} src={img} alt="card image" />
+        <Button
+          className={s.buttonModal}
+          variant={'secondary'}
+          IconID={'image-outline'}
+          width={'16'}
+          height={'16'}
+          fullWidth
+        >
+          Change Cover
+        </Button>
+      </div>
+      <div className={`${s.contentBtn} ${s.contentBtns}`}>
+        <Button variant="secondary" classNameBtnBox={s.btnBox}>
+          Cancel
+        </Button>
+        <Button variant="primary" classNameBtnBox={s.btnBox}>
+          Add New Card
         </Button>
       </div>
     </Modal>
