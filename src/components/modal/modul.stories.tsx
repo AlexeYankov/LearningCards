@@ -170,13 +170,53 @@ export const ModalPrimaryButton: Story = {
 
 export const ModalButtons: Story = {
   render: () => (
-    <Modal className={`${s.contentBtn} ${s.contentBtns}`}>
-      <Button variant="secondary" classNameBtnBox={s.btnBox}>
-        Button secondary
-      </Button>
-      <Button variant="primary" classNameBtnBox={s.btnBox}>
-        Button primary
-      </Button>
+    <Modal>
+      <div className={`${s.contentBtn} ${s.contentBtns}`}>
+        <Button variant="secondary" classNameBtnBox={s.btnBox}>
+          Button secondary
+        </Button>
+        <Button variant="primary" classNameBtnBox={s.btnBox}>
+          Button primary
+        </Button>
+      </div>
+    </Modal>
+  ),
+}
+
+export const ModalAddNewPack: Story = {
+  render: () => (
+    <Modal>
+      <ModalTitle title={'Add New Pack'} />
+      <div className={s.contentComponents}>
+        <img className={s.img} src={img} alt="card image" />
+        <Button
+          className={s.buttonModal}
+          variant={'secondary'}
+          IconID={'image-outline'}
+          width={'16'}
+          height={'16'}
+          fullWidth
+        >
+          Change Cover
+        </Button>
+        <TextField label={'Name Pack'} placeholder={'Name'} />
+        <CheckBox
+          IconID={'checkbox-unselected'}
+          SelectedIconID={'checkbox-selected'}
+          disabled={false}
+          height={'24'}
+          label={'Private Pack'}
+          width={'24'}
+        />
+      </div>
+      <div className={`${s.contentBtn} ${s.contentBtns}`}>
+        <Button variant="secondary" classNameBtnBox={s.btnBox}>
+          Cancel
+        </Button>
+        <Button variant="primary" classNameBtnBox={s.btnBox}>
+          Add New Pack
+        </Button>
+      </div>
     </Modal>
   ),
 }

@@ -19,9 +19,9 @@
   transform: translate(-50%, -50%);
 
   width: 100%;
-  max-width: 530px;
+  max-width: 540px;
 
-  background-color: var(--color-light-900);
+  background-color: transparent;
 }
 
 .dialogTitle {
@@ -33,6 +33,7 @@
 
   background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
+  border-bottom: none;
   border-radius: 2px 2px 0 0;
 
   svg {
@@ -72,6 +73,7 @@
 
   background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
+  border-bottom: none;
 
   label:nth-child(1) {
     color: var(--color-dark-100);
@@ -126,4 +128,5 @@ div.btnBox {
 
 .contentBtns {
   justify-content: space-between;
+  margin-top: -1px;
 }
