@@ -90,6 +90,7 @@ export const ModalWithComponentsDemo: Story = {
         classname={s.select}
         placeholder={'Select-box'}
         classNameSelectItem={s.selectItem}
+        reversed
       />
       <TextField label={'Input'} placeholder={'Input'} />
       <TextField label={'Input'} placeholder={'Input'} />
@@ -114,6 +115,7 @@ export const ModalWithImageDemo: Story = {
         classname={s.select}
         placeholder={'Select-box'}
         classNameSelectItem={s.selectItem}
+        reversed
       />
       <Typography variant={'subtitle2'} as={'p'}>
         Question:
@@ -232,6 +234,7 @@ export const ModalAddNewCard: Story = {
           classname={s.select}
           placeholder={'Picture'}
           classNameSelectItem={s.selectItem}
+          reversed
         />
         <Typography variant={'subtitle2'} as={'p'}>
           Question:
