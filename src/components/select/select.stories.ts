@@ -29,10 +29,8 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {
   args: {
     variant: 'Primary',
-    options: ["Select-box", "Select-box", "Select-box"],
-    width: '100px',
+    options: ['Select-box', 'Select-box', 'Select-box'],
     placeholder: 'Select-box',
-    padding: '5px',
     label: 'Select-box',
     reversed: true,
   },
@@ -41,9 +39,7 @@ export const Secondary: Story = {
   args: {
     variant: 'Secondary',
     // width: "24",
-    options: ["Select-box", "Select-box", "Select-box"],
-    width: '210px',
-    padding: '12px',
+    options: ['Select-box', 'Select-box', 'Select-box'],
     placeholder: 'Select-box',
     reversed: true,
     label: 'Select-box',
@@ -53,9 +49,7 @@ export const Secondary: Story = {
 export const Thirtery: Story = {
   args: {
     variant: 'Thirtery',
-    options: ["Select-box", "Select-box", "Select-box"],
-    width: '210px',
-    padding: '12px',
+    options: ['Select-box', 'Select-box', 'Select-box'],
     placeholder: 'Select-box',
     reversed: true,
     label: 'Select-box',

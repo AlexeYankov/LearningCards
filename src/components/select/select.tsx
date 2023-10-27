@@ -27,7 +27,6 @@ type SelectProps = {
   variant?: string
   label?: string
   classname?: string
-  classNameSelectItem?: string
 }
 
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
@@ -54,27 +53,22 @@ export const Select = ({
   options,
   placeholder = 'select',
   classname,
-  classNameSelectItem,
   ...rest
 }: SelectProps) => {
   return (
     <SelectRadix.Root {...rest}>
-      <label htmlFor="" className={s.selectLabelforSelect}>
-        {label}
+      <label htmlFor="" className={s.box}>
+        <span className={`${s.label} `}>{label}</span>
         <SelectRadix.Trigger
           aria-label={`${placeholder}`}
-          className={s.SelectTrigger + ' ' + `${reversed ? s.hoverActive : ''} ${classname}`}
-          style={{
-            maxWidth: `calc(${width} - ${padding}*2)`,
-            minWidth: `calc(${width} - ${padding}*2)`,
-            width: `${width}`,
-            padding: `0px ${padding}`,
-          }}
+          className={s.SelectTrigger + ' ' + `${reversed ? s.hoverActive : ''} `}
         >
-          <SelectRadix.Value placeholder={placeholder} />
-          <SelectRadix.Icon className={reversed ? s.rotate : s.SelectIcon}>
-            <ChevronDownIcon />
-          </SelectRadix.Icon>
+          <div className={s.selectTriggerBox}>
+            <SelectRadix.Value placeholder={placeholder} />
+            <SelectRadix.Icon className={reversed ? s.rotate : s.SelectIcon}>
+              <ChevronDownIcon />
+            </SelectRadix.Icon>
+          </div>
         </SelectRadix.Trigger>
       </label>
       <SelectRadix.Portal>
@@ -83,12 +77,7 @@ export const Select = ({
             <SelectRadix.Group>
               {options.map((el, i) => {
                 return (
-                  <SelectItem
-                    className={classNameSelectItem}
-                    key={crypto.randomUUID()}
-                    value={el + i}
-                    padding={padding}
-                  >
+                  <SelectItem key={crypto.randomUUID()} value={el + i} padding={padding}>
                     {el}
                   </SelectItem>
                 )
