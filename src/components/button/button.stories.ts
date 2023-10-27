@@ -68,10 +68,10 @@ export const Link: Story = {
 export const SecondaryWithIcon: Story = {
   args: {
     IconID: 'log-out',
-    children: 'Primary Button',
+    children: 'Secondary Button',
     disabled: false,
     height: '16',
-    variant: 'primary',
+    variant: 'secondary',
     width: '16',
   },
 }
