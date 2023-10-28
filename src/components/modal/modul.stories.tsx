@@ -8,6 +8,7 @@ import s from './modal.module.scss'
 import { Select } from '@/components/select'
 import { Button } from '@/components/button'
 import img from './../../asserts/Mask.png'
+import { Image } from '@/asserts/icons/components/Image.tsx'
 
 const meta = {
   argTypes: {},
@@ -89,7 +90,6 @@ export const ModalWithComponentsDemo: Story = {
         options={['Select item 1', 'Select item 2', 'Select item 3']}
         classname={s.select}
         placeholder={'Select-box'}
-        classNameSelectItem={s.selectItem}
         reversed
       />
       <TextField label={'Input'} placeholder={'Input'} />
@@ -114,35 +114,20 @@ export const ModalWithImageDemo: Story = {
         options={['Select item 1', 'Select item 2', 'Select item 3']}
         classname={s.select}
         placeholder={'Select-box'}
-        classNameSelectItem={s.selectItem}
         reversed
       />
       <Typography variant={'subtitle2'} as={'p'}>
         Question:
       </Typography>
       <img className={s.img} src={img} alt="card image" />
-      <Button
-        className={s.buttonModal}
-        variant={'secondary'}
-        IconID={'image-outline'}
-        width={'16'}
-        height={'16'}
-        fullWidth
-      >
+      <Button className={s.buttonModal} variant={'secondary'} icon={<Image />} fullWidth>
         Change Cover
       </Button>
       <Typography variant={'subtitle2'} as={'p'}>
         Answer:
       </Typography>
       <img className={s.img} src={img} alt="card image" />
-      <Button
-        className={s.buttonModal}
-        variant={'secondary'}
-        IconID={'image-outline'}
-        width={'16'}
-        height={'16'}
-        fullWidth
-      >
+      <Button className={s.buttonModal} variant={'secondary'} icon={<Image />} fullWidth>
         Change Cover
       </Button>
       <TextField label={'Input'} placeholder={'Input'} />
@@ -191,14 +176,7 @@ export const ModalAddNewPack: Story = {
       <ModalTitle title={'Add New Pack'} />
       <div className={s.contentComponents}>
         <img className={s.img} src={img} alt="card image" />
-        <Button
-          className={s.buttonModal}
-          variant={'secondary'}
-          IconID={'image-outline'}
-          width={'16'}
-          height={'16'}
-          fullWidth
-        >
+        <Button className={s.buttonModal} variant={'secondary'} icon={<Image />} fullWidth>
           Change Cover
         </Button>
         <TextField label={'Name Pack'} placeholder={'Name'} />
@@ -233,35 +211,20 @@ export const ModalAddNewCard: Story = {
           options={['Select item 1', 'Select item 2', 'Select item 3']}
           classname={s.select}
           placeholder={'Picture'}
-          classNameSelectItem={s.selectItem}
           reversed
         />
         <Typography variant={'subtitle2'} as={'p'}>
           Question:
         </Typography>
         <img className={s.img} src={img} alt="card image" />
-        <Button
-          className={s.buttonModal}
-          variant={'secondary'}
-          IconID={'image-outline'}
-          width={'16'}
-          height={'16'}
-          fullWidth
-        >
+        <Button className={s.buttonModal} variant={'secondary'} icon={<Image />} fullWidth>
           Change Cover
         </Button>
         <Typography variant={'subtitle2'} as={'p'}>
           Answer:
         </Typography>
         <img className={s.img} src={img} alt="card image" />
-        <Button
-          className={s.buttonModal}
-          variant={'secondary'}
-          IconID={'image-outline'}
-          width={'16'}
-          height={'16'}
-          fullWidth
-        >
+        <Button className={s.buttonModal} variant={'secondary'} icon={<Image />} fullWidth>
           Change Cover
         </Button>
       </div>
