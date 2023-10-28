@@ -3,6 +3,7 @@ import { ComponentPropsWithoutRef, ElementType, useState } from 'react'
 import s from './check-box.module.scss'
 
 import sprite from '../../asserts/sprite.svg'
+import { Label } from '@/components/label'
 
 export const CheckBox = <T extends ElementType = 'input'>(
   props: CheckBoxProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof CheckBoxProps<T>>
@@ -21,6 +22,7 @@ export const CheckBox = <T extends ElementType = 'input'>(
     theme = 'white',
     viewBox = '0 0 24 24',
     width = '20px',
+    checkboxId,
     ...rest
   } = props
   const [isChecked, setChecked] = useState(controlledBy)
@@ -52,7 +54,7 @@ export const CheckBox = <T extends ElementType = 'input'>(
           {...rest}
         />
       </div>
-      {label && <label>{label}</label>}
+      {label && <Label label={label} htmlFor={'checkboxId'} />}
     </div>
   )
 }
@@ -70,4 +72,5 @@ export type CheckBoxProps<T extends ElementType = 'input'> = {
 
   setControlledBy?: (value: boolean) => void
   width?: string
+  checkboxId?: string
 } & ComponentPropsWithoutRef<T>

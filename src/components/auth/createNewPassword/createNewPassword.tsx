@@ -9,7 +9,12 @@ export const CreateNewPassword = () => {
       <Typography className={s.title} as={'span'} variant={'large'}>
         Create new password
       </Typography>
-      <TextField password placeholder={'Create New Password'} label={'Password'} />
+      <TextField
+        password
+        placeholder={'Create New Password'}
+        label={'Password'}
+        inputId={'Password'}
+      />
       <Typography className={s.text} as={'p'} variant={'body2'}>
         Create new password and we will send you further instructions to email
       </Typography>

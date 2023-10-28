@@ -28,6 +28,7 @@ export const Default: Story = {
     disabled: false,
     label: 'Input',
     placeholder: 'Input',
+    inputId: 'inputIdDefault',
     type: 'text',
     password: false,
     search: false,
@@ -39,6 +40,7 @@ export const Error: Story = {
     disabled: false,
     errorMessage: 'Error!',
     label: 'Input',
+    inputId: 'inputIdError',
     placeholder: 'Error',
     type: 'text',
     value: 'error value',
@@ -50,7 +52,8 @@ export const Error: Story = {
 export const Password: Story = {
   args: {
     disabled: false,
-    label: 'Input',
+    label: 'Input password',
+    inputId: 'inputIdPassword',
     placeholder: 'password',
     type: 'password',
     value: 'some password',
@@ -61,8 +64,9 @@ export const Password: Story = {
 export const Search: Story = {
   args: {
     disabled: false,
-    label: 'Input',
-    placeholder: 'Input search',
+    label: 'Input search',
+    inputId: 'inputIdSearch',
+    placeholder: 'search',
     search: true,
   },
 }

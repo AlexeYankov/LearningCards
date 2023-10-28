@@ -31,7 +31,8 @@ export const Primary: Story = {
     variant: 'Primary',
     options: ['Select-box', 'Select-box', 'Select-box'],
     placeholder: 'Select-box',
-    label: 'Select-box',
+    label: 'Select-box Primary',
+    selectId: 'Select-box Primary',
     reversed: true,
   },
 }
@@ -42,7 +43,8 @@ export const Secondary: Story = {
     options: ['Select-box', 'Select-box', 'Select-box'],
     placeholder: 'Select-box',
     reversed: true,
-    label: 'Select-box',
+    label: 'Select-box Secondary',
+    selectId: 'Select-box Secondary',
     // height: "24",
   },
 }
@@ -52,7 +54,8 @@ export const Thirtery: Story = {
     options: ['Select-box', 'Select-box', 'Select-box'],
     placeholder: 'Select-box',
     reversed: true,
-    label: 'Select-box',
+    label: 'Select-box Thirtery',
+    selectId: 'Select-box Thirtery',
     disabled: true,
   },
 }

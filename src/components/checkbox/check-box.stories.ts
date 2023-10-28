@@ -37,5 +37,6 @@ export const Secondary: Story = {
     label: 'Check-box',
     variant: 'secondary',
     width: '24',
+    checkboxId: 'Check-box',
   },
 }

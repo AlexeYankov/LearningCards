@@ -4,6 +4,7 @@ import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as SelectRadix from '@radix-ui/react-select'
 
 import s from './selectRadix.module.scss'
+import { Label } from '@/components/label'
 
 type SelectItemProps = {
   children?: React.ReactNode
@@ -21,6 +22,7 @@ type SelectProps = {
   variant?: string
   label?: string
   classname?: string
+  selectId?: string
 }
 
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
@@ -39,16 +41,17 @@ export const Select = ({
   options,
   placeholder = 'select',
   classname,
+  selectId,
   ...rest
 }: SelectProps) => {
-  console.log(classname)
   return (
     <SelectRadix.Root {...rest}>
-      <label htmlFor="" className={s.box}>
-        <span className={`${s.label} `}>{label}</span>
+      <div className={s.box}>
+        <Label label={label} htmlFor={selectId} className={`${s.label} `} />
         <SelectRadix.Trigger
           aria-label={`${placeholder}`}
           className={s.SelectTrigger + ' ' + `${reversed ? s.hoverActive : ''} `}
+          id={selectId}
         >
           <div className={`${s.selectTriggerBox} ${classname}`}>
             <SelectRadix.Value placeholder={placeholder} />
@@ -57,7 +60,7 @@ export const Select = ({
             </SelectRadix.Icon>
           </div>
         </SelectRadix.Trigger>
-      </label>
+      </div>
       <SelectRadix.Portal>
         <SelectRadix.Content className={`${s.SelectContent}`} position={'popper'}>
           <SelectRadix.Viewport className={s.SelectViewport}>

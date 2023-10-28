@@ -11,6 +11,7 @@ import s from './textField.module.scss'
 import { Search } from '@/asserts/icons/components/Search'
 import { Close } from '@/asserts/icons/components/Close'
 import { Password } from '@/asserts/icons/components/Password'
+import { Label } from '@/components/label'
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
   let {
@@ -28,6 +29,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
     password,
     value,
     onClearClick,
+    inputId,
     ...rest
   } = props
 
@@ -59,8 +61,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 
   return (
     <div className={s.box}>
-      <label>
-        <div className={`${s.label} ${disabledLabelClass}`}>{label}</div>
+      <div>
+        <Label label={label} htmlFor={inputId} className={`${s.label} ${disabledLabelClass}`} />
         <div className={s.inputContainer}>
           {!!iconStart && (
             <span className={`${s.iconStart} ${disabledIconClass}`}>{iconStart}</span>
@@ -72,6 +74,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
             placeholder={placeholder}
             type={valueType}
             value={text}
+            id={inputId}
             ref={ref}
             {...rest}
           />
@@ -95,7 +98,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
           )}
         </div>
         {errorMessage && <span className={s.errorRed}>{errorMessage}</span>}
-      </label>
+      </div>
     </div>
   )
 })
@@ -115,4 +118,5 @@ type TextFieldProps<T extends ElementType = 'input'> = {
   search?: boolean
   password?: boolean
   onClearClick?: () => void
+  inputId?: string
 } & ComponentPropsWithoutRef<T>

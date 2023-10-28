@@ -89,11 +89,12 @@ export const ModalWithComponentsDemo: Story = {
         label={'Select-box'}
         options={['Select item 1', 'Select item 2', 'Select item 3']}
         classname={s.select}
+        selectId={'Select-box'}
         placeholder={'Select-box'}
         reversed
       />
-      <TextField label={'Input'} placeholder={'Input'} />
-      <TextField label={'Input'} placeholder={'Input'} />
+      <TextField label={'Input'} placeholder={'Input'} inputId={'Input1'} />
+      <TextField label={'Input'} placeholder={'Input'} inputId={'Input2'} />
       <CheckBox
         IconID={'checkbox-unselected'}
         SelectedIconID={'checkbox-selected'}
@@ -101,6 +102,7 @@ export const ModalWithComponentsDemo: Story = {
         height={'24'}
         label={'Check-box'}
         width={'24'}
+        checkboxId={'Check-box'}
       />
     </Modal>
   ),
@@ -115,6 +117,7 @@ export const ModalWithImageDemo: Story = {
         classname={s.select}
         placeholder={'Select-box'}
         reversed
+        selectId={'Select-box'}
       />
       <Typography variant={'subtitle2'} as={'p'}>
         Question:
@@ -130,13 +133,14 @@ export const ModalWithImageDemo: Story = {
       <Button className={s.buttonModal} variant={'secondary'} icon={<Image />} fullWidth>
         Change Cover
       </Button>
-      <TextField label={'Input'} placeholder={'Input'} />
+      <TextField label={'Input'} placeholder={'Input'} inputId={'Input'} />
       <CheckBox
         IconID={'checkbox-unselected'}
         SelectedIconID={'checkbox-selected'}
         disabled={false}
         height={'24'}
         label={'Check-box'}
+        checkboxId={'Check-box'}
         width={'24'}
       />
     </Modal>
@@ -179,7 +183,7 @@ export const ModalAddNewPack: Story = {
         <Button className={s.buttonModal} variant={'secondary'} icon={<Image />} fullWidth>
           Change Cover
         </Button>
-        <TextField label={'Name Pack'} placeholder={'Name'} />
+        <TextField label={'Name Pack'} placeholder={'Name'} inputId={'Name Pack'} />
         <CheckBox
           IconID={'checkbox-unselected'}
           SelectedIconID={'checkbox-selected'}
@@ -187,6 +191,7 @@ export const ModalAddNewPack: Story = {
           height={'24'}
           label={'Private Pack'}
           width={'24'}
+          checkboxId={'Private Pack'}
         />
       </div>
       <div className={`${s.contentBtn} ${s.contentBtns}`}>
@@ -211,6 +216,7 @@ export const ModalAddNewCard: Story = {
           options={['Select item 1', 'Select item 2', 'Select item 3']}
           classname={s.select}
           placeholder={'Picture'}
+          selectId={'newCardSelectId'}
           reversed
         />
         <Typography variant={'subtitle2'} as={'p'}>
