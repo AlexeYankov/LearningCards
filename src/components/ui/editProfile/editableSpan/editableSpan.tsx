@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-import { Button } from '@/components/button'
-import { TextField } from '@/components/input'
+import { Button } from '@/components/ui/button'
+import { TextField } from '@/components/ui/textField'
 
-import s from '../EditProfile.module.scss'
+import s from '../editProfile.module.scss'
 
 type EditableSpanPropsType = {
   onChange: (newValue: string) => void
@@ -34,13 +34,13 @@ export const EditableSpan = React.memo(function ({ onChange, value }: EditableSp
     }
   }
 
-  return editMode? (
+  return editMode ? (
     <span>
       <TextField
         autoFocus
         label={'Nickname'}
         onKeyPress={keyPress}
-        setValue={setTitle}
+        // onChange={onChage}
         type={'text'}
         value={title}
       />
@@ -58,7 +58,7 @@ export const EditableSpan = React.memo(function ({ onChange, value }: EditableSp
         {value}
       </h1>
       <div className={s.email}>j&johnson@gmail.com</div>
-      <Button IconID={'log-out'} children={'Log out'} variant={'secondary'} />
+      {/* <Button IconID={'log-out'} children={'Log out'} variant={'secondary'} /> */}
     </>
   )
 })

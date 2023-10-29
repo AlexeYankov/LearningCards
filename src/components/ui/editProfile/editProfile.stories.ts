@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-// eslint-disable-next-line import/extensions
-import { EditProfile } from './EditProfile.tsx'
+import { EditProfile } from './editProfile'
 
 const meta = {
   component: EditProfile,

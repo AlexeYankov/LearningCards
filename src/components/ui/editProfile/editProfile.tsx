@@ -1,11 +1,10 @@
-// eslint-disable-next-line import/extensions
 import { useState } from 'react'
 
-import s from './EditProfile.module.scss'
+import s from './editProfile.module.scss'
 
-import logo from '../../asserts/Logo.png'
-import profileImage from './../../asserts/profileImage.png'
-import { EditableSpan } from './EditableSpan/EditableSpan'
+import logo from '@/asserts/Logo.png'
+import profileImage from '@/asserts/profileImage.png'
+import { EditableSpan } from './editableSpan/editableSpan'
 
 type Props = {
   name: string
