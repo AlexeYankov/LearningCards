@@ -21,11 +21,13 @@ export const Table = ({ headCell, bodyCell, ...rest }: TableType) => {
           </Row>
         </Head>
         <Body>
-          <Row>
-            {bodyCell?.map((el: BodyCellType) => {
-              return <BodyCell key={el.id} el={el} {...rest} />
-            })}
-          </Row>
+          {bodyCell?.map((el: BodyCellType) => {
+            return (
+              <Row>
+                <BodyCell key={el.id} el={el} {...rest} />
+              </Row>
+            )
+          })}
         </Body>
       </React.Fragment>
     </Root>
