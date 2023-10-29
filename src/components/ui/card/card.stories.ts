@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/default
-import { Card } from '@/components/Card/Card'
+import { Card } from '@/components/ui/card/card'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {

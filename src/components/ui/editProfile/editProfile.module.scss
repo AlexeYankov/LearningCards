@@ -6,7 +6,6 @@
   align-items: center;
   gap: 2.25rem;
 
-
   .header {
     display: flex;
     width: 80rem;
@@ -39,7 +38,6 @@
       border-radius: 2.25rem;
       margin-left: 10px;
     }
-
   }
 
   .cardsContainer {
@@ -63,19 +61,17 @@
       font-size: var(--font-size-xl);
       font-style: normal;
       font-weight: var(--font-weight-bold);
-      line-height:var(--line-height-l);
-
+      line-height: var(--line-height-l);
     }
 
     .email {
-      color: var(  --color-dark-100);
+      color: var(--color-dark-100);
       font-family: var(--font-family-primary);
       font-size: var(--font-size-s);
       font-style: normal;
       font-weight: var(--font-weight-regular);
       line-height: var(--line-height-m); /* 171.429% */
     }
-
 
     .logoProfileEdit {
       width: 6rem;
@@ -89,8 +85,7 @@
       width: 21.75rem;
       margin-top: 2.25rem;
     }
-    .editMode{
+    .editMode {
     }
   }
-
 }

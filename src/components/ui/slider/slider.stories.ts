@@ -1,5 +1,5 @@
-import { SliderDemo } from '@/components/Slider/Slider'
 import { Meta, StoryObj } from '@storybook/react'
+import { SliderDemo } from './slider'
 
 const meta = {
   component: SliderDemo,
