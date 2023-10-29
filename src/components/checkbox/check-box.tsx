@@ -1,19 +1,19 @@
 import { ComponentPropsWithoutRef, ElementType, useState } from 'react'
 
 import { Label } from '@/components/label'
+import {ComponentPropsWithoutRef, ElementType} from 'react'
 
 import s from './check-box.module.scss'
 
 import sprite from '../../asserts/sprite.svg'
 
 export const CheckBox = <T extends ElementType = 'input'>(
-  props: CheckBoxProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof CheckBoxProps<T>>
+    props: CheckBoxProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof CheckBoxProps<T>>
 ) => {
   const {
-    IconID = 'checkbox-unselected',
-    SelectedIconID = 'checkbox-selected',
+    IconID,
+    SelectedIconID,
     as: Component = 'input',
-    checkboxId,
     className,
     controlledBy,
     disabled = false,
@@ -23,23 +23,23 @@ export const CheckBox = <T extends ElementType = 'input'>(
     setControlledBy,
     theme = 'white',
     viewBox = '0 0 24 24',
-    width = '20px',
+    width = '100%',
     ...rest
   } = props
   const [isChecked, setChecked] = useState(controlledBy)
 
-  return (
-    <div
-      className={s.checkboxContainer}
-      onClick={() => setChecked(!isChecked)}
-      style={disabled ? { cursor: 'not-allowed', opacity: '0.7', pointerEvents: 'none' } : {}}
-    >
-      <div className={s.checkboxIconContainer}>
-        <div className={s.checkboxUnselected}>
-          <svg height={height} viewBox={viewBox} width={width}>
-            <use xlinkHref={`${sprite}#${isChecked ? SelectedIconID : IconID}`} />
-          </svg>
-        </div>
+    return (
+        <div
+            className={`${s.checkboxContainer} ${className}`}
+            onClick={() => setControlledBy ? setControlledBy(!controlledBy) :''}
+            style={disabled ? {cursor: 'not-allowed', opacity: '0.7', pointerEvents: 'none'} : {}}
+        >
+            <div className={s.checkboxIconContainer}>
+                <div className={s.checkboxUnselected}>
+                    <svg height={height} viewBox={viewBox} width={width}>
+                        <use xlinkHref={`${sprite}#${controlledBy ? SelectedIconID : IconID}`}/>
+                    </svg>
+                </div>
 
         <Component
           className={`${fullWidth ? s.fullWidth : ''} ${className}`}
@@ -55,7 +55,7 @@ export const CheckBox = <T extends ElementType = 'input'>(
           {...rest}
         />
       </div>
-      {label && <Label htmlFor={'checkboxId'} label={label} />}
+      {label && <label>{label}</label>}
     </div>
   )
 }
@@ -64,14 +64,13 @@ export type CheckBoxProps<T extends ElementType = 'input'> = {
   //   as?: T
   IconID?: string
   SelectedIconID?: string
-  checkboxId?: string
   className?: string
   controlledBy?: boolean
   fullWidth?: boolean
   height?: string
-
   //   children: ReactNode
   label?: string
+
   setControlledBy?: (value: boolean) => void
   width?: string
 } & ComponentPropsWithoutRef<T>
