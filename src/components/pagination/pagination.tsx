@@ -1,7 +1,7 @@
 import s from './pagination.module.scss'
 
-import { Pages } from './components/pages/pages'
 import { Select } from '../select/select'
+import { Pages } from './components/pages/pages'
 
 type PaginationType = {
   arrowColor: string
@@ -29,10 +29,10 @@ export const Pagination = ({
 
       <span>Показать&nbsp;</span>
       <Select
+        classname={s.trigger}
         options={options}
         placeholder={placeholder}
         reversed={reversed}
-        classname={s.trigger}
       />
       <span>&nbsp;на&nbsp;странице</span>
     </div>

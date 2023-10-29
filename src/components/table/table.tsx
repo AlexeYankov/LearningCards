@@ -1,18 +1,19 @@
-import { Body, Head, Root, Row } from '@it-incubator/ui-kit'
 import React from 'react'
+
+import { Body, Head, Root, Row } from '@it-incubator/ui-kit'
 
 // import sprite from '../../asserts/sprite.svg'
 
 import s from './table.module.scss'
 
-import HeadCell from './headCell/headCell'
 import BodyCell from './bodyCell/bodyCell'
+import HeadCell from './headCell/headCell'
 import { BodyCellType, HeadCellType, TableType } from './types'
 
-export const Table = ({ headCell, bodyCell, ...rest }: TableType) => {
+export const Table = ({ bodyCell, headCell, ...rest }: TableType) => {
   return (
     <Root>
-      <React.Fragment key=".0">
+      <React.Fragment key={'.0'}>
         <Head>
           <Row>
             {headCell?.map((el: HeadCellType) => {
@@ -23,7 +24,7 @@ export const Table = ({ headCell, bodyCell, ...rest }: TableType) => {
         <Body>
           <Row>
             {bodyCell?.map((el: BodyCellType) => {
-              return <BodyCell key={el.id} el={el} {...rest} />
+              return <BodyCell el={el} key={el.id} {...rest} />
             })}
           </Row>
         </Body>

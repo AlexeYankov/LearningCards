@@ -1,16 +1,16 @@
-import { ComponentPropsWithoutRef, ElementType, forwardRef, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ElementType, ReactNode, forwardRef } from 'react'
 
 import s from './button.module.scss'
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const {
-    icon,
     as: Component = 'button',
     children,
     className,
-    fullWidth,
-    variant = 'primary',
     classNameBtnBox,
+    fullWidth,
+    icon,
+    variant = 'primary',
     ...rest
   } = props
 
@@ -29,11 +29,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
 })
 
 export type ButtonProps<T extends ElementType = 'button'> = {
-  icon?: ReactNode
   as?: T
   children?: ReactNode
   className?: string
-  fullWidth?: boolean
-  variant?: 'link' | 'primary' | 'secondary' | 'tertiary'
   classNameBtnBox?: string
+  fullWidth?: boolean
+  icon?: ReactNode
+  variant?: 'link' | 'primary' | 'secondary' | 'tertiary'
 } & ComponentPropsWithoutRef<T>

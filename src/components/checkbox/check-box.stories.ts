@@ -32,11 +32,11 @@ export const Secondary: Story = {
   args: {
     IconID: 'checkbox-unselected',
     SelectedIconID: 'checkbox-selected',
+    checkboxId: 'Check-box',
     disabled: false,
     height: '24',
     label: 'Check-box',
     variant: 'secondary',
     width: '24',
-    checkboxId: 'Check-box',
   },
 }

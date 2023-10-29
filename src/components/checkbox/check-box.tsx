@@ -1,9 +1,10 @@
 import { ComponentPropsWithoutRef, ElementType, useState } from 'react'
 
+import { Label } from '@/components/label'
+
 import s from './check-box.module.scss'
 
 import sprite from '../../asserts/sprite.svg'
-import { Label } from '@/components/label'
 
 export const CheckBox = <T extends ElementType = 'input'>(
   props: CheckBoxProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof CheckBoxProps<T>>
@@ -12,6 +13,7 @@ export const CheckBox = <T extends ElementType = 'input'>(
     IconID = 'checkbox-unselected',
     SelectedIconID = 'checkbox-selected',
     as: Component = 'input',
+    checkboxId,
     className,
     controlledBy,
     disabled = false,
@@ -22,7 +24,6 @@ export const CheckBox = <T extends ElementType = 'input'>(
     theme = 'white',
     viewBox = '0 0 24 24',
     width = '20px',
-    checkboxId,
     ...rest
   } = props
   const [isChecked, setChecked] = useState(controlledBy)
@@ -54,7 +55,7 @@ export const CheckBox = <T extends ElementType = 'input'>(
           {...rest}
         />
       </div>
-      {label && <Label label={label} htmlFor={'checkboxId'} />}
+      {label && <Label htmlFor={'checkboxId'} label={label} />}
     </div>
   )
 }
@@ -63,14 +64,14 @@ export type CheckBoxProps<T extends ElementType = 'input'> = {
   //   as?: T
   IconID?: string
   SelectedIconID?: string
+  checkboxId?: string
   className?: string
   controlledBy?: boolean
   fullWidth?: boolean
   height?: string
+
   //   children: ReactNode
   label?: string
-
   setControlledBy?: (value: boolean) => void
   width?: string
-  checkboxId?: string
 } & ComponentPropsWithoutRef<T>

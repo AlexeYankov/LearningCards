@@ -28,37 +28,36 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
-    variant: 'Primary',
     headCell: [{ headCellName: 'Name', id: crypto.randomUUID() }],
+    variant: 'Primary',
   },
 }
 export const Secondary: Story = {
   args: {
-    variant: 'Thirtery',
     bodyCell: [
       {
         bodyCellName: 'Name',
         id: crypto.randomUUID(),
       },
     ],
+    variant: 'Thirtery',
   },
 }
 export const Thirtery: Story = {
   args: {
-    variant: 'Secondary',
     bodyCell: [
       {
         bodyCellName: 'Name',
-        id: crypto.randomUUID(),
         checkBox: true,
+        id: crypto.randomUUID(),
       },
     ],
+    variant: 'Secondary',
   },
 }
 
 export const Fourty: Story = {
   args: {
-    variant: 'fourty',
     bodyCell: [
       {
         bodyCellName: 'Name',
@@ -75,11 +74,11 @@ export const Fourty: Story = {
         ],
       },
     ],
+    variant: 'fourty',
   },
 }
 export const Fivety: Story = {
   args: {
-    variant: 'fivety',
     bodyCell: [
       {
         id: crypto.randomUUID(),
@@ -99,65 +98,65 @@ export const Fivety: Story = {
         ],
       },
     ],
+    variant: 'fivety',
   },
 }
 
 export const Sixty: Story = {
   args: {
-    variant: 'Sixty',
     bodyCell: [
       {
         id: crypto.randomUUID(),
         stars: ['star', 'star', 'star', 'star', 'star-outline'],
       },
     ],
+    variant: 'Sixty',
   },
 }
 
 export const Seventy: Story = {
   args: {
-    variant: 'seventy',
     bodyCell: [
       {
-        bodyCellName: 'Name',
-        id: crypto.randomUUID(),
         bodyCellImage: './src/asserts/profileImage.png',
         bodyCellImageAlt: 'deck cover photo',
+        bodyCellName: 'Name',
+        id: crypto.randomUUID(),
       },
     ],
+    variant: 'seventy',
     width: '250px',
   },
 }
 
-
 export const Eighty: Story = {
   args: {
-    variant: 'eighty',
     bodyCell: [
       {
-        id: crypto.randomUUID(),
         checkBox: true,
+        id: crypto.randomUUID(),
       },
     ],
+    variant: 'eighty',
     width: '200px',
   },
 }
 
 export const Ninety: Story = {
   args: {
-    variant: 'ninety',
     headCell: [
       {
         headCellName: 'Name',
         id: crypto.randomUUID(),
         svgSizes: {
-          id: 'arrow-ios-Up',
           height: '12px',
-          width: '12px',
+          id: 'arrow-ios-Up',
           uniqId: crypto.randomUUID(),
+          width: '12px',
         },
       },
     ],
+    variant: 'ninety',
     width: '200px',
   },
 }

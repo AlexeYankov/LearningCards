@@ -1,33 +1,32 @@
 export type TableType = {
-  padding?: string
-  width?: string
-  headCell?: HeadCellType[]
   bodyCell?: BodyCellType[]
+  headCell?: HeadCellType[]
+  padding?: string
   variant?: string
+  width?: string
 }
 
 export type HeadCellType = {
-  id: string
   headCellName?: string
+  id: string
   svgSizes?: HeadCellSvgType
   width?: string
 }
 export type BodyCellType = {
-  id: string
-  bodyCellName?: string
   bodyCellImage?: string
   bodyCellImageAlt?: string
+  bodyCellName?: string
+  checkBox?: boolean
+  id: string
+  stars?: Array<string>
   svgs?: HeadCellSvgType[]
   width?: string
-  checkBox?: boolean
-  stars?: Array<string>
-  
 }
 
 export type HeadCellSvgType = {
   height?: string
-  width?: string
-  viewBox?: string
   id: string
   uniqId: string
+  viewBox?: string
+  width?: string
 }

@@ -1,28 +1,28 @@
 import React from 'react'
 
+import { Label } from '@/components/label'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as SelectRadix from '@radix-ui/react-select'
 
 import s from './selectRadix.module.scss'
-import { Label } from '@/components/label'
 
 type SelectItemProps = {
   children?: React.ReactNode
   className?: string
   disabled?: boolean
-  value: string
   reversed?: boolean
+  value: string
 }
 
 type SelectProps = {
+  classname?: string
   disabled?: boolean
-  reversed?: boolean
+  label?: string
   options: Array<string>
   placeholder?: string
-  variant?: string
-  label?: string
-  classname?: string
+  reversed?: boolean
   selectId?: string
+  variant?: string
 }
 
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
@@ -36,18 +36,18 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
 )
 
 export const Select = ({
-  reversed,
+  classname,
   label,
   options,
   placeholder = 'select',
-  classname,
+  reversed,
   selectId,
   ...rest
 }: SelectProps) => {
   return (
     <SelectRadix.Root {...rest}>
       <div className={s.box}>
-        <Label label={label} htmlFor={selectId} className={`${s.label} `} />
+        <Label className={`${s.label} `} htmlFor={selectId} label={label} />
         <SelectRadix.Trigger
           aria-label={`${placeholder}`}
           className={s.SelectTrigger + ' ' + `${reversed ? s.hoverActive : ''} `}
