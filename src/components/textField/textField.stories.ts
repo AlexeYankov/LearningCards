@@ -26,12 +26,12 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     disabled: false,
-    label: 'Input',
-    placeholder: 'Input',
     inputId: 'inputIdDefault',
-    type: 'text',
+    label: 'Input',
     password: false,
+    placeholder: 'Input',
     search: false,
+    type: 'text',
   },
 }
 
@@ -39,33 +39,33 @@ export const Error: Story = {
   args: {
     disabled: false,
     errorMessage: 'Error!',
-    label: 'Input',
     inputId: 'inputIdError',
+    label: 'Input',
+    password: false,
     placeholder: 'Error',
+    search: false,
     type: 'text',
     value: 'error value',
-    password: false,
-    search: false,
   },
 }
 
 export const Password: Story = {
   args: {
     disabled: false,
-    label: 'Input password',
     inputId: 'inputIdPassword',
+    label: 'Input password',
+    password: true,
     placeholder: 'password',
     type: 'password',
     value: 'some password',
-    password: true,
   },
 }
 
 export const Search: Story = {
   args: {
     disabled: false,
-    label: 'Input search',
     inputId: 'inputIdSearch',
+    label: 'Input search',
     placeholder: 'search',
     search: true,
   },

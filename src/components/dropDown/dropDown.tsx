@@ -1,35 +1,36 @@
 import { FC, ReactNode, useState } from 'react'
 
-import * as DropdownRadix from '@radix-ui/react-dropdown-menu'
-import s from './dropDown.module.scss'
-import profileImage from '@/asserts/profileImage.png'
-
-import { Typography } from '@/components/typography'
+import { Delete } from '@/asserts/icons/components/Delete'
+import { Edit } from '@/asserts/icons/components/Edit'
+import { Learn } from '@/asserts/icons/components/Learn'
 import { Profile } from '@/asserts/icons/components/Profile'
 import { SignOut } from '@/asserts/icons/components/SignOut'
-import { Learn } from '@/asserts/icons/components/Learn'
-import { Edit } from '@/asserts/icons/components/Edit'
-import { Delete } from '@/asserts/icons/components/Delete'
+import profileImage from '@/asserts/profileImage.png'
+import { Typography } from '@/components/typography'
+import * as DropdownRadix from '@radix-ui/react-dropdown-menu'
+
+import s from './dropDown.module.scss'
 
 export type DropDown = {
   align?: 'center' | 'end' | 'start'
   children: ReactNode
   className?: string
-  trigger?: boolean
   sideOffset?: number
+  trigger?: boolean
 }
 
 export const DropDown: FC<DropDown> = ({
-  className,
-  children,
-  trigger,
   align = 'end',
+  children,
+  className,
   sideOffset,
+  trigger,
 }) => {
   const [open, setOpen] = useState(false)
+
   return (
-    <DropdownRadix.Root open={open} onOpenChange={setOpen}>
-      <DropdownRadix.Trigger className={s.trigger} asChild>
+    <DropdownRadix.Root onOpenChange={setOpen} open={open}>
+      <DropdownRadix.Trigger asChild className={s.trigger}>
         {trigger && <img alt={''} className={s.triggerImg} src={profileImage} />}
       </DropdownRadix.Trigger>
 
@@ -51,12 +52,12 @@ export const DropDown: FC<DropDown> = ({
 export type DropDownItemWithIcon = {
   children?: ReactNode
   className?: string
-  text?: string
   icon?: ReactNode
+  text?: string
   variant?:
-    | 'caption'
     | 'body1'
     | 'body2'
+    | 'caption'
     | 'heading1'
     | 'heading2'
     | 'heading3'
@@ -70,10 +71,10 @@ export type DropDownItemWithIcon = {
 
 export const ItemWithIcon: FC<DropDownItemWithIcon> = ({
   children,
+  className,
+  icon,
   text,
   variant = 'caption',
-  icon,
-  className,
 }) => {
   return (
     <DropdownRadix.Item className={`${s.item} ${className}`}>
@@ -95,7 +96,7 @@ export const DropDownMenu = () => {
         <div className={s.inner}>
           <img alt={''} className={s.img} src={profileImage} />
           <div className={s.itemBox}>
-            <Typography variant={'subtitle2'} as={'p'}>
+            <Typography as={'p'} variant={'subtitle2'}>
               Ivan
             </Typography>
             <Typography className={s.email} variant={'caption'}>
@@ -104,8 +105,8 @@ export const DropDownMenu = () => {
           </div>
         </div>
       </ItemWithIcon>
-      <ItemWithIcon icon={<Profile />} text="My Profile" />
-      <ItemWithIcon icon={<SignOut />} text="Sign Out" />
+      <ItemWithIcon icon={<Profile />} text={'My Profile'} />
+      <ItemWithIcon icon={<SignOut />} text={'Sign Out'} />
     </DropDown>
   )
 }
@@ -113,9 +114,9 @@ export const DropDownMenu = () => {
 export const DropDownPackMenu = () => {
   return (
     <DropDown className={s.content} trigger>
-      <ItemWithIcon icon={<Learn />} text="Learn" />
-      <ItemWithIcon icon={<Edit />} text="Edit" />
-      <ItemWithIcon icon={<Delete />} text="Delete" />
+      <ItemWithIcon icon={<Learn />} text={'Learn'} />
+      <ItemWithIcon icon={<Edit />} text={'Edit'} />
+      <ItemWithIcon icon={<Delete />} text={'Delete'} />
     </DropDown>
   )
 }

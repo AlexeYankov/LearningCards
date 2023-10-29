@@ -28,34 +28,34 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
-    variant: 'Primary',
+    label: 'Select-box Primary',
     options: ['Select-box', 'Select-box', 'Select-box'],
     placeholder: 'Select-box',
-    label: 'Select-box Primary',
-    selectId: 'Select-box Primary',
     reversed: true,
+    selectId: 'Select-box Primary',
+    variant: 'Primary',
   },
 }
 export const Secondary: Story = {
   args: {
-    variant: 'Secondary',
+    label: 'Select-box Secondary',
     // width: "24",
     options: ['Select-box', 'Select-box', 'Select-box'],
     placeholder: 'Select-box',
     reversed: true,
-    label: 'Select-box Secondary',
     selectId: 'Select-box Secondary',
+    variant: 'Secondary',
     // height: "24",
   },
 }
 export const Thirtery: Story = {
   args: {
-    variant: 'Thirtery',
+    disabled: true,
+    label: 'Select-box Thirtery',
     options: ['Select-box', 'Select-box', 'Select-box'],
     placeholder: 'Select-box',
     reversed: true,
-    label: 'Select-box Thirtery',
     selectId: 'Select-box Thirtery',
-    disabled: true,
+    variant: 'Thirtery',
   },
 }

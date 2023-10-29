@@ -1,10 +1,10 @@
+import { CheckBox } from '@/components/checkbox/check-box'
 import { Cell as UIBodyCell } from '@it-incubator/ui-kit'
 
 import s from './bodyCell.module.scss'
 
 import sprite from '../../../asserts/sprite.svg'
 import { BodyCellType } from '../types'
-import { CheckBox } from '@/components/checkbox/check-box'
 
 type BodyCellComponentType = {
   el: BodyCellType
@@ -15,13 +15,13 @@ type BodyCellComponentType = {
 const BodyCell = ({ el, padding, width }: BodyCellComponentType) => {
   return (
     <UIBodyCell
-      style={{ padding: `${el.checkBox ? '0px 24px' : padding}`, width: `${width}` }}
       className={s.bodyCell}
+      style={{ padding: `${el.checkBox ? '0px 24px' : padding}`, width: `${width}` }}
     >
-      {el.checkBox && <CheckBox controlledBy={true} />}
+      {el.checkBox && <CheckBox controlledBy />}
 
       {el.bodyCellImage && (
-        <img src={el.bodyCellImage} alt={el.bodyCellImageAlt || `${el.bodyCellName + ' image'}`} />
+        <img alt={el.bodyCellImageAlt || `${el.bodyCellName + ' image'}`} src={el.bodyCellImage} />
       )}
 
       {el.bodyCellName && <span>{el.bodyCellName}</span>}
@@ -29,8 +29,8 @@ const BodyCell = ({ el, padding, width }: BodyCellComponentType) => {
       {el.svgs?.map(el => {
         return (
           <div
-            style={{ display: 'flex', margin: '0px', padding: '0px', width: `${el.width}` }}
             key={el.uniqId}
+            style={{ display: 'flex', margin: '0px', padding: '0px', width: `${el.width}` }}
           >
             <svg height={el.height} viewBox={el.viewBox || '0 0 24 24'} width={el.width || '16px'}>
               <use xlinkHref={`${sprite}#${el.id}`} />
@@ -43,8 +43,8 @@ const BodyCell = ({ el, padding, width }: BodyCellComponentType) => {
         return (
           <div
             className={s.stars}
-            style={{ display: 'flex', margin: '0px', padding: '0px' }}
             key={i}
+            style={{ display: 'flex', margin: '0px', padding: '0px' }}
           >
             <svg height={'16px'} viewBox={'0 0 24 24'} width={el.width}>
               <use xlinkHref={`${sprite}#${currentEl}`} />

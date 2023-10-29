@@ -2,34 +2,35 @@ import {
   ChangeEvent,
   ComponentPropsWithoutRef,
   ElementType,
-  forwardRef,
   ReactNode,
+  forwardRef,
   useState,
 } from 'react'
 
-import s from './textField.module.scss'
-import { Search } from '@/asserts/icons/components/Search'
 import { Close } from '@/asserts/icons/components/Close'
 import { Password } from '@/asserts/icons/components/Password'
+import { Search } from '@/asserts/icons/components/Search'
 import { Label } from '@/components/label'
+
+import s from './textField.module.scss'
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
   let {
     as: Component = 'input',
     className,
-    iconEnd,
-    iconStart,
     disabled,
     errorMessage,
+    iconEnd,
+    iconStart,
+    inputId,
     label,
+    onClearClick,
+    password,
     placeholder,
+    search,
     setValue,
     type = 'text',
-    search,
-    password,
     value,
-    onClearClick,
-    inputId,
     ...rest
   } = props
 
@@ -62,7 +63,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   return (
     <div className={s.box}>
       <div>
-        <Label label={label} htmlFor={inputId} className={`${s.label} ${disabledLabelClass}`} />
+        <Label className={`${s.label} ${disabledLabelClass}`} htmlFor={inputId} label={label} />
         <div className={s.inputContainer}>
           {!!iconStart && (
             <span className={`${s.iconStart} ${disabledIconClass}`}>{iconStart}</span>
@@ -70,19 +71,19 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
           <Component
             className={`${s.input} ${isShowErrorClass}`}
             disabled={disabled}
+            id={inputId}
             onChange={handleChangeText}
             placeholder={placeholder}
+            ref={ref}
             type={valueType}
             value={text}
-            id={inputId}
-            ref={ref}
             {...rest}
           />
           {!isShowClearButton && search && (
             <button
               className={`${s.iconEnd} ${disabledIconClass}`}
               onClick={handleClearText}
-              type="button"
+              type={'button'}
             >
               <Close size={20} />
             </button>
@@ -91,9 +92,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
             <button
               className={`${s.iconEnd} ${disabledIconClass}`}
               onClick={handleChangeInputType}
-              type="button"
+              type={'button'}
             >
-              <Password size={20} iconId={passwordIcon} />
+              <Password iconId={passwordIcon} size={20} />
             </button>
           )}
         </div>
@@ -107,16 +108,16 @@ type TextFieldProps<T extends ElementType = 'input'> = {
   as?: T
   children?: ReactNode
   className?: string
+  errorMessage?: null | string
   iconEnd?: ReactNode
   iconStart?: ReactNode
-  errorMessage?: null | string
+  inputId?: string
   label?: string
+  onClearClick?: () => void
+  password?: boolean
   placeholder?: string
+  search?: boolean
   setValue?: (value: string) => void
   type?: 'password' | 'text'
   value?: string
-  search?: boolean
-  password?: boolean
-  onClearClick?: () => void
-  inputId?: string
 } & ComponentPropsWithoutRef<T>

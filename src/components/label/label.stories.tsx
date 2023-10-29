@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
+
 import { Label } from './label'
 
 const meta = {
   component: Label,
-  tags: ['autodocs'],
-  title: 'Components/Label',
   parameters: {
     backgrounds: {
       default: 'black',
@@ -14,6 +13,8 @@ const meta = {
       ],
     },
   },
+  tags: ['autodocs'],
+  title: 'Components/Label',
 } satisfies Meta<typeof Label>
 
 export default meta

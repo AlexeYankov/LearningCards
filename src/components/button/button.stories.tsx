@@ -29,70 +29,70 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
-    variant: 'primary',
     children: 'Primary Button',
     disabled: false,
     fullWidth: false,
+    variant: 'primary',
   },
   render: args => <Button {...args} />,
 }
 
 export const Secondary: Story = {
   args: {
-    variant: 'secondary',
     children: 'Secondary Button',
     disabled: false,
     fullWidth: false,
+    variant: 'secondary',
   },
   render: args => <Button {...args} />,
 }
 
 export const PrimaryWithIcon: Story = {
   args: {
-    variant: 'primary',
     children: 'Primary With Icon Button',
     disabled: false,
     fullWidth: false,
+    variant: 'primary',
   },
   render: args => <Button icon={<Logout />} {...args} />,
 }
 
 export const Tertiary: Story = {
   args: {
-    variant: 'tertiary',
     children: 'Tertiary Button',
     disabled: false,
     fullWidth: false,
+    variant: 'tertiary',
   },
   render: args => <Button {...args} />,
 }
 
 export const Link: Story = {
   args: {
-    variant: 'link',
     children: 'Link Button',
     disabled: false,
     fullWidth: false,
+    variant: 'link',
   },
   render: args => <Button {...args} />,
 }
 
 export const SecondaryWithIcon: Story = {
   args: {
-    variant: 'secondary',
     children: 'Secondary With Icon Button',
     disabled: false,
     fullWidth: false,
+    variant: 'secondary',
   },
   render: args => <Button icon={<Logout />} {...args} />,
 }
 
 export const FullWidthButton: Story = {
   args: {
-    variant: 'primary',
     children: 'Full Width Button',
     disabled: false,
     fullWidth: true,
+    variant: 'primary',
   },
   render: args => <Button {...args} />,
 }

@@ -1,5 +1,7 @@
-import * as ScrollArea from '@radix-ui/react-scroll-area'
 import { ComponentPropsWithoutRef, FC, ReactNode } from 'react'
+
+import * as ScrollArea from '@radix-ui/react-scroll-area'
+
 import s from './scrollbar.module.scss'
 
 export type ScrollbarProps = {
@@ -26,11 +28,11 @@ export const ScrollBar: FC<ScrollbarProps> = ({
   return (
     <ScrollArea.Root asChild type={type}>
       <div className={s.root} {...rest}>
-        <ScrollArea.Viewport className={s.viewport} children={children} style={viewportStyles} />
-        <ScrollArea.Scrollbar className={s.scrollbar} orientation="vertical">
+        <ScrollArea.Viewport children={children} className={s.viewport} style={viewportStyles} />
+        <ScrollArea.Scrollbar className={s.scrollbar} orientation={'vertical'}>
           <ScrollArea.Thumb className={s.thumb} />
         </ScrollArea.Scrollbar>
-        <ScrollArea.Scrollbar className={s.scrollbar} orientation="horizontal">
+        <ScrollArea.Scrollbar className={s.scrollbar} orientation={'horizontal'}>
           <ScrollArea.Thumb className={s.thumb} />
         </ScrollArea.Scrollbar>
         <ScrollArea.Corner />

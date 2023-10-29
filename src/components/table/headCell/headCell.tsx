@@ -13,7 +13,7 @@ type HeadCellcomponentType = {
 
 const HeadCell = ({ el, padding, width }: HeadCellcomponentType) => {
   return (
-    <UIHeadCell style={{ padding: `${padding}`, width: `${width}` }} className={s.headCell}>
+    <UIHeadCell className={s.headCell} style={{ padding: `${padding}`, width: `${width}` }}>
       <span>{el.headCellName}</span>
 
       {el.svgSizes?.id && (

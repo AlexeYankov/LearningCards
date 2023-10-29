@@ -1,14 +1,16 @@
-import { Meta, StoryObj } from '@storybook/react'
-import { Modal, ModalDescription, ModalTitle } from './modal'
-import { Typography } from '@/components/typography'
-import { ScrollBar } from '@/components/scrollbar'
-import { TextField } from '../textField'
-import { CheckBox } from '@/components/checkbox'
-import s from './modal.module.scss'
-import { Select } from '@/components/select'
-import { Button } from '@/components/button'
-import img from './../../asserts/Mask.png'
 import { Image } from '@/asserts/icons/components/Image.tsx'
+import { Button } from '@/components/button'
+import { CheckBox } from '@/components/checkbox'
+import { ScrollBar } from '@/components/scrollbar'
+import { Select } from '@/components/select'
+import { Typography } from '@/components/typography'
+import { Meta, StoryObj } from '@storybook/react'
+
+import s from './modal.module.scss'
+
+import { TextField } from '../textField'
+import img from './../../asserts/Mask.png'
+import { Modal, ModalDescription, ModalTitle } from './modal'
 
 const meta = {
   argTypes: {},
@@ -43,8 +45,8 @@ export const ModalDescriptionDemo: Story = {
   render: () => (
     <Modal>
       <ModalDescription>
-        <ScrollBar maxHeight="40vh">
-          <Typography variant={'body1'} as={'p'}>
+        <ScrollBar maxHeight={'40vh'}>
+          <Typography as={'p'} variant={'body1'}>
             {loremText}
           </Typography>
         </ScrollBar>
@@ -57,23 +59,23 @@ export const ModalScrollbarDescriptionDemo: Story = {
   render: () => (
     <Modal>
       <ModalDescription>
-        <ScrollBar maxHeight="40vh">
-          <Typography variant={'body1'} as={'p'}>
+        <ScrollBar maxHeight={'40vh'}>
+          <Typography as={'p'} variant={'body1'}>
             {loremText}
           </Typography>
-          <Typography variant={'body1'} as={'p'}>
+          <Typography as={'p'} variant={'body1'}>
             {loremText}
           </Typography>
-          <Typography variant={'body1'} as={'p'}>
+          <Typography as={'p'} variant={'body1'}>
             {loremText}
           </Typography>
-          <Typography variant={'body1'} as={'p'}>
+          <Typography as={'p'} variant={'body1'}>
             {loremText}
           </Typography>
-          <Typography variant={'body1'} as={'p'}>
+          <Typography as={'p'} variant={'body1'}>
             {loremText}
           </Typography>
-          <Typography variant={'body1'} as={'p'}>
+          <Typography as={'p'} variant={'body1'}>
             {loremText}
           </Typography>
         </ScrollBar>
@@ -86,23 +88,23 @@ export const ModalWithComponentsDemo: Story = {
   render: () => (
     <Modal className={s.contentComponents}>
       <Select
+        classname={s.select}
         label={'Select-box'}
         options={['Select item 1', 'Select item 2', 'Select item 3']}
-        classname={s.select}
-        selectId={'Select-box'}
         placeholder={'Select-box'}
         reversed
+        selectId={'Select-box'}
       />
-      <TextField label={'Input'} placeholder={'Input'} inputId={'Input1'} />
-      <TextField label={'Input'} placeholder={'Input'} inputId={'Input2'} />
+      <TextField inputId={'Input1'} label={'Input'} placeholder={'Input'} />
+      <TextField inputId={'Input2'} label={'Input'} placeholder={'Input'} />
       <CheckBox
         IconID={'checkbox-unselected'}
         SelectedIconID={'checkbox-selected'}
+        checkboxId={'Check-box'}
         disabled={false}
         height={'24'}
         label={'Check-box'}
         width={'24'}
-        checkboxId={'Check-box'}
       />
     </Modal>
   ),
@@ -112,35 +114,35 @@ export const ModalWithImageDemo: Story = {
   render: () => (
     <Modal className={s.contentComponents}>
       <Select
+        classname={s.select}
         label={'Select-box'}
         options={['Select item 1', 'Select item 2', 'Select item 3']}
-        classname={s.select}
         placeholder={'Select-box'}
         reversed
         selectId={'Select-box'}
       />
-      <Typography variant={'subtitle2'} as={'p'}>
+      <Typography as={'p'} variant={'subtitle2'}>
         Question:
       </Typography>
-      <img className={s.img} src={img} alt="card image" />
-      <Button className={s.buttonModal} variant={'secondary'} icon={<Image />} fullWidth>
+      <img alt={'card image'} className={s.img} src={img} />
+      <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
         Change Cover
       </Button>
-      <Typography variant={'subtitle2'} as={'p'}>
+      <Typography as={'p'} variant={'subtitle2'}>
         Answer:
       </Typography>
-      <img className={s.img} src={img} alt="card image" />
-      <Button className={s.buttonModal} variant={'secondary'} icon={<Image />} fullWidth>
+      <img alt={'card image'} className={s.img} src={img} />
+      <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
         Change Cover
       </Button>
-      <TextField label={'Input'} placeholder={'Input'} inputId={'Input'} />
+      <TextField inputId={'Input'} label={'Input'} placeholder={'Input'} />
       <CheckBox
         IconID={'checkbox-unselected'}
         SelectedIconID={'checkbox-selected'}
+        checkboxId={'Check-box'}
         disabled={false}
         height={'24'}
         label={'Check-box'}
-        checkboxId={'Check-box'}
         width={'24'}
       />
     </Modal>
@@ -163,10 +165,10 @@ export const ModalButtons: Story = {
   render: () => (
     <Modal>
       <div className={`${s.contentBtn} ${s.contentBtns}`}>
-        <Button variant="secondary" classNameBtnBox={s.btnBox}>
+        <Button classNameBtnBox={s.btnBox} variant={'secondary'}>
           Button secondary
         </Button>
-        <Button variant="primary" classNameBtnBox={s.btnBox}>
+        <Button classNameBtnBox={s.btnBox} variant={'primary'}>
           Button primary
         </Button>
       </div>
@@ -179,26 +181,26 @@ export const ModalAddNewPack: Story = {
     <Modal>
       <ModalTitle title={'Add New Pack'} />
       <div className={s.contentComponents}>
-        <img className={s.img} src={img} alt="card image" />
-        <Button className={s.buttonModal} variant={'secondary'} icon={<Image />} fullWidth>
+        <img alt={'card image'} className={s.img} src={img} />
+        <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
           Change Cover
         </Button>
-        <TextField label={'Name Pack'} placeholder={'Name'} inputId={'Name Pack'} />
+        <TextField inputId={'Name Pack'} label={'Name Pack'} placeholder={'Name'} />
         <CheckBox
           IconID={'checkbox-unselected'}
           SelectedIconID={'checkbox-selected'}
+          checkboxId={'Private Pack'}
           disabled={false}
           height={'24'}
           label={'Private Pack'}
           width={'24'}
-          checkboxId={'Private Pack'}
         />
       </div>
       <div className={`${s.contentBtn} ${s.contentBtns}`}>
-        <Button variant="secondary" classNameBtnBox={s.btnBox}>
+        <Button classNameBtnBox={s.btnBox} variant={'secondary'}>
           Cancel
         </Button>
-        <Button variant="primary" classNameBtnBox={s.btnBox}>
+        <Button classNameBtnBox={s.btnBox} variant={'primary'}>
           Add New Pack
         </Button>
       </div>
@@ -212,33 +214,33 @@ export const ModalAddNewCard: Story = {
       <ModalTitle title={'Add New Card'} />
       <div className={s.contentComponents}>
         <Select
+          classname={s.select}
           label={'Choose a question format'}
           options={['Select item 1', 'Select item 2', 'Select item 3']}
-          classname={s.select}
           placeholder={'Picture'}
-          selectId={'newCardSelectId'}
           reversed
+          selectId={'newCardSelectId'}
         />
-        <Typography variant={'subtitle2'} as={'p'}>
+        <Typography as={'p'} variant={'subtitle2'}>
           Question:
         </Typography>
-        <img className={s.img} src={img} alt="card image" />
-        <Button className={s.buttonModal} variant={'secondary'} icon={<Image />} fullWidth>
+        <img alt={'card image'} className={s.img} src={img} />
+        <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
           Change Cover
         </Button>
-        <Typography variant={'subtitle2'} as={'p'}>
+        <Typography as={'p'} variant={'subtitle2'}>
           Answer:
         </Typography>
-        <img className={s.img} src={img} alt="card image" />
-        <Button className={s.buttonModal} variant={'secondary'} icon={<Image />} fullWidth>
+        <img alt={'card image'} className={s.img} src={img} />
+        <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
           Change Cover
         </Button>
       </div>
       <div className={`${s.contentBtn} ${s.contentBtns}`}>
-        <Button variant="secondary" classNameBtnBox={s.btnBox}>
+        <Button classNameBtnBox={s.btnBox} variant={'secondary'}>
           Cancel
         </Button>
-        <Button variant="primary" classNameBtnBox={s.btnBox}>
+        <Button classNameBtnBox={s.btnBox} variant={'primary'}>
           Add New Card
         </Button>
       </div>
