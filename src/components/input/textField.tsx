@@ -9,6 +9,7 @@ export const TextField = <T extends ElementType = 'input'>(
   props: TextFieldProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof TextFieldProps<T>>
 ) => {
   const {
+    onChange,
     IconEnd,
     IconID,
     IconStart,
@@ -54,12 +55,12 @@ export const TextField = <T extends ElementType = 'input'>(
         <div className={`${s.label} ${disabledLabelClass}`}> {label}</div>
         <div className={s.inputContainer}>
           <Component
-            className={`${s.input} ${isShowErrorClass}`}
+            className={`${s.input} ${isShowErrorClass} ${className}`}
             disabled={disabled}
-            onChange={e => setText(e.currentTarget.value)}
+            onChange={onChange}
             placeholder={placeholder}
             type={type !== toggleType ? 'text' : type}
-            value={text}
+            value={value}
             {...rest}
           />
           {type === 'password' && IconID && (
@@ -91,7 +92,7 @@ export const TextField = <T extends ElementType = 'input'>(
   )
 }
 
-type TextFieldProps<T extends ElementType = 'input'> = {
+export type TextFieldProps<T extends ElementType = 'input'> = {
   IconEnd?: string
   IconID?: string
   IconStart?: string
@@ -107,4 +108,5 @@ type TextFieldProps<T extends ElementType = 'input'> = {
   value?: string
   viewBox?: string
   width?: string
+  onChange?:()=>void
 } & ComponentPropsWithoutRef<T>
