@@ -1,0 +1,17 @@
+span {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.headCell {
+  padding: 6px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--color-dark-500);
+  gap: 4px;
+  svg {
+    fill: white;
+  }
+}

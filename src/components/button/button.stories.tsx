@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Button } from './'
+import { Logout } from '../../asserts/icons/components/Logout'
+import { Button } from './button'
 
 const meta = {
   argTypes: {
@@ -28,59 +29,70 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
+    variant: 'primary',
     children: 'Primary Button',
     disabled: false,
-    variant: 'primary',
+    fullWidth: false,
   },
+  render: args => <Button {...args} />,
 }
 
 export const Secondary: Story = {
   args: {
+    variant: 'secondary',
     children: 'Secondary Button',
     disabled: false,
-    variant: 'secondary',
+    fullWidth: false,
   },
-}
-export const PrimaryWithIcon: Story = {
-  args: {
-    IconID: 'log-out',
-    children: 'Primary Button',
-    disabled: false,
-    height: '16',
-    variant: 'primary',
-    width: '16',
-  },
-}
-export const Tertiary: Story = {
-  args: {
-    children: 'Tertiary Button',
-    disabled: false,
-    variant: 'tertiary',
-  },
-}
-export const Link: Story = {
-  args: {
-    children: 'Tertiary Button',
-    disabled: false,
-    variant: 'link',
-  },
-}
-export const SecondaryWithIcon: Story = {
-  args: {
-    IconID: 'log-out',
-    children: 'Primary Button',
-    disabled: false,
-    height: '16',
-    variant: 'primary',
-    width: '16',
-  },
+  render: args => <Button {...args} />,
 }
 
-export const FullWidth: Story = {
+export const PrimaryWithIcon: Story = {
   args: {
+    variant: 'primary',
+    children: 'Primary With Icon Button',
+    disabled: false,
+    fullWidth: false,
+  },
+  render: args => <Button icon={<Logout />} {...args} />,
+}
+
+export const Tertiary: Story = {
+  args: {
+    variant: 'tertiary',
+    children: 'Tertiary Button',
+    disabled: false,
+    fullWidth: false,
+  },
+  render: args => <Button {...args} />,
+}
+
+export const Link: Story = {
+  args: {
+    variant: 'link',
+    children: 'Link Button',
+    disabled: false,
+    fullWidth: false,
+  },
+  render: args => <Button {...args} />,
+}
+
+export const SecondaryWithIcon: Story = {
+  args: {
+    variant: 'secondary',
+    children: 'Secondary With Icon Button',
+    disabled: false,
+    fullWidth: false,
+  },
+  render: args => <Button icon={<Logout />} {...args} />,
+}
+
+export const FullWidthButton: Story = {
+  args: {
+    variant: 'primary',
     children: 'Full Width Button',
     disabled: false,
     fullWidth: true,
-    variant: 'primary',
   },
+  render: args => <Button {...args} />,
 }

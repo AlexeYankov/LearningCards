@@ -4,7 +4,7 @@ import { TextField } from './'
 
 const meta = {
   argTypes: {
-    type: ['text', 'password', 'search'],
+    type: ['text', 'password'],
   },
   component: TextField,
   parameters: {
@@ -28,43 +28,45 @@ export const Default: Story = {
     disabled: false,
     label: 'Input',
     placeholder: 'Input',
+    inputId: 'inputIdDefault',
     type: 'text',
+    password: false,
+    search: false,
   },
 }
 
 export const Error: Story = {
   args: {
     disabled: false,
-    error: 'Error!',
+    errorMessage: 'Error!',
     label: 'Input',
+    inputId: 'inputIdError',
     placeholder: 'Error',
     type: 'text',
     value: 'error value',
+    password: false,
+    search: false,
   },
 }
 
 export const Password: Story = {
   args: {
-    IconID: 'eye-outline',
     disabled: false,
-    height: '20',
-    label: 'Input',
+    label: 'Input password',
+    inputId: 'inputIdPassword',
     placeholder: 'password',
     type: 'password',
     value: 'some password',
-    width: '20',
+    password: true,
   },
 }
 
 export const Search: Story = {
   args: {
-    IconEnd: 'close-outline',
-    IconStart: 'search-outline',
     disabled: false,
-    height: '16',
-    label: 'Input',
-    placeholder: 'Input search',
-    type: 'search',
-    width: '16',
+    label: 'Input search',
+    inputId: 'inputIdSearch',
+    placeholder: 'search',
+    search: true,
   },
 }

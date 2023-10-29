@@ -1,9 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react'
-
-import { DropDownMenu } from './dropDownMenu'
+import { CreateNewPassword } from './createNewPassword'
 
 const meta = {
-  component: DropDownMenu,
+  component: CreateNewPassword,
   parameters: {
     backgrounds: {
       default: 'black',
@@ -14,14 +13,15 @@ const meta = {
     },
   },
   tags: ['autodocs'],
-  title: 'Components/DropDownMenu',
-} satisfies Meta<typeof DropDownMenu>
+  title: 'Components/auth/createNewPassword',
+} satisfies Meta<typeof CreateNewPassword>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const DropDownMenuDemo: Story = {
+export const CreateNewPasswordDemo: Story = {
   args: {
-    children: 'Large',
+    children: <CreateNewPassword />,
   },
+  render: () => <CreateNewPassword />,
 }
