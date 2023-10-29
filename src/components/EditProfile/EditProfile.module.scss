@@ -1,0 +1,96 @@
+.container {
+  display: flex;
+  width: 80rem;
+  padding-bottom: 0px;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.25rem;
+
+
+  .header {
+    display: flex;
+    width: 80rem;
+    height: 3.75rem;
+    flex-shrink: 0;
+    justify-content: space-between;
+    padding: 0.75rem 8.5rem;
+    border-bottom: 1px solid var(--color-dark-500);
+    background: var(--color-dark-700);
+
+    .textHeader {
+      color: var(--light-100);
+      font-family: var(--font-family-primary);
+      font-size: var(--font-size-m);
+      font-style: normal;
+      font-weight: var(--font-weight-bold);
+      line-height: var(--line-height-m);
+    }
+
+    .logo {
+      width: 9.78013rem;
+      height: 2.25rem;
+      flex-shrink: 0;
+    }
+
+    .logoProfile {
+      width: 2.25rem;
+      height: 2.25rem;
+      flex-shrink: 0;
+      border-radius: 2.25rem;
+      margin-left: 10px;
+    }
+
+  }
+
+  .cardsContainer {
+    display: flex;
+    justify-content: center;
+
+    .cards {
+      display: flex;
+      width: 26.25rem;
+      height: 26.25rem;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-shrink: 0;
+      flex-direction: column;
+      background: var(--color-dark-700);
+    }
+
+    .text {
+      color: var(--color-light-100);
+      font-family: var(--font-family-primary);
+      font-size: var(--font-size-xl);
+      font-style: normal;
+      font-weight: var(--font-weight-bold);
+      line-height:var(--line-height-l);
+
+    }
+
+    .email {
+      color: var(  --color-dark-100);
+      font-family: var(--font-family-primary);
+      font-size: var(--font-size-s);
+      font-style: normal;
+      font-weight: var(--font-weight-regular);
+      line-height: var(--line-height-m); /* 171.429% */
+    }
+
+
+    .logoProfileEdit {
+      width: 6rem;
+      height: 6rem;
+      flex-shrink: 0;
+      border-radius: 2.25rem;
+    }
+
+    .textField {
+      padding: 5px;
+      width: 21.75rem;
+      margin-top: 2.25rem;
+    }
+    .editMode{
+    }
+  }
+
+}
