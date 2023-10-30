@@ -1,58 +1,58 @@
-import { Cell as UIBodyCell } from '@it-incubator/ui-kit'
+import { Cell } from '@it-incubator/ui-kit'
 
 import s from './bodyCell.module.scss'
 
 import sprite from '@/asserts/sprite.svg'
 import { BodyCellType } from '../types'
 import { CheckBox } from '../../checkbox'
+import { Typography } from '../../typography'
 
 type BodyCellComponentType = {
   el: BodyCellType
-  padding?: string
-  width?: string
 }
 
-const BodyCell = ({ el, padding, width }: BodyCellComponentType) => {
+const BodyCell = ({ el, }: BodyCellComponentType) => {
   return (
-    <UIBodyCell
+    <Cell
       className={s.bodyCell}
-      style={{ padding: `${el.checkBox ? '0px 24px' : padding}`, width: `${width}` }}
+      // style={{ padding: `${el.checkBox ? '0px 24px' : padding}`, width: `${width}` }}
     >
-      {el.checkBox && <CheckBox controlledBy />}
+      {el.checkBox && <CheckBox />}
 
       {el.bodyCellImage && (
-        <img alt={el.bodyCellImageAlt || `${el.bodyCellName + ' image'}`} src={el.bodyCellImage} />
+        <Typography
+          as="img"
+          alt={el.bodyCellImageAlt || `${el.bodyCellName + ' image'}`}
+          src={el.bodyCellImage}
+        />
       )}
 
-      {el.bodyCellName && <span>{el.bodyCellName}</span>}
+      {el.bodyCellName && (
+        <Typography as="span" variant="body1">
+          {el.bodyCellName}
+        </Typography>
+      )}
 
-      {el.svgs?.map(el => {
+      {el.svgs?.map((el, i) => {
         return (
-          <div
-            key={el.uniqId}
-            style={{ display: 'flex', margin: '0px', padding: '0px', width: `${el.width}` }}
-          >
-            <svg height={el.height} viewBox={el.viewBox || '0 0 24 24'} width={el.width || '16px'}>
+          <div className={s.svgsContainer} key={i}>
+            <svg height="16px" viewBox="0 0 24 24">
               <use xlinkHref={`${sprite}#${el.id}`} />
             </svg>
           </div>
         )
       })}
 
-      {el.stars?.map((currentEl, i) => {
+      {el.stars?.map((id, i) => {
         return (
-          <div
-            className={s.stars}
-            key={i}
-            style={{ display: 'flex', margin: '0px', padding: '0px' }}
-          >
-            <svg height={'16px'} viewBox={'0 0 24 24'} width={el.width}>
-              <use xlinkHref={`${sprite}#${currentEl}`} />
+          <div className={s.stars} key={i}>
+            <svg height="16px" viewBox="0 0 24 24">
+              <use xlinkHref={`${sprite}#${id}`} />
             </svg>
           </div>
         )
       })}
-    </UIBodyCell>
+    </Cell>
   )
 }
 

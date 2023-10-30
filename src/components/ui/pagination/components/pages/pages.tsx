@@ -10,23 +10,17 @@ type PagesType = {
   arrowID: string
   color?: string
   currentPage?: number
-  height?: string
   pages: number
   reversedArrowID: string
   startPagesFrom?: number
-  viewBox?: string
-  width?: string
 }
 
 export const Pages = ({
   arrowID,
   color,
   currentPage = 1,
-  height = '24',
   pages = 1,
   reversedArrowID,
-  viewBox,
-  width = '24',
 }: PagesType) => {
   const [page, setPage] = useState(currentPage)
 
@@ -38,11 +32,10 @@ export const Pages = ({
     <div className={s.pagesContainer}>
       <svg
         fill={color || 'black'}
-        height={height}
         onClick={() => setCurrentPage(arrowID)}
         style={page === 1 ? { opacity: '0.7', pointerEvents: 'none' } : {}}
-        viewBox={viewBox}
-        width={width}
+        viewBox={'0 0 24 24'}
+        width={'24px'}
       >
         <use xlinkHref={`${sprite}#${arrowID}`} />
       </svg>
@@ -51,11 +44,10 @@ export const Pages = ({
 
       <svg
         fill={color || 'black'}
-        height={height}
         onClick={() => setCurrentPage(reversedArrowID)}
         style={page === pages ? { opacity: '0.7', pointerEvents: 'none' } : {}}
-        viewBox={viewBox}
-        width={width}
+        viewBox={'0 0 24 24'}
+        width={'24px'}
       >
         <use xlinkHref={`${sprite}#${reversedArrowID}`} />
       </svg>

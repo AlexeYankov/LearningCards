@@ -20,6 +20,17 @@ img {
   svg:not(.stars) {
     fill: white;
   }
+  .stars {
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+  }
+  .svgsContainer {
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+  }
   .stars svg {
     fill: var(--color-warning-300);
   }
