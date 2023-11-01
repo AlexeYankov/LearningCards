@@ -50,11 +50,12 @@ export const SignIn = () => {
           control={control}
           name={'rememberMe'}
           className={s.checkbox}
-          IconID={'checkbox-unselected'}
           width={'24'}
           height={'24'}
+          IconID={'checkbox-unselected'}
           SelectedIconID={'checkbox-selected'}
           label={'Remember me'}
+          checkboxId={'ControlledCheckboxSignIn'}
         />
         <Typography
           className={s.forgotPassLink}

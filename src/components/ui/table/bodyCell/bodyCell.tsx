@@ -18,7 +18,7 @@ const BodyCell = ({ el, padding, width }: BodyCellComponentType) => {
       className={s.bodyCell}
       style={{ padding: `${el.checkBox ? '0px 24px' : padding}`, width: `${width}` }}
     >
-      {el.checkBox && <CheckBox controlledBy />}
+      {el.checkBox && <CheckBox checked />}
 
       {el.bodyCellImage && (
         <img alt={el.bodyCellImageAlt || `${el.bodyCellName + ' image'}`} src={el.bodyCellImage} />

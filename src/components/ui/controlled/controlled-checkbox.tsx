@@ -3,7 +3,7 @@ import { FieldValues, useController, UseControllerProps } from 'react-hook-form'
 import { CheckBox, CheckBoxProps } from '../checkbox/check-box.tsx'
 
 export type ControlledCheckboxProps<TFieldValues extends FieldValues> =
-  UseControllerProps<TFieldValues> & Omit<CheckBoxProps, 'onChange' | 'value' | 'id'>
+  UseControllerProps<TFieldValues> & CheckBoxProps
 
 export const ControlledCheckbox = <TFieldValues extends FieldValues>({
   IconID,
@@ -13,11 +13,11 @@ export const ControlledCheckbox = <TFieldValues extends FieldValues>({
   shouldUnregister,
   control,
   defaultValue,
+  checkboxId,
+  label,
   ...checkboxProps
 }: ControlledCheckboxProps<TFieldValues>) => {
-  const {
-    field: { onChange, value },
-  } = useController({
+  const { field } = useController({
     name,
     rules,
     shouldUnregister,
@@ -27,13 +27,12 @@ export const ControlledCheckbox = <TFieldValues extends FieldValues>({
 
   return (
     <CheckBox
-      {...{
-        setControlledBy: onChange,
-        controlledBy: value,
-        ...checkboxProps,
-        SelectedIconID,
-        IconID,
-      }}
+      SelectedIconID={SelectedIconID}
+      IconID={IconID}
+      checkboxId={checkboxId}
+      label={name}
+      {...field}
+      {...checkboxProps}
     />
   )
 }
