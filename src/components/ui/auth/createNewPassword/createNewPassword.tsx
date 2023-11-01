@@ -4,10 +4,11 @@ import { Typography } from '@/components/ui/typography'
 import s from './createNewPassword.module.scss'
 
 import { TextField } from '../../textField'
+import { Card } from '@/components/ui/card'
 
 export const CreateNewPassword = () => {
   return (
-    <div className={s.box}>
+    <Card className={s.box}>
       <Typography as={'span'} className={s.title} variant={'large'}>
         Create new password
       </Typography>
@@ -25,6 +26,6 @@ export const CreateNewPassword = () => {
           Create New Password
         </Typography>
       </Button>
-    </div>
+    </Card>
   )
 }

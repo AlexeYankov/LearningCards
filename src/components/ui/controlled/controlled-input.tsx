@@ -19,7 +19,6 @@ export const ControlledInput = <TFieldValues extends FieldValues>({
     control,
   })
 
-  console.log(type)
   return (
     <TextField
       type={type}

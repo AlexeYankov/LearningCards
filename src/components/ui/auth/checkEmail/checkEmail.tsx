@@ -3,10 +3,11 @@ import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 
 import s from './checkEmail.module.scss'
+import { Card } from '@/components/ui/card'
 
 export const CheckEmail = () => {
   return (
-    <div className={s.box}>
+    <Card className={s.box}>
       <Typography as={'span'} className={s.title} variant={'large'}>
         Check Email
       </Typography>
@@ -21,6 +22,6 @@ export const CheckEmail = () => {
           Back to Sign In
         </Typography>
       </Button>
-    </div>
+    </Card>
   )
 }

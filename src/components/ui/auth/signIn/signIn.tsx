@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ControlledInput } from '../../controlled/controlled-input'
 import { ControlledCheckbox } from '../../controlled/controlled-checkbox'
 import { Button } from '../../button'
+import { Card } from '@/components/ui/card'
 
 type FormValues = z.infer<typeof loginSchema>
 
@@ -23,7 +24,7 @@ export const SignIn = () => {
   }
 
   return (
-    <div className={s.signIn}>
+    <Card className={s.signIn}>
       <Typography className={s.label} children={'Sign In'} variant={'large'} />
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <ControlledInput
@@ -77,6 +78,6 @@ export const SignIn = () => {
         as={'p'}
       />
       <Typography className={s.linkSignUp} children={'Sign Up'} variant={'body1'} as={'p'} />
-    </div>
+    </Card>
   )
 }

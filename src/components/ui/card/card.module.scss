@@ -1,16 +1,17 @@
 .card {
-  width: 26.25rem;
-  height: 34.5rem;
-  flex-shrink: 0;
-  background-color: #313131;
-  fill: var(--dark-700);
-  stroke-width: 1px;
-  stroke: #313131;
-  filter: drop-shadow(-1px -1px 2px rgba(0, 0, 0, 0.1)) drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.1));
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 420px;
+
+  background-color: var(--color-dark-700);
+  filter: drop-shadow(-1px -1px 2px rgb(0 0 0 / 10%)) drop-shadow(1px 1px 2px rgb(0 0 0 / 10%));
 
   .photo {
-    objectfit: cover;
     width: 100%;
     height: 100%;
+
+    objectfit: cover;
   }
 }
