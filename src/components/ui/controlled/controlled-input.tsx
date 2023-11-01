@@ -23,7 +23,7 @@ export const ControlledInput = <TFieldValues extends FieldValues>({
     <TextField
       type={type}
       label={name}
-      error={error?.message}
+      errorMessage={error?.message}
       {...field}
       {...res}
       IconID={IconID}
