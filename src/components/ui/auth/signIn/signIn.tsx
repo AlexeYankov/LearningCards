@@ -33,15 +33,17 @@ export const SignIn = () => {
           name={'email'}
           type={'text'}
           label={'Email'}
+          inputId={'inputEmailSignUp'}
         />
         <ControlledInput
           className={s.inputPassword}
-          IconID={'eye-outline'}
           placeholder={'Password'}
           control={control}
           name={'password'}
           type={'password'}
           label={'Password'}
+          password
+          inputId={'inputPasswordSignUp'}
         />
         <ControlledCheckbox
           control={control}
@@ -53,12 +55,18 @@ export const SignIn = () => {
           SelectedIconID={'checkbox-selected'}
           label={'Remember me'}
         />
-        <Typography className={s.forgotPassLink} children={'Forgot Password?'} variant={'body2'} />
+        <Typography
+          className={s.forgotPassLink}
+          children={'Forgot Password?'}
+          variant={'body2'}
+          as={'p'}
+        />
         <Button
           className={s.button}
           type={'submit'}
           variant={'primary'}
-          children={<Typography children={'Sign In'} variant={'subtitle2'} />}
+          fullWidth
+          children={<Typography children={'Sign In'} variant={'subtitle2'} as={'p'} />}
         />
       </form>
 
@@ -66,8 +74,9 @@ export const SignIn = () => {
         className={s.linkDontHaveAccount}
         children={"Don't have an account?"}
         variant={'body2'}
+        as={'p'}
       />
-      <Typography className={s.linkSignUp} children={'Sign Up'} variant={'body1'} />
+      <Typography className={s.linkSignUp} children={'Sign Up'} variant={'body1'} as={'p'} />
     </div>
   )
 }

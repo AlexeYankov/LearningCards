@@ -12,7 +12,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
     className,
     disabled,
     errorMessage,
-    IconID,
     inputId,
     label,
     onClearClick,
@@ -83,7 +82,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 })
 
 export type TextFieldProps = {
-  IconID?: string
   children?: ReactNode
   className?: string
   errorMessage?: null | string

@@ -31,30 +31,34 @@ export const SignUp = () => {
           name={'email'}
           type={'text'}
           label={'Email'}
+          inputId={'inputEmail'}
         />
         <ControlledInput
           className={s.inputPassword}
-          IconID={'eye-outline'}
           placeholder={'Password'}
           control={control}
           name={'password'}
           type={'password'}
           label={'Password'}
+          password
+          inputId={'inputPassword'}
         />
         <ControlledInput
           className={s.inputConfirmPassword}
-          IconID={'eye-outline'}
           placeholder={'Confirm Password'}
           control={control}
           name={'confirmPassword'}
           type={'password'}
           label={'Confirm Password'}
+          password
+          inputId={'inputConfirmPassword'}
         />
         <Button
           className={s.button}
           type={'submit'}
           variant={'primary'}
-          children={<Typography children={'Sign Up'} variant={'subtitle2'} />}
+          fullWidth
+          children={<Typography children={'Sign Up'} variant={'subtitle2'} as={'p'} />}
         />
       </form>
 
@@ -62,8 +66,9 @@ export const SignUp = () => {
         className={s.linkAlreadyHaveAccount}
         children={'Already have an account?'}
         variant={'body2'}
+        as={'p'}
       />
-      <Typography className={s.linkSignIn} children={'Sign In'} variant={'body1'} />
+      <Typography className={s.linkSignIn} children={'Sign In'} variant={'body1'} as={'p'} />
     </div>
   )
 }
