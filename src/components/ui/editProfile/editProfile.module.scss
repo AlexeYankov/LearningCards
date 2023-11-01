@@ -8,7 +8,7 @@
 
   .header {
     display: flex;
-    width: 80rem;
+    width: 91rem;
     height: 3.75rem;
     flex-shrink: 0;
     justify-content: space-between;
@@ -23,12 +23,14 @@
       font-style: normal;
       font-weight: var(--font-weight-bold);
       line-height: var(--line-height-m);
+      cursor: pointer;
     }
 
     .logo {
       width: 9.78013rem;
       height: 2.25rem;
       flex-shrink: 0;
+      cursor: pointer;
     }
 
     .logoProfile {
