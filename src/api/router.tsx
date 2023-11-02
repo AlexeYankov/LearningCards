@@ -7,12 +7,27 @@ import {
   RouteObject,
   RouterProvider,
 } from 'react-router-dom'
-import { useGetCardsQuery, useGetDecksQuery } from './common.api'
+import { SignIn } from '@/components/ui/auth/signIn/signIn'
+import { SignUp } from '@/components/ui/auth/signUp/signUp'
+import { CreateNewPassword } from '@/components/ui/auth/createNewPassword'
+import { CheckEmail } from '@/components/ui/auth/checkEmail'
 
 const publicRoutes: RouteObject[] = [
   {
     path: '/login',
-    element: <div>login</div>,
+    element: <SignIn />,
+  },
+  {
+    path: '/signUp',
+    element: <SignUp />,
+  },
+  {
+    path: '/createNewPassword',
+    element: <CreateNewPassword />,
+  },
+  {
+    path: '/checkEmail',
+    element: <CheckEmail />,
   },
 ]
 
@@ -28,6 +43,7 @@ const router = createBrowserRouter([
     element: <PrivateRoutes />,
     children: privateRoutes,
   },
+
   ...publicRoutes,
 ])
 
