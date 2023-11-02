@@ -31,7 +31,7 @@ export const CheckBox = <T extends ElementType = 'input'>(
     <div
       // className={`${s.checkboxContainer}`}
       className={`${s.checkboxContainer} ${className}`}
-      onClick={() => onChange ? onChange(!checked) :''}
+      onClick={() => onChange && onChange(!checked)}
       style={disabled ? { cursor: 'not-allowed', opacity: '0.7', pointerEvents: 'none' } : {}}
     >
       <div className={s.checkboxIconContainer}>
