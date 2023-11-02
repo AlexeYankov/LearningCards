@@ -12,7 +12,7 @@ type Props = {
   isLoggedIn?: boolean
 }
 
-export const Header: FC<Props> = ({ isLoggedIn = false }) => {
+export const Header: FC<Props> = ({ isLoggedIn = true }) => {
   return (
     <div className={f.container}>
       <div className={s.container}>
