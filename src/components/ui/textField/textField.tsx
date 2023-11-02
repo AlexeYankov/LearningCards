@@ -46,16 +46,16 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 
   return (
     <div className={s.box}>
-      <div style={{position: 'relative'}}>
-        <Label style={{position: 'absolute', top: '-25px'}} className={`${s.label} ${disabledLabelClass}`} htmlFor={inputId} label={label} />
-        <div className={s.inputContainer}>
+      <div>
+        <Label className={`${s.label} ${disabledLabelClass}`} htmlFor={inputId} label={label} />
+        <div className={`${s.inputContainer} ${className}`}>
           {search && (
             <div className={`${s.iconStart} ${disabledIconClass}`}>
               <Search size={20} />
             </div>
           )}
           <input
-            className={`${s.input} ${isShowErrorClass} ${className}`}
+            className={`${s.input} ${isShowErrorClass}`}
             disabled={disabled}
             id={inputId}
             onKeyDown={handleKeyDown}
@@ -75,7 +75,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
             </button>
           )}
         </div>
-        {errorMessage && <span className={s.errorRed}>{errorMessage}</span>}
+        <div className={s.test}>
+          {errorMessage && <div className={s.errorRed}>{errorMessage}</div>}
+        </div>
       </div>
     </div>
   )

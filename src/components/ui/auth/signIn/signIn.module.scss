@@ -12,17 +12,9 @@
     box-sizing: border-box;
     color: var(--color-light-100);
 
-    .inputEmail {
-      margin-bottom: 24px;
-    }
-
-    .inputPassword {
-      margin-bottom: 12px;
-    }
-
     .checkbox {
       justify-content: flex-start;
-      margin: 6px 0 0 -9px;
+      margin-left: -9px;
     }
 
     .button {
@@ -31,7 +23,7 @@
   }
 
   .forgotPassLink {
-    margin-bottom: 66px;
+    margin-bottom: 56px;
     text-align: right;
   }
 

@@ -23,6 +23,7 @@ export const SignUp = () => {
   })
   const onSubmit = (data: FormValues) => {
     console.log(data)
+    navigate('/login')
   }
 
   const goToLogin = () => {
@@ -33,7 +34,6 @@ export const SignUp = () => {
       <Typography className={s.label} children={'Sign Up'} variant={'large'} />
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <ControlledInput
-          className={s.inputEmail}
           placeholder={'Email'}
           control={control}
           name={'email'}
@@ -42,7 +42,6 @@ export const SignUp = () => {
           inputId={'inputEmail'}
         />
         <ControlledInput
-          className={s.inputPassword}
           placeholder={'Password'}
           control={control}
           name={'password'}
@@ -67,7 +66,6 @@ export const SignUp = () => {
           variant={'primary'}
           fullWidth
           children={<Typography children={'Sign Up'} variant={'subtitle2'} as={'p'} />}
-          onClick={goToLogin}
         />
       </form>
 
