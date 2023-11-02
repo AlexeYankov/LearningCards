@@ -4,25 +4,26 @@ import s from './headCell.module.scss'
 
 import sprite from '@/asserts/sprite.svg'
 import { HeadCellType } from '../types'
+import { Typography } from '../../typography'
 
 type HeadCellcomponentType = {
   el: HeadCellType
-  padding?: string
-  width?: string
+  tableName?: string
 }
 
-const HeadCell = ({ el, padding, width }: HeadCellcomponentType) => {
+const HeadCell = ({ el, tableName }: HeadCellcomponentType) => {
   return (
-    <UIHeadCell className={s.headCell} style={{ padding: `${padding}`, width: `${width}` }}>
-      <span>{el.headCellName}</span>
+    <UIHeadCell
+      className={
+        tableName !== 'NotDecks' && el.headCellName === 'Grade' ? s.headCellLast : s.headCell
+      }
+      style={tableName !== 'Decks' ? { width: '300px' } : { width: '200px' }}
+    >
+      <Typography variant="heading3">{el.headCellName}</Typography>
 
       {el.svgSizes?.id && (
-        <div style={{ margin: '0px', padding: '0px', width: `${el.svgSizes?.width}` }}>
-          <svg
-            height={el.svgSizes?.height}
-            viewBox={el.svgSizes?.viewBox || '0 0 24 24'}
-            width={el.svgSizes?.width}
-          >
+        <div>
+          <svg viewBox={'0 0 24 24'} width={'12px'}>
             <use xlinkHref={`${sprite}#${el.svgSizes?.id}`} />
           </svg>
         </div>

@@ -1,3 +1,13 @@
+import { Provider } from 'react-redux'
+
+import { store } from './api/store'
+import { Router } from './api/router'
+
 export function App() {
-  return <div>Hello</div>
+  return (
+    <Provider store={store}>
+      {/* <PacksPage /> */}
+      <Router/>
+    </Provider>
+  )
 }

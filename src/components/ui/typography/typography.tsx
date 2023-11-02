@@ -6,7 +6,11 @@ export const Typography = forwardRef<HTMLSpanElement, TypographyProps>((props, r
   const { as: Component = 'span', children, className, variant = 'large', ...rest } = props
 
   return (
-    <Component className={`${s.typography} ${s[variant]} ${className}`} ref={ref} {...rest}>
+    <Component
+      className={`${s.typography} ${s[variant]} ${className ? className : ''}`}
+      ref={ref}
+      {...rest}
+    >
       {children}
     </Component>
   )

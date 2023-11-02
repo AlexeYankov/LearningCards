@@ -10,7 +10,7 @@ export const Page = ({ el, page, setPage }: PageType) => {
   return (
     <button
       className={`${s.page} ${page === el ? s.currentPage : ''}`}
-      key={crypto.randomUUID()}
+      key={el}
       onClick={() => setPage(el)}
     >
       {el}
