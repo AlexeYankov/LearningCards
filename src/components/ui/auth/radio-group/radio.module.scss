@@ -15,20 +15,30 @@ button {
   width: 16px;
   height: 16px;
   border-radius: 100%;
-  border: 2px solid #8C61FF ;
-  box-shadow: 0 2px 10px var(--black-a7);
+  border: 2px solid var(--color-accent-500) ;
+
 }
 .RadioGroupItem:hover {
   cursor: pointer;
-  box-shadow: 0 0 0 4px #333;
-  background-color: #333 ;
+  box-shadow: 0 0 0 6px #333;
+  background:var(--dark-500, #333) ;
 
 }
 .RadioGroupItem:focus {
-  box-shadow: 0 0 0 4px var(--color-dark-500);
-  background-color: var(--color-dark-500) ;
+  box-shadow: 0 0 0 6px #171717;
+  background: var(--dark-700, #171717) ;
 }
-
+.RadioGroupItem:active {
+  box-shadow: 0 0 0 6px #382766;
+  background: var(--primary-900, #382766) ;
+}
+.RadioGroupItem[data-disabled],
+.RadioGroupItem[data-disabled]:hover,
+.RadioGroupItem[data-disabled]:active {
+  box-shadow: none;
+  background-color:transparent;
+  border:2px solid var(--color-accent-900);
+}
 .RadioGroupIndicator {
   display: flex;
   align-items: center;
@@ -44,7 +54,7 @@ button {
   border-radius: 50%;
   width: 9px;
   height: 9px;
-  background-color: #8C61FF;
+  background-color:var(--color-accent-500);
 
 }
 
