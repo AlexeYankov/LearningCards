@@ -4,44 +4,47 @@ import s from './bodyCell.module.scss'
 
 import sprite from '@/asserts/sprite.svg'
 import { BodyCellType } from '../types'
-import { CheckBox } from '../../checkbox'
 import { Typography } from '../../typography'
 
 type BodyCellComponentType = {
   el: BodyCellType
+  tableName?: string
 }
 
-const BodyCell = ({ el, }: BodyCellComponentType) => {
+const BodyCell = ({ el, tableName }: BodyCellComponentType) => {
   return (
     <Cell
       className={s.bodyCell}
-      // style={{ padding: `${el.checkBox ? '0px 24px' : padding}`, width: `${width}` }}
+      style={tableName === 'Decks' ? { width: '200px' } : { width: '300px' }}
     >
-      {el.checkBox && <CheckBox />}
+      {/* {el.checkBox && <CheckBox />} */}
 
-      {el.bodyCellImage && (
-        <Typography
-          as="img"
-          alt={el.bodyCellImageAlt || `${el.bodyCellName + ' image'}`}
-          src={el.bodyCellImage}
-        />
+      {el.cover && (
+        <Typography as="img" alt={el.bodyCellImageAlt || `${el.cover + ' image'}`} src={el.cover} />
       )}
 
-      {el.bodyCellName && (
-        <Typography as="span" variant="body1">
-          {el.bodyCellName}
-        </Typography>
+      {el.name && <Typography variant="body1">{el.name}</Typography>}
+      {el.svgs && (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            // background: 'red',
+            width: '100%',
+          }}
+        >
+          {el.svgs?.map((el, i) => {
+            return (
+              <div className={s.svgsContainer} key={i}>
+                <svg height="16px" viewBox="0 0 24 24">
+                  <use xlinkHref={`${sprite}#${el.id}`} />
+                </svg>
+              </div>
+            )
+          })}
+        </div>
       )}
-
-      {el.svgs?.map((el, i) => {
-        return (
-          <div className={s.svgsContainer} key={i}>
-            <svg height="16px" viewBox="0 0 24 24">
-              <use xlinkHref={`${sprite}#${el.id}`} />
-            </svg>
-          </div>
-        )
-      })}
 
       {el.stars?.map((id, i) => {
         return (

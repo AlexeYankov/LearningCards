@@ -28,14 +28,18 @@ export const Pagination = ({
     <div className={s.paginationContainer}>
       <Pages arrowID={arrowID} color={arrowColor} pages={pages} reversedArrowID={reversedArrowID} />
 
-      <Typography>Показать&nbsp;</Typography>
-      <Select
-        classname={s.trigger}
-        options={options}
-        placeholder={placeholder}
-        reversed={reversed}
-      />
-      <Typography>&nbsp;на&nbsp;странице</Typography>
+      <div className={s.paginationContainer}>
+        <Typography variant="body2">Показать</Typography>
+
+        <Select
+          classname={s.trigger}
+          options={options}
+          placeholder={placeholder}
+          reversed={reversed}
+        />
+
+        <Typography variant="body2">на странице</Typography>
+      </div>
     </div>
   )
 }

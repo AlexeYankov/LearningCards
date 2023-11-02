@@ -10,7 +10,7 @@ export const Header = () => {
     <div className={f.container}>
       <div className={s.container}>
         <header className={s.header}>
-          <img alt={''} className={s.logo} src={logo} />
+          <img alt={''} className={s.logo} src={logo}/>
           <div className={s.textHeader}>
             Ivan <img alt={''} className={s.logoProfile} src={profileImage} />
           </div>

@@ -1,14 +1,13 @@
 import { Provider } from 'react-redux'
 
 import { store } from './api/store'
-import { PacksPage } from './components/ui/packs/packsPage'
+import { Router } from './api/router'
 
 export function App() {
   return (
     <Provider store={store}>
-      <div style={{background: 'black', height: '100vh', color: 'white'}}>
-        <PacksPage />
-      </div>
+      {/* <PacksPage /> */}
+      <Router/>
     </Provider>
   )
 }

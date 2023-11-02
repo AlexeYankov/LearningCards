@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import s from './editProfile.module.scss'
 
-import logo from '@/asserts/Logo.png'
+import logo from '../../../asserts/Logo.png'
 import profileImage from '@/asserts/profileImage.png'
 import { EditableSpan } from './editableSpan/editableSpan'
 

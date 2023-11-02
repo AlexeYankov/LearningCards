@@ -34,9 +34,9 @@ export const PagesForRender = ({ page, pages, setPage }: PagesForRender) => {
   return (
     <>
       <Page el={1} page={page} setPage={setPage} />
-      {page > 5 && <Typography>...&nbsp;</Typography>}
+      {page > 5 && <Typography variant='heading3'>...</Typography>}
       {PagesJSX}
-      {page + 5 <= pages && <Typography>...&nbsp;</Typography>}
+      {page + 5 <= pages && <Typography variant='heading3'>...</Typography>}
       <Page el={pages} page={page} setPage={setPage} />
     </>
   )

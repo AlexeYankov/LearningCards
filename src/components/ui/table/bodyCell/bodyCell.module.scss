@@ -2,6 +2,7 @@ span {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  cursor: pointer;
 }
 
 img {
@@ -15,7 +16,7 @@ img {
   align-items: center;
   justify-content: flex-start;
   border-bottom: 1px solid var(--dark-500, #333);
-  gap: 10px;
+  // gap: 10px;
   padding: 6px 24px;
   svg:not(.stars) {
     fill: white;
@@ -23,12 +24,12 @@ img {
   .stars {
     display: flex;
     margin: 0px;
-    padding: 0px;
+    padding-top: 8px;
   }
   .svgsContainer {
     display: flex;
-    margin: 0px;
-    padding: 0px;
+    padding-top: 8px;
+    padding-left: 10px;
     cursor: pointer;
   }
   .stars svg {

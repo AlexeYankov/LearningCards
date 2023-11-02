@@ -62,8 +62,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 
   return (
     <div className={s.box}>
-      <div>
-        <Label className={`${s.label} ${disabledLabelClass}`} htmlFor={inputId} label={label} />
+      <div style={{position: 'relative'}}>
+        <Label style={{position: 'absolute', top: '-25px'}} className={`${s.label} ${disabledLabelClass}`} htmlFor={inputId} label={label} />
         <div className={s.inputContainer}>
           {!!iconStart && (
             <span className={`${s.iconStart} ${disabledIconClass}`}>{iconStart}</span>

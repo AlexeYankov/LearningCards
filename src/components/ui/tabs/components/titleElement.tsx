@@ -16,7 +16,7 @@ export const TitleElement = ({ active, title, index, length, setActive }: TitleE
       className={`${s.container} ${active === index && s.containerActive} ${
         index === length - 1 && s.end
       }`}
-      tabIndex={index}
+      tabIndex={0}
       onClick={() => setActive(index)}
     >
       <Typography variant="body1">{title}</Typography>

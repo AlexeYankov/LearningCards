@@ -8,12 +8,18 @@ import { Typography } from '../../typography'
 
 type HeadCellcomponentType = {
   el: HeadCellType
+  tableName?: string
 }
 
-const HeadCell = ({ el }: HeadCellcomponentType) => {
+const HeadCell = ({ el, tableName }: HeadCellcomponentType) => {
   return (
-    <UIHeadCell className={s.headCell}>
-      <Typography variant="heading2">{el.headCellName}</Typography>
+    <UIHeadCell
+      className={
+        tableName !== 'NotDecks' && el.headCellName === 'Grade' ? s.headCellLast : s.headCell
+      }
+      style={tableName !== 'Decks' ? { width: '300px' } : { width: '200px' }}
+    >
+      <Typography variant="heading3">{el.headCellName}</Typography>
 
       {el.svgSizes?.id && (
         <div>
