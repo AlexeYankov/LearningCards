@@ -91,7 +91,7 @@ export const ItemWithIcon: FC<DropDownItemWithIcon> = ({
 
 export const DropDownMenu = () => {
   return (
-    <DropDown sideOffset={4} trigger>
+    <DropDown sideOffset={0} trigger>
       <ItemWithIcon className={s.itemProfile}>
         <div className={s.inner}>
           <img alt={''} className={s.img} src={profileImage} />
