@@ -37,9 +37,11 @@
   .linkDontHaveAccount {
     margin-bottom: 11px;
     text-align: center;
+    color: var(--light-900, #C3C1C7);
   }
 
   .linkSignUp {
     text-align: center;
+    color: var(--primary-500, #8C61FF);
   }
 }
