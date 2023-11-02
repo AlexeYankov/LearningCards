@@ -7,6 +7,7 @@ import { ControlledInput } from '../../controlled/controlled-input'
 import { ControlledCheckbox } from '../../controlled/controlled-checkbox'
 import { Button } from '../../button'
 import { Card } from '@/components/ui/card'
+import { useNavigate } from 'react-router-dom'
 
 type FormValues = z.infer<typeof loginSchema>
 
@@ -16,11 +17,18 @@ const loginSchema = z.object({
   rememberMe: z.boolean().default(false),
 })
 export const SignIn = () => {
+  const navigate = useNavigate()
+
   const { handleSubmit, control } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
   })
   const onSubmit = (data: FormValues) => {
     console.log(data)
+    navigate('/')
+  }
+
+  const goToRegistration = () => {
+    navigate('/signup')
   }
 
   return (
@@ -78,7 +86,14 @@ export const SignIn = () => {
         variant={'body2'}
         as={'p'}
       />
-      <Typography className={s.linkSignUp} children={'Sign Up'} variant={'body1'} as={'p'} />
+      <Button
+        className={s.button}
+        type={'button'}
+        variant={'link'}
+        fullWidth
+        children={<Typography children={'Sign Up'} variant={'subtitle2'} as={'p'} />}
+        onClick={goToRegistration}
+      />
     </Card>
   )
 }

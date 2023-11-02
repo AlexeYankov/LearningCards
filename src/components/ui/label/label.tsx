@@ -8,8 +8,10 @@ type Props = {
   label?: string
 } & ComponentPropsWithoutRef<'label'>
 
-export const Label: FC<Props> = ({ className, label, ...rest }) => (
-  <LabelRadix.Root className={`${s.label} ${className}`} {...rest}>
-    {label}
-  </LabelRadix.Root>
-)
+export const Label: FC<Props> = ({ className, label, ...rest }) => {
+  return (
+    <LabelRadix.Root className={`${s.label} ${className}`} {...rest}>
+      {label}
+    </LabelRadix.Root>
+  )
+}

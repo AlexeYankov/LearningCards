@@ -77,7 +77,12 @@ label.disabledLabel {
 }
 
 .errorRed {
+  margin-bottom: -24px;
   color: var(--color-danger-300);
+}
+
+.test {
+  margin-bottom: 24px;
 }
 
 .passwordIcon {

@@ -10,18 +10,11 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-
-    .inputEmail {
-      margin-bottom: 24px;
-    }
-
-    .inputPassword {
-      margin-bottom: 12px;
-    }
+    color: var(--color-light-100);
 
     .checkbox {
       justify-content: flex-start;
-      margin: 6px 0 0 -9px;
+      margin-left: -9px;
     }
 
     .button {
@@ -30,18 +23,18 @@
   }
 
   .forgotPassLink {
-    margin-bottom: 66px;
+    margin-bottom: 56px;
     text-align: right;
   }
 
   .linkDontHaveAccount {
     margin-bottom: 11px;
+    color: var(--color-light-900);
     text-align: center;
-    color: var(--light-900, #C3C1C7);
   }
 
   .linkSignUp {
+    color: var(-color--primary-500);
     text-align: center;
-    color: var(--primary-500, #8C61FF);
   }
 }
