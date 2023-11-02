@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-import { Button } from '@/components/button'
-import { TextField } from '@/components/input'
-
 import s from '../EditProfile.module.scss'
+
+import { Button } from '../../ui/button'
+import { TextField } from '../../ui/input'
 
 type EditableSpanPropsType = {
   onChange: (newValue: string) => void
@@ -34,7 +34,7 @@ export const EditableSpan = React.memo(function ({ onChange, value }: EditableSp
     }
   }
 
-  return editMode? (
+  return editMode ? (
     <span>
       <TextField
         autoFocus

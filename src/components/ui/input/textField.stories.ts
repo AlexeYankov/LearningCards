@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { TextField } from './'
+import { TextField } from './index.ts'
 
 const meta = {
   argTypes: {

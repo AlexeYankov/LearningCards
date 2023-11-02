@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode, useState } from 'react'
 
-import { PasswordIcon } from '@/asserts/icons/components/PasswordIcon'
-import { SearchIcon } from '@/asserts/icons/components/SearchIcon'
+import { PasswordIcon } from '@/asserts/icons/components/PasswordIcon.tsx'
+import { SearchIcon } from '@/asserts/icons/components/SearchIcon.tsx'
 
 import s from './textField.module.scss'
 
