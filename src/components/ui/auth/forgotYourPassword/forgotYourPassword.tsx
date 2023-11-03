@@ -30,7 +30,6 @@ export const ForgotYourPassword = () => {
       <Typography className={s.label} children={'Forgot your password?'} variant={'large'} />
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <ControlledInput
-          className={s.inputEmail}
           placeholder={'Email'}
           control={control}
           name={'email'}
@@ -58,7 +57,6 @@ export const ForgotYourPassword = () => {
           className={s.tryLoggingIn}
           type={'button'}
           variant={'link'}
-          fullWidth
           onClick={goToLogin}
           children={<Typography children={'Try logging in'} variant={'subtitle2'} as={'span'} />}
         />

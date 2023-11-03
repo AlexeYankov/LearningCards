@@ -76,10 +76,9 @@ export const SignUp = () => {
         as={'p'}
       />
       <Button
-        className={s.button}
+        className={s.linkSignIn}
         type={'button'}
         variant={'link'}
-        fullWidth
         children={<Typography children={'Sign In'} variant={'subtitle2'} as={'p'} />}
         onClick={goToLogin}
       />
