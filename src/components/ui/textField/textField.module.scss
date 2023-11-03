@@ -76,13 +76,12 @@ label.disabledLabel {
   color: var(--color-dark-300);
 }
 
-.errorRed {
-  margin-bottom: -24px;
-  color: var(--color-danger-300);
+.errorBox {
+  height: 24px;
 }
 
-.test {
-  margin-bottom: 24px;
+.showErrorRed {
+  color: var(--color-danger-300);
 }
 
 .passwordIcon {

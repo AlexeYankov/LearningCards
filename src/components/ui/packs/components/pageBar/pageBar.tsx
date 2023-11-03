@@ -11,8 +11,13 @@ import { Typography } from '@/components/ui/typography'
 export const PageBar = () => {
   return (
     <div className={f.container__pageBar}>
-      <div className={f.container__textField}>
-        <TextField placeholder="Input search" search label='placeholder'/>
+      <div>
+        <TextField
+          placeholder="Input search"
+          search
+          label="placeholder"
+          className={f.container__textField}
+        />
       </div>
 
       <div style={{ position: 'relative' }}>
@@ -26,7 +31,7 @@ export const PageBar = () => {
       </div>
 
       <Button icon={<Delete />} variant="secondary">
-        <Typography variant='body2'>Clear Filter</Typography>
+        <Typography variant="body2">Clear Filter</Typography>
       </Button>
     </div>
   )

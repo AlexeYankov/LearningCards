@@ -1,37 +1,44 @@
 .container {
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   justify-content: space-around;
-  padding: 0px;
-  margin: 0px;
+
+  margin: 0;
+  padding: 0;
 }
+
 .container__pageBar {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding-bottom: 36px;
+
   width: 1000px;
+  padding-bottom: 36px;
 }
+
 .container__pageName {
   display: flex;
   align-items: center;
-  width: 1000px;
   justify-content: space-between;
-  padding: 36px 0px;
-  .container__textField {
-    display: flex;
-    align-items: center;
-    width: 300px;
-    justify-content: space-between;
-  }
+
+  width: 1000px;
+  padding: 36px 0;
 }
+
+.container__textField {
+  position: relative;
+  top: 24px;
+}
+
 .container__common {
-  border: 1px solid var(--dark-500, #333);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  margin: 0px;
+
   width: 1000px;
+  margin: 0;
+
+  border: 1px solid var(--dark-500, #333);
 }

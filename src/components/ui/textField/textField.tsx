@@ -44,40 +44,39 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   const isShowClearButton = onClearClick && search && rest.value?.length! > 0
   const passwordIcon = valueType === 'password' ? 'eye-outline' : 'eye-off-outline'
 
+  console.log(className)
   return (
-    <div className={s.box}>
-      <div>
-        <Label className={`${s.label} ${disabledLabelClass}`} htmlFor={inputId} label={label} />
-        <div className={`${s.inputContainer} ${className}`}>
-          {search && (
-            <div className={`${s.iconStart} ${disabledIconClass}`}>
-              <Search size={20} />
-            </div>
-          )}
-          <input
-            className={`${s.input} ${isShowErrorClass}`}
-            disabled={disabled}
-            id={inputId}
-            onKeyDown={handleKeyDown}
-            placeholder={placeholder}
-            ref={ref}
-            type={valueType}
-            {...rest}
-          />
-          {isShowClearButton && (
-            <button className={`${s.iconEnd} ${disabledIconClass}`} onClick={onClearClick}>
-              <Close size={20} />
-            </button>
-          )}
-          {password && (
-            <button className={`${s.iconEnd} ${disabledIconClass}`} onClick={handleChangeInputType}>
-              <Password iconId={passwordIcon} size={20} />
-            </button>
-          )}
-        </div>
-        <div className={s.test}>
-          {errorMessage && <div className={s.errorRed}>{errorMessage}</div>}
-        </div>
+    <div className={`${s.box} ${className}`}>
+      <Label className={`${s.label} ${disabledLabelClass}`} htmlFor={inputId} label={label} />
+      <div className={`${s.inputContainer}`}>
+        {search && (
+          <div className={`${s.iconStart} ${disabledIconClass}`}>
+            <Search size={20} />
+          </div>
+        )}
+        <input
+          className={`${s.input} ${isShowErrorClass}`}
+          disabled={disabled}
+          id={inputId}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder}
+          ref={ref}
+          type={valueType}
+          {...rest}
+        />
+        {isShowClearButton && (
+          <button className={`${s.iconEnd} ${disabledIconClass}`} onClick={onClearClick}>
+            <Close size={20} />
+          </button>
+        )}
+        {password && (
+          <button className={`${s.iconEnd} ${disabledIconClass}`} onClick={handleChangeInputType}>
+            <Password iconId={passwordIcon} size={20} />
+          </button>
+        )}
+      </div>
+      <div className={s.errorBox}>
+        {errorMessage && <div className={s.showErrorRed}>{errorMessage}</div>}
       </div>
     </div>
   )
