@@ -12,12 +12,7 @@ export const PageBar = () => {
   return (
     <div className={f.container__pageBar}>
       <div>
-        <TextField
-          placeholder="Input search"
-          search
-          label="placeholder"
-          className={f.container__textField}
-        />
+        <TextField placeholder="Input search" search className={f.container__textField} />
       </div>
 
       <div style={{ position: 'relative' }}>

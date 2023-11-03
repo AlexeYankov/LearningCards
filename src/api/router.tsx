@@ -1,5 +1,3 @@
-import { PacksPage } from '@/components/ui/packs/packsPage'
-
 import {
   createBrowserRouter,
   Navigate,
@@ -12,6 +10,8 @@ import { SignUp } from '@/components/ui/auth/signUp/signUp'
 import { CreateNewPassword } from '@/components/ui/auth/createNewPassword'
 import { CheckEmail } from '@/components/ui/auth/checkEmail'
 import { ForgotYourPassword } from '@/components/ui/auth/forgotYourPassword'
+import { PacksPage } from '@/components/ui/packs/packsPage.tsx'
+import { PacksList } from '@/components/ui/packs/components/packsList/packsList.tsx'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -44,6 +44,10 @@ const privateRoutes: RouteObject[] = [
   {
     path: '/',
     element: <PacksPage />,
+  },
+  {
+    path: '/1',
+    element: <PacksList />,
   },
 ]
 

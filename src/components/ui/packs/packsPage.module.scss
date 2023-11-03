@@ -13,7 +13,7 @@
   align-items: flex-end;
   justify-content: space-between;
 
-  width: 1000px;
+  width: 100%;
   padding-bottom: 36px;
 }
 
@@ -22,14 +22,13 @@
   align-items: center;
   justify-content: space-between;
 
-  width: 1000px;
-  padding: 36px 0;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .container__textField {
   position: relative;
   top: 24px;
-  max-width: 100%;
 }
 
 .container__common {
@@ -38,7 +37,6 @@
   align-items: center;
   justify-content: center;
 
-  width: 1000px;
   margin: 0;
 
   border: 1px solid var(--dark-500, #333);
