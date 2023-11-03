@@ -7,20 +7,25 @@ import s from './packsList.module.scss'
 import { useGetDecksQuery } from '@/api/decks/decks.api'
 
 export const PacksList = () => {
-  const { data } = useGetDecksQuery()
+  const { data } = useGetDecksQuery({ itemsPerPage: 5 })
 
-  console.log(data)
   return (
     <>
       <div className={s.box}>
         <PageName />
         <PageBar />
-        <Table tableName="Decks" headCell={tableHeadData} bodyCell={tableBodyData} decks={data} />
+        <Table
+          tableName="Decks"
+          headCell={tableHeadData}
+          bodyCell={tableBodyData}
+          decks={data?.items}
+          totalItems={data?.pagination?.totalItems}
+        />
         <Pagination
+          pagination={data?.pagination}
           arrowColor="white"
           arrowID="arrow-ios-back"
           options={['10', '20', '30', '50', '100']}
-          pages={17}
           placeholder="100"
           reversedArrowID="arrow-ios-forward"
         />

@@ -25,7 +25,16 @@ export type UpdateCardsType = {
 }
 
 export type DecksType = {
-  items: CardsResponsType[]
+  items?: CardsResponsType[]
+  maxCardsCount?: number
+  pagination?: PaginationResponseType
+}
+
+export type PaginationResponseType = {
+  currentPage?: number
+  itemsPerPage?: number
+  totalItems?: number
+  totalPages?: number
 }
 
 export const cardsService: any = baseApi.injectEndpoints({

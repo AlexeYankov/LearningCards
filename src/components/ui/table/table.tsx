@@ -8,8 +8,16 @@ import BodyCell from './bodyCell/bodyCell'
 import HeadCell from './headCell/headCell'
 import { BodyCellType, HeadCellType, TableType } from './types'
 
-export const Table = ({ bodyCell, headCell, className, tableName, decks, ...rest }: TableType) => {
-  const renderDecks = decks?.items || bodyCell
+export const Table = ({
+  bodyCell,
+  headCell,
+  className,
+  tableName,
+  decks,
+  totalItems,
+  ...rest
+}: TableType) => {
+  const renderDecks = decks || bodyCell
 
   return (
     <Root className={`${className ? className : ''}`}>

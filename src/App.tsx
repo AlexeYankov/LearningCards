@@ -8,7 +8,7 @@ import { Router } from '@/api/router'
 export function App() {
   return (
     <Provider store={store}>
-      <Header isLoggedIn={false} />
+      <Header isLoggedIn={true} />
       <div className={s.container}>
         <Router />
       </div>

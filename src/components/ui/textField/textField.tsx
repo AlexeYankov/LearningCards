@@ -42,7 +42,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   }
 
   const isShowClearButton = onClearClick && search && rest.value?.length! > 0
-  const passwordIcon = valueType === 'password' ? 'eye-outline' : 'eye-off-outline'
+  const passwordIcon = valueType === 'password' ? 'eye-off-outline' : 'eye-outline'
 
   return (
     <div className={`${s.box} ${className}`}>
