@@ -7,12 +7,26 @@ import img from '@/asserts/Mask.png'
 import { Image } from '@/asserts/icons/components/Image'
 import { TextField } from '@/components/ui/textField'
 import { CheckBox } from '@/components/ui/checkbox'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
+import { useCreateDeckMutation } from '@/api/decks/decks.api'
 
 export const PageName = () => {
   const [open, setOpen] = useState(false)
+  const [value, setValue] = useState('')
 
-  const closeModal = () => setOpen(false)
+  const [createDeck] = useCreateDeckMutation()
+
+  const handleCloseModal = () => setOpen(false)
+
+  const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.currentTarget.value)
+  }
+
+  const handleAddNewPackClick = () => {
+    createDeck({ name: value })
+    setValue('')
+    setOpen(false)
+  }
 
   return (
     <div className={f.container__pageName}>
@@ -26,7 +40,13 @@ export const PageName = () => {
           <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
             Change Cover
           </Button>
-          <TextField inputId={'Name Pack'} label={'Name Pack'} placeholder={'Name'} />
+          <TextField
+            inputId={'Name Pack'}
+            label={'Name Pack'}
+            placeholder={'Name'}
+            value={value}
+            onChange={handleValueChange}
+          />
           <CheckBox
             IconID={'checkbox-unselected'}
             SelectedIconID={'checkbox-selected'}
@@ -38,10 +58,10 @@ export const PageName = () => {
           />
         </div>
         <div className={`${s.contentBtn} ${s.contentBtns}`}>
-          <Button classNameBtnBox={s.btnBox} variant={'secondary'} onClick={closeModal}>
+          <Button classNameBtnBox={s.btnBox} variant={'secondary'} onClick={handleCloseModal}>
             Cancel
           </Button>
-          <Button classNameBtnBox={s.btnBox} variant={'primary'}>
+          <Button classNameBtnBox={s.btnBox} variant={'primary'} onClick={handleAddNewPackClick}>
             Add New Pack
           </Button>
         </div>

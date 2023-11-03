@@ -11,7 +11,7 @@ type GetDecksParamsType = {
   currentPage?: number
 }
 
-export const decksService = baseApi.injectEndpoints({
+export const decksApi = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       getDecks: builder.query<DecksType, GetDecksParamsType | void>({
@@ -31,7 +31,7 @@ export const decksService = baseApi.injectEndpoints({
         },
         providesTags: ['Decks'],
       }),
-      createDeck: builder.mutation<CardsResponsType, { title: string }>({
+      createDeck: builder.mutation<CardsResponsType, { name: string }>({
         query: params => {
           return {
             url: `v1/decks`,
@@ -39,10 +39,10 @@ export const decksService = baseApi.injectEndpoints({
             body: params,
           }
         },
-        // invalidatesTags: ['Decks'],
+        invalidatesTags: ['Decks'],
       }),
     }
   },
 })
 
-export const { useGetDecksQuery, useCreateDeckMutation } = decksService
+export const { useGetDecksQuery, useCreateDeckMutation } = decksApi

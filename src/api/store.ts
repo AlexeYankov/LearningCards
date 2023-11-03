@@ -1,12 +1,24 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 
 import { baseApi } from './cards.api'
-import { decksService } from '@/api/decks/decks.api.ts'
+import { decksApi } from '@/api/decks/decks.api.ts'
+import { useDispatch } from 'react-redux'
 
 export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
-    [decksService.reducerPath]: decksService.reducer,
+    [decksApi.reducerPath]: decksApi.reducer,
   },
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(baseApi.middleware).concat(decksApi.middleware),
 })
+
+export type AppDispatch = typeof store.dispatch
+export const useAppDispatch: () => AppDispatch = useDispatch
+export type RootState = ReturnType<typeof store.getState>
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>
