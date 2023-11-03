@@ -24,6 +24,7 @@ const BodyCell = ({ el, tableName }: BodyCellComponentType) => {
       )}
 
       {el.name && <Typography variant="body1">{el.name}</Typography>}
+      {el.question && <Typography variant="body1">{el.question}</Typography>}
       {el.svgs && (
         <div
           style={{

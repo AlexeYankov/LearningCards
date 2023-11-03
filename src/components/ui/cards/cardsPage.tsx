@@ -1,15 +1,19 @@
-import f from './packsPage.module.scss'
+import f from './cardsPage.module.scss'
 
 import { PageName } from './components/pageName/pageName'
 import { PageBar } from './components/pageBar/pageBar'
 import { Header } from './components/header/header'
 import { Table } from '../table'
-import { tableHeadData } from './tableData'
+import { tableHeadCardsData } from './tableData'
 import { Pagination } from '../pagination'
-import { useGetDecksQuery } from '@/api/common.api'
+import { useGetCardsQuery } from '@/api/common.api'
 
-export const PacksPage = () => {
-  const { data } = useGetDecksQuery()
+type CardsPageType = {
+  id?: string
+}
+
+export const CardsPage = ({ id }: CardsPageType) => {
+  const { data } = useGetCardsQuery('clo9m4k9w17wcvo2qfo5tgyfs')
 
   return (
     <>
@@ -17,13 +21,13 @@ export const PacksPage = () => {
       <div className={f.container}>
         <PageName />
         <PageBar />
+
         <Table
-          tableName="Decks"
-          headCell={tableHeadData}
+          tableName="Cards"
+          headCell={tableHeadCardsData}
           bodyCell={data?.items || []}
           className={f.container__common}
         />
-
         <Pagination
           arrowColor="white"
           arrowID="arrow-ios-back"

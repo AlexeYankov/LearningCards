@@ -15,7 +15,7 @@ const HeadCell = ({ el, tableName }: HeadCellcomponentType) => {
   return (
     <UIHeadCell
       className={
-        tableName !== 'NotDecks' && el.headCellName === 'Grade' ? s.headCellLast : s.headCell
+        tableName !== 'Cards' && el.headCellName === 'Grade' ? s.headCellLast : s.headCell
       }
       style={tableName !== 'Decks' ? { width: '300px' } : { width: '200px' }}
     >

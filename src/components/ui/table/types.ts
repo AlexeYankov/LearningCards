@@ -17,11 +17,13 @@ export type BodyCellType = {
   }
   cover?: string
   bodyCellImageAlt?: string
+  question?: string
   name?: string
+  answer?: string
   isPrivate?: boolean
   stars?: Array<string>
   svgs?: HeadCellSvgType[]
-  cardsCount?: number
+  cardsCount?: string
   grade?: number
   updated?: string
 }

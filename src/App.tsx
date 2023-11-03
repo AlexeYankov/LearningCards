@@ -6,8 +6,7 @@ import { Router } from './api/router'
 export function App() {
   return (
     <Provider store={store}>
-      {/* <PacksPage /> */}
-      <Router/>
+      <Router />
     </Provider>
   )
 }

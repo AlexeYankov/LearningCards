@@ -17,7 +17,7 @@ export const Table = ({ bodyCell, headCell, className, tableName, ...rest }: Tab
             {headCell?.map((el: HeadCellType, i) => {
               return (
                 <HeadCell
-                  tableName={tableName === 'NotDecks' && i <= 1 ? 'NotDecks' : 'Decks'}
+                  tableName={tableName === 'Cards' && i <= 1 ? 'Cards' : 'Decks'}
                   el={el}
                   key={i}
                   {...rest}
@@ -37,14 +37,24 @@ export const Table = ({ bodyCell, headCell, className, tableName, ...rest }: Tab
             if (Math.round(el.grade || 0) - 5 < 0) {
               result = starsGrade.concat(emptyStarsGrade)
             }
+            const currentData = new Date(el.updated || 0)
+            const currentDay =
+              currentData.getDate() < 10 ? '0' + currentData.getDate() : currentData.getDate()
+
+            const convertTimeTo = [
+              currentDay,
+              currentData.getMonth(),
+              currentData.getFullYear(),
+            ].join('.')
+
             return (
               <Row className={s.row} key={i}>
                 {/*pack name*/}
-                <BodyCell el={{ name: el.name }} tableName={tableName} />
+                <BodyCell el={{ name: el.name || el.question }} tableName={tableName} />
                 {/*cards in pack*/}
-                <BodyCell el={{ name: el.cardsCount + '' }} tableName={tableName} />
+                <BodyCell el={{ name: el.cardsCount || el.answer || '0' }} tableName={tableName} />
                 {/*//pack update data*/}
-                <BodyCell el={{ name: el.updated }} tableName="Decks" />
+                <BodyCell el={{ name: convertTimeTo }} tableName="Decks" />
                 {/*pack author or stars of card*/}
                 {tableName === 'Decks' ? (
                   <BodyCell el={{ name: el.author?.name }} tableName="Decks" />

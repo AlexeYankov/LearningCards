@@ -7,7 +7,7 @@ import {
   RouteObject,
   RouterProvider,
 } from 'react-router-dom'
-import { useGetCardsQuery, useGetDecksQuery } from './common.api'
+import { CardsPage } from '@/components/ui/cards/cardsPage'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -18,8 +18,18 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    path: '/',
+    path: '/decks',
     element: <PacksPage />,
+  },
+  {
+    path: '/decks/clo9m4k9w17wcvo2qfo5tgyfs',
+    element: <CardsPage />,
+    // children: [
+    //   {
+    //     path: `${id}`,
+    //     element: <CardsPage id={id} />,
+    //   },
+    // ],
   },
 ]
 
@@ -38,7 +48,5 @@ function PrivateRoutes() {
 }
 
 export const Router = () => {
-  // const result = useGetDecksQuery()
-  // const cards = useGetCardsQuery('clogyz1ef1b3uvo2qac2uhhsj')
   return <RouterProvider router={router} />
 }
