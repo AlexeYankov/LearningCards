@@ -23,9 +23,11 @@ export const PageName = () => {
   }
 
   const handleAddNewPackClick = () => {
-    createDeck({ name: value })
-    setValue('')
-    setOpen(false)
+    if (value.trim() !== '') {
+      createDeck({ name: value })
+      setValue('')
+      setOpen(false)
+    }
   }
 
   return (
@@ -46,6 +48,7 @@ export const PageName = () => {
             placeholder={'Name'}
             value={value}
             onChange={handleValueChange}
+            onEnter={handleAddNewPackClick}
           />
           <CheckBox
             IconID={'checkbox-unselected'}
