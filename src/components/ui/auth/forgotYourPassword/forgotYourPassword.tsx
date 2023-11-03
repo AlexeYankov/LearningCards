@@ -20,7 +20,7 @@ export const ForgotYourPassword = () => {
   })
   const onSubmit = (data: FormValues) => {
     console.log(data)
-    navigate('/checkEmail')
+    navigate('/createNewPassword')
   }
   const goToLogin = () => {
     navigate('/login')
