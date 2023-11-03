@@ -44,7 +44,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   const isShowClearButton = onClearClick && search && rest.value?.length! > 0
   const passwordIcon = valueType === 'password' ? 'eye-outline' : 'eye-off-outline'
 
-  console.log(className)
   return (
     <div className={`${s.box} ${className}`}>
       <Label className={`${s.label} ${disabledLabelClass}`} htmlFor={inputId} label={label} />

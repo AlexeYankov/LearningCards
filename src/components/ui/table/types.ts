@@ -1,9 +1,12 @@
+import { DecksType } from '@/api/common.api.ts'
+
 export type TableType = {
   bodyCell?: BodyCellType[]
   headCell?: HeadCellType[]
   variant?: string
   className?: string
   tableName?: string
+  decks?: DecksType
 }
 
 export type HeadCellType = {

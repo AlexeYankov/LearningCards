@@ -8,7 +8,9 @@ import BodyCell from './bodyCell/bodyCell'
 import HeadCell from './headCell/headCell'
 import { BodyCellType, HeadCellType, TableType } from './types'
 
-export const Table = ({ bodyCell, headCell, className, tableName, ...rest }: TableType) => {
+export const Table = ({ bodyCell, headCell, className, tableName, decks, ...rest }: TableType) => {
+  const renderDecks = decks?.items || bodyCell
+
   return (
     <Root className={`${className ? className : ''}`}>
       <React.Fragment key={'.0'}>
@@ -27,12 +29,14 @@ export const Table = ({ bodyCell, headCell, className, tableName, ...rest }: Tab
           </Row>
         </Head>
         <Body>
-          {bodyCell?.map((el: BodyCellType, i) => {
-            const starsGrade = Array.from({ length: Math.round(el.grade || 0) }, (v, i) => 'star')
+          {renderDecks?.map((el: BodyCellType, i) => {
+            const localDate = new Date(el.updated!).toLocaleDateString()
+
+            const starsGrade = Array.from({ length: Math.round(el.grade || 0) }, () => 'star')
             let result = starsGrade
             const emptyStarsGrade = Array.from(
               { length: 5 - Math.round(el.grade || 0) },
-              (v, i) => 'star-outline'
+              () => 'star-outline'
             )
             if (Math.round(el.grade || 0) - 5 < 0) {
               result = starsGrade.concat(emptyStarsGrade)
@@ -44,7 +48,7 @@ export const Table = ({ bodyCell, headCell, className, tableName, ...rest }: Tab
                 {/*cards in pack*/}
                 <BodyCell el={{ name: el.cardsCount + '' }} tableName={tableName} />
                 {/*//pack update data*/}
-                <BodyCell el={{ name: el.updated }} tableName="Decks" />
+                <BodyCell el={{ name: localDate }} tableName="Decks" />
                 {/*pack author or stars of card*/}
                 {tableName === 'Decks' ? (
                   <BodyCell el={{ name: el.author?.name }} tableName="Decks" />

@@ -4,14 +4,18 @@ import { Table } from '@/components/ui/table'
 import { tableBodyData, tableHeadData } from '@/components/ui/packs/tableData'
 import { Pagination } from '@/components/ui/pagination'
 import s from './packsList.module.scss'
+import { useGetDecksQuery } from '@/api/decks/decks.api'
 
 export const PacksList = () => {
+  const { data } = useGetDecksQuery()
+
+  console.log(data)
   return (
     <>
       <div className={s.box}>
         <PageName />
         <PageBar />
-        <Table tableName="Decks" headCell={tableHeadData} bodyCell={tableBodyData} />
+        <Table tableName="Decks" headCell={tableHeadData} bodyCell={tableBodyData} decks={data} />
         <Pagination
           arrowColor="white"
           arrowID="arrow-ios-back"

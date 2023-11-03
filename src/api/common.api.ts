@@ -35,10 +35,10 @@ export const cardsService: any = baseApi.injectEndpoints({
         query: id => `v1/decks/${id}/cards`,
         providesTags: ['Cards'],
       }),
-      getDecks: builder.query<DecksType, void>({
-        query: () => `v1/decks`,
-        providesTags: ['Decks'],
-      }),
+      // getDecks: builder.query<DecksType, void>({
+      //   query: () => `v1/decks`,
+      //   providesTags: ['Decks'],
+      // }),
       updateCards: builder.mutation<UpdateCardsType, CardsResponsType>({
         query: ({ id, ...patch }) => ({
           url: `v1/cards/:${id}`,
@@ -51,4 +51,4 @@ export const cardsService: any = baseApi.injectEndpoints({
   },
 })
 
-export const { useGetDecksQuery, useGetCardsQuery } = cardsService
+export const { useGetCardsQuery } = cardsService
