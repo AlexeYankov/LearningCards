@@ -1,16 +1,92 @@
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import f from '../../packsPage.module.scss'
+import { Modal, ModalTitle } from '@/components/ui/modal'
+import s from '@/components/ui/modal/modal.module.scss'
+import img from '@/asserts/Mask.png'
+import { Image } from '@/asserts/icons/components/Image'
+import { TextField } from '@/components/ui/textField'
+import { CheckBox } from '@/components/ui/checkbox'
+import { useState } from 'react'
 
 export const PageName = () => {
+  const [open, setOpen] = useState(false)
+
+  const closeModal = () => setOpen(false)
+
   return (
     <div className={f.container__pageName}>
       <Typography as="h1" variant="large">
         Packs list
       </Typography>
-      <div>
-        <Button>Add New Pack</Button>
-      </div>
+      <Modal open={open} onOpenChange={setOpen} triggerName={'Add New Pack'}>
+        <ModalTitle title={'Add New Pack'} />
+        <div className={s.contentComponents}>
+          <img alt={'card image'} className={s.img} src={img} />
+          <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
+            Change Cover
+          </Button>
+          <TextField inputId={'Name Pack'} label={'Name Pack'} placeholder={'Name'} />
+          <CheckBox
+            IconID={'checkbox-unselected'}
+            SelectedIconID={'checkbox-selected'}
+            checkboxId={'Private Pack'}
+            disabled={false}
+            height={'24'}
+            label={'Private Pack'}
+            width={'24'}
+          />
+        </div>
+        <div className={`${s.contentBtn} ${s.contentBtns}`}>
+          <Button classNameBtnBox={s.btnBox} variant={'secondary'} onClick={closeModal}>
+            Cancel
+          </Button>
+          <Button classNameBtnBox={s.btnBox} variant={'primary'}>
+            Add New Pack
+          </Button>
+        </div>
+      </Modal>
     </div>
   )
 }
+
+// type Props = {
+//   open: boolean
+//   setOpen: (open: boolean) => void
+//   trigger: ReactNode
+// }
+
+// const AddNewPackModal: FC<Props> = ({ open, setOpen, trigger }) => {
+//   console.log(open)
+//   console.log(trigger)
+//
+//   return (
+//     <Modal open={open} onOpenChange={() => setOpen(true)} trigger={trigger}>
+//       <ModalTitle title={'Add New Pack'} />
+//       <div className={s.contentComponents}>
+//         <img alt={'card image'} className={s.img} src={img} />
+//         <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
+//           Change Cover
+//         </Button>
+//         <TextField inputId={'Name Pack'} label={'Name Pack'} placeholder={'Name'} />
+//         <CheckBox
+//           IconID={'checkbox-unselected'}
+//           SelectedIconID={'checkbox-selected'}
+//           checkboxId={'Private Pack'}
+//           disabled={false}
+//           height={'24'}
+//           label={'Private Pack'}
+//           width={'24'}
+//         />
+//       </div>
+//       <div className={`${s.contentBtn} ${s.contentBtns}`}>
+//         <Button classNameBtnBox={s.btnBox} variant={'secondary'}>
+//           Cancel
+//         </Button>
+//         <Button classNameBtnBox={s.btnBox} variant={'primary'}>
+//           Add New Pack
+//         </Button>
+//       </div>
+//     </Modal>
+//   )
+// }

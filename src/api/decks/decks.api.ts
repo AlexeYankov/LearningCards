@@ -1,5 +1,5 @@
 import { baseApi } from '@/api/cards.api.ts'
-import { DecksType } from '@/api/common.api.ts'
+import { CardsResponsType, DecksType } from '@/api/common.api.ts'
 
 type GetDecksParamsType = {
   itemsPerPage?: number
@@ -31,8 +31,18 @@ export const decksService = baseApi.injectEndpoints({
         },
         providesTags: ['Decks'],
       }),
+      createDeck: builder.mutation<CardsResponsType, { title: string }>({
+        query: params => {
+          return {
+            url: `v1/decks`,
+            method: 'POST',
+            body: params,
+          }
+        },
+        // invalidatesTags: ['Decks'],
+      }),
     }
   },
 })
 
-export const { useGetDecksQuery } = decksService
+export const { useGetDecksQuery, useCreateDeckMutation } = decksService
