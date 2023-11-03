@@ -30,6 +30,9 @@ export const SignIn = () => {
   const goToRegistration = () => {
     navigate('/signup')
   }
+  const goToForgotPassword = () => {
+    navigate('/forgotPassword')
+  }
 
   return (
     <Card className={s.signIn}>
@@ -70,6 +73,7 @@ export const SignIn = () => {
           children={'Forgot Password?'}
           variant={'body2'}
           as={'p'}
+          onClick={goToForgotPassword}
         />
         <Button
           className={s.button}

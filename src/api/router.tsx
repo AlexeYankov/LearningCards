@@ -11,6 +11,7 @@ import { SignIn } from '@/components/ui/auth/signIn/signIn'
 import { SignUp } from '@/components/ui/auth/signUp/signUp'
 import { CreateNewPassword } from '@/components/ui/auth/createNewPassword'
 import { CheckEmail } from '@/components/ui/auth/checkEmail'
+import { ForgotYourPassword } from '@/components/ui/auth/forgotYourPassword'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -28,6 +29,10 @@ const publicRoutes: RouteObject[] = [
   {
     path: '/checkEmail',
     element: <CheckEmail />,
+  },
+  {
+    path: '/forgotPassword',
+    element: <ForgotYourPassword />,
   },
 ]
 
