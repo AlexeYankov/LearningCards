@@ -29,10 +29,11 @@ export const PageBar = () => {
         <Label style={{ position: 'absolute', top: '-25px' }} label="Number of cards" />
         <SliderDemo />
       </div>
-
-      <Button icon={<Delete />} variant="secondary">
-        <Typography variant="body2">Clear Filter</Typography>
-      </Button>
+      <div>
+        <Button icon={<Delete />} variant="secondary" className={f.button}>
+          <Typography variant="body2">Clear Filter</Typography>
+        </Button>
+      </div>
     </div>
   )
 }
