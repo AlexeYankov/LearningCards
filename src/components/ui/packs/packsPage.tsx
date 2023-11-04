@@ -5,11 +5,13 @@ import { PageBar } from './components/pageBar/pageBar'
 import { Table } from '../table'
 import { tableBodyData, tableHeadCardsData } from './tableData'
 import { Pagination } from '../pagination'
-import { useGetDecksQuery } from '@/api/decks/decks.api.ts'
+import { FC } from 'react'
 
-export const PacksPage = () => {
-  const { data } = useGetDecksQuery()
+type PacksPageType = {
+  pagination: any
+}
 
+export const PacksPage: FC<PacksPageType> = ({ pagination }) => {
   return (
     <>
       <div className={f.container}>
@@ -31,7 +33,7 @@ export const PacksPage = () => {
           arrowColor="white"
           arrowID="arrow-ios-back"
           options={['10', '20', '30', '50', '100']}
-          pagination={data?.pagination}
+          pagination={pagination}
           placeholder="100"
           reversedArrowID="arrow-ios-forward"
         />

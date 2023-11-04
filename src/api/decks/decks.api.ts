@@ -17,16 +17,8 @@ export const decksApi = baseApi.injectEndpoints({
       getDecks: builder.query<DecksType, GetDecksParamsType | void>({
         query: params => {
           return {
-            url: `v1/decks`,
-            params: {
-              itemsPerPage: params?.itemsPerPage,
-              minCardsCount: params?.minCardsCount,
-              maxCardsCount: params?.maxCardsCount,
-              name: params?.name,
-              currentPage: params?.currentPage,
-              authorId: params?.authorId,
-              orderBy: params?.orderBy,
-            },
+            url: `v1/decks/`,
+            params: params ?? undefined,
           }
         },
         providesTags: ['Decks'],

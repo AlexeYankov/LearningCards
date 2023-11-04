@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
- 
+
 export const baseApi = createApi({
   reducerPath: 'baseApi',
   tagTypes: ['Cards', 'Decks'],
@@ -10,5 +10,6 @@ export const baseApi = createApi({
       headers.append('x-auth-skip', 'true')
     },
   }),
-  endpoints: ()=>({})
+  refetchOnFocus: true,
+  endpoints: () => ({}),
 })

@@ -3,6 +3,7 @@ import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 import { baseApi } from './cards.api'
 import { decksApi } from '@/api/decks/decks.api.ts'
 import { useDispatch } from 'react-redux'
+import { setupListeners } from '@reduxjs/toolkit/query/react'
 
 export const store = configureStore({
   reducer: {
@@ -22,3 +23,5 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >
+
+setupListeners(store.dispatch)
