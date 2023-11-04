@@ -7,12 +7,9 @@ import { Body, Head, Root, Row } from '@it-incubator/ui-kit'
 import BodyCell from './bodyCell/bodyCell'
 import HeadCell from './headCell/headCell'
 import { BodyCellType, HeadCellType, TableType } from './types'
-import { useGetDecksQuery } from '@/api/decks/decks.api.ts'
 
-export const Table = ({ bodyCell, headCell, className, tableName, ...rest }: TableType) => {
-  const { data } = useGetDecksQuery()
-
-  const renderDecks = data?.items || bodyCell
+export const Table = ({ bodyCell, headCell, className, tableName, decks, ...rest }: TableType) => {
+  const renderDecks = decks || bodyCell
 
   return (
     <Root className={`${className ? className : ''}`}>

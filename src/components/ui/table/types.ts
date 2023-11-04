@@ -1,3 +1,5 @@
+import { CardsResponsType } from '@/api/common.api.ts'
+
 export type TableType = {
   bodyCell?: BodyCellType[]
   headCell?: HeadCellType[]
@@ -5,6 +7,7 @@ export type TableType = {
   className?: string
   tableName?: string
   totalItems?: number
+  decks?: CardsResponsType[]
 }
 
 export type HeadCellType = {

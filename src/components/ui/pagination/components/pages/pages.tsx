@@ -3,9 +3,6 @@ import s from './pages.module.scss'
 import sprite from '@/asserts/sprite.svg'
 import { PagesForRender } from './pagesForRender'
 import { setPageHandler } from '../utils/counter'
-import { PaginationResponseType } from '@/api/common.api.ts'
-import { useGetDecksQuery } from '@/api/decks/decks.api.ts'
-import { useState } from 'react'
 
 type PagesType = {
   arrowID: string
@@ -13,23 +10,33 @@ type PagesType = {
   reversedArrowID: string
   startPagesFrom?: number
   itemsPerPage?: number
+  currentPage?: number
+  totalPages?: number
+  onPaginationClick: (page: number) => void
 }
 
-export const Pages = ({ arrowID, color, reversedArrowID }: PagesType) => {
-  const [query, setQuery] = useState<any>(undefined)
-
-  const { data } = useGetDecksQuery(query)
-
-  const { currentPage, itemsPerPage, totalItems, totalPages }: PaginationResponseType = {
-    currentPage: data?.pagination?.currentPage || 1,
-    itemsPerPage: data?.pagination?.itemsPerPage || 10,
-    totalItems: data?.pagination?.totalItems || 100,
-    totalPages: data?.pagination?.totalPages || 20,
-  }
-
-  console.log(itemsPerPage)
-  console.log(totalItems)
-  console.log(currentPage)
+export const Pages = ({
+  arrowID,
+  color,
+  reversedArrowID,
+  onPaginationClick,
+  totalPages = 20,
+  currentPage = 1,
+}: PagesType) => {
+  // const [query, setQuery] = useState<any>(undefined)
+  //
+  // const { data } = useGetDecksQuery(query)
+  //
+  // const { currentPage, totalPages }: PaginationResponseType = {
+  //   currentPage: data?.pagination?.currentPage || 1,
+  //   itemsPerPage: data?.pagination?.itemsPerPage || 10,
+  //   totalItems: data?.pagination?.totalItems || 100,
+  //   totalPages: data?.pagination?.totalPages || 20,
+  // }
+  //
+  // const handlePaginationClick = (page: number) => {
+  //   setQuery({ currentPage: page })
+  // }
 
   const setCurrentPage = (callbackIconID: string) => {
     setPageHandler(
@@ -38,12 +45,8 @@ export const Pages = ({ arrowID, color, reversedArrowID }: PagesType) => {
       currentPage,
       totalPages,
       callbackIconID,
-      handlePaginationClick
+      onPaginationClick
     )
-  }
-
-  const handlePaginationClick = (page: number) => {
-    setQuery({ currentPage: page, itemsPerPage })
   }
 
   return (
@@ -58,7 +61,7 @@ export const Pages = ({ arrowID, color, reversedArrowID }: PagesType) => {
         <use xlinkHref={`${sprite}#${arrowID}`} />
       </svg>
 
-      <PagesForRender page={currentPage} pages={totalPages} setPage={handlePaginationClick} />
+      <PagesForRender page={currentPage} pages={totalPages} setPage={onPaginationClick} />
 
       <svg
         fill={color || 'black'}

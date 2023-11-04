@@ -12,6 +12,9 @@ type PaginationType = {
   reversed?: boolean
   reversedArrowID: string
   variant?: string
+  currentPage?: number
+  totalPages?: number
+  onPaginationClick: (page: number) => void
 }
 
 export const Pagination = ({
@@ -20,11 +23,21 @@ export const Pagination = ({
   options,
   placeholder,
   reversed,
+  totalPages,
+  onPaginationClick,
+  currentPage,
   reversedArrowID,
 }: PaginationType) => {
   return (
     <div className={s.paginationContainer}>
-      <Pages arrowID={arrowID} color={arrowColor} reversedArrowID={reversedArrowID} />
+      <Pages
+        arrowID={arrowID}
+        color={arrowColor}
+        reversedArrowID={reversedArrowID}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPaginationClick={onPaginationClick}
+      />
 
       <div className={s.paginationContainer}>
         <Typography variant="body2">Показать</Typography>
