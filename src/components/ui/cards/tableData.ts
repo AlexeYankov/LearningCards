@@ -1,4 +1,3 @@
-
 export const tableHeadCardsData = [
   { headCellName: 'Question' },
   { headCellName: 'Answer' },

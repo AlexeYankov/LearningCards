@@ -10,6 +10,7 @@ type Props = {
 
 export const Label: FC<Props> = ({ className, label, ...rest }) => {
   console.log(className)
+
   return (
     <LabelRadix.Root className={`${s.label} ${className}`} {...rest}>
       {label}

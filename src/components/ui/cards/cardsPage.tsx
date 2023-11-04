@@ -1,12 +1,13 @@
+import { useGetCardsQuery } from '@/api/common.api'
+
 import f from './cardsPage.module.scss'
 
-import { PageName } from './components/pageName/pageName'
-import { PageBar } from './components/pageBar/pageBar'
-import { Header } from './components/header/header'
-import { Table } from '../table'
-import { tableHeadCardsData } from './tableData'
 import { Pagination } from '../pagination'
-import { useGetCardsQuery } from '@/api/common.api'
+import { Table } from '../table'
+import { Header } from './components/header/header'
+import { PageBar } from './components/pageBar/pageBar'
+import { PageName } from './components/pageName/pageName'
+import { tableHeadCardsData } from './tableData'
 
 type CardsPageType = {
   id?: string
@@ -23,18 +24,18 @@ export const CardsPage = ({ id }: CardsPageType) => {
         <PageBar />
 
         <Table
-          tableName="Cards"
-          headCell={tableHeadCardsData}
           bodyCell={data?.items || []}
           className={f.container__common}
+          headCell={tableHeadCardsData}
+          tableName={'Cards'}
         />
         <Pagination
-          arrowColor="white"
-          arrowID="arrow-ios-back"
+          arrowColor={'white'}
+          arrowID={'arrow-ios-back'}
           options={['10', '20', '30', '50', '100']}
           pages={17}
-          placeholder="100"
-          reversedArrowID="arrow-ios-forward"
+          placeholder={'100'}
+          reversedArrowID={'arrow-ios-forward'}
         />
       </div>
     </>

@@ -1,29 +1,29 @@
-import { PacksPage } from '@/components/ui/packs/packsPage'
-
 import {
-  createBrowserRouter,
   Navigate,
   Outlet,
   RouteObject,
   RouterProvider,
+  createBrowserRouter,
 } from 'react-router-dom'
+
 import { CardsPage } from '@/components/ui/cards/cardsPage'
+import { PacksPage } from '@/components/ui/packs/packsPage'
 
 const publicRoutes: RouteObject[] = [
   {
-    path: '/login',
     element: <div>login</div>,
+    path: '/login',
   },
 ]
 
 const privateRoutes: RouteObject[] = [
   {
-    path: '/decks',
     element: <PacksPage />,
+    path: '/decks',
   },
   {
-    path: '/decks/clo9m4k9w17wcvo2qfo5tgyfs',
     element: <CardsPage />,
+    path: '/decks/clo9m4k9w17wcvo2qfo5tgyfs',
     // children: [
     //   {
     //     path: `${id}`,
@@ -35,8 +35,8 @@ const privateRoutes: RouteObject[] = [
 
 const router = createBrowserRouter([
   {
-    element: <PrivateRoutes />,
     children: privateRoutes,
+    element: <PrivateRoutes />,
   },
   ...publicRoutes,
 ])
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
 function PrivateRoutes() {
   const isAuthenticated = true
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
+  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
 }
 
 export const Router = () => {

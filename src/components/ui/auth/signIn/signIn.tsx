@@ -1,11 +1,14 @@
-import s from './signIn.module.scss'
-import { Typography } from '@/components/ui/typography'
-import { z } from 'zod'
 import { useForm } from 'react-hook-form'
+
+import { Typography } from '@/components/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ControlledInput } from '../../controlled/controlled-input'
-import { ControlledCheckbox } from '../../controlled/controlled-checkbox'
+import { z } from 'zod'
+
+import s from './signIn.module.scss'
+
 import { Button } from '../../button'
+import { ControlledCheckbox } from '../../controlled/controlled-checkbox'
+import { ControlledInput } from '../../controlled/controlled-input'
 
 type FormValues = z.infer<typeof loginSchema>
 
@@ -14,8 +17,9 @@ const loginSchema = z.object({
   password: z.string().min(3),
   rememberMe: z.boolean().default(false),
 })
+
 export const SignIn = () => {
-  const { handleSubmit, control } = useForm<FormValues>({
+  const { control, handleSubmit } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
   })
   const onSubmit = (data: FormValues) => {
@@ -24,50 +28,50 @@ export const SignIn = () => {
 
   return (
     <div className={s.signIn}>
-      <Typography className={s.label} children={'Sign In'} variant={'large'} />
+      <Typography children={'Sign In'} className={s.label} variant={'large'} />
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <ControlledInput
           className={s.inputEmail}
-          placeholder={'Email'}
           control={control}
-          name={'email'}
-          type={'text'}
           label={'Email'}
+          name={'email'}
+          placeholder={'Email'}
+          type={'text'}
         />
         <ControlledInput
-          className={s.inputPassword}
           IconID={'eye-outline'}
-          placeholder={'Password'}
+          className={s.inputPassword}
           control={control}
-          name={'password'}
-          type={'password'}
           label={'Password'}
+          name={'password'}
+          placeholder={'Password'}
+          type={'password'}
         />
         <ControlledCheckbox
-          control={control}
-          name={'rememberMe'}
-          className={s.checkbox}
           IconID={'checkbox-unselected'}
-          width={'24'}
-          height={'24'}
           SelectedIconID={'checkbox-selected'}
+          className={s.checkbox}
+          control={control}
+          height={'24'}
           label={'Remember me'}
+          name={'rememberMe'}
+          width={'24'}
         />
-        <Typography className={s.forgotPassLink} children={'Forgot Password?'} variant={'body2'} />
+        <Typography children={'Forgot Password?'} className={s.forgotPassLink} variant={'body2'} />
         <Button
+          children={<Typography children={'Sign In'} variant={'subtitle2'} />}
           className={s.button}
           type={'submit'}
           variant={'primary'}
-          children={<Typography children={'Sign In'} variant={'subtitle2'} />}
         />
       </form>
 
       <Typography
-        className={s.linkDontHaveAccount}
         children={"Don't have an account?"}
+        className={s.linkDontHaveAccount}
         variant={'body2'}
       />
-      <Typography className={s.linkSignUp} children={'Sign Up'} variant={'body1'} />
+      <Typography children={'Sign Up'} className={s.linkSignUp} variant={'body1'} />
     </div>
   )
 }

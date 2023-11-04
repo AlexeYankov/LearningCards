@@ -1,27 +1,27 @@
 import { baseApi } from './cards.api'
 
 export type CardsResponsType = {
-  id: string
-  deckId: string
-  userId: string
-  question: string
   answer: string
-  shots: number
   answerImg: string
+  answerVideo: string
+  created: string
+  deckId: string
+  id: string
+  question: string
   questionImg: string
   questionVideo: string
-  answerVideo: string
   rating: number
-  created: string
+  shots: number
   updated: string
+  userId: string
 }
 export type UpdateCardsType = {
-  question: string
   answer: string
   answerImg: string
+  answerVideo: string
+  question: string
   questionImg: string
   questionVideo: string
-  answerVideo: string
 }
 
 export type DecksType = {
@@ -31,24 +31,41 @@ export type DecksType = {
 export const cardsService: any = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      getCards: builder.query<CardsResponsType, void>({
-        query: id => `v1/decks/${id}/cards`,
+      deleteCard: builder.mutation<UpdateCardsType, void>({
+        invalidatesTags: ['Cards'],
+        query: id => ({
+          method: 'DELETE',
+          url: `v1/cards/${id}`,
+        }),
+      }),
+      getCard: builder.query<CardsResponsType, void>({
         providesTags: ['Cards'],
+        query: id => `v1/cards/${id}`,
+      }),
+      getCards: builder.query<CardsResponsType[], void>({
+        providesTags: ['Cards'],
+        query: id => `v1/decks/${id}/cards`,
       }),
       getDecks: builder.query<DecksType, void>({
-        query: () => `v1/decks`,
         providesTags: ['Decks'],
+        query: () => `v1/decks`,
       }),
-      updateCards: builder.mutation<UpdateCardsType, CardsResponsType>({
-        query: ({ id, ...patch }) => ({
-          url: `v1/cards/:${id}`,
-          method: 'PATCH',
-          body: patch,
-        }),
+      updateCard: builder.mutation<UpdateCardsType, CardsResponsType>({
         invalidatesTags: ['Cards'],
+        query: ({ id, ...patch }) => ({
+          body: patch,
+          method: 'PATCH',
+          url: `v1/cards/${id}`,
+        }),
       }),
     }
   },
 })
 
-export const { useGetDecksQuery, useGetCardsQuery } = cardsService
+export const {
+  useDeleteCardMutation,
+  useGetCardQuery,
+  useGetCardsQuery,
+  useGetDecksQuery,
+  useUpdateCardMutation,
+} = cardsService

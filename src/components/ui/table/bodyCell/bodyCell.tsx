@@ -1,17 +1,18 @@
+import sprite from '@/asserts/sprite.svg'
 import { Cell } from '@it-incubator/ui-kit'
 
 import s from './bodyCell.module.scss'
 
-import sprite from '@/asserts/sprite.svg'
-import { BodyCellType } from '../types'
 import { Typography } from '../../typography'
+import { BodyCellType } from '../types'
 
 type BodyCellComponentType = {
   el: BodyCellType
+  onClick?: () => void
   tableName?: string
 }
 
-const BodyCell = ({ el, tableName }: BodyCellComponentType) => {
+const BodyCell = ({ el, onClick, tableName }: BodyCellComponentType) => {
   return (
     <Cell
       className={s.bodyCell}
@@ -20,16 +21,28 @@ const BodyCell = ({ el, tableName }: BodyCellComponentType) => {
       {/* {el.checkBox && <CheckBox />} */}
 
       {el.cover && (
-        <Typography as="img" alt={el.bodyCellImageAlt || `${el.cover + ' image'}`} src={el.cover} />
+        <Typography
+          alt={el.bodyCellImageAlt || `${el.cover + ' image'}`}
+          as={'img'}
+          src={el.cover}
+        />
       )}
 
-      {el.name && <Typography variant="body1">{el.name}</Typography>}
-      {el.question && <Typography variant="body1">{el.question}</Typography>}
+      {el.name && (
+        <Typography onClick={onClick} variant={'body1'}>
+          {el.name}
+        </Typography>
+      )}
+      {el.question && (
+        <Typography onClick={onClick} variant={'body1'}>
+          {el.question}
+        </Typography>
+      )}
       {el.svgs && (
         <div
           style={{
-            display: 'flex',
             alignItems: 'center',
+            display: 'flex',
             justifyContent: 'flex-end',
             // background: 'red',
             width: '100%',
@@ -38,7 +51,7 @@ const BodyCell = ({ el, tableName }: BodyCellComponentType) => {
           {el.svgs?.map((el, i) => {
             return (
               <div className={s.svgsContainer} key={i}>
-                <svg height="16px" viewBox="0 0 24 24">
+                <svg height={'16px'} viewBox={'0 0 24 24'}>
                   <use xlinkHref={`${sprite}#${el.id}`} />
                 </svg>
               </div>
@@ -50,7 +63,7 @@ const BodyCell = ({ el, tableName }: BodyCellComponentType) => {
       {el.stars?.map((id, i) => {
         return (
           <div className={s.stars} key={i}>
-            <svg height="16px" viewBox="0 0 24 24">
+            <svg height={'16px'} viewBox={'0 0 24 24'}>
               <use xlinkHref={`${sprite}#${id}`} />
             </svg>
           </div>

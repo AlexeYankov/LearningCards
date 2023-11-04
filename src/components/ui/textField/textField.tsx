@@ -5,20 +5,21 @@ import { Password } from '@/asserts/icons/components/Password'
 import { Search } from '@/asserts/icons/components/Search'
 
 import s from './textField.module.scss'
+
 import { Label } from '../label'
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
   let {
-    onChange,
+    IconID,
     as: Component = 'input',
     className,
     disabled,
     errorMessage,
     iconEnd,
-    IconID,
     iconStart,
     inputId,
     label,
+    onChange,
     onClearClick,
     password,
     placeholder,
@@ -62,8 +63,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 
   return (
     <div className={s.box}>
-      <div style={{position: 'relative'}}>
-        <Label style={{position: 'absolute', top: '-25px'}} className={`${s.label} ${disabledLabelClass}`} htmlFor={inputId} label={label} />
+      <div style={{ position: 'relative' }}>
+        <Label
+          className={`${s.label} ${disabledLabelClass}`}
+          htmlFor={inputId}
+          label={label}
+          style={{ position: 'absolute', top: '-25px' }}
+        />
         <div className={s.inputContainer}>
           {!!iconStart && (
             <span className={`${s.iconStart} ${disabledIconClass}`}>{iconStart}</span>
@@ -96,21 +102,21 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 })
 
 export type TextFieldProps<T extends ElementType = 'input'> = {
-  as?: T
   IconID?: string
+  as?: T
   children?: ReactNode
   className?: string
+  error?: string
   errorMessage?: null | string
   iconEnd?: ReactNode
   iconStart?: ReactNode
   inputId?: string
   label?: string
+  onChange?: (value: string) => void
   onClearClick?: () => void
   password?: boolean
   placeholder?: string
-  error?: string
   search?: boolean
-  onChange?: (value: string) => void
   type?: 'password' | 'text'
   value?: string
 } & ComponentPropsWithoutRef<T>

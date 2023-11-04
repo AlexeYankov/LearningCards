@@ -1,9 +1,9 @@
 export type TableType = {
   bodyCell?: BodyCellType[]
-  headCell?: HeadCellType[]
-  variant?: string
   className?: string
+  headCell?: HeadCellType[]
   tableName?: string
+  variant?: string
 }
 
 export type HeadCellType = {
@@ -11,20 +11,21 @@ export type HeadCellType = {
   svgSizes?: HeadCellSvgType
 }
 export type BodyCellType = {
+  answer?: string
   author?: {
     id?: string
     name?: string
   }
-  cover?: string
   bodyCellImageAlt?: string
-  question?: string
-  name?: string
-  answer?: string
+  cardsCount?: string
+  cover?: string
+  grade?: number
+  id?: string
   isPrivate?: boolean
+  name?: string
+  question?: string
   stars?: Array<string>
   svgs?: HeadCellSvgType[]
-  cardsCount?: string
-  grade?: number
   updated?: string
 }
 

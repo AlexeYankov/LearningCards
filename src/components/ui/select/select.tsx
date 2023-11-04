@@ -4,6 +4,7 @@ import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as SelectRadix from '@radix-ui/react-select'
 
 import s from './selectRadix.module.scss'
+
 import { Label } from '../label'
 
 type SelectItemProps = {

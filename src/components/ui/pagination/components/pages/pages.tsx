@@ -1,10 +1,11 @@
 import { useState } from 'react'
 
+import sprite from '@/asserts/sprite.svg'
+
 import s from './pages.module.scss'
 
-import sprite from '@/asserts/sprite.svg'
-import { PagesForRender } from './pagesForRender'
 import { setPageHandler } from '../utils/counter'
+import PagesForRender from './pagesForRender'
 
 type PagesType = {
   arrowID: string

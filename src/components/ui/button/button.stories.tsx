@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Delete } from '@/asserts/icons/components/Delete'
 import { Logout } from '@/asserts/icons/components/Logout'
+
 import { Button } from './button'
 
 const meta = {

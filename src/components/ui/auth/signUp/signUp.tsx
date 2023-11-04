@@ -1,69 +1,74 @@
-import s from './signUp.module.scss'
-import { Typography } from '@/components/ui/typography'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+
+import { Typography } from '@/components/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ControlledInput } from '../../controlled/controlled-input'
+import { z } from 'zod'
+
+import s from './signUp.module.scss'
+
 import { Button } from '../../button'
+import { ControlledInput } from '../../controlled/controlled-input'
 
 type FormValues = z.infer<typeof loginSchema>
 
 const loginSchema = z.object({
+  confirmPassword: z.string().min(3),
   email: z.string().email(),
   password: z.string().min(3),
-  confirmPassword: z.string().min(3),
 })
+
 export const SignUp = () => {
-  const { handleSubmit, control } = useForm<FormValues>({
+  const { control, handleSubmit } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
   })
   const onSubmit = (data: FormValues) => {
     console.log(data)
   }
+
   return (
     <div className={s.signUp}>
-      <Typography className={s.label} children={'Sign Up'} variant={'large'} />
+      <Typography children={'Sign Up'} className={s.label} variant={'large'} />
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <ControlledInput
           className={s.inputEmail}
-          placeholder={'Email'}
           control={control}
-          name={'email'}
-          type={'text'}
           label={'Email'}
+          name={'email'}
+          placeholder={'Email'}
+          type={'text'}
         />
         <ControlledInput
+          IconID={'eye-outline'}
           className={s.inputPassword}
-          IconID={'eye-outline'}
-          placeholder={'Password'}
           control={control}
-          name={'password'}
-          type={'password'}
           label={'Password'}
+          name={'password'}
+          placeholder={'Password'}
+          type={'password'}
         />
         <ControlledInput
-          className={s.inputConfirmPassword}
           IconID={'eye-outline'}
-          placeholder={'Confirm Password'}
+          className={s.inputConfirmPassword}
           control={control}
-          name={'confirmPassword'}
-          type={'password'}
           label={'Confirm Password'}
+          name={'confirmPassword'}
+          placeholder={'Confirm Password'}
+          type={'password'}
         />
         <Button
+          children={<Typography children={'Sign Up'} variant={'subtitle2'} />}
           className={s.button}
           type={'submit'}
           variant={'primary'}
-          children={<Typography children={'Sign Up'} variant={'subtitle2'} />}
         />
       </form>
 
       <Typography
-        className={s.linkAlreadyHaveAccount}
         children={'Already have an account?'}
+        className={s.linkAlreadyHaveAccount}
         variant={'body2'}
       />
-      <Typography className={s.linkSignIn} children={'Sign In'} variant={'body1'} />
+      <Typography children={'Sign In'} className={s.linkSignIn} variant={'body1'} />
     </div>
   )
 }

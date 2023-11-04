@@ -21,11 +21,11 @@ export const Primary: Story = {
   args: {
     IconID: 'checkbox-unselected',
     SelectedIconID: 'checkbox-selected',
+    checkboxId: 'wiopergjjiweoigjwe',
     disabled: false,
     height: '24',
     variant: 'primary',
     width: '24',
-    checkboxId: 'wiopergjjiweoigjwe',
   },
 }
 
