@@ -3,6 +3,9 @@ import s from './pages.module.scss'
 import sprite from '@/asserts/sprite.svg'
 import { PagesForRender } from './pagesForRender'
 import { setPageHandler } from '../utils/counter'
+import { useAppDispatch, useAppSelector } from '@/api/store.ts'
+import { changeCurrentPage } from '@/api/decks/pagination.reducer.ts'
+import { useGetDecksQuery } from '@/api/decks/decks.api.ts'
 
 type PagesType = {
   arrowID: string
@@ -10,9 +13,8 @@ type PagesType = {
   reversedArrowID: string
   startPagesFrom?: number
   itemsPerPage?: number
-  currentPage?: number
   totalPages?: number
-  onPaginationClick: (page: number) => void
+  onPaginationClick: (page: { currentPage: number }) => void
 }
 
 export const Pages = ({
@@ -21,22 +23,11 @@ export const Pages = ({
   reversedArrowID,
   onPaginationClick,
   totalPages = 20,
-  currentPage = 1,
 }: PagesType) => {
-  // const [query, setQuery] = useState<any>(undefined)
-  //
-  // const { data } = useGetDecksQuery(query)
-  //
-  // const { currentPage, totalPages }: PaginationResponseType = {
-  //   currentPage: data?.pagination?.currentPage || 1,
-  //   itemsPerPage: data?.pagination?.itemsPerPage || 10,
-  //   totalItems: data?.pagination?.totalItems || 100,
-  //   totalPages: data?.pagination?.totalPages || 20,
-  // }
-  //
-  // const handlePaginationClick = (page: number) => {
-  //   setQuery({ currentPage: page })
-  // }
+  const dispatch = useAppDispatch()
+  const currentPage = useAppSelector(state => state.pagination.currentPage)
+
+  useGetDecksQuery({ currentPage })
 
   const setCurrentPage = (callbackIconID: string) => {
     setPageHandler(
@@ -45,8 +36,13 @@ export const Pages = ({
       currentPage,
       totalPages,
       callbackIconID,
-      onPaginationClick
+      handlePageChange
     )
+  }
+
+  const handlePageChange = (page: number) => {
+    dispatch(changeCurrentPage({ currentPage: page }))
+    onPaginationClick({ currentPage: page })
   }
 
   return (
@@ -61,7 +57,7 @@ export const Pages = ({
         <use xlinkHref={`${sprite}#${arrowID}`} />
       </svg>
 
-      <PagesForRender page={currentPage} pages={totalPages} setPage={onPaginationClick} />
+      <PagesForRender page={currentPage} pages={totalPages} setPage={handlePageChange} />
 
       <svg
         fill={color || 'black'}

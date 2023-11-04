@@ -9,19 +9,17 @@ import { useGetDecksQuery } from '@/api/decks/decks.api.ts'
 import { PaginationResponseType } from '@/api/common.api.ts'
 
 export const PacksList = () => {
-  const [query, setQuery] = useState<any>(undefined)
+  const [query, setQuery] = useState<Partial<PaginationResponseType>>({})
 
   const { data } = useGetDecksQuery(query)
 
-  const { currentPage, totalPages }: PaginationResponseType = {
-    currentPage: data?.pagination?.currentPage || 1,
-    itemsPerPage: data?.pagination?.itemsPerPage || 10,
-    totalItems: data?.pagination?.totalItems || 100,
+  const { totalPages }: PaginationResponseType = {
     totalPages: data?.pagination?.totalPages || 20,
   }
 
-  const handlePaginationClick = (page: number) => {
-    setQuery({ currentPage: page })
+  const handlePaginationChange = (newValues: Partial<PaginationResponseType>) => {
+    console.log(newValues)
+    setQuery({ ...newValues })
   }
 
   return (
@@ -36,9 +34,8 @@ export const PacksList = () => {
           decks={data?.items}
         />
         <Pagination
-          currentPage={currentPage}
           totalPages={totalPages}
-          onPaginationClick={handlePaginationClick}
+          onPaginationChange={handlePaginationChange}
           arrowColor="white"
           arrowID="arrow-ios-back"
           options={['10', '20', '30', '50', '100']}
