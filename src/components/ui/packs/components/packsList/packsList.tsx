@@ -13,12 +13,7 @@ export const PacksList = () => {
 
   const { data } = useGetDecksQuery(query)
 
-  const { totalPages }: PaginationResponseType = {
-    totalPages: data?.pagination?.totalPages || 20,
-  }
-
   const handlePaginationChange = (newValues: Partial<PaginationResponseType>) => {
-    console.log(newValues)
     setQuery({ ...newValues })
   }
 
@@ -34,7 +29,6 @@ export const PacksList = () => {
           decks={data?.items}
         />
         <Pagination
-          totalPages={totalPages}
           onPaginationChange={handlePaginationChange}
           arrowColor="white"
           arrowID="arrow-ios-back"

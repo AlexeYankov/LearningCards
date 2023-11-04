@@ -13,7 +13,6 @@ type PaginationType = {
   reversed?: boolean
   reversedArrowID: string
   variant?: string
-  itemsPerPage?: number
   totalPages?: number
   onPaginationChange: (value: Partial<PaginationResponseType>) => void
 }
@@ -27,7 +26,6 @@ export const Pagination = ({
   totalPages,
   onPaginationChange,
   reversedArrowID,
-  itemsPerPage,
 }: PaginationType) => {
   return (
     <div className={s.paginationContainer}>
@@ -47,7 +45,6 @@ export const Pagination = ({
           options={options}
           placeholder={placeholder}
           reversed={reversed}
-          itemsPerPage={itemsPerPage}
           onSelectChange={onPaginationChange}
         />
 

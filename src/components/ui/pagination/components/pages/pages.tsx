@@ -12,7 +12,6 @@ type PagesType = {
   color?: string
   reversedArrowID: string
   startPagesFrom?: number
-  itemsPerPage?: number
   totalPages?: number
   onPaginationClick: (page: { currentPage: number }) => void
 }
