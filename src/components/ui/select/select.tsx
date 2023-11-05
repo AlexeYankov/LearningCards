@@ -1,14 +1,14 @@
 import React from 'react'
 
+import { useGetDecksQuery } from '@/api/decks/decks.api.ts'
+import { changeItemsPerPage } from '@/api/decks/pagination.reducer.ts'
+import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as SelectRadix from '@radix-ui/react-select'
 
 import s from './selectRadix.module.scss'
 
 import { Label } from '../label'
-import { useGetDecksQuery } from '@/api/decks/decks.api.ts'
-import { useAppDispatch, useAppSelector } from '@/api/store.ts'
-import { changeItemsPerPage } from '@/api/decks/pagination.reducer.ts'
 
 type SelectItemProps = {
   children?: React.ReactNode
@@ -21,14 +21,14 @@ type SelectItemProps = {
 type SelectProps = {
   classname?: string
   disabled?: boolean
+  itemsPerPage?: number
   label?: string
+  onSelectChange: (value: { itemsPerPage: number }) => void
   options: Array<string>
   placeholder?: string
   reversed?: boolean
   selectId?: string
   variant?: string
-  itemsPerPage?: number
-  onSelectChange: (value: { itemsPerPage: number }) => void
 }
 
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
@@ -44,11 +44,11 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
 export const Select = ({
   classname,
   label,
+  onSelectChange,
   options,
   placeholder = 'select',
   reversed,
   selectId,
-  onSelectChange,
   ...rest
 }: SelectProps) => {
   const dispatch = useAppDispatch()
@@ -61,11 +61,12 @@ export const Select = ({
   }
 
   useGetDecksQuery({ itemsPerPage })
+
   return (
     <SelectRadix.Root
       {...rest}
-      onValueChange={handleValueChange}
       defaultValue={String(itemsPerPage)}
+      onValueChange={handleValueChange}
     >
       <div className={s.box}>
         <Label className={`${s.label} `} htmlFor={selectId} label={label} />

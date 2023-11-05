@@ -13,26 +13,25 @@ export const CheckBox = <T extends ElementType = 'input'>(
     IconID,
     SelectedIconID,
     as: Component = 'input',
+    checkboxId,
+    checked,
     className,
     disabled = false,
     fullWidth,
     height = '100%',
     label,
+    onChange,
     theme = 'white',
     viewBox = '0 0 24 24',
     width = '100%',
-    checkboxId,
-    onChange,
-    checked,
     ...rest
-
   } = props
 
   return (
     <div
       // className={`${s.checkboxContainer}`}
       className={`${s.checkboxContainer} ${className}`}
-      onClick={() => onChange ? onChange(!checked) :''}
+      onClick={() => (onChange ? onChange(!checked) : '')}
       style={disabled ? { cursor: 'not-allowed', opacity: '0.7', pointerEvents: 'none' } : {}}
     >
       <div className={s.checkboxIconContainer}>
@@ -53,7 +52,6 @@ export const CheckBox = <T extends ElementType = 'input'>(
           }}
           type={'checkbox'}
           {...rest}
-
         />
       </div>
       {label && <Label htmlFor={'checkboxId'} label={label} />}
@@ -62,9 +60,9 @@ export const CheckBox = <T extends ElementType = 'input'>(
 }
 
 export type CheckBoxProps<T extends ElementType = 'input'> = {
-  checkboxId?: string
   IconID?: string
   SelectedIconID?: string
+  checkboxId?: string
   // as?: T
   className?: string
   fullWidth?: boolean

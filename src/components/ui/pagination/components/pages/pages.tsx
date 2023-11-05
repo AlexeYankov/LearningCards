@@ -1,24 +1,27 @@
+import { useGetDecksQuery } from '@/api/decks/decks.api.ts'
+import { changeCurrentPage } from '@/api/decks/pagination.reducer.ts'
+import { useAppDispatch, useAppSelector } from '@/api/store.ts'
+import sprite from '@/asserts/sprite.svg'
+
 import s from './pages.module.scss'
 
 import { setPageHandler } from '../utils/counter'
-import { useAppDispatch, useAppSelector } from '@/api/store.ts'
-import { changeCurrentPage } from '@/api/decks/pagination.reducer.ts'
-import { useGetDecksQuery } from '@/api/decks/decks.api.ts'
+import PagesForRender from './pagesForRender'
 
 type PagesType = {
   arrowID: string
   color?: string
+  onPaginationClick: (page: { currentPage: number }) => void
   reversedArrowID: string
   startPagesFrom?: number
   totalPages?: number
-  onPaginationClick: (page: { currentPage: number }) => void
 }
 
 export const Pages = ({
   arrowID,
   color,
-  reversedArrowID,
   onPaginationClick,
+  reversedArrowID,
   totalPages = 20,
 }: PagesType) => {
   const dispatch = useAppDispatch()

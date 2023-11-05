@@ -5,10 +5,9 @@ import { Edit } from '@/asserts/icons/components/Edit'
 import { Learn } from '@/asserts/icons/components/Learn'
 import { Profile } from '@/asserts/icons/components/Profile'
 import { SignOut } from '@/asserts/icons/components/SignOut'
+import profileImage from '@/asserts/profileImage.png'
 import { Typography } from '@/components/ui/typography'
 import * as DropdownRadix from '@radix-ui/react-dropdown-menu'
-
-import profileImage from '@/asserts/profileImage.png'
 
 import s from './dropDown.module.scss'
 
@@ -91,12 +90,12 @@ export const ItemWithIcon: FC<DropDownItemWithIcon> = ({
 }
 
 type DropDownMenuProps = {
-  name?: string
-  email?: string
   avatar?: string
+  email?: string
+  name?: string
 }
 
-export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, name, email }) => {
+export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => {
   return (
     <DropDown sideOffset={0} trigger>
       <ItemWithIcon className={s.itemProfile}>

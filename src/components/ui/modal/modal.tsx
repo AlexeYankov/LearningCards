@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, FC, forwardRef, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, FC, ReactNode, forwardRef } from 'react'
 
 import { Close } from '@/asserts/icons/components/Close'
 import { Typography } from '@/components/ui/typography'
@@ -18,7 +18,7 @@ export const Modal = forwardRef<
   HTMLDivElement,
   ComponentPropsWithoutRef<typeof DialogRadix.Root> & ModalProps
 >((props, ref) => {
-  const { children, className, modal, triggerName, onOpenChange, open, ...rest } = props
+  const { children, className, modal, onOpenChange, open, triggerName, ...rest } = props
 
   return (
     <div className={s.modal}>

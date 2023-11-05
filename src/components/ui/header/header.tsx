@@ -1,38 +1,43 @@
-import s from '../../../editProfile/editProfile.module.scss'
-import f from './header.module.scss'
+import { Link } from 'react-router-dom'
 
 import logo from '@/asserts/Logo.png'
+import { Button } from '@/components/ui/button'
 import { DropDownMenu } from '@/components/ui/dropDown/dropDown'
 import { Typography } from '@/components/ui/typography'
-import profileImage from './../../../../../asserts/profileImage.png'
-import { Button } from '@/components/ui/button'
-import { FC } from 'react'
+
+import s from '../editProfile/editProfile.module.scss'
+import f from './header.module.scss'
+
+import profileImage from '../../../asserts/profileImage.png'
 
 type Props = {
   isLoggedIn?: boolean
 }
 
-export const Header: FC<Props> = ({ isLoggedIn = true }) => {
+export const Header: React.FC<Props> = ({ isLoggedIn = true }) => {
   return (
     <div className={f.container}>
       <div className={s.container}>
         <header className={s.header}>
+          {/* <Link to="/"> */}
           <img alt={''} className={s.logo} src={logo} />
+          {/* </Link> */}
+
           <div className={s.textHeader}>
             <>
               {isLoggedIn ? (
                 <>
-                  <Typography as={'p'} variant={'subtitle1'} className={f.headerName}>
+                  <Typography as={'p'} className={f.headerName} variant={'subtitle1'}>
                     Ivan
                   </Typography>
-                  <DropDownMenu name={'Ivan'} email={'j&johnson@gmail.com'} avatar={profileImage} />
+                  <DropDownMenu avatar={profileImage} email={'j&johnson@gmail.com'} name={'Ivan'} />
                 </>
               ) : (
                 <Button
+                  children={<Typography as={'p'} children={'Sign In'} variant={'subtitle2'} />}
                   className={s.button}
-                  variant={'primary'}
                   fullWidth
-                  children={<Typography children={'Sign In'} variant={'subtitle2'} as={'p'} />}
+                  variant={'primary'}
                 />
               )}
             </>

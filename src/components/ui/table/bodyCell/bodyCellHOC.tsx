@@ -35,9 +35,9 @@ export const BodyCellHOC = ({ el, tableName }: BodyCellHOCType) => {
     <Row className={s.row}>
       {/*pack name*/}
       <BodyCell
-        el={{ name: el.name || el.question, id: el.id }}
+        el={{ id: el.id, name: el.name || el.question }}
+        i={(el.name && true) || false}
         tableName={tableName}
-        i={el.name && true || false}
       />
       {/*cards in pack*/}
       <BodyCell el={{ name: el.cardsCount || el.answer || '0' }} tableName={tableName} />

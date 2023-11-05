@@ -18,12 +18,6 @@ export const EditProfile = ({ name = 'Ivan' }: Props) => {
 
   return (
     <div className={s.container}>
-      <header className={s.header}>
-        <img alt={''} className={s.logo} src={logo} />
-        <div className={s.textHeader}>
-          {value} <img alt={''} className={s.logoProfile} src={profileImage} />
-        </div>
-      </header>
       <div className={s.cardsContainer}>
         <div className={s.cards}>
           <h1 className={s.text}>Personal information</h1>

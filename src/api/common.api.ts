@@ -49,18 +49,17 @@ export const cardsService: any = baseApi.injectEndpoints({
       }),
       getCard: builder.query<CardsResponsType, void>({
         providesTags: ['Cards'],
+        query: id => `v1/cards/${id}`,
       }),
-      getDecks: builder.query<DecksType, void>({
-        providesTags: ['Decks'],
-        query: () => `v1/decks`,
+      getCards: builder.query<CardsResponsType[], void>({
+        providesTags: ['Cards'],
+        query: id => `v1/decks/${id}/cards`,
       }),
+      // getDecks: builder.query<DecksType, void>({
+      //   providesTags: ['Decks'],
+      //   query: () => `v1/decks`,
+      // }),
       updateCard: builder.mutation<UpdateCardsType, CardsResponsType>({
-        invalidatesTags: ['Cards'],
-        query: ({ id, ...patch }) => ({
-          body: patch,
-          method: 'PATCH',
-          url: `v1/cards/${id}`,
-        }),
         invalidatesTags: ['Cards'],
         query: ({ id, ...patch }) => ({
           body: patch,
@@ -72,11 +71,5 @@ export const cardsService: any = baseApi.injectEndpoints({
   },
 })
 
-export const { useGetCardsQuery } = cardsService
-export const {
-  useDeleteCardMutation,
-  useGetCardQuery,
-  useGetCardsQuery,
-  useGetDecksQuery,
-  useUpdateCardMutation,
-} = cardsService
+export const { useDeleteCardMutation, useGetCardQuery, useGetCardsQuery, useUpdateCardMutation } =
+  cardsService

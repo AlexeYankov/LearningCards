@@ -1,5 +1,7 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
+import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -7,8 +9,7 @@ import { z } from 'zod'
 import s from './signUp.module.scss'
 
 import { Button } from '../../button'
-import { Card } from '@/components/ui/card'
-import { useNavigate } from 'react-router-dom'
+import { ControlledInput } from '../../controlled/controlled-input'
 
 type FormValues = z.infer<typeof loginSchema>
 
@@ -21,7 +22,7 @@ const loginSchema = z.object({
 export const SignUp = () => {
   const navigate = useNavigate()
 
-  const { handleSubmit, control } = useForm<FormValues>({
+  const { control, handleSubmit } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
   })
   const onSubmit = (data: FormValues) => {
@@ -35,57 +36,56 @@ export const SignUp = () => {
 
   return (
     <Card className={s.signUp}>
-      <Typography className={s.label} children={'Sign Up'} variant={'large'} />
+      <Typography children={'Sign Up'} className={s.label} variant={'large'} />
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <ControlledInput
-          placeholder={'Email'}
           control={control}
-          name={'email'}
-          type={'text'}
-          label={'Email'}
           inputId={'inputEmail'}
+          label={'Email'}
+          name={'email'}
+          placeholder={'Email'}
+          type={'text'}
         />
         <ControlledInput
-          placeholder={'Password'}
           control={control}
-          name={'password'}
-          type={'password'}
-          label={'Password'}
-          password
           inputId={'inputPassword'}
+          label={'Password'}
+          name={'password'}
+          password
+          placeholder={'Password'}
+          type={'password'}
         />
         <ControlledInput
           className={s.inputConfirmPassword}
-          placeholder={'Confirm Password'}
           control={control}
-          name={'confirmPassword'}
-          type={'password'}
-          label={'Confirm Password'}
-          password
           inputId={'inputConfirmPassword'}
+          label={'Confirm Password'}
+          name={'confirmPassword'}
+          password
+          placeholder={'Confirm Password'}
+          type={'password'}
         />
         <Button
           children={<Typography children={'Sign Up'} variant={'subtitle2'} />}
           className={s.button}
+          fullWidth
           type={'submit'}
           variant={'primary'}
-          fullWidth
-          children={<Typography children={'Sign Up'} variant={'subtitle2'} as={'p'} />}
         />
       </form>
 
       <Typography
+        as={'p'}
         children={'Already have an account?'}
         className={s.linkAlreadyHaveAccount}
         variant={'body2'}
-        as={'p'}
       />
-      < className={s.linkSignIn}
+      <Button
+        children={<Typography as={'p'} children={'Sign In'} ography variant={'subtitle2'} />}
+        className={s.linkSignIn}
+        onClick={goToLogin}
         type={'button'}
         variant={'link'}
-        children={<TypButton
-       ography children={'Sign In'} variant={'subtitle2'} as={'p'} />}
-        onClick={goToLogin}
       />
     </Card>
   )

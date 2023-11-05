@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom'
 
-import f from './cardsPage.module.scss'
 import { useGetCardsQuery } from '@/api/common.api'
+
+import f from './cardsPage.module.scss'
 
 import { Pagination } from '../pagination'
 import { Table } from '../table'
@@ -15,27 +16,25 @@ export const CardsPage = () => {
   const { data } = useGetCardsQuery(`${id}`)
 
   return (
-    <>
-      <Header />
-      <div className={f.container}>
-        <PageName />
-        <PageBar />
+    <div className={f.container}>
+      <PageName />
+      <PageBar />
 
-        <Table
-          bodyCell={data?.items || []}
-          className={f.container__common}
-          headCell={tableHeadCardsData}
-          tableName={'Cards'}
-        />
-        <Pagination
+      <Table
+        bodyCell={data?.items || []}
+        className={f.container__common}
+        headCell={tableHeadCardsData}
+        tableName={'Cards'}
+      />
+      {/* <Pagination
           arrowColor={'white'}
           arrowID={'arrow-ios-back'}
           options={['10', '20', '30', '50', '100']}
-          pages={17}
+          // pages={17}
+          onPaginationChange={handlePaginationChange}
           placeholder={'100'}
           reversedArrowID={'arrow-ios-forward'}
-        />
-      </div>
-    </>
+        /> */}
+    </div>
   )
 }

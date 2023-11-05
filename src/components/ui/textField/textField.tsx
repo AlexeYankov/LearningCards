@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, forwardRef, KeyboardEvent, ReactNode, useState } from 'react'
+import { ComponentPropsWithoutRef, KeyboardEvent, ReactNode, forwardRef, useState } from 'react'
 
 import { Close } from '@/asserts/icons/components/Close'
 import { Password } from '@/asserts/icons/components/Password'
@@ -9,20 +9,19 @@ import s from './textField.module.scss'
 import { Label } from '../label'
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
-  let {
+  const {
     className,
     disabled,
     errorMessage,
     inputId,
     label,
-    onChange,
     onClearClick,
     onEnter,
+    onKeyDown,
     password,
     placeholder,
     search,
     type = 'text',
-    onKeyDown,
     ...rest
   } = props
 
@@ -90,12 +89,11 @@ export type TextFieldProps = {
   errorMessage?: null | string
   inputId?: string
   label?: string
-  onChange?: (value: string) => void
   onClearClick?: () => void
+  onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
   password?: boolean
   placeholder?: string
   search?: boolean
   type?: 'password' | 'text'
-  onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
   value?: string
 } & ComponentPropsWithoutRef<'input'>
