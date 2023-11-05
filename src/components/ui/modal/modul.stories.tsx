@@ -1,12 +1,12 @@
+import img from '@/asserts/Mask.png'
 import { Image } from '@/asserts/icons/components/Image.tsx'
 import { Typography } from '@/components/ui/typography'
 import { Meta, StoryObj } from '@storybook/react'
 
 import s from './modal.module.scss'
 
-import { TextField } from '../textField'
-import img from '@/asserts/Mask.png'
-import { Modal, ModalDescription, ModalTitle } from './modal'
+import { Button } from '../button'
+import { CheckBox } from '../checkbox'
 import { ScrollBar } from '../scrollbar'
 import { Select } from '../select'
 import { CheckBox } from '../checkbox'

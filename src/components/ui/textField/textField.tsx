@@ -5,6 +5,7 @@ import { Password } from '@/asserts/icons/components/Password'
 import { Search } from '@/asserts/icons/components/Search'
 
 import s from './textField.module.scss'
+
 import { Label } from '../label'
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
@@ -14,6 +15,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
     errorMessage,
     inputId,
     label,
+    onChange,
     onClearClick,
     onEnter,
     password,
@@ -84,9 +86,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 export type TextFieldProps = {
   children?: ReactNode
   className?: string
+  error?: string
   errorMessage?: null | string
   inputId?: string
   label?: string
+  onChange?: (value: string) => void
   onClearClick?: () => void
   password?: boolean
   placeholder?: string

@@ -6,13 +6,13 @@ import { Tabs } from '@/components/ui/tabs'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 
-import f from '../../packsPage.module.scss'
+import f from '../../cardsPage.module.scss'
 
 export const PageBar = () => {
   return (
     <div className={f.container__pageBar}>
-      <div>
-        <TextField placeholder="Input search" search className={f.container__textField} />
+      <div className={f.container__textField}>
+        <TextField label={'placeholder'} placeholder={'Input search'} search />
       </div>
 
       <div style={{ position: 'relative' }}>
@@ -24,11 +24,10 @@ export const PageBar = () => {
         <Label label={'Number of cards'} style={{ position: 'absolute', top: '-25px' }} />
         <SliderDemo />
       </div>
-      <div>
-        <Button icon={<Delete />} variant="secondary" className={f.button}>
-          <Typography variant="body2">Clear Filter</Typography>
-        </Button>
-      </div>
+
+      <Button icon={<Delete />} variant={'secondary'}>
+        <Typography variant={'body2'}>Clear Filter</Typography>
+      </Button>
     </div>
   )
 }

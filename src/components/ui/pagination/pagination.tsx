@@ -1,9 +1,9 @@
 import s from './pagination.module.scss'
 
 import { Select } from '../select/select'
-import { Pages } from './components/pages/pages'
 import { Typography } from '../typography'
 import { PaginationResponseType } from '@/api/common.api.ts'
+import { Pages } from './components/pages/pages'
 
 type PaginationType = {
   arrowColor: string
@@ -38,7 +38,7 @@ export const Pagination = ({
       />
 
       <div className={s.paginationContainer}>
-        <Typography variant="body2">Показать</Typography>
+        <Typography variant={'body2'}>Показать</Typography>
 
         <Select
           classname={s.trigger}
@@ -48,7 +48,7 @@ export const Pagination = ({
           onSelectChange={onPaginationChange}
         />
 
-        <Typography variant="body2">на странице</Typography>
+        <Typography variant={'body2'}>на странице</Typography>
       </div>
     </div>
   )

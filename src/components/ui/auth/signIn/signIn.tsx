@@ -1,9 +1,12 @@
-import s from './signIn.module.scss'
-import { Typography } from '@/components/ui/typography'
-import { z } from 'zod'
 import { useForm } from 'react-hook-form'
+
+import { Typography } from '@/components/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ControlledInput } from '../../controlled/controlled-input'
+import { z } from 'zod'
+
+import s from './signIn.module.scss'
+
+import { Button } from '../../button'
 import { ControlledCheckbox } from '../../controlled/controlled-checkbox'
 import { Button } from '../../button'
 import { Card } from '@/components/ui/card'
@@ -16,6 +19,7 @@ const loginSchema = z.object({
   password: z.string().min(3),
   rememberMe: z.boolean().default(false),
 })
+
 export const SignIn = () => {
   const navigate = useNavigate()
 
@@ -40,18 +44,22 @@ export const SignIn = () => {
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <ControlledInput
           className={s.inputEmail}
-          placeholder={'Email'}
           control={control}
+          label={'Email'}
           name={'email'}
+          placeholder={'Email'}
           type={'text'}
           label={'Email'}
           inputId={'inputEmailSignUp'}
         />
         <ControlledInput
+          IconID={'eye-outline'}
           className={s.inputPassword}
           placeholder={'Password'}
           control={control}
+          label={'Password'}
           name={'password'}
+          placeholder={'Password'}
           type={'password'}
           label={'Password'}
           password
@@ -65,6 +73,9 @@ export const SignIn = () => {
           height={'24'}
           IconID={'checkbox-unselected'}
           SelectedIconID={'checkbox-selected'}
+          className={s.checkbox}
+          control={control}
+          height={'24'}
           label={'Remember me'}
           checkboxId={'ControlledCheckboxSignIn'}
         />
@@ -76,6 +87,7 @@ export const SignIn = () => {
           onClick={goToForgotPassword}
         />
         <Button
+          children={<Typography children={'Sign In'} variant={'subtitle2'} />}
           className={s.button}
           type={'submit'}
           variant={'primary'}
@@ -85,8 +97,8 @@ export const SignIn = () => {
       </form>
 
       <Typography
-        className={s.linkDontHaveAccount}
         children={"Don't have an account?"}
+        className={s.linkDontHaveAccount}
         variant={'body2'}
         as={'p'}
       />
