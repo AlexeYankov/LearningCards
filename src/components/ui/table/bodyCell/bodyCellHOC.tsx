@@ -29,15 +29,15 @@ export const BodyCellHOC = ({ el, tableName }: BodyCellHOCType) => {
   const convertTimeTo = [currentDay, currentData.getMonth(), currentData.getFullYear()].join('.')
   //   console.log(el.id)
   //   const { data } = useGetDeckQuery(el.id)
-  const { data } = useGetCardsQuery(el.id)
+  // const { data } = useGetCardsQuery(el.id)
 
   return (
     <Row className={s.row}>
       {/*pack name*/}
       <BodyCell
-        el={{ name: el.name || el.question }}
+        el={{ name: el.name || el.question, id: el.id }}
         tableName={tableName}
-        // onClick={getCardsDecksHandler}
+        i={el.name && true || false}
       />
       {/*cards in pack*/}
       <BodyCell el={{ name: el.cardsCount || el.answer || '0' }} tableName={tableName} />

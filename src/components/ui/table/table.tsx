@@ -28,7 +28,7 @@ export const Table = ({ bodyCell, className, headCell, tableName, ...rest }: Tab
         </Head>
         <Body>
           {bodyCell?.map((el: BodyCellType, i) => {
-            return <BodyCellHOC el={el} key={i} tableName={tableName || ''} />
+            return <BodyCellHOC el={el} key={i} tableName={tableName || ''}/>
           })}
         </Body>
       </React.Fragment>

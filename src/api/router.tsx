@@ -23,7 +23,7 @@ const privateRoutes: RouteObject[] = [
   },
   {
     element: <CardsPage />,
-    path: '/decks/clo9m4k9w17wcvo2qfo5tgyfs',
+    path: '/decks/:id',
     // children: [
     //   {
     //     path: `${id}`,

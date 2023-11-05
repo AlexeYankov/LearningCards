@@ -1,6 +1,7 @@
-import { useGetCardsQuery } from '@/api/common.api'
+import { useParams } from 'react-router-dom'
 
 import f from './cardsPage.module.scss'
+import { useGetCardsQuery } from '@/api/common.api'
 
 import { Pagination } from '../pagination'
 import { Table } from '../table'
@@ -9,12 +10,9 @@ import { PageBar } from './components/pageBar/pageBar'
 import { PageName } from './components/pageName/pageName'
 import { tableHeadCardsData } from './tableData'
 
-type CardsPageType = {
-  id?: string
-}
-
-export const CardsPage = ({ id }: CardsPageType) => {
-  const { data } = useGetCardsQuery('clo9m4k9w17wcvo2qfo5tgyfs')
+export const CardsPage = () => {
+  const { id } = useParams()
+  const { data } = useGetCardsQuery(`${id}`)
 
   return (
     <>
