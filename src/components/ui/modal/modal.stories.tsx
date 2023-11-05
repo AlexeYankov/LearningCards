@@ -13,6 +13,7 @@ import { ScrollBar } from '../scrollbar'
 import { Select } from '../select'
 import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal/modal'
 import { TextField } from '@/components/ui/textField'
+import { BrowserRouterDecorator, ReduxStoreProviderDecorator } from '@/api/storybookDecorators.tsx'
 
 const meta = {
   argTypes: {},
@@ -28,6 +29,7 @@ const meta = {
   },
   tags: ['autodocs'],
   title: 'Components/Modal',
+  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator],
 } satisfies Meta<typeof Modal>
 
 export default meta
