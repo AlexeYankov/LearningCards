@@ -24,10 +24,11 @@ export const PageBar = () => {
         <Label label={'Number of cards'} style={{ position: 'absolute', top: '-25px' }} />
         <SliderDemo />
       </div>
-
-      <Button icon={<Delete />} variant={'secondary'}>
-        <Typography variant={'body2'}>Clear Filter</Typography>
-      </Button>
+      <div>
+        <Button icon={<Delete />} variant={'secondary'}>
+          <Typography variant={'body2'}>Clear Filter</Typography>
+        </Button>
+      </div>
     </div>
   )
 }

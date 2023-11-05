@@ -7,9 +7,11 @@ export const PageName = () => {
   return (
     <div className={f.container__pageName}>
       <Typography as={'h1'} variant={'large'}>
-        Packs list
+        My Pack
       </Typography>
-      <Button>Add New Pack</Button>
+      <div>
+        <Button>Add New Card</Button>
+      </div>
     </div>
   )
 }

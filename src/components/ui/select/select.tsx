@@ -23,7 +23,7 @@ type SelectProps = {
   disabled?: boolean
   itemsPerPage?: number
   label?: string
-  onSelectChange: (value: { itemsPerPage: number }) => void
+  onSelectChange?: (value: { itemsPerPage: number }) => void
   options: Array<string>
   placeholder?: string
   reversed?: boolean
@@ -56,7 +56,7 @@ export const Select = ({
   const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
 
   const handleValueChange = (value: string) => {
-    onSelectChange({ itemsPerPage: +value })
+    onSelectChange && onSelectChange({ itemsPerPage: +value })
     dispatch(changeItemsPerPage({ itemsPerPage: +value }))
   }
 
