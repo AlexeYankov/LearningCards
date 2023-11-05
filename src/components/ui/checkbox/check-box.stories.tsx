@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { CheckBox } from '.'
 import { useState } from 'react'
+
+import { CheckBox } from '.'
 
 const meta = {
   argTypes: {
@@ -19,50 +20,50 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
+  args: {
+    height: '24',
+    variant: 'primary',
+    width: '24',
+  },
   render: args => {
     const [isCheck, setIsCheck] = useState(false)
 
     return (
       <>
         <CheckBox
+          IconID={'checkbox-unselected'}
+          SelectedIconID={'checkbox-selected'}
           checkboxId={'checkboxId'}
           checked={isCheck}
           onChange={() => setIsCheck(!isCheck)}
-          IconID={'checkbox-unselected'}
-          SelectedIconID={'checkbox-selected'}
           {...args}
         />
       </>
     )
-  },
-  args: {
-    height: '24',
-    variant: 'primary',
-    width: '24',
   },
 }
 
 export const Secondary: Story = {
+  args: {
+    height: '24',
+    label: 'Check-box',
+    variant: 'primary',
+    width: '24',
+  },
   render: args => {
     const [isCheck, setIsCheck] = useState(false)
 
     return (
       <>
         <CheckBox
+          IconID={'checkbox-unselected'}
+          SelectedIconID={'checkbox-selected'}
           checkboxId={'checkboxIdSecondary'}
           checked={isCheck}
           onChange={() => setIsCheck(!isCheck)}
-          IconID={'checkbox-unselected'}
-          SelectedIconID={'checkbox-selected'}
           {...args}
         />
       </>
     )
-  },
-  args: {
-    height: '24',
-    variant: 'primary',
-    width: '24',
-    label: 'Check-box',
   },
 }

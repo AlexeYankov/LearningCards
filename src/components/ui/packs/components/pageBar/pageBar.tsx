@@ -12,7 +12,7 @@ export const PageBar = () => {
   return (
     <div className={f.container__pageBar}>
       <div>
-        <TextField placeholder="Input search" search className={f.container__textField} />
+        <TextField className={f.container__textField} placeholder={'Input search'} search />
       </div>
 
       <div style={{ position: 'relative' }}>
@@ -25,8 +25,8 @@ export const PageBar = () => {
         <SliderDemo />
       </div>
       <div>
-        <Button icon={<Delete />} variant="secondary" className={f.button}>
-          <Typography variant="body2">Clear Filter</Typography>
+        <Button className={f.button} icon={<Delete />} variant={'secondary'}>
+          <Typography variant={'body2'}>Clear Filter</Typography>
         </Button>
       </div>
     </div>

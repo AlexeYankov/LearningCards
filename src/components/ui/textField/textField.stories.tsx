@@ -1,7 +1,8 @@
+import { useState } from 'react'
+
 import { Meta, StoryObj } from '@storybook/react'
 
 import { TextField } from '.'
-import { useState } from 'react'
 
 const meta = {
   argTypes: {
@@ -47,9 +48,9 @@ export const Password: Story = {
   args: {
     inputId: 'inputIdPassword',
     label: 'Input password',
+    password: true,
     placeholder: 'password',
     type: 'password',
-    password: true,
   },
 }
 
@@ -60,13 +61,13 @@ export const Search: Story = {
     return (
       <>
         <TextField
-          search={true}
-          placeholder={'search'}
           inputId={'inputIdSearch'}
           label={'Input Search'}
-          value={text}
           onChange={e => setText(e.currentTarget.value)}
           onClearClick={() => setText('')}
+          placeholder={'search'}
+          search
+          value={text}
         />
       </>
     )

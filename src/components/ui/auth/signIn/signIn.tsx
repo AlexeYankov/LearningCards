@@ -1,5 +1,7 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
+import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -8,9 +10,7 @@ import s from './signIn.module.scss'
 
 import { Button } from '../../button'
 import { ControlledCheckbox } from '../../controlled/controlled-checkbox'
-import { Button } from '../../button'
-import { Card } from '@/components/ui/card'
-import { useNavigate } from 'react-router-dom'
+import { ControlledInput } from '../../controlled/controlled-input'
 
 type FormValues = z.infer<typeof loginSchema>
 
@@ -23,7 +23,7 @@ const loginSchema = z.object({
 export const SignIn = () => {
   const navigate = useNavigate()
 
-  const { handleSubmit, control } = useForm<FormValues>({
+  const { control, handleSubmit } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
   })
   const onSubmit = (data: FormValues) => {
@@ -40,74 +40,66 @@ export const SignIn = () => {
 
   return (
     <Card className={s.signIn}>
-      <Typography className={s.label} children={'Sign In'} variant={'large'} />
+      <Typography children={'Sign In'} className={s.label} variant={'large'} />
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <ControlledInput
           className={s.inputEmail}
           control={control}
+          inputId={'inputEmailSignUp'}
           label={'Email'}
           name={'email'}
           placeholder={'Email'}
           type={'text'}
-          label={'Email'}
-          inputId={'inputEmailSignUp'}
         />
         <ControlledInput
-          IconID={'eye-outline'}
           className={s.inputPassword}
-          placeholder={'Password'}
           control={control}
+          inputId={'inputPasswordSignUp'}
           label={'Password'}
           name={'password'}
+          password
           placeholder={'Password'}
           type={'password'}
-          label={'Password'}
-          password
-          inputId={'inputPasswordSignUp'}
         />
         <ControlledCheckbox
-          control={control}
-          name={'rememberMe'}
-          className={s.checkbox}
-          width={'24'}
-          height={'24'}
           IconID={'checkbox-unselected'}
           SelectedIconID={'checkbox-selected'}
+          checkboxId={'ControlledCheckboxSignIn'}
           className={s.checkbox}
           control={control}
           height={'24'}
           label={'Remember me'}
-          checkboxId={'ControlledCheckboxSignIn'}
+          name={'rememberMe'}
+          width={'24'}
         />
         <Typography
-          className={s.forgotPassLink}
-          children={'Forgot Password?'}
-          variant={'body2'}
           as={'p'}
+          children={'Forgot Password?'}
+          className={s.forgotPassLink}
           onClick={goToForgotPassword}
+          variant={'body2'}
         />
         <Button
-          children={<Typography children={'Sign In'} variant={'subtitle2'} />}
+          children={<Typography as={'p'} children={'Sign In'} variant={'subtitle2'} />}
           className={s.button}
+          fullWidth
           type={'submit'}
           variant={'primary'}
-          fullWidth
-          children={<Typography children={'Sign In'} variant={'subtitle2'} as={'p'} />}
         />
       </form>
 
       <Typography
+        as={'p'}
         children={"Don't have an account?"}
         className={s.linkDontHaveAccount}
         variant={'body2'}
-        as={'p'}
       />
       <Button
+        children={<Typography as={'p'} children={'Sign Up'} variant={'subtitle2'} />}
         className={s.linkSignUp}
+        onClick={goToRegistration}
         type={'button'}
         variant={'link'}
-        children={<Typography children={'Sign Up'} variant={'subtitle2'} as={'p'} />}
-        onClick={goToRegistration}
       />
     </Card>
   )

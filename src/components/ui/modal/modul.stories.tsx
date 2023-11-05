@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import img from '@/asserts/Mask.png'
 import { Image } from '@/asserts/icons/components/Image.tsx'
 import { Typography } from '@/components/ui/typography'
@@ -6,12 +8,11 @@ import { Meta, StoryObj } from '@storybook/react'
 import s from './modal.module.scss'
 
 import { Button } from '../button'
+import { Button } from '../button'
+import { CheckBox } from '../checkbox'
 import { CheckBox } from '../checkbox'
 import { ScrollBar } from '../scrollbar'
 import { Select } from '../select'
-import { CheckBox } from '../checkbox'
-import { Button } from '../button'
-import { useState } from 'react'
 
 const meta = {
   argTypes: {},
@@ -88,6 +89,7 @@ export const ModalScrollbarDescriptionDemo: Story = {
 export const ModalWithComponentsDemo: Story = {
   render: () => {
     const [isCheck, setIsCheck] = useState(false)
+
     return (
       <Modal className={s.contentComponents}>
         <Select
@@ -101,12 +103,12 @@ export const ModalWithComponentsDemo: Story = {
         <TextField inputId={'Input1'} label={'Input'} placeholder={'Input'} />
         <TextField inputId={'Input2'} label={'Input'} placeholder={'Input'} />
         <CheckBox
-          checkboxId={'checkboxIdSecondary'}
-          checked={isCheck}
-          onChange={() => setIsCheck(!isCheck)}
           IconID={'checkbox-unselected'}
           SelectedIconID={'checkbox-selected'}
+          checkboxId={'checkboxIdSecondary'}
+          checked={isCheck}
           label={'checkBox'}
+          onChange={() => setIsCheck(!isCheck)}
         />
       </Modal>
     )

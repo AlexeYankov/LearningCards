@@ -1,16 +1,24 @@
-import { useGetDecksQuery } from '@/api/common.api'
+import { useState } from 'react'
+
+import { PaginationResponseType } from '@/api/common.api'
+import { useGetDecksQuery } from '@/api/decks/decks.api'
 
 import f from './packsPage.module.scss'
 
 import { Pagination } from '../pagination'
 import { Table } from '../table'
-import { Header } from './components/header/header'
 import { PageBar } from './components/pageBar/pageBar'
 import { PageName } from './components/pageName/pageName'
 import { tableHeadData } from './tableData'
 
 export const PacksPage = () => {
-  const { data } = useGetDecksQuery()
+  const [query, setQuery] = useState<Partial<PaginationResponseType>>({})
+
+  const { data } = useGetDecksQuery(query)
+
+  const handlePaginationChange = (newValues: Partial<PaginationResponseType>) => {
+    setQuery({ ...newValues })
+  }
 
   return (
     <>
@@ -27,8 +35,9 @@ export const PacksPage = () => {
         <Pagination
           arrowColor={'white'}
           arrowID={'arrow-ios-back'}
+          // pages={17}
+          onPaginationChange={handlePaginationChange}
           options={['10', '20', '30', '50', '100']}
-          pages={17}
           placeholder={'100'}
           reversedArrowID={'arrow-ios-forward'}
         />

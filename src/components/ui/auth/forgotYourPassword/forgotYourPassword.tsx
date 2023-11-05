@@ -1,21 +1,24 @@
-import s from '@/components/ui/auth/forgotYourPassword/forgotYourPassword.module.scss'
-import { ControlledInput } from '@/components/ui/controlled/controlled-input.tsx'
 import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Card } from '@/components/ui/card'
-import { z } from 'zod'
-import { Typography } from '@/components/ui/typography'
-import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
+
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { ControlledInput } from '@/components/ui/controlled/controlled-input.tsx'
+import { Typography } from '@/components/ui/typography'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+
+import s from '@/components/ui/auth/forgotYourPassword/forgotYourPassword.module.scss'
 
 type FormValues = z.infer<typeof loginSchema>
 const loginSchema = z.object({
   email: z.string().email(),
 })
+
 export const ForgotYourPassword = () => {
   const navigate = useNavigate()
 
-  const { handleSubmit, control } = useForm<FormValues>({
+  const { control, handleSubmit } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
   })
   const onSubmit = (data: FormValues) => {
@@ -25,40 +28,41 @@ export const ForgotYourPassword = () => {
   const goToLogin = () => {
     navigate('/login')
   }
+
   return (
     <Card className={s.forgotYourPassword}>
-      <Typography className={s.label} children={'Forgot your password?'} variant={'large'} />
+      <Typography children={'Forgot your password?'} className={s.label} variant={'large'} />
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <ControlledInput
-          placeholder={'Email'}
           control={control}
-          name={'email'}
-          type={'text'}
-          label={'Email'}
           inputId={'inputEmailSignUp'}
+          label={'Email'}
+          name={'email'}
+          placeholder={'Email'}
+          type={'text'}
         />
         <Typography as={'p'} className={s.text} variant={'body2'}>
           Enter your email address and we will send you further instructions
         </Typography>
         <Button
+          children={<Typography as={'p'} children={'Send Instructions'} variant={'subtitle2'} />}
           className={s.button}
+          fullWidth
           type={'submit'}
           variant={'primary'}
-          fullWidth
-          children={<Typography children={'Send Instructions'} variant={'subtitle2'} as={'p'} />}
         />
         <Typography
-          className={s.rememberYourPassword}
-          children={'Did you remember your password?'}
-          variant={'body2'}
           as={'p'}
+          children={'Did you remember your password?'}
+          className={s.rememberYourPassword}
+          variant={'body2'}
         />
         <Button
+          children={<Typography as={'span'} children={'Try logging in'} variant={'subtitle2'} />}
           className={s.tryLoggingIn}
+          onClick={goToLogin}
           type={'button'}
           variant={'link'}
-          onClick={goToLogin}
-          children={<Typography children={'Try logging in'} variant={'subtitle2'} as={'span'} />}
         />
       </form>
     </Card>

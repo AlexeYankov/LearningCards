@@ -2,39 +2,39 @@ import { baseApi } from '@/api/cards.api.ts'
 import { CardsResponsType, DecksType } from '@/api/common.api.ts'
 
 type GetDecksParamsType = {
-  itemsPerPage?: number
-  minCardsCount?: number
-  maxCardsCount?: number
-  name?: string
   authorId?: string
-  orderBy?: 'desc' | 'asc'
   currentPage?: number
+  itemsPerPage?: number
+  maxCardsCount?: number
+  minCardsCount?: number
+  name?: string
+  orderBy?: 'asc' | 'desc'
 }
 
 export const decksApi = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      getDecks: builder.query<DecksType, GetDecksParamsType | void>({
-        query: params => {
-          return {
-            url: `v1/decks/`,
-            params: params ?? undefined,
-          }
-        },
-        providesTags: ['Decks'],
-      }),
       createDeck: builder.mutation<CardsResponsType, { name: string }>({
+        invalidatesTags: ['Decks'],
         query: params => {
           return {
-            url: `v1/decks`,
-            method: 'POST',
             body: params,
+            method: 'POST',
+            url: `v1/decks`,
           }
         },
-        invalidatesTags: ['Decks'],
+      }),
+      getDecks: builder.query<DecksType, GetDecksParamsType | void>({
+        providesTags: ['Decks'],
+        query: params => {
+          return {
+            params: params ?? undefined,
+            url: `v1/decks/`,
+          }
+        },
       }),
     }
   },
 })
 
-export const { useGetDecksQuery, useCreateDeckMutation } = decksApi
+export const { useCreateDeckMutation, useGetDecksQuery } = decksApi

@@ -1,14 +1,16 @@
-import { Button } from '@/components/ui/button'
-import { Typography } from '@/components/ui/typography'
-import f from '../../packsPage.module.scss'
-import { Modal, ModalTitle } from '@/components/ui/modal'
-import s from '@/components/ui/modal/modal.module.scss'
+import { ChangeEvent, useState } from 'react'
+
+import { useCreateDeckMutation } from '@/api/decks/decks.api'
 import img from '@/asserts/Mask.png'
 import { Image } from '@/asserts/icons/components/Image'
-import { TextField } from '@/components/ui/textField'
+import { Button } from '@/components/ui/button'
 import { CheckBox } from '@/components/ui/checkbox'
-import { ChangeEvent, useState } from 'react'
-import { useCreateDeckMutation } from '@/api/decks/decks.api'
+import { Modal, ModalTitle } from '@/components/ui/modal'
+import { TextField } from '@/components/ui/textField'
+import { Typography } from '@/components/ui/typography'
+
+import f from '../../packsPage.module.scss'
+import s from '@/components/ui/modal/modal.module.scss'
 
 export const PageName = () => {
   const [open, setOpen] = useState(false)
@@ -32,10 +34,10 @@ export const PageName = () => {
 
   return (
     <div className={f.container__pageName}>
-      <Typography as="h1" variant="large">
+      <Typography as={'h1'} variant={'large'}>
         Packs list
       </Typography>
-      <Modal open={open} onOpenChange={setOpen} triggerName={'Add New Pack'}>
+      <Modal onOpenChange={setOpen} open={open} triggerName={'Add New Pack'}>
         <ModalTitle title={'Add New Pack'} />
         <div className={s.contentComponents}>
           <img alt={'card image'} className={s.img} src={img} />
@@ -45,10 +47,10 @@ export const PageName = () => {
           <TextField
             inputId={'Name Pack'}
             label={'Name Pack'}
-            placeholder={'Name'}
-            value={value}
             onChange={handleValueChange}
             onEnter={handleAddNewPackClick}
+            placeholder={'Name'}
+            value={value}
           />
           <CheckBox
             IconID={'checkbox-unselected'}
@@ -61,10 +63,10 @@ export const PageName = () => {
           />
         </div>
         <div className={`${s.contentBtn} ${s.contentBtns}`}>
-          <Button classNameBtnBox={s.btnBox} variant={'secondary'} onClick={handleCloseModal}>
+          <Button classNameBtnBox={s.btnBox} onClick={handleCloseModal} variant={'secondary'}>
             Cancel
           </Button>
-          <Button classNameBtnBox={s.btnBox} variant={'primary'} onClick={handleAddNewPackClick}>
+          <Button classNameBtnBox={s.btnBox} onClick={handleAddNewPackClick} variant={'primary'}>
             Add New Pack
           </Button>
         </div>

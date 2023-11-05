@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import sprite from '@/asserts/sprite.svg'
 import { Cell } from '@it-incubator/ui-kit'
 
@@ -5,16 +7,15 @@ import s from './bodyCell.module.scss'
 
 import { Typography } from '../../typography'
 import { BodyCellType } from '../types'
-import { Link } from 'react-router-dom'
 
 type BodyCellComponentType = {
   el: BodyCellType
+  i?: boolean
   onClick?: () => void
   tableName?: string
-  i?: boolean
 }
 
-const BodyCell = ({ el, onClick, tableName, i }: BodyCellComponentType) => {
+const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) => {
   return (
     <Cell
       className={s.bodyCell}
@@ -56,6 +57,7 @@ const BodyCell = ({ el, onClick, tableName, i }: BodyCellComponentType) => {
               1: () => alert('is edit'),
               2: () => alert('is delete'),
             }
+
             return (
               <div className={s.svgsContainer} key={i} onClick={crud[i + '']}>
                 <svg height={'16px'} viewBox={'0 0 24 24'}>

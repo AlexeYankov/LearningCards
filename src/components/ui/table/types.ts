@@ -3,10 +3,10 @@ import { CardsResponsType } from '@/api/common.api.ts'
 export type TableType = {
   bodyCell?: BodyCellType[]
   className?: string
+  decks?: CardsResponsType[]
   headCell?: HeadCellType[]
   tableName?: string
   totalItems?: number
-  decks?: CardsResponsType[]
 }
 
 export type HeadCellType = {
