@@ -5,6 +5,9 @@ import * as SelectRadix from '@radix-ui/react-select'
 
 import s from './selectRadix.module.scss'
 import { Label } from '../label'
+import { useGetDecksQuery } from '@/api/decks/decks.api.ts'
+import { useAppDispatch, useAppSelector } from '@/api/store.ts'
+import { changeItemsPerPage } from '@/api/decks/pagination.reducer.ts'
 
 type SelectItemProps = {
   children?: React.ReactNode
@@ -23,6 +26,8 @@ type SelectProps = {
   reversed?: boolean
   selectId?: string
   variant?: string
+  itemsPerPage?: number
+  onSelectChange: (value: { itemsPerPage: number }) => void
 }
 
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
@@ -42,10 +47,25 @@ export const Select = ({
   placeholder = 'select',
   reversed,
   selectId,
+  onSelectChange,
   ...rest
 }: SelectProps) => {
+  const dispatch = useAppDispatch()
+
+  const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
+
+  const handleValueChange = (value: string) => {
+    onSelectChange({ itemsPerPage: +value })
+    dispatch(changeItemsPerPage({ itemsPerPage: +value }))
+  }
+
+  useGetDecksQuery({ itemsPerPage })
   return (
-    <SelectRadix.Root {...rest}>
+    <SelectRadix.Root
+      {...rest}
+      onValueChange={handleValueChange}
+      defaultValue={String(itemsPerPage)}
+    >
       <div className={s.box}>
         <Label className={`${s.label} `} htmlFor={selectId} label={label} />
         <SelectRadix.Trigger
@@ -65,13 +85,11 @@ export const Select = ({
         <SelectRadix.Content className={`${s.SelectContent}`} position={'popper'}>
           <SelectRadix.Viewport className={s.SelectViewport}>
             <SelectRadix.Group>
-              {options.map((el, i) => {
-                return (
-                  <SelectItem key={crypto.randomUUID()} value={el + i}>
-                    {el}
-                  </SelectItem>
-                )
-              })}
+              {options.map((el, i) => (
+                <SelectItem key={el + i} value={el}>
+                  {el}
+                </SelectItem>
+              ))}
             </SelectRadix.Group>
           </SelectRadix.Viewport>
         </SelectRadix.Content>

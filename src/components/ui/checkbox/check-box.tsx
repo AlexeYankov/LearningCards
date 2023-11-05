@@ -13,35 +13,37 @@ export const CheckBox = <T extends ElementType = 'input'>(
     SelectedIconID,
     as: Component = 'input',
     className,
-    controlledBy,
     disabled = false,
     fullWidth,
     height = '100%',
     label,
-    setControlledBy,
     theme = 'white',
     viewBox = '0 0 24 24',
     width = '100%',
     checkboxId,
+    onChange,
+    checked,
     ...rest
+
   } = props
 
   return (
     <div
+      // className={`${s.checkboxContainer}`}
       className={`${s.checkboxContainer} ${className}`}
-      onClick={() => (setControlledBy ? setControlledBy(!controlledBy) : '')}
+      onClick={() => onChange ? onChange(!checked) :''}
       style={disabled ? { cursor: 'not-allowed', opacity: '0.7', pointerEvents: 'none' } : {}}
     >
       <div className={s.checkboxIconContainer}>
         <div className={s.checkboxUnselected}>
           <svg height={height} viewBox={viewBox} width={width}>
-            <use xlinkHref={`${sprite}#${controlledBy ? SelectedIconID : IconID}`} />
+            <use xlinkHref={`${sprite}#${checked ? SelectedIconID : IconID}`} />
           </svg>
         </div>
 
         <Component
+          // className={`${fullWidth ? s.fullWidth : ''}`}
           className={`${fullWidth ? s.fullWidth : ''} ${className}`}
-          onChange={setControlledBy}
           style={{
             display: 'flex',
             position: 'absolute',
@@ -49,8 +51,8 @@ export const CheckBox = <T extends ElementType = 'input'>(
             zIndex: '-10',
           }}
           type={'checkbox'}
-          value={controlledBy || false}
           {...rest}
+
         />
       </div>
       {label && <Label label={label} htmlFor={'checkboxId'} />}
@@ -59,17 +61,14 @@ export const CheckBox = <T extends ElementType = 'input'>(
 }
 
 export type CheckBoxProps<T extends ElementType = 'input'> = {
-  // as?: T
   checkboxId?: string
   IconID?: string
   SelectedIconID?: string
   className?: string
-  controlledBy?: boolean
   fullWidth?: boolean
   height?: string
-  //   children: ReactNode
   label?: string
-
-  setControlledBy?: (controlledBy: boolean) => void
   width?: string
+  // checked?: boolean
+  // onChange?: (isCheck: boolean) => void
 } & ComponentPropsWithoutRef<T>

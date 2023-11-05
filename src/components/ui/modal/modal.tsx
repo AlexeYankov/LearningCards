@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, FC, ReactNode, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, FC, forwardRef, ReactNode } from 'react'
 
 import { Close } from '@/asserts/icons/components/Close'
 import { ScrollBar } from '../scrollbar'
@@ -10,20 +10,21 @@ import s from './modal.module.scss'
 
 type ModalProps = {
   className?: string
+  triggerName?: string
 }
 
 export const Modal = forwardRef<
   HTMLDivElement,
   ComponentPropsWithoutRef<typeof DialogRadix.Root> & ModalProps
 >((props, ref) => {
-  const { children, className, modal, onOpenChange, open, ...rest } = props
+  const { children, className, modal, triggerName, onOpenChange, open, ...rest } = props
 
   return (
     <div className={s.modal}>
       <DialogRadix.Root onOpenChange={onOpenChange} open={open}>
         <DialogRadix.Trigger asChild className={s.dialogTrigger}>
           <Button type={'button'} variant={'primary'}>
-            Edit
+            {triggerName}
           </Button>
         </DialogRadix.Trigger>
         <DialogRadix.Portal>

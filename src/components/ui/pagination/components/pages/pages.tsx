@@ -1,61 +1,69 @@
-import { useState } from 'react'
-
 import s from './pages.module.scss'
 
 import sprite from '@/asserts/sprite.svg'
 import { PagesForRender } from './pagesForRender'
 import { setPageHandler } from '../utils/counter'
+import { useAppDispatch, useAppSelector } from '@/api/store.ts'
+import { changeCurrentPage } from '@/api/decks/pagination.reducer.ts'
+import { useGetDecksQuery } from '@/api/decks/decks.api.ts'
 
 type PagesType = {
   arrowID: string
   color?: string
-  currentPage?: number
-  height?: string
-  pages: number
   reversedArrowID: string
   startPagesFrom?: number
-  viewBox?: string
-  width?: string
+  totalPages?: number
+  onPaginationClick: (page: { currentPage: number }) => void
 }
 
 export const Pages = ({
   arrowID,
   color,
-  currentPage = 1,
-  height = '24',
-  pages = 1,
   reversedArrowID,
-  viewBox,
-  width = '24',
+  onPaginationClick,
+  totalPages = 20,
 }: PagesType) => {
-  const [page, setPage] = useState(currentPage)
+  const dispatch = useAppDispatch()
+  const currentPage = useAppSelector(state => state.pagination.currentPage)
+
+  useGetDecksQuery({ currentPage })
 
   const setCurrentPage = (callbackIconID: string) => {
-    setPageHandler(arrowID, reversedArrowID, page, pages, callbackIconID, setPage)
+    setPageHandler(
+      arrowID,
+      reversedArrowID,
+      currentPage,
+      totalPages,
+      callbackIconID,
+      handlePageChange
+    )
+  }
+
+  const handlePageChange = (page: number) => {
+    dispatch(changeCurrentPage({ currentPage: page }))
+    onPaginationClick({ currentPage: page })
   }
 
   return (
     <div className={s.pagesContainer}>
       <svg
         fill={color || 'black'}
-        height={height}
         onClick={() => setCurrentPage(arrowID)}
-        style={page === 1 ? { opacity: '0.7', pointerEvents: 'none' } : {}}
-        viewBox={viewBox}
-        width={width}
+        style={currentPage === 1 ? { opacity: '0.7', pointerEvents: 'none' } : {}}
+        viewBox={'0 0 24 24'}
+        width={'24px'}
       >
         <use xlinkHref={`${sprite}#${arrowID}`} />
       </svg>
 
-      <PagesForRender page={page} pages={pages} setPage={setPage} />
+      <PagesForRender page={currentPage} pages={totalPages} setPage={handlePageChange} />
 
       <svg
         fill={color || 'black'}
-        height={height}
         onClick={() => setCurrentPage(reversedArrowID)}
-        style={page === pages ? { opacity: '0.7', pointerEvents: 'none' } : {}}
-        viewBox={viewBox}
-        width={width}
+        style={currentPage === totalPages ? { opacity: '0.7', pointerEvents: 'none' } : {}}
+        viewBox={'0 0 24 24'}
+        width={'24px'}
       >
         <use xlinkHref={`${sprite}#${reversedArrowID}`} />
       </svg>

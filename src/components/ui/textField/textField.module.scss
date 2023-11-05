@@ -76,7 +76,11 @@ label.disabledLabel {
   color: var(--color-dark-300);
 }
 
-.errorRed {
+.errorBox {
+  height: 24px;
+}
+
+.showErrorRed {
   color: var(--color-danger-300);
 }
 
@@ -109,7 +113,7 @@ label.disabledLabel {
   }
 }
 
-span.disabledIcon {
+.disabledIcon {
   svg {
     fill: var(--color-dark-300);
   }

@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 
 import { TextField } from '.'
+import { useState } from 'react'
 
 const meta = {
   argTypes: {
@@ -25,48 +26,49 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    disabled: false,
     inputId: 'inputIdDefault',
     label: 'Input',
-    password: false,
     placeholder: 'Input',
-    search: false,
     type: 'text',
   },
 }
 
 export const Error: Story = {
   args: {
-    disabled: false,
     errorMessage: 'Error!',
     inputId: 'inputIdError',
     label: 'Input',
-    password: false,
     placeholder: 'Error',
-    search: false,
     type: 'text',
-    value: 'error value',
   },
 }
 
 export const Password: Story = {
   args: {
-    disabled: false,
     inputId: 'inputIdPassword',
     label: 'Input password',
-    password: true,
     placeholder: 'password',
     type: 'password',
-    value: 'some password',
+    password: true,
   },
 }
 
 export const Search: Story = {
-  args: {
-    disabled: false,
-    inputId: 'inputIdSearch',
-    label: 'Input search',
-    placeholder: 'search',
-    search: true,
+  render: () => {
+    const [text, setText] = useState('')
+
+    return (
+      <>
+        <TextField
+          search={true}
+          placeholder={'search'}
+          inputId={'inputIdSearch'}
+          label={'Input Search'}
+          value={text}
+          onChange={e => setText(e.currentTarget.value)}
+          onClearClick={() => setText('')}
+        />
+      </>
+    )
   },
 }

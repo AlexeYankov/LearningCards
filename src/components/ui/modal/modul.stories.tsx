@@ -11,6 +11,7 @@ import { ScrollBar } from '../scrollbar'
 import { Select } from '../select'
 import { CheckBox } from '../checkbox'
 import { Button } from '../button'
+import { useState } from 'react'
 
 const meta = {
   argTypes: {},
@@ -85,29 +86,31 @@ export const ModalScrollbarDescriptionDemo: Story = {
 }
 
 export const ModalWithComponentsDemo: Story = {
-  render: () => (
-    <Modal className={s.contentComponents}>
-      <Select
-        classname={s.select}
-        label={'Select-box'}
-        options={['Select item 1', 'Select item 2', 'Select item 3']}
-        placeholder={'Select-box'}
-        reversed
-        selectId={'Select-box'}
-      />
-      <TextField inputId={'Input1'} label={'Input'} placeholder={'Input'} />
-      <TextField inputId={'Input2'} label={'Input'} placeholder={'Input'} />
-      <CheckBox
-        IconID={'checkbox-unselected'}
-        SelectedIconID={'checkbox-selected'}
-        checkboxId={'Check-box'}
-        disabled={false}
-        height={'24'}
-        label={'Check-box'}
-        width={'24'}
-      />
-    </Modal>
-  ),
+  render: () => {
+    const [isCheck, setIsCheck] = useState(false)
+    return (
+      <Modal className={s.contentComponents}>
+        <Select
+          classname={s.select}
+          label={'Select-box'}
+          options={['Select item 1', 'Select item 2', 'Select item 3']}
+          placeholder={'Select-box'}
+          reversed
+          selectId={'Select-box'}
+        />
+        <TextField inputId={'Input1'} label={'Input'} placeholder={'Input'} />
+        <TextField inputId={'Input2'} label={'Input'} placeholder={'Input'} />
+        <CheckBox
+          checkboxId={'checkboxIdSecondary'}
+          checked={isCheck}
+          onChange={() => setIsCheck(!isCheck)}
+          IconID={'checkbox-unselected'}
+          SelectedIconID={'checkbox-selected'}
+          label={'checkBox'}
+        />
+      </Modal>
+    )
+  },
 }
 
 export const ModalWithImageDemo: Story = {
@@ -177,35 +180,39 @@ export const ModalButtons: Story = {
 }
 
 export const ModalAddNewPack: Story = {
-  render: () => (
-    <Modal>
-      <ModalTitle title={'Add New Pack'} />
-      <div className={s.contentComponents}>
-        <img alt={'card image'} className={s.img} src={img} />
-        <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
-          Change Cover
-        </Button>
-        <TextField inputId={'Name Pack'} label={'Name Pack'} placeholder={'Name'} />
-        <CheckBox
-          IconID={'checkbox-unselected'}
-          SelectedIconID={'checkbox-selected'}
-          checkboxId={'Private Pack'}
-          disabled={false}
-          height={'24'}
-          label={'Private Pack'}
-          width={'24'}
-        />
-      </div>
-      <div className={`${s.contentBtn} ${s.contentBtns}`}>
-        <Button classNameBtnBox={s.btnBox} variant={'secondary'}>
-          Cancel
-        </Button>
-        <Button classNameBtnBox={s.btnBox} variant={'primary'}>
-          Add New Pack
-        </Button>
-      </div>
-    </Modal>
-  ),
+  render: () => {
+    // const [isCheck, setIsCheck] = useState(false)
+
+    return (
+      <Modal>
+        <ModalTitle title={'Add New Pack'} />
+        <div className={s.contentComponents}>
+          <img alt={'card image'} className={s.img} src={img} />
+          <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
+            Change Cover
+          </Button>
+          <TextField inputId={'Name Pack'} label={'Name Pack'} placeholder={'Name'} />
+          <CheckBox
+            IconID={'checkbox-unselected'}
+            SelectedIconID={'checkbox-selected'}
+            checkboxId={'Private Pack'}
+            disabled={false}
+            height={'24'}
+            label={'Private Pack'}
+            width={'24'}
+          />
+        </div>
+        <div className={`${s.contentBtn} ${s.contentBtns}`}>
+          <Button classNameBtnBox={s.btnBox} variant={'secondary'}>
+            Cancel
+          </Button>
+          <Button classNameBtnBox={s.btnBox} variant={'primary'}>
+            Add New Pack
+          </Button>
+        </div>
+      </Modal>
+    )
+  },
 }
 
 export const ModalAddNewCard: Story = {

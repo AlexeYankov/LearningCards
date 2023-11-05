@@ -1,32 +1,35 @@
+import { CardsResponsType } from '@/api/common.api.ts'
+
 export type TableType = {
   bodyCell?: BodyCellType[]
   headCell?: HeadCellType[]
-  padding?: string
   variant?: string
-  width?: string
+  className?: string
+  tableName?: string
+  totalItems?: number
+  decks?: CardsResponsType[]
 }
 
 export type HeadCellType = {
   headCellName?: string
-  id: string
   svgSizes?: HeadCellSvgType
-  width?: string
 }
 export type BodyCellType = {
-  bodyCellImage?: string
+  author?: {
+    id?: string
+    name?: string
+  }
+  cover?: string
   bodyCellImageAlt?: string
-  bodyCellName?: string
-  checkBox?: boolean
-  id: string
+  name?: string
+  isPrivate?: boolean
   stars?: Array<string>
   svgs?: HeadCellSvgType[]
-  width?: string
+  cardsCount?: number
+  grade?: number
+  updated?: string
 }
 
 export type HeadCellSvgType = {
-  height?: string
   id: string
-  uniqId: string
-  viewBox?: string
-  width?: string
 }

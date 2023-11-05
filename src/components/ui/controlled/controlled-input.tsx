@@ -6,9 +6,9 @@ type ControlledInputType<TFieldValues extends FieldValues> = UseControllerProps<
 
 export const ControlledInput = <TFieldValues extends FieldValues>({
   type,
-  IconID,
   name,
   control,
+  password,
   ...res
 }: ControlledInputType<TFieldValues>) => {
   const {
@@ -23,10 +23,10 @@ export const ControlledInput = <TFieldValues extends FieldValues>({
     <TextField
       type={type}
       label={name}
-      error={error?.message}
+      errorMessage={error?.message}
+      password={password}
       {...field}
       {...res}
-      IconID={IconID}
     />
   )
 }
