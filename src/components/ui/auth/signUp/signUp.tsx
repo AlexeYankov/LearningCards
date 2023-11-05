@@ -1,9 +1,11 @@
-import s from './signUp.module.scss'
-import { Typography } from '@/components/ui/typography'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+
+import { Typography } from '@/components/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ControlledInput } from '../../controlled/controlled-input'
+import { z } from 'zod'
+
+import s from './signUp.module.scss'
+
 import { Button } from '../../button'
 import { Card } from '@/components/ui/card'
 import { useNavigate } from 'react-router-dom'
@@ -11,10 +13,11 @@ import { useNavigate } from 'react-router-dom'
 type FormValues = z.infer<typeof loginSchema>
 
 const loginSchema = z.object({
+  confirmPassword: z.string().min(3),
   email: z.string().email(),
   password: z.string().min(3),
-  confirmPassword: z.string().min(3),
 })
+
 export const SignUp = () => {
   const navigate = useNavigate()
 
@@ -29,6 +32,7 @@ export const SignUp = () => {
   const goToLogin = () => {
     navigate('/login')
   }
+
   return (
     <Card className={s.signUp}>
       <Typography className={s.label} children={'Sign Up'} variant={'large'} />
@@ -61,6 +65,7 @@ export const SignUp = () => {
           inputId={'inputConfirmPassword'}
         />
         <Button
+          children={<Typography children={'Sign Up'} variant={'subtitle2'} />}
           className={s.button}
           type={'submit'}
           variant={'primary'}
@@ -70,16 +75,16 @@ export const SignUp = () => {
       </form>
 
       <Typography
-        className={s.linkAlreadyHaveAccount}
         children={'Already have an account?'}
+        className={s.linkAlreadyHaveAccount}
         variant={'body2'}
         as={'p'}
       />
-      <Button
-        className={s.linkSignIn}
+      < className={s.linkSignIn}
         type={'button'}
         variant={'link'}
-        children={<Typography children={'Sign In'} variant={'subtitle2'} as={'p'} />}
+        children={<TypButton
+       ography children={'Sign In'} variant={'subtitle2'} as={'p'} />}
         onClick={goToLogin}
       />
     </Card>

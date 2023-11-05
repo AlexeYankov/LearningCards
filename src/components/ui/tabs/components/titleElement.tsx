@@ -1,25 +1,26 @@
-import { Typography } from '../../typography'
 import s from './titleElement.module.scss'
 
+import { Typography } from '../../typography'
+
 type TitleElementType = {
-  title: string
+  active: number
   index: number
   length: number
-  active: number
   setActive: (value: number) => void
+  title: string
 }
 
-export const TitleElement = ({ active, title, index, length, setActive }: TitleElementType) => {
+export const TitleElement = ({ active, index, length, setActive, title }: TitleElementType) => {
   return (
     <Typography
-      as="li"
+      as={'li'}
       className={`${s.container} ${active === index && s.containerActive} ${
         index === length - 1 && s.end
       }`}
-      tabIndex={0}
       onClick={() => setActive(index)}
+      tabIndex={0}
     >
-      <Typography variant="body1">{title}</Typography>
+      <Typography variant={'body1'}>{title}</Typography>
     </Typography>
   )
 }

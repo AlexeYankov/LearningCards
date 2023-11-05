@@ -1,7 +1,5 @@
 import s from './pages.module.scss'
 
-import sprite from '@/asserts/sprite.svg'
-import { PagesForRender } from './pagesForRender'
 import { setPageHandler } from '../utils/counter'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { changeCurrentPage } from '@/api/decks/pagination.reducer.ts'

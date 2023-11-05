@@ -1,10 +1,13 @@
 import {
-  createBrowserRouter,
   Navigate,
   Outlet,
   RouteObject,
   RouterProvider,
+  createBrowserRouter,
 } from 'react-router-dom'
+
+import { CardsPage } from '@/components/ui/cards/cardsPage'
+import { PacksPage } from '@/components/ui/packs/packsPage'
 import { SignIn } from '@/components/ui/auth/signIn/signIn'
 import { SignUp } from '@/components/ui/auth/signUp/signUp'
 import { CreateNewPassword } from '@/components/ui/auth/createNewPassword'
@@ -37,13 +40,25 @@ const publicRoutes: RouteObject[] = [
   {
     path: '/createNewPassword',
     element: <CreateNewPassword />,
+    element: <div>login</div>,
+    path: '/login',
   },
 ]
 
 const privateRoutes: RouteObject[] = [
   {
-    path: '/',
     element: <PacksPage />,
+    path: '/decks',
+  },
+  {
+    element: <CardsPage />,
+    path: '/decks/:id',
+    // children: [
+    //   {
+    //     path: `${id}`,
+    //     element: <CardsPage id={id} />,
+    //   },
+    // ],
   },
   {
     path: '/1',
@@ -53,8 +68,8 @@ const privateRoutes: RouteObject[] = [
 
 const router = createBrowserRouter([
   {
-    element: <PrivateRoutes />,
     children: privateRoutes,
+    element: <PrivateRoutes />,
   },
 
   ...publicRoutes,
@@ -63,11 +78,9 @@ const router = createBrowserRouter([
 function PrivateRoutes() {
   const isAuthenticated = true
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
+  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
 }
 
 export const Router = () => {
-  // const result = useGetDecksQuery()
-  // const cards = useGetCardsQuery('clogyz1ef1b3uvo2qac2uhhsj')
   return <RouterProvider router={router} />
 }

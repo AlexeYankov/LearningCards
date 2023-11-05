@@ -1,12 +1,13 @@
 import { ComponentPropsWithoutRef, FC, forwardRef, ReactNode } from 'react'
 
 import { Close } from '@/asserts/icons/components/Close'
-import { ScrollBar } from '../scrollbar'
-import { Button } from '../button'
 import { Typography } from '@/components/ui/typography'
 import * as DialogRadix from '@radix-ui/react-dialog'
 
 import s from './modal.module.scss'
+
+import { Button } from '../button'
+import { ScrollBar } from '../scrollbar'
 
 type ModalProps = {
   className?: string

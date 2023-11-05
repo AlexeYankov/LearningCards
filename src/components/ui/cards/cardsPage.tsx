@@ -1,29 +1,32 @@
-import { useGetDecksQuery } from '@/api/common.api'
+import { useParams } from 'react-router-dom'
 
-import f from './packsPage.module.scss'
+import f from './cardsPage.module.scss'
+import { useGetCardsQuery } from '@/api/common.api'
 
 import { Pagination } from '../pagination'
 import { Table } from '../table'
 import { Header } from './components/header/header'
 import { PageBar } from './components/pageBar/pageBar'
 import { PageName } from './components/pageName/pageName'
-import { tableHeadData } from './tableData'
+import { tableHeadCardsData } from './tableData'
 
-export const PacksPage = () => {
-  const { data } = useGetDecksQuery()
+export const CardsPage = () => {
+  const { id } = useParams()
+  const { data } = useGetCardsQuery(`${id}`)
 
   return (
     <>
+      <Header />
       <div className={f.container}>
         <PageName />
         <PageBar />
+
         <Table
           bodyCell={data?.items || []}
           className={f.container__common}
-          headCell={tableHeadData}
-          tableName={'Decks'}
+          headCell={tableHeadCardsData}
+          tableName={'Cards'}
         />
-
         <Pagination
           arrowColor={'white'}
           arrowID={'arrow-ios-back'}

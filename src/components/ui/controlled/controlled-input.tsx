@@ -1,4 +1,5 @@
-import { FieldValues, useController, UseControllerProps } from 'react-hook-form'
+import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
+
 import { TextField, TextFieldProps } from '../textField'
 
 type ControlledInputType<TFieldValues extends FieldValues> = UseControllerProps<TFieldValues> &
@@ -15,8 +16,8 @@ export const ControlledInput = <TFieldValues extends FieldValues>({
     field,
     fieldState: { error },
   } = useController({
-    name,
     control,
+    name,
   })
 
   return (

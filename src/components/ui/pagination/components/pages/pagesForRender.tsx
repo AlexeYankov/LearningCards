@@ -1,15 +1,15 @@
 import { Typography } from '@/components/ui/typography'
+
 import { Page } from '../page/page'
 
-type PagesForRender = {
+type PagesForRenderType = {
   page: number
   pages: number
   setPage: (value: number) => void
 }
 
-export const PagesForRender = ({ page, pages, setPage }: PagesForRender) => {
-  //@ts-ignore
-  const allPages = Array.from({ length: pages }, (v, i) => i + 1)
+const PagesForRender = ({ page, pages, setPage }: PagesForRenderType) => {
+  const allPages = Array.from({ length: pages }, (_, i) => i + 1)
 
   delete allPages[0]
   delete allPages[pages - 1]
@@ -34,10 +34,12 @@ export const PagesForRender = ({ page, pages, setPage }: PagesForRender) => {
   return (
     <>
       <Page el={1} page={page} setPage={setPage} />
-      {page > 5 && <Typography variant='heading3'>...</Typography>}
+      {page > 5 && <Typography variant={'heading3'}>...</Typography>}
       {PagesJSX}
-      {page + 5 <= pages && <Typography variant='heading3'>...</Typography>}
+      {page + 5 <= pages && <Typography variant={'heading3'}>...</Typography>}
       <Page el={pages} page={page} setPage={setPage} />
     </>
   )
 }
+
+export default PagesForRender
