@@ -3,10 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useGetCardsQuery } from '@/api/common.api'
 
 import f from './cardsPage.module.scss'
-
-import { Pagination } from '../pagination'
 import { Table } from '../table'
-import { Header } from './components/header/header'
 import { PageBar } from './components/pageBar/pageBar'
 import { PageName } from './components/pageName/pageName'
 import { tableHeadCardsData } from './tableData'

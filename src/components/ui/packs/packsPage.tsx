@@ -35,7 +35,6 @@ export const PacksPage = () => {
         <Pagination
           arrowColor={'white'}
           arrowID={'arrow-ios-back'}
-          // pages={17}
           onPaginationChange={handlePaginationChange}
           options={['10', '20', '30', '50', '100']}
           placeholder={'100'}

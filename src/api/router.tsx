@@ -1,9 +1,9 @@
 import {
+  createBrowserRouter,
   Navigate,
   Outlet,
   RouteObject,
   RouterProvider,
-  createBrowserRouter,
 } from 'react-router-dom'
 
 import { CheckEmail } from '@/components/ui/auth/checkEmail'
@@ -12,7 +12,6 @@ import { ForgotYourPassword } from '@/components/ui/auth/forgotYourPassword'
 import { SignIn } from '@/components/ui/auth/signIn/signIn'
 import { SignUp } from '@/components/ui/auth/signUp/signUp'
 import { CardsPage } from '@/components/ui/cards/cardsPage'
-import { PacksList } from '@/components/ui/packs/components/packsList/packsList.tsx'
 import { PacksPage } from '@/components/ui/packs/packsPage'
 
 const publicRoutes: RouteObject[] = [
@@ -51,10 +50,6 @@ const privateRoutes: RouteObject[] = [
     element: <CardsPage />,
     path: '/:id',
   },
-  // {
-  //   path: '/',
-  //   element: <PacksList />,
-  // },
 ]
 
 const router = createBrowserRouter([

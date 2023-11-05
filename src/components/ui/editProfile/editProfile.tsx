@@ -4,7 +4,6 @@ import profileImage from '@/asserts/profileImage.png'
 
 import s from './editProfile.module.scss'
 
-import logo from '../../../asserts/Logo.png'
 import { EditableSpan } from './editableSpan/editableSpan'
 
 type Props = {
@@ -23,8 +22,6 @@ export const EditProfile = ({ name = 'Ivan' }: Props) => {
           <h1 className={s.text}>Personal information</h1>
           <img alt={''} className={s.logoProfileEdit} src={profileImage} />
           <EditableSpan onChange={handleValueChange} value={value} />
-
-          {/*  Ivan <img alt={''} src={icon} />*/}
         </div>
       </div>
     </div>
