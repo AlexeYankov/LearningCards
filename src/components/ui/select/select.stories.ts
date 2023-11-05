@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Select } from '.'
+import { BrowserRouterDecorator, ReduxStoreProviderDecorator } from '@/api/storybookDecorators.tsx'
 
 const meta = {
   argTypes: {
@@ -21,6 +22,7 @@ const meta = {
   },
   tags: ['autodocs'],
   title: 'Components/Select',
+  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator],
 } satisfies Meta<typeof Select>
 
 export default meta
