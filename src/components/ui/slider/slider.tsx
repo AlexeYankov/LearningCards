@@ -3,6 +3,7 @@ import { Slider, SliderOutput, SliderProps, SliderThumb, SliderTrack } from 'rea
 import './slider.scss'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { changeMaxCardsCount, changeMinCardsCount } from '@/api/decks/pagination.reducer'
+import { useEffect, useState } from 'react'
 
 interface MySliderProps extends SliderProps<number[]> {
   label?: string
@@ -15,15 +16,23 @@ export const SliderDemo = ({ thumbLabels, ...props }: MySliderProps) => {
   const minCardsCount = useAppSelector(state => state.pagination.minCardsCount)
   const maxCardsCount = useAppSelector(state => state.pagination.maxCardsCount)
 
+  const [value, setValue] = useState([minCardsCount, maxCardsCount])
+
   const onValuesCountChange = (minCardsCount: number, maxCardsCount: number) => {
     dispatch(changeMinCardsCount({ minCardsCount }))
     dispatch(changeMaxCardsCount({ maxCardsCount }))
   }
 
+  useEffect(() => {
+    setValue([minCardsCount, maxCardsCount])
+  }, [minCardsCount, maxCardsCount])
+
   return (
     <Slider
       maxValue={61}
       defaultValue={[minCardsCount, maxCardsCount]}
+      value={value}
+      onChange={setValue}
       onChangeEnd={state => onValuesCountChange(state[0], state[1])}
       {...props}
     >
