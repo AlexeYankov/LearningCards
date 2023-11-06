@@ -17,7 +17,7 @@ export const SliderDemo = <T extends number | number[]>({
       {({ state }) => (
         <div className={'react-aria-SliderOutput'}>
           <div className={'value1'}>{state.getThumbValueLabel(0)}</div>
-          <div className={'value2'}>{state.getThumbValueLabel(1)}</div>
+          <div className={'value2'}>{state.getThumbMaxValue(0)}</div>
         </div>
       )}
     </SliderOutput>

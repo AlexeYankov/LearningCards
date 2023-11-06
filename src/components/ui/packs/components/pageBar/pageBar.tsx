@@ -7,8 +7,13 @@ import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 
 import f from '../../packsPage.module.scss'
+import { FC } from 'react'
 
-export const PageBar = () => {
+type PageBarProps = {
+  maxCardsCount?: number
+}
+
+export const PageBar: FC<PageBarProps> = ({ maxCardsCount }) => {
   return (
     <div className={f.container__pageBar}>
       <div>
@@ -22,7 +27,7 @@ export const PageBar = () => {
 
       <div style={{ position: 'relative' }}>
         <Label label={'Number of cards'} style={{ position: 'absolute', top: '-25px' }} />
-        <SliderDemo />
+        <SliderDemo maxValue={maxCardsCount} defaultValue={[0, maxCardsCount || 61]} />
       </div>
       <div>
         <Button className={f.button} icon={<Delete />} variant={'secondary'}>

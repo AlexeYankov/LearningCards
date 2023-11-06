@@ -24,7 +24,7 @@ export const PacksPage = () => {
     <>
       <div className={f.container}>
         <PageName onQueryPaginationValueChange={handleQueryPaginationValueChange} />
-        <PageBar />
+        <PageBar maxCardsCount={data?.maxCardsCount} />
         <Table
           bodyCell={data?.items || []}
           className={f.container__common}
