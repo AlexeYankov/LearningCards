@@ -40,9 +40,9 @@ export const decksApi = baseApi.injectEndpoints({
         invalidatesTags: ['Decks'],
         query: params => {
           return {
-            params,
             method: 'POST',
             url: `v1/decks`,
+            body: params,
           }
         },
       }),
