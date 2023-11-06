@@ -18,9 +18,11 @@ export const SliderDemo = ({ thumbLabels, ...props }: MySliderProps) => {
 
   const [value, setValue] = useState([minCardsCount, maxCardsCount])
 
-  const onValuesCountChange = (minCardsCount: number, maxCardsCount: number) => {
-    dispatch(changeMinCardsCount({ minCardsCount }))
-    dispatch(changeMaxCardsCount({ maxCardsCount }))
+  const onValuesCountChange = (values: number[]) => {
+    dispatch(changeMinCardsCount({ minCardsCount: values[0] }))
+    dispatch(changeMaxCardsCount({ maxCardsCount: values[1] }))
+
+    setValue([minCardsCount, maxCardsCount])
   }
 
   useEffect(() => {
@@ -30,10 +32,10 @@ export const SliderDemo = ({ thumbLabels, ...props }: MySliderProps) => {
   return (
     <Slider
       maxValue={61}
-      defaultValue={[minCardsCount, maxCardsCount]}
+      defaultValue={value}
       value={value}
       onChange={setValue}
-      onChangeEnd={state => onValuesCountChange(state[0], state[1])}
+      onChangeEnd={state => onValuesCountChange([...state])}
       {...props}
     >
       <SliderOutput>

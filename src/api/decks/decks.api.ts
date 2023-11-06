@@ -11,6 +11,19 @@ type GetDecksParamsType = {
   orderBy?: 'asc' | 'desc'
 }
 
+type DeleteDeckResponseType = {
+  id: string
+  userId: string
+  name: string
+  isPrivate: boolean
+  shots: number
+  cover: string
+  rating: number
+  created: string
+  updated: string
+  cardsCount: number
+}
+
 export const decksApi = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
@@ -18,7 +31,7 @@ export const decksApi = baseApi.injectEndpoints({
         invalidatesTags: ['Decks'],
         query: params => {
           return {
-            body: params,
+            params,
             method: 'POST',
             url: `v1/decks`,
           }
@@ -33,8 +46,18 @@ export const decksApi = baseApi.injectEndpoints({
           }
         },
       }),
+      deleteDeck: builder.mutation<DeleteDeckResponseType, { id: string }>({
+        query: id => {
+          return {
+            method: 'DELETE',
+            url: `v1/decks`,
+            params: id,
+          }
+        },
+        invalidatesTags: ['Decks'],
+      }),
     }
   },
 })
 
-export const { useCreateDeckMutation, useGetDecksQuery } = decksApi
+export const { useCreateDeckMutation, useGetDecksQuery, useDeleteDeckMutation } = decksApi

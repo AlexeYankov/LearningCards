@@ -1,4 +1,3 @@
-import { useGetCardsQuery } from '@/api/common.api'
 import { Row } from '@it-incubator/ui-kit'
 
 import s from '../table.module.scss'
@@ -63,6 +62,7 @@ export const BodyCellHOC = ({ el, tableName }: BodyCellHOCType) => {
               { id: 'edit-2-outline' },
               { id: 'trash-outline' },
             ],
+            id: el.id,
           }}
           tableName={'Decks'}
         />

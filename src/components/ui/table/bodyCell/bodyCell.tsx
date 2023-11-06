@@ -7,6 +7,7 @@ import s from './bodyCell.module.scss'
 
 import { Typography } from '../../typography'
 import { BodyCellType } from '../types'
+import { useDeleteDeckMutation } from '@/api/decks/decks.api.ts'
 
 type BodyCellComponentType = {
   el: BodyCellType
@@ -16,6 +17,8 @@ type BodyCellComponentType = {
 }
 
 const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) => {
+  const [deleteDeck] = useDeleteDeckMutation()
+
   return (
     <Cell
       className={s.bodyCell}
@@ -47,21 +50,20 @@ const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) => {
             alignItems: 'center',
             display: 'flex',
             justifyContent: 'flex-end',
-            // background: 'red',
             width: '100%',
           }}
         >
-          {el.svgs?.map((el, i) => {
+          {el.svgs?.map((svgEl, i) => {
             const crud: any = {
               0: () => alert('is learn'),
               1: () => alert('is edit'),
-              2: () => alert('is delete'),
+              2: () => deleteDeck({ id: el.id }),
             }
 
             return (
               <div className={s.svgsContainer} key={i} onClick={crud[i + '']}>
                 <svg height={'16px'} viewBox={'0 0 24 24'}>
-                  <use xlinkHref={`${sprite}#${el.id}`} />
+                  <use xlinkHref={`${sprite}#${svgEl.id}`} />
                 </svg>
               </div>
             )
