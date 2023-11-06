@@ -27,6 +27,15 @@ type DeleteDeckResponseType = {
 export const decksApi = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
+      getDecks: builder.query<DecksType, GetDecksParamsType | void>({
+        providesTags: ['Decks'],
+        query: params => {
+          return {
+            params: params ?? undefined,
+            url: `v1/decks`,
+          }
+        },
+      }),
       createDeck: builder.mutation<CardsResponsType, { name: string }>({
         invalidatesTags: ['Decks'],
         query: params => {
@@ -37,21 +46,11 @@ export const decksApi = baseApi.injectEndpoints({
           }
         },
       }),
-      getDecks: builder.query<DecksType, GetDecksParamsType | void>({
-        providesTags: ['Decks'],
-        query: params => {
-          return {
-            params: params ?? undefined,
-            url: `v1/decks/`,
-          }
-        },
-      }),
-      deleteDeck: builder.mutation<DeleteDeckResponseType, { id: string }>({
+      deleteDeck: builder.mutation<DeleteDeckResponseType, string>({
         query: id => {
           return {
             method: 'DELETE',
-            url: `v1/decks`,
-            params: id,
+            url: `v1/decks/${id}`,
           }
         },
         invalidatesTags: ['Decks'],

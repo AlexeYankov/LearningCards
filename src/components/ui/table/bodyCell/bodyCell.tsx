@@ -19,6 +19,10 @@ type BodyCellComponentType = {
 const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) => {
   const [deleteDeck] = useDeleteDeckMutation()
 
+  const removeDeckHandler = (deckId: string) => {
+    deleteDeck(deckId)
+  }
+
   return (
     <Cell
       className={s.bodyCell}
@@ -57,7 +61,7 @@ const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) => {
             const crud: any = {
               0: () => alert('is learn'),
               1: () => alert('is edit'),
-              2: () => deleteDeck({ id: el.id }),
+              2: () => removeDeckHandler(el.id!),
             }
 
             return (
