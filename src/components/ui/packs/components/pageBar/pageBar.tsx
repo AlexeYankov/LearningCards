@@ -8,12 +8,13 @@ import { Typography } from '@/components/ui/typography'
 
 import f from '../../packsPage.module.scss'
 import { FC } from 'react'
+import { PaginationResponseType } from '@/api/common.api'
 
 type PageBarProps = {
-  maxCardsCount?: number
+  onQueryPaginationValueChange?: (newValues: Partial<PaginationResponseType>) => void
 }
 
-export const PageBar: FC<PageBarProps> = ({ maxCardsCount }) => {
+export const PageBar: FC<PageBarProps> = ({ onQueryPaginationValueChange }) => {
   return (
     <div className={f.container__pageBar}>
       <div>
@@ -27,7 +28,7 @@ export const PageBar: FC<PageBarProps> = ({ maxCardsCount }) => {
 
       <div style={{ position: 'relative' }}>
         <Label label={'Number of cards'} style={{ position: 'absolute', top: '-25px' }} />
-        <SliderDemo maxValue={maxCardsCount} defaultValue={[0, maxCardsCount || 61]} />
+        <SliderDemo onQueryPaginationValueChange={onQueryPaginationValueChange} />
       </div>
       <div>
         <Button className={f.button} icon={<Delete />} variant={'secondary'}>

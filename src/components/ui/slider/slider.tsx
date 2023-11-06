@@ -1,30 +1,60 @@
 import { Slider, SliderOutput, SliderProps, SliderThumb, SliderTrack } from 'react-aria-components'
 
 import './slider.scss'
+import { PaginationResponseType } from '@/api/common.api.ts'
+import { useAppDispatch, useAppSelector } from '@/api/store.ts'
+import { changeMaxCardsCount, changeMinCardsCount } from '@/api/decks/pagination.reducer'
 
-interface MySliderProps<T> extends SliderProps<T> {
+interface MySliderProps extends SliderProps<number[]> {
   label?: string
   thumbLabels?: string[]
+  onQueryPaginationValueChange?: (newValues: Partial<PaginationResponseType>) => void
 }
 
-export const SliderDemo = <T extends number | number[]>({
-  // label,
+export const SliderDemo = ({
   thumbLabels,
+  onQueryPaginationValueChange,
   ...props
-}: MySliderProps<T>) => (
-  <Slider {...props}>
-    <SliderOutput>
-      {({ state }) => (
-        <div className={'react-aria-SliderOutput'}>
-          <div className={'value1'}>{state.getThumbValueLabel(0)}</div>
-          <div className={'value2'}>{state.getThumbMaxValue(0)}</div>
-        </div>
-      )}
-    </SliderOutput>
-    <SliderTrack>
-      {({ state }) =>
-        state.values.map((_, i) => <SliderThumb aria-label={thumbLabels?.[i]} index={i} key={i} />)
-      }
-    </SliderTrack>
-  </Slider>
-)
+}: MySliderProps) => {
+  const dispatch = useAppDispatch()
+
+  const minCardsCount = useAppSelector(state => state.pagination.minCardsCount)
+  const maxCardsCount = useAppSelector(state => state.pagination.maxCardsCount)
+
+  const onValuesCountChange = (minCardsCount: number, maxCardsCount: number) => {
+    dispatch(changeMinCardsCount({ minCardsCount }))
+    dispatch(changeMaxCardsCount({ maxCardsCount }))
+    onQueryPaginationValueChange &&
+      onQueryPaginationValueChange({
+        minCardsCount,
+        maxCardsCount,
+      })
+  }
+
+  return (
+    <Slider
+      maxValue={61}
+      defaultValue={[minCardsCount, maxCardsCount]}
+      onChangeEnd={state => onValuesCountChange(state[0], state[1])}
+      {...props}
+    >
+      <SliderOutput>
+        {({ state }) => {
+          return (
+            <div className={'react-aria-SliderOutput'}>
+              <div className={'value1'}>{state.values[0]}</div>
+              <div className={'value2'}>{state.values[1]}</div>
+            </div>
+          )
+        }}
+      </SliderOutput>
+      <SliderTrack>
+        {({ state }) =>
+          state.values.map((_, i) => (
+            <SliderThumb aria-label={thumbLabels?.[i]} index={i} key={i} />
+          ))
+        }
+      </SliderTrack>
+    </Slider>
+  )
+}
