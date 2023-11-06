@@ -11,7 +11,7 @@ import { Typography } from '@/components/ui/typography'
 
 import f from '../../packsPage.module.scss'
 import s from '@/components/ui/modal/modal.module.scss'
-import { useAppDispatch } from '@/api/store.ts'
+import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { changeCurrentPage } from '@/api/decks/pagination.reducer.ts'
 import { PaginationResponseType } from '@/api/common.api.ts'
 
@@ -21,6 +21,8 @@ type PageNameProps = {
 
 export const PageName: FC<PageNameProps> = ({ handlePaginationChange }) => {
   const dispatch = useAppDispatch()
+
+  const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
 
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState('')
@@ -43,7 +45,7 @@ export const PageName: FC<PageNameProps> = ({ handlePaginationChange }) => {
   }
 
   useEffect(() => {
-    handlePaginationChange && handlePaginationChange({ currentPage: 1 })
+    handlePaginationChange && handlePaginationChange({ currentPage: 1, itemsPerPage })
   }, [data])
 
   return (
