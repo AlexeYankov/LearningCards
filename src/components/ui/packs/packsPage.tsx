@@ -23,7 +23,7 @@ export const PacksPage = () => {
   return (
     <>
       <div className={f.container}>
-        <PageName />
+        <PageName handlePaginationChange={handlePaginationChange} />
         <PageBar />
         <Table
           bodyCell={data?.items || []}
@@ -39,6 +39,7 @@ export const PacksPage = () => {
           options={['10', '20', '30', '50', '100']}
           placeholder={'100'}
           reversedArrowID={'arrow-ios-forward'}
+          totalPages={data?.pagination?.totalPages || 20}
         />
       </div>
     </>

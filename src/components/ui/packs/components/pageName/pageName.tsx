@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, FC, useEffect, useState } from 'react'
 
 import { useCreateDeckMutation } from '@/api/decks/decks.api'
 import img from '@/asserts/Mask.png'
@@ -11,12 +11,21 @@ import { Typography } from '@/components/ui/typography'
 
 import f from '../../packsPage.module.scss'
 import s from '@/components/ui/modal/modal.module.scss'
+import { useAppDispatch } from '@/api/store.ts'
+import { changeCurrentPage } from '@/api/decks/pagination.reducer.ts'
+import { PaginationResponseType } from '@/api/common.api.ts'
 
-export const PageName = () => {
+type PageNameProps = {
+  handlePaginationChange?: (newValues: Partial<PaginationResponseType>) => void
+}
+
+export const PageName: FC<PageNameProps> = ({ handlePaginationChange }) => {
+  const dispatch = useAppDispatch()
+
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState('')
 
-  const [createDeck] = useCreateDeckMutation()
+  const [createDeck, { data }] = useCreateDeckMutation()
 
   const handleCloseModal = () => setOpen(false)
 
@@ -27,10 +36,15 @@ export const PageName = () => {
   const handleAddNewPackClick = () => {
     if (value.trim() !== '') {
       createDeck({ name: value })
+      dispatch(changeCurrentPage({ currentPage: 1 }))
       setValue('')
       setOpen(false)
     }
   }
+
+  useEffect(() => {
+    handlePaginationChange && handlePaginationChange({ currentPage: 1 })
+  }, [data])
 
   return (
     <div className={f.container__pageName}>
