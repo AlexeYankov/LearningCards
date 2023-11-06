@@ -16,10 +16,10 @@ import { changeCurrentPage } from '@/api/decks/pagination.reducer.ts'
 import { PaginationResponseType } from '@/api/common.api.ts'
 
 type PageNameProps = {
-  handlePaginationChange?: (newValues: Partial<PaginationResponseType>) => void
+  onQueryPaginationValueChange?: (newValues: Partial<PaginationResponseType>) => void
 }
 
-export const PageName: FC<PageNameProps> = ({ handlePaginationChange }) => {
+export const PageName: FC<PageNameProps> = ({ onQueryPaginationValueChange }) => {
   const dispatch = useAppDispatch()
 
   const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
@@ -45,7 +45,7 @@ export const PageName: FC<PageNameProps> = ({ handlePaginationChange }) => {
   }
 
   useEffect(() => {
-    handlePaginationChange && handlePaginationChange({ currentPage: 1, itemsPerPage })
+    onQueryPaginationValueChange && onQueryPaginationValueChange({ currentPage: 1, itemsPerPage })
   }, [data])
 
   return (

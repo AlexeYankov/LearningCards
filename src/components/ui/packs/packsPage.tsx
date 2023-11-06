@@ -16,14 +16,14 @@ export const PacksPage = () => {
 
   const { data } = useGetDecksQuery(query)
 
-  const handlePaginationChange = (newValues: Partial<PaginationResponseType>) => {
+  const handleQueryPaginationValueChange = (newValues: Partial<PaginationResponseType>) => {
     setQuery({ ...newValues })
   }
 
   return (
     <>
       <div className={f.container}>
-        <PageName handlePaginationChange={handlePaginationChange} />
+        <PageName onQueryPaginationValueChange={handleQueryPaginationValueChange} />
         <PageBar />
         <Table
           bodyCell={data?.items || []}
@@ -35,7 +35,7 @@ export const PacksPage = () => {
         <Pagination
           arrowColor={'white'}
           arrowID={'arrow-ios-back'}
-          onPaginationChange={handlePaginationChange}
+          onQueryPaginationValueChange={handleQueryPaginationValueChange}
           options={['10', '20', '30', '50', '100']}
           placeholder={'100'}
           reversedArrowID={'arrow-ios-forward'}

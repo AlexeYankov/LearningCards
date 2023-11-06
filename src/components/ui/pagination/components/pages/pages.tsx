@@ -7,11 +7,12 @@ import s from './pages.module.scss'
 
 import { setPageHandler } from '../utils/counter'
 import PagesForRender from './pagesForRender'
+import { PaginationResponseType } from '@/api/common.api.ts'
 
 type PagesType = {
   arrowID: string
   color?: string
-  onPaginationClick: (page: { currentPage: number }) => void
+  onPaginationClick?: (newValues: Partial<PaginationResponseType>) => void
   reversedArrowID: string
   startPagesFrom?: number
   totalPages?: number
@@ -26,8 +27,9 @@ export const Pages = ({
 }: PagesType) => {
   const dispatch = useAppDispatch()
   const currentPage = useAppSelector(state => state.pagination.currentPage)
+  const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
 
-  useGetDecksQuery({ currentPage })
+  useGetDecksQuery({ currentPage, itemsPerPage })
 
   const setCurrentPage = (callbackIconID: string) => {
     setPageHandler(
@@ -42,7 +44,7 @@ export const Pages = ({
 
   const handlePageChange = (page: number) => {
     dispatch(changeCurrentPage({ currentPage: page }))
-    onPaginationClick({ currentPage: page })
+    onPaginationClick && onPaginationClick({ currentPage: page, itemsPerPage })
   }
 
   return (
