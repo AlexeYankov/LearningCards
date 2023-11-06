@@ -1,4 +1,3 @@
-import { useGetDecksQuery } from '@/api/decks/decks.api.ts'
 import { changeCurrentPage } from '@/api/decks/pagination.reducer.ts'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import sprite from '@/asserts/sprite.svg'
@@ -7,29 +6,21 @@ import s from './pages.module.scss'
 
 import { setPageHandler } from '../utils/counter'
 import PagesForRender from './pagesForRender'
-import { PaginationResponseType } from '@/api/common.api.ts'
+import { useEffect } from 'react'
 
 type PagesType = {
   arrowID: string
   color?: string
-  onPaginationClick?: (newValues: Partial<PaginationResponseType>) => void
   reversedArrowID: string
   startPagesFrom?: number
   totalPages?: number
 }
 
-export const Pages = ({
-  arrowID,
-  color,
-  onPaginationClick,
-  reversedArrowID,
-  totalPages = 20,
-}: PagesType) => {
+export const Pages = ({ arrowID, color, reversedArrowID, totalPages = 20 }: PagesType) => {
   const dispatch = useAppDispatch()
   const currentPage = useAppSelector(state => state.pagination.currentPage)
-  const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
-
-  useGetDecksQuery({ currentPage, itemsPerPage })
+  const minCardsCount = useAppSelector(state => state.pagination.minCardsCount)
+  const maxCardsCount = useAppSelector(state => state.pagination.maxCardsCount)
 
   const setCurrentPage = (callbackIconID: string) => {
     setPageHandler(
@@ -44,8 +35,9 @@ export const Pages = ({
 
   const handlePageChange = (page: number) => {
     dispatch(changeCurrentPage({ currentPage: page }))
-    onPaginationClick && onPaginationClick({ currentPage: page, itemsPerPage })
   }
+
+  useEffect(() => {}, [minCardsCount, maxCardsCount])
 
   return (
     <div className={s.pagesContainer}>

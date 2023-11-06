@@ -1,5 +1,3 @@
-import { PaginationResponseType } from '@/api/common.api.ts'
-
 import s from './pagination.module.scss'
 
 import { Select } from '../select/select'
@@ -9,7 +7,6 @@ import { Pages } from './components/pages/pages'
 type PaginationType = {
   arrowColor: string
   arrowID: string
-  onQueryPaginationValueChange?: (value: Partial<PaginationResponseType>) => void
   options: Array<string>
   placeholder: string
   reversed?: boolean
@@ -21,7 +18,6 @@ type PaginationType = {
 export const Pagination = ({
   arrowColor,
   arrowID,
-  onQueryPaginationValueChange,
   options,
   placeholder,
   reversed,
@@ -33,7 +29,6 @@ export const Pagination = ({
       <Pages
         arrowID={arrowID}
         color={arrowColor}
-        onPaginationClick={onQueryPaginationValueChange}
         reversedArrowID={reversedArrowID}
         totalPages={totalPages}
       />
@@ -43,7 +38,6 @@ export const Pagination = ({
 
         <Select
           classname={s.trigger}
-          onSelectChange={onQueryPaginationValueChange}
           options={options}
           placeholder={placeholder}
           reversed={reversed}

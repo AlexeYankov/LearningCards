@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import { useCreateDeckMutation } from '@/api/decks/decks.api'
 import img from '@/asserts/Mask.png'
@@ -11,23 +11,20 @@ import { Typography } from '@/components/ui/typography'
 
 import f from '../../packsPage.module.scss'
 import s from '@/components/ui/modal/modal.module.scss'
-import { useAppDispatch, useAppSelector } from '@/api/store.ts'
-import { changeCurrentPage } from '@/api/decks/pagination.reducer.ts'
-import { PaginationResponseType } from '@/api/common.api.ts'
+import { useAppDispatch } from '@/api/store.ts'
+import {
+  changeCurrentPage,
+  changeMaxCardsCount,
+  changeMinCardsCount,
+} from '@/api/decks/pagination.reducer.ts'
 
-type PageNameProps = {
-  onQueryPaginationValueChange?: (newValues: Partial<PaginationResponseType>) => void
-}
-
-export const PageName: FC<PageNameProps> = ({ onQueryPaginationValueChange }) => {
+export const PageName = () => {
   const dispatch = useAppDispatch()
-
-  const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
 
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState('')
 
-  const [createDeck, { data }] = useCreateDeckMutation()
+  const [createDeck] = useCreateDeckMutation()
 
   const handleCloseModal = () => setOpen(false)
 
@@ -39,14 +36,12 @@ export const PageName: FC<PageNameProps> = ({ onQueryPaginationValueChange }) =>
     if (value.trim() !== '') {
       createDeck({ name: value })
       dispatch(changeCurrentPage({ currentPage: 1 }))
+      dispatch(changeMinCardsCount({ minCardsCount: 0 }))
+      dispatch(changeMaxCardsCount({ maxCardsCount: 61 }))
       setValue('')
       setOpen(false)
     }
   }
-
-  useEffect(() => {
-    onQueryPaginationValueChange && onQueryPaginationValueChange({ currentPage: 1, itemsPerPage })
-  }, [data])
 
   return (
     <div className={f.container__pageName}>

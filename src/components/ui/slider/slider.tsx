@@ -1,21 +1,15 @@
 import { Slider, SliderOutput, SliderProps, SliderThumb, SliderTrack } from 'react-aria-components'
 
 import './slider.scss'
-import { PaginationResponseType } from '@/api/common.api.ts'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { changeMaxCardsCount, changeMinCardsCount } from '@/api/decks/pagination.reducer'
 
 interface MySliderProps extends SliderProps<number[]> {
   label?: string
   thumbLabels?: string[]
-  onQueryPaginationValueChange?: (newValues: Partial<PaginationResponseType>) => void
 }
 
-export const SliderDemo = ({
-  thumbLabels,
-  onQueryPaginationValueChange,
-  ...props
-}: MySliderProps) => {
+export const SliderDemo = ({ thumbLabels, ...props }: MySliderProps) => {
   const dispatch = useAppDispatch()
 
   const minCardsCount = useAppSelector(state => state.pagination.minCardsCount)
@@ -24,11 +18,6 @@ export const SliderDemo = ({
   const onValuesCountChange = (minCardsCount: number, maxCardsCount: number) => {
     dispatch(changeMinCardsCount({ minCardsCount }))
     dispatch(changeMaxCardsCount({ maxCardsCount }))
-    onQueryPaginationValueChange &&
-      onQueryPaginationValueChange({
-        minCardsCount,
-        maxCardsCount,
-      })
   }
 
   return (
