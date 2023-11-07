@@ -1,7 +1,7 @@
 import { Delete } from '@/asserts/icons/components/Delete'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
-import { SliderDemo } from '@/components/ui/slider'
+import { Slider } from '@/components/ui/slider'
 import { Tabs } from '@/components/ui/tabs'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
@@ -20,9 +20,9 @@ export const PageBar = () => {
         <Tabs title={['My Cards', 'All Cards']} />
       </div>
 
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative', maxWidth: '250px', width: '100%' }}>
         <Label label={'Number of cards'} style={{ position: 'absolute', top: '-25px' }} />
-        <SliderDemo />
+        <Slider />
       </div>
       <div>
         <Button className={f.button} icon={<Delete />} variant={'secondary'}>
