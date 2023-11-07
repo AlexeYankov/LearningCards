@@ -3,10 +3,7 @@ import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import sprite from '@/asserts/sprite.svg'
 
 import s from './pages.module.scss'
-
-import { setPageHandler } from '../utils/counter'
 import PagesForRender from './pagesForRender'
-import { useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 
 type PagesType = {
@@ -20,39 +17,26 @@ type PagesType = {
 export const Pages = ({ arrowID, color, reversedArrowID, totalPages = 20 }: PagesType) => {
   const dispatch = useAppDispatch()
   const [searchParams] = useSearchParams()
-
   const currentPage = useAppSelector(state => state.pagination.currentPage)
-  const minCardsCount = useAppSelector(state => state.pagination.minCardsCount)
-  const maxCardsCount = useAppSelector(state => state.pagination.maxCardsCount)
-
-  const setCurrentPage = (callbackIconID: string) => {
-    setPageHandler(
-      arrowID,
-      reversedArrowID,
-      currentPage,
-      totalPages,
-      callbackIconID,
-      handlePageChange
-    )
-  }
 
   const handlePageChange = (page: number) => {
     dispatch(changeCurrentPage({ currentPage: page }))
   }
-
-  useEffect(() => {}, [minCardsCount, maxCardsCount])
 
   const getToCurrentPageUrl = (pageValue: number) => {
     searchParams.set('currentPage', String(pageValue))
     return { search: searchParams.toString() }
   }
 
+  const prevPage = currentPage - 1 === 0 ? 1 : currentPage - 1
+  const nextPage = currentPage + 1 >= totalPages ? totalPages : currentPage + 1
+
   return (
     <div className={s.pagesContainer}>
-      <Link to={getToCurrentPageUrl(currentPage)}>
+      <Link to={getToCurrentPageUrl(prevPage)}>
         <svg
           fill={color || 'black'}
-          onClick={() => setCurrentPage(arrowID)}
+          onClick={() => handlePageChange(prevPage)}
           style={currentPage === 1 ? { opacity: '0.7', pointerEvents: 'none' } : {}}
           viewBox={'0 0 24 24'}
           width={'24px'}
@@ -61,12 +45,24 @@ export const Pages = ({ arrowID, color, reversedArrowID, totalPages = 20 }: Page
         </svg>
       </Link>
 
-      <PagesForRender page={currentPage} pages={totalPages} setPage={handlePageChange} />
-      <Link to={getToCurrentPageUrl(currentPage)}>
+      <PagesForRender
+        page={currentPage}
+        pages={totalPages}
+        setPage={handlePageChange}
+        getToCurrentPageUrl={getToCurrentPageUrl}
+      />
+      <Link to={getToCurrentPageUrl(nextPage)}>
         <svg
           fill={color || 'black'}
-          onClick={() => setCurrentPage(reversedArrowID)}
-          style={currentPage === totalPages ? { opacity: '0.7', pointerEvents: 'none' } : {}}
+          onClick={() => handlePageChange(nextPage)}
+          style={
+            currentPage === totalPages
+              ? {
+                  opacity: '0.7',
+                  pointerEvents: 'none',
+                }
+              : {}
+          }
           viewBox={'0 0 24 24'}
           width={'24px'}
         >

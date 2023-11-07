@@ -3,7 +3,6 @@ import { Slider, SliderOutput, SliderProps, SliderThumb, SliderTrack } from 'rea
 import './slider.scss'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { changeMaxCardsCount, changeMinCardsCount } from '@/api/decks/pagination.reducer'
-import { useEffect, useState } from 'react'
 
 interface MySliderProps extends SliderProps<number[]> {
   label?: string
@@ -16,30 +15,26 @@ export const SliderDemo = ({ thumbLabels, ...props }: MySliderProps) => {
   const minCardsCount = useAppSelector(state => state.pagination.minCardsCount)
   const maxCardsCount = useAppSelector(state => state.pagination.maxCardsCount)
 
-  const [value, setValue] = useState([minCardsCount, maxCardsCount])
-
   const onValuesCountChange = (values: number[]) => {
     dispatch(changeMinCardsCount({ minCardsCount: values[0] }))
     dispatch(changeMaxCardsCount({ maxCardsCount: values[1] }))
-
-    setValue([minCardsCount, maxCardsCount])
   }
 
-  useEffect(() => {
-    setValue([minCardsCount, maxCardsCount])
-  }, [minCardsCount, maxCardsCount])
+  const handleChangeValue = () => {}
 
   return (
     <Slider
       maxValue={61}
-      defaultValue={value}
-      value={value}
-      onChange={setValue}
-      onChangeEnd={state => onValuesCountChange([...state])}
+      defaultValue={[minCardsCount, maxCardsCount]}
+      value={[minCardsCount, maxCardsCount]}
+      onChange={handleChangeValue}
+      onChangeEnd={onValuesCountChange}
       {...props}
     >
       <SliderOutput>
         {({ state }) => {
+          state.setThumbValue(0, minCardsCount)
+          state.setThumbValue(1, maxCardsCount)
           return (
             <div className={'react-aria-SliderOutput'}>
               <div className={'value1'}>{state.values[0]}</div>

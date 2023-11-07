@@ -1,22 +1,15 @@
 import { Typography } from '@/components/ui/typography'
 
 import { Page } from '../page/page'
-import { useSearchParams } from 'react-router-dom'
 
 type PagesForRenderType = {
   page: number
   pages: number
   setPage: (value: number) => void
+  getToCurrentPageUrl: (pageValue: number) => { search: string }
 }
 
-const PagesForRender = ({ page, pages, setPage }: PagesForRenderType) => {
-  const [searchParams] = useSearchParams()
-
-  const getToCurrentPageUrl = (pageValue: number) => {
-    searchParams.set('currentPage', String(pageValue))
-    return { search: searchParams.toString() }
-  }
-
+const PagesForRender = ({ page, pages, setPage, getToCurrentPageUrl }: PagesForRenderType) => {
   const allPages = Array.from({ length: pages }, (_, i) => i + 1)
 
   delete allPages[0]
