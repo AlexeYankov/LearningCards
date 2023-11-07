@@ -8,7 +8,7 @@ import {Typography} from "@/components/ui/typography";
 type Option = {
     value: string | number;
     key?: number | string;
-} & ComponentPropsWithoutRef<"input">;
+} & ComponentPropsWithoutRef<typeof RadioGroup.Root>;
 export type RadioGroupPropsType = RadioGroupLib.RadioGroupProps & {
     options: Option[];
     disabled?: boolean;
@@ -32,11 +32,11 @@ export const Radio = forwardRef<
             <RadioGroup.Root className={s.RadioGroupRoot} disabled={disabled} ref={ref}>
                 {options?.map((el) => {
                     return (
-                        <div style={{display: 'flex', alignItems: 'center'}}>
-                            <RadioGroup.Item className={s.RadioGroupItem} key={el.key} value={`${el.value}`}>
+                        <div key={el.value} className={s.RadioGroupBlock}>
+                            <RadioGroup.Item className={s.RadioGroupItem} value={`${el.value}`}>
                                 <RadioGroup.Indicator className={s.RadioGroupIndicator}/>
                             </RadioGroup.Item>
-                            <Label className={s.Label} label={`${el.value}`}/>
+                            <Label  className={s.Label} label={`${el.value}`}/>
                         </div>
                     )
                 })}

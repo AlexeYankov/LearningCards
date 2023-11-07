@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Radio} from "@/components/ui/auth/radio-group/radio.tsx";
+import {Radio} from "@/components/ui/radio-group/radio.tsx";
 
 const meta = {
     component: Radio,
@@ -13,6 +13,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
     args: {
         options: [{value: "one"}, {value: "two"}, {value: "three"}],
+        disabled:false
     },
 };
 
