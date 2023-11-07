@@ -7,6 +7,7 @@ export type TableType = {
   headCell?: HeadCellType[]
   tableName?: string
   totalItems?: number
+  isMyDeck?: boolean
 }
 
 export type HeadCellType = {

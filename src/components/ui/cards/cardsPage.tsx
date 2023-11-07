@@ -6,7 +6,6 @@ import f from './cardsPage.module.scss'
 
 import { Pagination } from '../pagination'
 import { Table } from '../table'
-import { Header } from './components/header/header'
 import { PageBar } from './components/pageBar/pageBar'
 import { PageName } from './components/pageName/pageName'
 import { tableHeadCardsData } from './tableData'
@@ -25,6 +24,7 @@ export const CardsPage = () => {
         className={f.container__common}
         headCell={tableHeadCardsData}
         tableName={'Cards'}
+        isMyDeck={true}
       />
       {/* <Pagination
           arrowColor={'white'}

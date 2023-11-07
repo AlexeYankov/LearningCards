@@ -13,13 +13,14 @@ type BodyCellComponentType = {
   i?: boolean
   onClick?: () => void
   tableName?: string
+  isMyDeck?: boolean
 }
 
-const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) => {
+const BodyCell = ({ el, i, onClick, tableName, isMyDeck }: BodyCellComponentType) => {
   return (
     <Cell
       className={s.bodyCell}
-      style={tableName === 'Decks' ? { width: '200px' } : { width: '300px' }}
+      style={tableName === 'Decks' ? { width: isMyDeck ? '100px' : '200px' } : { width: '300px' }}
     >
       {/*{el.checkBox && <CheckBox checked />}*/}
 
@@ -48,7 +49,7 @@ const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) => {
             display: 'flex',
             justifyContent: 'flex-end',
             // background: 'red',
-            width: '100%',
+            width: isMyDeck ? '100px' : '100%',
           }}
         >
           {el.svgs?.map((el, i) => {
@@ -59,11 +60,13 @@ const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) => {
             }
 
             return (
-              <div className={s.svgsContainer} key={i} onClick={crud[i + '']}>
-                <svg height={'16px'} viewBox={'0 0 24 24'}>
-                  <use xlinkHref={`${sprite}#${el.id}`} />
-                </svg>
-              </div>
+              el.id && (
+                <div className={s.svgsContainer} key={i} onClick={crud[i + '']}>
+                  <svg height={'16px'} viewBox={'0 0 24 24'}>
+                    <use xlinkHref={`${sprite}#${el.id}`} />
+                  </svg>
+                </div>
+              )
             )
           })}
         </div>

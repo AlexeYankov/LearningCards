@@ -9,13 +9,14 @@ import { HeadCellType } from '../types'
 type HeadCellcomponentType = {
   el: HeadCellType
   tableName?: string
+  isMyDeck?: boolean
 }
 
-const HeadCell = ({ el, tableName }: HeadCellcomponentType) => {
+const HeadCell = ({ el, tableName, isMyDeck }: HeadCellcomponentType) => {
   return (
     <UIHeadCell
       className={tableName !== 'Cards' && el.headCellName === 'Grade' ? s.headCellLast : s.headCell}
-      style={tableName !== 'Decks' ? { width: '300px' } : { width: '200px' }}
+      style={tableName !== 'Decks' ? { width: '300px' } : { width: isMyDeck && el.headCellName !== 'Last Updated' ? '100px' : '200px' }}
     >
       <Typography variant={'heading3'}>{el.headCellName}</Typography>
 
