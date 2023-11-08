@@ -35,4 +35,11 @@ img {
   .stars svg {
     fill: var(--color-warning-300);
   }
+  a {
+    text-decoration: none;
+    color: var(--color-light-100);
+  }
+  a :visited {
+    color: var(--color-light-100);
+  }
 }

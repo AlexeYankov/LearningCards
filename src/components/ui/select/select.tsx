@@ -1,9 +1,11 @@
 import React from 'react'
-
+import { changeCurrentPage, changeItemsPerPage } from '@/api/decks/pagination.reducer.ts'
+import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as SelectRadix from '@radix-ui/react-select'
 
 import s from './selectRadix.module.scss'
+
 import { Label } from '../label'
 
 type SelectItemProps = {
@@ -17,6 +19,7 @@ type SelectItemProps = {
 type SelectProps = {
   classname?: string
   disabled?: boolean
+  itemsPerPage?: number
   label?: string
   options: Array<string>
   placeholder?: string
@@ -44,8 +47,21 @@ export const Select = ({
   selectId,
   ...rest
 }: SelectProps) => {
+  const dispatch = useAppDispatch()
+
+  const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
+
+  const handleValueChange = (value: string) => {
+    dispatch(changeItemsPerPage({ itemsPerPage: +value }))
+    dispatch(changeCurrentPage({ currentPage: 1 }))
+  }
+
   return (
-    <SelectRadix.Root {...rest}>
+    <SelectRadix.Root
+      {...rest}
+      defaultValue={String(itemsPerPage)}
+      onValueChange={handleValueChange}
+    >
       <div className={s.box}>
         <Label className={`${s.label} `} htmlFor={selectId} label={label} />
         <SelectRadix.Trigger
@@ -65,13 +81,11 @@ export const Select = ({
         <SelectRadix.Content className={`${s.SelectContent}`} position={'popper'}>
           <SelectRadix.Viewport className={s.SelectViewport}>
             <SelectRadix.Group>
-              {options.map((el, i) => {
-                return (
-                  <SelectItem key={crypto.randomUUID()} value={el + i}>
-                    {el}
-                  </SelectItem>
-                )
-              })}
+              {options.map((el, i) => (
+                <SelectItem key={el + i} value={el}>
+                  {el}
+                </SelectItem>
+              ))}
             </SelectRadix.Group>
           </SelectRadix.Viewport>
         </SelectRadix.Content>

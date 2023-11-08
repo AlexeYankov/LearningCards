@@ -1,17 +1,16 @@
-import { Provider } from 'react-redux'
-
-import { store } from './api/store'
-import { Header } from '@/components/ui/packs/components/header/header'
-import s from './app.module.scss'
 import { Router } from '@/api/router'
+
+import s from './app.module.scss'
+
+import { Header } from './components/ui/header/header'
 
 export function App() {
   return (
-    <Provider store={store}>
-      <Header isLoggedIn={false} />
+    <>
+      <Header isLoggedIn />
       <div className={s.container}>
         <Router />
       </div>
-    </Provider>
+    </>
   )
 }

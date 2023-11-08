@@ -4,47 +4,53 @@
     'label output'
     'track track';
   grid-template-columns: 1fr auto;
+
   max-width: 300px;
+
   color: var(--color-light-100);
 
   .react-aria-SliderOutput {
-    grid-area: output;
     display: flex;
-    width: 259px;
+    grid-area: output;
     justify-content: space-between;
+    width: 259px;
   }
 
   .value1 {
     display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+
     width: 2.25rem;
     height: 2.25rem;
-    flex-shrink: 0;
-    border-radius: 0.125rem;
-    border: 1px solid var(--color-dark-300, #4c4c4c);
-    justify-content: center;
     padding: 5px;
+
+    border: 1px solid var(--color-dark-300, #4c4c4c);
+    border-radius: 0.125rem;
   }
 
   .value2 {
     display: flex;
+    flex-shrink: 0;
     justify-content: center;
+
     width: 2.25rem;
     height: 2.25rem;
-    flex-shrink: 0;
-    border-radius: 0.125rem;
-    border: 1px solid var(--color-dark-300, #4c4c4c);
     padding: 5px;
+
+    border: 1px solid var(--color-dark-300, #4c4c4c);
+    border-radius: 0.125rem;
   }
 
   .react-aria-SliderTrack {
-    grid-area: track;
     position: relative;
+    grid-area: track;
     margin: -24px 42px;
 
-    &:before {
+    &::before {
       content: '';
-      display: block;
       position: absolute;
+      display: block;
       background: var(--color-accent-500);
     }
   }
@@ -52,29 +58,34 @@
   .react-aria-SliderThumb {
     width: 0.8rem;
     height: 0.8rem;
-    border-radius: 50%;
+
     background: var(--color-light-100);
     border: 2px solid var(--spectrum-alias-background-color-default);
+    border-radius: 50%;
     box-shadow: 0 0 0 4px var(--color-accent-500);
   }
 
   &[data-orientation='horizontal'] {
     flex-direction: column;
-    width: 300px;
 
     .react-aria-SliderTrack {
+      top: 50%;
+      left: 10px;
+
+      flex-shrink: 0;
+
       width: 9.6875rem;
       height: 1rem;
-      flex-shrink: 0;
-      top: 50%;
-      left: 50px;
 
-      &:before {
-        width: 9.6875rem;
-        height: 0.5rem;
-        flex-shrink: 0;
+      &::before {
         top: 50%;
         transform: translateY(-50%);
+
+        flex-shrink: 0;
+
+        width: 9.6875rem;
+        height: 0.5rem;
+
         border-radius: 0.225rem;
       }
     }
@@ -85,8 +96,8 @@
   }
 
   &[data-orientation='vertical'] {
-    height: 150px;
     display: block;
+    height: 150px;
 
     .react-aria-Label,
     .react-aria-SliderOutput {
@@ -97,11 +108,11 @@
       width: 30px;
       height: 100%;
 
-      &:before {
-        width: 3px;
-        height: 100%;
+      &::before {
         left: 50%;
         transform: translateX(-50%);
+        width: 3px;
+        height: 100%;
       }
     }
 
@@ -119,14 +130,14 @@
 
 @media (forced-colors: active) {
   .react-aria-Slider {
-    forced-color-adjust: none;
-
     --label-color: ButtonText;
     --track-color: ButtonBorder;
     --thumb-color: ButtonBorder;
     --thumb-color-dragging: Highlight;
     --focus-ring-color: Highlight;
     --spectrum-alias-background-color-default: Canvas;
+
+    forced-color-adjust: none;
 
     &[data-disabled] {
       --track-color: GrayText;

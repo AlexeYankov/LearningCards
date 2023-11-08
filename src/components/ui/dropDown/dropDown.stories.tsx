@@ -1,5 +1,6 @@
 import { DropDown, DropDownMenu, DropDownPackMenu } from '@/components/ui/dropDown/dropDown'
 import { Meta, StoryObj } from '@storybook/react'
+
 import profileImage from './../../../asserts/profileImage.png'
 
 const meta = {
@@ -23,11 +24,11 @@ type Story = StoryObj<typeof meta>
 export const DropDownMenuDemo: Story = {
   args: {
     children: (
-      <DropDownMenu name={'12312312'} email={'j&johnson@gmail.com'} avatar={profileImage} />
+      <DropDownMenu avatar={profileImage} email={'j&johnson@gmail.com'} name={'12312312'} />
     ),
   },
   render: () => (
-    <DropDownMenu name={'12312312'} email={'j&johnson@gmail.com'} avatar={profileImage} />
+    <DropDownMenu avatar={profileImage} email={'j&johnson@gmail.com'} name={'12312312'} />
   ),
 }
 

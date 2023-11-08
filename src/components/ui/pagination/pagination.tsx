@@ -1,17 +1,17 @@
 import s from './pagination.module.scss'
 
 import { Select } from '../select/select'
-import { Pages } from './components/pages/pages'
 import { Typography } from '../typography'
+import { Pages } from './components/pages/pages'
 
 type PaginationType = {
   arrowColor: string
   arrowID: string
   options: Array<string>
-  pages: number
   placeholder: string
   reversed?: boolean
   reversedArrowID: string
+  totalPages?: number
   variant?: string
 }
 
@@ -19,17 +19,22 @@ export const Pagination = ({
   arrowColor,
   arrowID,
   options,
-  pages,
   placeholder,
   reversed,
   reversedArrowID,
+  totalPages,
 }: PaginationType) => {
   return (
     <div className={s.paginationContainer}>
-      <Pages arrowID={arrowID} color={arrowColor} pages={pages} reversedArrowID={reversedArrowID} />
+      <Pages
+        arrowID={arrowID}
+        color={arrowColor}
+        reversedArrowID={reversedArrowID}
+        totalPages={totalPages}
+      />
 
       <div className={s.paginationContainer}>
-        <Typography variant="body2">Показать</Typography>
+        <Typography variant={'body2'}>Показать</Typography>
 
         <Select
           classname={s.trigger}
@@ -38,7 +43,7 @@ export const Pagination = ({
           reversed={reversed}
         />
 
-        <Typography variant="body2">на странице</Typography>
+        <Typography variant={'body2'}>на странице</Typography>
       </div>
     </div>
   )

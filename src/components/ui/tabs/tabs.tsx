@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Typography } from '../typography'
-import { TitleElement } from './components/titleElement'
 
 import s from './tabs.module.scss'
+
+import { Typography } from '../typography'
+import { TitleElement } from './components/titleElement'
 
 type TabsType = {
   title: Array<string>
@@ -11,17 +12,18 @@ type TabsType = {
 
 export const Tabs = ({ title }: TabsType) => {
   const [active, setActive] = useState(0)
+
   return (
-    <Typography as="ul" className={s.container}>
+    <Typography as={'ul'} className={s.container}>
       {title.map((el, i) => {
         return (
           <TitleElement
-            key={i}
-            title={el}
+            active={active}
             index={i}
+            key={i}
             length={title.length}
             setActive={setActive}
-            active={active}
+            title={el}
           />
         )
       })}

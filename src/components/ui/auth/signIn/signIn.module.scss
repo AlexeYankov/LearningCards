@@ -24,18 +24,20 @@
 
   .forgotPassLink {
     text-decoration: none;
+    cursor: pointer;
     margin-bottom: 56px;
     text-align: right;
   }
 
   .linkDontHaveAccount {
-    margin-bottom: 11px;
+    margin-bottom: 10px;
     color: var(--color-light-900);
     text-align: center;
   }
 
   .linkSignUp {
-    color: var(-color--primary-500);
-    text-align: center;
+    margin: 0 auto;
+    padding-right: 0;
+    padding-left: 0;
   }
 }

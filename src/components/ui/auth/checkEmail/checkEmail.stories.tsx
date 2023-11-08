@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 
 import { CheckEmail } from './checkEmail'
+import { BrowserRouterDecorator, ReduxStoreProviderDecorator } from '@/api/storybookDecorators'
 
 const meta = {
   component: CheckEmail,
@@ -15,6 +16,7 @@ const meta = {
   },
   tags: ['autodocs'],
   title: 'Components/auth/checkEmail',
+  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator],
 } satisfies Meta<typeof CheckEmail>
 
 export default meta

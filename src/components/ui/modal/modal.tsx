@@ -1,29 +1,31 @@
 import { ComponentPropsWithoutRef, FC, ReactNode, forwardRef } from 'react'
 
 import { Close } from '@/asserts/icons/components/Close'
-import { ScrollBar } from '../scrollbar'
-import { Button } from '../button'
 import { Typography } from '@/components/ui/typography'
 import * as DialogRadix from '@radix-ui/react-dialog'
 
 import s from './modal.module.scss'
 
+import { Button } from '../button'
+import { ScrollBar } from '../scrollbar'
+
 type ModalProps = {
   className?: string
+  triggerName?: string
 }
 
 export const Modal = forwardRef<
   HTMLDivElement,
   ComponentPropsWithoutRef<typeof DialogRadix.Root> & ModalProps
 >((props, ref) => {
-  const { children, className, modal, onOpenChange, open, ...rest } = props
+  const { children, className, modal, onOpenChange, open, triggerName, ...rest } = props
 
   return (
     <div className={s.modal}>
       <DialogRadix.Root onOpenChange={onOpenChange} open={open}>
         <DialogRadix.Trigger asChild className={s.dialogTrigger}>
           <Button type={'button'} variant={'primary'}>
-            Edit
+            {triggerName}
           </Button>
         </DialogRadix.Trigger>
         <DialogRadix.Portal>

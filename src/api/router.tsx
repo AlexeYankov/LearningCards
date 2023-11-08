@@ -1,47 +1,61 @@
-import {PacksPage} from '@/components/ui/packs/packsPage'
+import {
+  createBrowserRouter,
+  Navigate,
+  Outlet,
+  RouteObject,
+  RouterProvider,
+} from 'react-router-dom'
 
-import {createBrowserRouter, Navigate, Outlet, RouteObject, RouterProvider,} from 'react-router-dom'
-import {SignIn} from '@/components/ui/auth/signIn/signIn'
-import {SignUp} from '@/components/ui/auth/signUp/signUp'
-import {CreateNewPassword} from '@/components/ui/auth/createNewPassword'
-import {CheckEmail} from '@/components/ui/auth/checkEmail'
-import {useMeQuery} from "@/api/auth-api/auth.api.ts";
-import {ForgotYourPassword} from "@/components/ui/auth/forgotYourPassword";
+import { CheckEmail } from '@/components/ui/auth/checkEmail'
+import { CreateNewPassword } from '@/components/ui/auth/createNewPassword'
+import { ForgotYourPassword } from '@/components/ui/auth/forgotYourPassword'
+import { SignIn } from '@/components/ui/auth/signIn/signIn'
+import { SignUp } from '@/components/ui/auth/signUp/signUp'
+import { CardsPage } from '@/components/ui/cards/cardsPage'
+import { PacksPage } from '@/components/ui/packs/packsPage'
 
 const publicRoutes: RouteObject[] = [
   {
-    path: '/login',
     element: <SignIn />,
+    path: '/login',
   },
   {
-    path: '/signUp',
     element: <SignUp />,
+    path: '/signUp',
   },
   {
-    path: '/createNewPassword',
     element: <CreateNewPassword />,
+    path: '/createNewPassword',
   },
   {
-    path: '/checkEmail',
     element: <CheckEmail />,
+    path: '/checkEmail',
   },
   {
+    element: <ForgotYourPassword />,
     path: '/forgotYourPassword',
-    element: <ForgotYourPassword/>,
+  },
+  {
+    element: <CreateNewPassword />,
+    path: '/createNewPassword',
   },
 ]
 
 const privateRoutes: RouteObject[] = [
   {
-    path: '/',
     element: <PacksPage />,
+    path: '/',
+  },
+  {
+    element: <CardsPage />,
+    path: '/:id',
   },
 ]
 
 const router = createBrowserRouter([
   {
-    element: <PrivateRoutes />,
     children: privateRoutes,
+    element: <PrivateRoutes />,
   },
 
   ...publicRoutes,

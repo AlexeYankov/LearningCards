@@ -1,14 +1,15 @@
-import { ComponentPropsWithoutRef, forwardRef, KeyboardEvent, ReactNode, useState } from 'react'
+import { ComponentPropsWithoutRef, KeyboardEvent, ReactNode, forwardRef, useState } from 'react'
 
 import { Close } from '@/asserts/icons/components/Close'
 import { Password } from '@/asserts/icons/components/Password'
 import { Search } from '@/asserts/icons/components/Search'
 
 import s from './textField.module.scss'
+
 import { Label } from '../label'
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
-  let {
+  const {
     className,
     disabled,
     errorMessage,
@@ -16,11 +17,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
     label,
     onClearClick,
     onEnter,
+    onKeyDown,
     password,
     placeholder,
     search,
     type = 'text',
-    onKeyDown,
     ...rest
   } = props
 
@@ -42,42 +43,40 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   }
 
   const isShowClearButton = onClearClick && search && rest.value?.length! > 0
-  const passwordIcon = valueType === 'password' ? 'eye-outline' : 'eye-off-outline'
+  const passwordIcon = valueType === 'password' ? 'eye-off-outline' : 'eye-outline'
 
   return (
-    <div className={s.box}>
-      <div>
-        <Label className={`${s.label} ${disabledLabelClass}`} htmlFor={inputId} label={label} />
-        <div className={`${s.inputContainer} ${className}`}>
-          {search && (
-            <div className={`${s.iconStart} ${disabledIconClass}`}>
-              <Search size={20} />
-            </div>
-          )}
-          <input
-            className={`${s.input} ${isShowErrorClass}`}
-            disabled={disabled}
-            id={inputId}
-            onKeyDown={handleKeyDown}
-            placeholder={placeholder}
-            ref={ref}
-            type={valueType}
-            {...rest}
-          />
-          {isShowClearButton && (
-            <button className={`${s.iconEnd} ${disabledIconClass}`} onClick={onClearClick}>
-              <Close size={20} />
-            </button>
-          )}
-          {password && (
-            <button className={`${s.iconEnd} ${disabledIconClass}`} onClick={handleChangeInputType}>
-              <Password iconId={passwordIcon} size={20} />
-            </button>
-          )}
-        </div>
-        <div className={s.test}>
-          {errorMessage && <div className={s.errorRed}>{errorMessage}</div>}
-        </div>
+    <div className={`${s.box} ${className}`}>
+      <Label className={`${s.label} ${disabledLabelClass}`} htmlFor={inputId} label={label} />
+      <div className={`${s.inputContainer}`}>
+        {search && (
+          <div className={`${s.iconStart} ${disabledIconClass}`}>
+            <Search size={20} />
+          </div>
+        )}
+        <input
+          className={`${s.input} ${isShowErrorClass}`}
+          disabled={disabled}
+          id={inputId}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder}
+          ref={ref}
+          type={valueType}
+          {...rest}
+        />
+        {isShowClearButton && (
+          <button className={`${s.iconEnd} ${disabledIconClass}`} onClick={onClearClick}>
+            <Close size={20} />
+          </button>
+        )}
+        {password && (
+          <button className={`${s.iconEnd} ${disabledIconClass}`} onClick={handleChangeInputType}>
+            <Password iconId={passwordIcon} size={20} />
+          </button>
+        )}
+      </div>
+      <div className={s.errorBox}>
+        {errorMessage && <div className={s.showErrorRed}>{errorMessage}</div>}
       </div>
     </div>
   )
@@ -86,14 +85,15 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 export type TextFieldProps = {
   children?: ReactNode
   className?: string
+  error?: string
   errorMessage?: null | string
   inputId?: string
   label?: string
   onClearClick?: () => void
+  onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
   password?: boolean
   placeholder?: string
   search?: boolean
   type?: 'password' | 'text'
-  onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
   value?: string
 } & ComponentPropsWithoutRef<'input'>

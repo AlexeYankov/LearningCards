@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container__pageBar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  width: 100%;
+  padding-bottom: 36px;
+}
+
+.container__pageName {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.container__textField {
+  position: relative;
+  top: 24px;
+}
+
+.container__common {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+
+  border: 1px solid var(--dark-500, #333);
+}
