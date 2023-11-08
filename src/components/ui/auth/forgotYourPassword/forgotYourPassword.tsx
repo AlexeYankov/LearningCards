@@ -6,17 +6,20 @@ import {Card} from "@/components/ui/card";
 import {z} from "zod";
 import {Typography} from "@/components/ui/typography";
 import {Button} from "@/components/ui/button";
+import {useVerifyEmailMutation} from "@/api/auth-api/auth.api.ts";
 
 type FormValues = z.infer<typeof loginSchema>
 const loginSchema = z.object({
     email: z.string().email(),
 })
 export const ForgotYourPassword = () => {
+    const [send]= useVerifyEmailMutation()
     const {handleSubmit, control} = useForm<FormValues>({
         resolver: zodResolver(loginSchema),
     })
     const onSubmit = (data: FormValues) => {
-        console.log(data)
+        const {email:code}=data
+        send({code})
     }
     return (
         <Card className={s.forgotYourPassword}>

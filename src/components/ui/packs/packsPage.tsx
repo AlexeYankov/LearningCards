@@ -7,7 +7,7 @@ import { tableBodyData, tableHeadCardsData } from './tableData'
 import { Pagination } from '../pagination'
 
 export const PacksPage = () => {
-  // const card = useGetCardsQuery('clogyz1ef1b3uvo2qac2uhhsj')
+
   return (
     <>
       <div className={f.container}>
