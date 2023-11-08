@@ -33,7 +33,7 @@ const publicRoutes: RouteObject[] = [
   },
   {
     element: <ForgotYourPassword />,
-    path: '/forgotPassword',
+    path: '/forgotYourPassword',
   },
   {
     element: <CreateNewPassword />,
@@ -62,9 +62,8 @@ const router = createBrowserRouter([
 ])
 
 function PrivateRoutes() {
-  const isAuthenticated = true
-
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
+  const {isError} = useMeQuery()
+  return !isError ? <Outlet /> : <Navigate to="/login" />
 }
 
 export const Router = () => {
