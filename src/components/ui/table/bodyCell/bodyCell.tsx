@@ -39,7 +39,7 @@ const BodyCell = ({ el, i, onClick, tableName, isMyDeck }: BodyCellComponentType
         </Typography>
       )}
       {el.svgs && (
-        <div className={`${s.iconsBox}`}>
+        <div className={`${s.iconsBox} `} data-show-icons={`${isMyDeck ? 'showIcons' : ''}`}>
           {el.svgs?.map((el, i) => {
             const crud: any = {
               0: () => alert('is learn'),

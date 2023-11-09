@@ -37,6 +37,7 @@ export const BodyCellHOC = ({ el, tableName, isMyDeck }: BodyCellHOCType) => {
         el={{ id: el.id, name: el.name || el.question }}
         i={(el.name && true) || false}
         tableName={tableName}
+        isMyDeck={isMyDeck}
       />
       {/*cards in pack*/}
       <BodyCell el={{ name: el.cardsCount || el.answer || '0' }} tableName={tableName} />
@@ -66,6 +67,7 @@ export const BodyCellHOC = ({ el, tableName, isMyDeck }: BodyCellHOCType) => {
             ],
           }}
           tableName={tableName}
+          isMyDeck={isMyDeck}
         />
       )}
       {/*true will change is your deck or not! is this ONLY FOR CARDS PAGE*/}

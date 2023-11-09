@@ -16,12 +16,13 @@ export const CardsPage = () => {
     <div className={f.container}>
       <PageName />
       <PageBar />
+
       <Table
         bodyCell={data?.items || []}
         className={f.container__common}
         headCell={tableHeadCardsData}
         tableName={'Cards'}
-        isMyDeck={true}
+        isMyDeck={false}
       />
       {/* <Pagination
           arrowColor={'white'}

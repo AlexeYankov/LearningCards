@@ -5,7 +5,7 @@ span {
   white-space: nowrap;
 }
 
-.headCellDecks {
+.headCell {
   display: flex;
   gap: 4px;
   align-items: center;
@@ -20,26 +20,10 @@ span {
     cursor: pointer;
     fill: white;
   }
-}
 
-.headCellCards {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-  justify-content: flex-start;
-
-  width: 100%;
-  padding: 6px 24px;
-
-  background-color: var(--color-dark-500);
-
-  svg {
-    cursor: pointer;
-    fill: white;
+  .typography {
+    font-size: var(--font-size-s);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-m);
   }
-}
-
-.headCell:last-child span {
-  z-index: -10;
-  opacity: 1;
 }

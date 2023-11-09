@@ -9,13 +9,14 @@ import { HeadCellType } from '../types'
 type HeadCellComponentType = {
   el: HeadCellType
   tableName?: string
-  isMyDeck?: boolean
 }
 
-const HeadCell = ({ el, tableName, isMyDeck }: HeadCellComponentType) => {
+const HeadCell = ({ el }: HeadCellComponentType) => {
   return (
-    <UIHeadCell className={`${tableName !== 'Decks' ? s.headCellDecks : s.headCellCards}`}>
-      <Typography variant={'heading3'}>{el.headCellName}</Typography>
+    <UIHeadCell className={s.headCell}>
+      <Typography variant={'heading3'} className={s.typography}>
+        {el.headCellName}
+      </Typography>
 
       {el.svgSizes?.id && (
         <div>
