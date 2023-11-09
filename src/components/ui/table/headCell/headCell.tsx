@@ -6,13 +6,13 @@ import s from './headCell.module.scss'
 import { Typography } from '../../typography'
 import { HeadCellType } from '../types'
 
-type HeadCellcomponentType = {
+type HeadCellComponentType = {
   el: HeadCellType
   tableName?: string
   isMyDeck?: boolean
 }
 
-const HeadCell = ({ el, tableName, isMyDeck }: HeadCellcomponentType) => {
+const HeadCell = ({ el, tableName, isMyDeck }: HeadCellComponentType) => {
   return (
     <UIHeadCell className={`${tableName !== 'Decks' ? s.headCellDecks : s.headCellCards}`}>
       <Typography variant={'heading3'}>{el.headCellName}</Typography>

@@ -8,9 +8,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-
   width: 100%;
-  padding-bottom: 36px;
 }
 
 .container__pageName {
@@ -19,12 +17,7 @@
   justify-content: space-between;
 
   width: 100%;
-  margin-bottom: 10px;
-}
-
-.container__textField {
-  position: relative;
-  top: 24px;
+  margin-bottom: 24px;
 }
 
 .container__common {
