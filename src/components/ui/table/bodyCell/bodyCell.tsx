@@ -18,10 +18,7 @@ type BodyCellComponentType = {
 
 const BodyCell = ({ el, i, onClick, tableName, isMyDeck }: BodyCellComponentType) => {
   return (
-    <Cell
-      className={s.bodyCell}
-      style={tableName === 'Decks' ? { width: isMyDeck ? '100px' : '200px' } : { width: '300px' }}
-    >
+    <Cell className={s.bodyCell}>
       {/*{el.checkBox && <CheckBox checked />}*/}
 
       {el.cover && (
@@ -43,15 +40,7 @@ const BodyCell = ({ el, i, onClick, tableName, isMyDeck }: BodyCellComponentType
         </Typography>
       )}
       {el.svgs && (
-        <div
-          style={{
-            alignItems: 'center',
-            display: 'flex',
-            justifyContent: 'flex-end',
-            // background: 'red',
-            width: isMyDeck ? '100px' : '100%',
-          }}
-        >
+        <div className={s.iconsBox}>
           {el.svgs?.map((el, i) => {
             const crud: any = {
               0: () => alert('is learn'),

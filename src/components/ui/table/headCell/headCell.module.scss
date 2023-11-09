@@ -5,7 +5,32 @@ span {
   white-space: nowrap;
 }
 
-.headCellDecks,
+.headCellDecks {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100%;
+  padding: 6px 24px;
+
+  background-color: var(--color-dark-500);
+
+  &:nth-child(1) {
+    display: none;
+  }
+
+  svg {
+    cursor: pointer;
+    fill: white;
+  }
+
+  &:nth-child(1) {
+    display: none;
+    background-color: red;
+  }
+}
+
 .headCellCards {
   display: flex;
   gap: 4px;
@@ -23,26 +48,7 @@ span {
   }
 }
 
-.headCellCards {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-  justify-content: flex-start;
-
-  padding: 6px 24px;
-
-  background-color: var(--color-dark-500);
-
-  svg {
-    cursor: pointer;
-    fill: white;
-  }
-}
-
 .headCell:last-child span {
   z-index: -10;
   opacity: 1;
-}
-
-.headCellDecks {
 }

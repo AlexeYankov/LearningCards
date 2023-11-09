@@ -3,5 +3,29 @@
   align-items: center;
   justify-content: center;
 
-  // flex-direction: column;
+  th {
+    &:nth-child(1) {
+      width: 100%;
+      min-width: 200px;
+    }
+
+    &:nth-child(2) {
+      width: 100%;
+      min-width: 200px;
+    }
+
+    &:nth-child(3) {
+      width: 100%;
+      min-width: 200px;
+    }
+
+    &:nth-child(4) {
+      width: 100%;
+      min-width: 400px;
+    }
+
+    &:nth-child(5) {
+      display: none;
+    }
+  }
 }
