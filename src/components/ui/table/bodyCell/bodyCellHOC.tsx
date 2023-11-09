@@ -26,9 +26,6 @@ export const BodyCellHOC = ({ el, tableName }: BodyCellHOCType) => {
     currentData.getDate() < 10 ? '0' + currentData.getDate() : currentData.getDate()
 
   const convertTimeTo = [currentDay, currentData.getMonth(), currentData.getFullYear()].join('.')
-  //   console.log(el.id)
-  //   const { data } = useGetDeckQuery(el.id)
-  // const { data } = useGetCardsQuery(el.id)
 
   return (
     <Row className={s.row}>
@@ -63,7 +60,7 @@ export const BodyCellHOC = ({ el, tableName }: BodyCellHOCType) => {
               { id: 'trash-outline' },
             ],
             id: el.id,
-            ...el,
+            author: { id: el.author?.id },
           }}
           tableName={'Decks'}
         />

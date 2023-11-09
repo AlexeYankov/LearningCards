@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementType, ReactNode, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ElementType, forwardRef, ReactNode } from 'react'
 
 import s from './typography.module.scss'
 
@@ -13,7 +13,7 @@ export const Typography = forwardRef<HTMLSpanElement, TypographyProps>((props, r
 })
 export type TypographyProps<T extends ElementType = ElementType> = {
   as?: T
-  children: ReactNode
+  children?: ReactNode
   className?: string
   variant?: VariantType
 } & ComponentPropsWithoutRef<T>
