@@ -63,6 +63,7 @@ export const BodyCellHOC = ({ el, tableName }: BodyCellHOCType) => {
               { id: 'trash-outline' },
             ],
             id: el.id,
+            ...el,
           }}
           tableName={'Decks'}
         />
