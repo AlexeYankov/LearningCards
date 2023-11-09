@@ -18,9 +18,7 @@ type BodyCellComponentType = {
 
 const BodyCell = ({ el, i, onClick, tableName, isMyDeck }: BodyCellComponentType) => {
   return (
-    <Cell className={s.bodyCell}>
-      {/*{el.checkBox && <CheckBox checked />}*/}
-
+    <Cell className={`${tableName === 'Cards' ? s.cardsCell : s.bodyCell}`}>
       {el.cover && (
         <Typography
           alt={el.bodyCellImageAlt || `${el.cover + ' image'}`}
@@ -40,7 +38,7 @@ const BodyCell = ({ el, i, onClick, tableName, isMyDeck }: BodyCellComponentType
         </Typography>
       )}
       {el.svgs && (
-        <div className={s.iconsBox}>
+        <div className={`${s.iconsBox}`}>
           {el.svgs?.map((el, i) => {
             const crud: any = {
               0: () => alert('is learn'),

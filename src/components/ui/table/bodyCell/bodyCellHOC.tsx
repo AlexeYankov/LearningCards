@@ -31,7 +31,7 @@ export const BodyCellHOC = ({ el, tableName, isMyDeck }: BodyCellHOCType) => {
   const convertTimeTo = [currentDay, currentMonth, currentData.getFullYear()].join('.')
 
   return (
-    <Row className={s.row}>
+    <Row className={`${tableName === 'Cards' ? s.cardsRow : s.decksRow}`}>
       {/*pack name*/}
       <BodyCell
         el={{ id: el.id, name: el.name || el.question }}
@@ -41,16 +41,16 @@ export const BodyCellHOC = ({ el, tableName, isMyDeck }: BodyCellHOCType) => {
       {/*cards in pack*/}
       <BodyCell el={{ name: el.cardsCount || el.answer || '0' }} tableName={tableName} />
       {/*//pack update data*/}
-      <BodyCell el={{ name: convertTimeTo }} tableName={'Decks'} />
+      <BodyCell el={{ name: convertTimeTo }} tableName={tableName} />
       {/*pack author or stars of card*/}
       {tableName === 'Decks' ? (
-        <BodyCell el={{ name: el.author?.name }} tableName={'Decks'} />
+        <BodyCell el={{ name: el.author?.name }} tableName={tableName} />
       ) : (
         <BodyCell
           el={{
             stars: result,
           }}
-          tableName={'Decks'}
+          tableName={tableName}
           isMyDeck={isMyDeck}
         />
       )}
@@ -65,7 +65,7 @@ export const BodyCellHOC = ({ el, tableName, isMyDeck }: BodyCellHOCType) => {
               { id: tableName === 'Decks' ? 'trash-outline' : '' },
             ],
           }}
-          tableName={'Decks'}
+          tableName={tableName}
         />
       )}
       {/*true will change is your deck or not! is this ONLY FOR CARDS PAGE*/}
@@ -75,7 +75,7 @@ export const BodyCellHOC = ({ el, tableName, isMyDeck }: BodyCellHOCType) => {
             svgs: [{ id: '' }, { id: 'edit-2-outline' }, { id: 'trash-outline' }],
           }}
           isMyDeck={isMyDeck}
-          tableName={'Decks'}
+          tableName={tableName}
         />
       )}
     </Row>

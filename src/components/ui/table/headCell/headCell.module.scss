@@ -16,18 +16,9 @@ span {
 
   background-color: var(--color-dark-500);
 
-  &:nth-child(1) {
-    display: none;
-  }
-
   svg {
     cursor: pointer;
     fill: white;
-  }
-
-  &:nth-child(1) {
-    display: none;
-    background-color: red;
   }
 }
 

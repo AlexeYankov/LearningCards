@@ -1,27 +1,61 @@
-.row {
+.decksRow {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 1000px;
 
   th {
     &:nth-child(1) {
       width: 100%;
-      min-width: 200px;
+      max-width: 200px;
     }
 
     &:nth-child(2) {
       width: 100%;
-      min-width: 200px;
+      max-width: 200px;
     }
 
     &:nth-child(3) {
       width: 100%;
-      min-width: 200px;
+      max-width: 200px;
     }
 
     &:nth-child(4) {
       width: 100%;
-      min-width: 400px;
+      max-width: 400px;
+    }
+
+    &:nth-child(5) {
+      display: none;
+    }
+  }
+}
+
+.cardsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1000px;
+
+  th {
+    &:nth-child(1) {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    &:nth-child(2) {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    &:nth-child(3) {
+      width: 100%;
+      max-width: 200px;
+    }
+
+    &:nth-child(4) {
+      width: 100%;
+      max-width: 200px;
     }
 
     &:nth-child(5) {

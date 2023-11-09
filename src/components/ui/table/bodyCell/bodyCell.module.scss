@@ -11,11 +11,13 @@ img {
   background: lightgray 50% / cover no-repeat;
 }
 
-.bodyCell {
+.bodyCell,
+.cardsCell {
   display: flex;
   align-items: center;
   justify-content: flex-start;
 
+  min-height: 37px;
   padding: 6px 24px;
 
   border-bottom: 1px solid var(--color-dark-500);
@@ -26,14 +28,12 @@ img {
 
   .stars {
     display: flex;
-    margin: 0;
-    padding-top: 8px;
+    gap: 10px;
   }
 
   .svgsContainer {
     cursor: pointer;
     display: flex;
-    padding-top: 8px;
   }
 
   .stars svg {
@@ -48,36 +48,6 @@ img {
   a :visited {
     color: var(--color-light-100);
   }
-
-  &:nth-child(1) {
-    width: 100%;
-    min-width: 200px;
-    min-height: 37px;
-    background-color: red;
-  }
-
-  &:nth-child(2) {
-    width: 100%;
-    min-width: 200px;
-    background-color: rosybrown;
-  }
-
-  &:nth-child(3) {
-    width: 100%;
-    min-width: 200px;
-    background-color: #0a6638;
-  }
-
-  &:nth-child(4) {
-    width: 100%;
-    min-width: 285px;
-    background-color: #73a5ff;
-  }
-
-  &:nth-child(5) {
-    width: 100%;
-    max-width: 115px;
-  }
 }
 
 .iconsBox {
@@ -85,4 +55,74 @@ img {
   gap: 10px;
   align-items: center;
   justify-content: center;
+
+  min-height: 24px;
+}
+
+.bodyCell {
+  &:nth-child(1) {
+    width: 100%;
+    max-width: 200px;
+    background-color: red;
+  }
+
+  &:nth-child(2) {
+    width: 100%;
+    max-width: 200px;
+    background-color: rosybrown;
+  }
+
+  &:nth-child(3) {
+    width: 100%;
+    max-width: 200px;
+    background-color: #0a6638;
+  }
+
+  &:nth-child(4) {
+    width: 100%;
+    max-width: 285px;
+  }
+
+  &:nth-child(5) {
+    width: 100%;
+    max-width: 115px;
+    background-color: #660a1d;
+  }
+}
+
+.cardsCell {
+  &:nth-child(1) {
+    width: 100%;
+    max-width: 300px;
+    background-color: cadetblue;
+  }
+
+  &:nth-child(2) {
+    width: 100%;
+    min-width: 300px;
+    max-width: 300px;
+    background-color: rosybrown;
+  }
+
+  &:nth-child(3) {
+    width: 100%;
+    min-width: 200px;
+    max-width: 200px;
+    background-color: #0a6638;
+  }
+
+  &:nth-child(4) {
+    gap: 10px;
+    width: 100%;
+    max-width: 200px;
+    background-color: saddlebrown;
+  }
+
+  &:nth-child(5) {
+    display: none;
+  }
+}
+
+.cardsCell.iconsBox {
+  display: none;
 }
