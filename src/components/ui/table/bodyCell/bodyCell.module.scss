@@ -28,7 +28,6 @@ img {
 
   .stars {
     display: flex;
-    gap: 10px;
   }
 
   .svgsContainer {
@@ -48,6 +47,10 @@ img {
   a :visited {
     color: var(--color-light-100);
   }
+
+  .typography {
+    font-size: var(--font-size-s);
+  }
 }
 
 .iconsBox {
@@ -63,19 +66,16 @@ img {
   &:nth-child(1) {
     width: 100%;
     max-width: 200px;
-    background-color: red;
   }
 
   &:nth-child(2) {
     width: 100%;
     max-width: 200px;
-    background-color: rosybrown;
   }
 
   &:nth-child(3) {
     width: 100%;
     max-width: 200px;
-    background-color: #0a6638;
   }
 
   &:nth-child(4) {
@@ -86,7 +86,6 @@ img {
   &:nth-child(5) {
     width: 100%;
     max-width: 115px;
-    background-color: #660a1d;
   }
 }
 
@@ -94,26 +93,22 @@ img {
   &:nth-child(1) {
     width: 100%;
     max-width: 300px;
-    background-color: cadetblue;
   }
 
   &:nth-child(2) {
     width: 100%;
     max-width: 300px;
-    background-color: rosybrown;
   }
 
   &:nth-child(3) {
     width: 100%;
     max-width: 200px;
-    background-color: #0a6638;
   }
 
   &:nth-child(4) {
     gap: 10px;
     width: 100%;
     max-width: 200px;
-    background-color: saddlebrown;
   }
 
   &:nth-child(5) {

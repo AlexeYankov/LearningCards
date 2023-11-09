@@ -1,9 +1,12 @@
-.decksRow {
+.decksRow,
+.cardsRow {
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 1000px;
+}
 
+.decksRow {
   th {
     &:nth-child(1) {
       width: 100%;
@@ -32,11 +35,6 @@
 }
 
 .cardsRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1000px;
-
   th {
     &:nth-child(1) {
       width: 100%;

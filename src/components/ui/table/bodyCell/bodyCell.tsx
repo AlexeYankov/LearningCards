@@ -24,16 +24,17 @@ const BodyCell = ({ el, i, onClick, tableName, isMyDeck }: BodyCellComponentType
           alt={el.bodyCellImageAlt || `${el.cover + ' image'}`}
           as={'img'}
           src={el.cover}
+          className={s.typography}
         />
       )}
 
       {el.name && (
-        <Typography onClick={onClick} variant={'body1'}>
+        <Typography onClick={onClick} variant={'body1'} className={s.typography}>
           {i ? <Link to={el.id || ''}>{el.name}</Link> : el.name}
         </Typography>
       )}
       {el.question && (
-        <Typography onClick={onClick} variant={'body1'}>
+        <Typography onClick={onClick} variant={'body1'} className={s.typography}>
           {el.question}
         </Typography>
       )}
