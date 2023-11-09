@@ -1,13 +1,21 @@
-.decksRow,
-.cardsRow {
-  //display: flex;
-  //align-items: center;
-  //justify-content: center;
-  //min-width: 1000px;
-}
-
 .decksRow {
   th {
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3) {
+      min-width: 200px;
+      max-width: 200px;
+    }
+
+    &:nth-child(4) {
+      min-width: 275px;
+      max-width: 280px;
+    }
+
+    &:nth-child(5) {
+      min-width: 90px;
+      max-width: 90px;
+    }
   }
 }
 
@@ -30,8 +38,8 @@
     }
 
     &:nth-child(5) {
-      min-width: 100px;
-      max-width: 100px;
+      min-width: 93px;
+      max-width: 93px;
     }
   }
 }

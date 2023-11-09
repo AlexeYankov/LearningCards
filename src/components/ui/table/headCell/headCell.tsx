@@ -18,13 +18,13 @@ const HeadCell = ({ el }: HeadCellComponentType) => {
         {el.headCellName}
       </Typography>
 
-      {el.svgSizes?.id && (
-        <div>
+      <span className={s.icon}>
+        {el.svgSizes?.id && (
           <svg viewBox={'0 0 24 24'} width={'12px'}>
             <use xlinkHref={`${sprite}#${el.svgSizes?.id}`} />
           </svg>
-        </div>
-      )}
+        )}
+      </span>
     </UIHeadCell>
   )
 }

@@ -3,10 +3,9 @@ import React from 'react'
 import { Body, Head, Root, Row } from '@it-incubator/ui-kit'
 
 import s from './table.module.scss'
-
-import { BodyCellHOC } from './bodyCell/bodyCellHOC'
-import HeadCell from './headCell/headCell'
 import { BodyCellType, HeadCellType, TableType } from './types'
+import HeadCell from '@/components/ui/table/headCell/headCell.tsx'
+import { BodyCellHOC } from '@/components/ui/table/bodyCell/bodyCellHOC'
 
 export const Table = ({
   bodyCell,
@@ -20,11 +19,7 @@ export const Table = ({
     <Root className={`${className}`}>
       <React.Fragment key={'.0'}>
         <Head>
-          <Row
-            className={`${tableName === 'Cards' ? s.cardsRow : s.decksRow} ${
-              isMyDeck ? s.lastHeadItem : ''
-            }`}
-          >
+          <Row className={`${tableName === 'Cards' ? s.cardsRow : s.decksRow}`}>
             {headCell?.map((el: HeadCellType, i) => {
               return <HeadCell el={el} key={i} tableName={tableName} {...rest} />
             })}

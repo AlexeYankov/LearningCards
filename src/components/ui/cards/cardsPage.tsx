@@ -12,7 +12,7 @@ export const CardsPage = () => {
   const { id } = useParams()
   const { data } = useGetCardsQuery(`${id}`)
 
-  const flag = false
+  const flag = true
   return (
     <div className={f.container}>
       <PageName />
