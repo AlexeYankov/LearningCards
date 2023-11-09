@@ -12,6 +12,7 @@ export const CardsPage = () => {
   const { id } = useParams()
   const { data } = useGetCardsQuery(`${id}`)
 
+  const flag = false
   return (
     <div className={f.container}>
       <PageName />
@@ -20,9 +21,11 @@ export const CardsPage = () => {
       <Table
         bodyCell={data?.items || []}
         className={f.container__common}
-        headCell={tableHeadCardsData}
+        headCell={
+          flag ? tableHeadCardsData : tableHeadCardsData.filter(el => el.headCellName != '')
+        }
         tableName={'Cards'}
-        isMyDeck={false}
+        isMyDeck={flag}
       />
       {/* <Pagination
           arrowColor={'white'}

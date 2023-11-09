@@ -13,13 +13,8 @@ img {
 
 .bodyCell,
 .cardsCell {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-
-  min-height: 37px;
   padding: 6px 24px;
-
+  text-align: left;
   border-bottom: 1px solid var(--color-dark-500);
 
   svg:not(.stars) {
@@ -28,6 +23,13 @@ img {
 
   .stars {
     display: flex;
+  }
+
+  .starsContainer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
   }
 
   .svgsContainer {
@@ -63,58 +65,7 @@ img {
 }
 
 .bodyCell {
-  &:nth-child(1) {
-    width: 100%;
-    max-width: 200px;
-  }
-
-  &:nth-child(2) {
-    width: 100%;
-    max-width: 200px;
-  }
-
-  &:nth-child(3) {
-    width: 100%;
-    max-width: 200px;
-  }
-
-  &:nth-child(4) {
-    width: 100%;
-    max-width: 285px;
-  }
-
-  &:nth-child(5) {
-    width: 100%;
-    max-width: 115px;
-  }
 }
 
 .cardsCell {
-  &:nth-child(1) {
-    width: 100%;
-    min-width: 300px;
-    max-width: 300px;
-  }
-
-  &:nth-child(2) {
-    width: 100%;
-    min-width: 300px;
-    max-width: 300px;
-  }
-
-  &:nth-child(3) {
-    width: 100%;
-    min-width: 130px;
-  }
-
-  &:nth-child(4) {
-    gap: 10px;
-    width: 100%;
-    max-width: 200px;
-  }
-
-  &:nth-child(5) {
-    width: 100%;
-    max-width: 105px;
-  }
 }

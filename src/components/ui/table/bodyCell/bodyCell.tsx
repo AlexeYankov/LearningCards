@@ -59,16 +59,17 @@ const BodyCell = ({ el, i, onClick, tableName, isMyDeck }: BodyCellComponentType
           })}
         </div>
       )}
-
-      {el.stars?.map((id, i) => {
-        return (
-          <div className={s.stars} key={i}>
-            <svg height={'16px'} viewBox={'0 0 24 24'}>
-              <use xlinkHref={`${sprite}#${id}`} />
-            </svg>
-          </div>
-        )
-      })}
+      <div className={s.starsContainer}>
+        {el.stars?.map((id, i) => {
+          return (
+            <div className={s.stars} key={i}>
+              <svg height={'16px'} viewBox={'0 0 24 24'}>
+                <use xlinkHref={`${sprite}#${id}`} />
+              </svg>
+            </div>
+          )
+        })}
+      </div>
     </Cell>
   )
 }

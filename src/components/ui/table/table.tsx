@@ -20,7 +20,11 @@ export const Table = ({
     <Root className={`${className}`}>
       <React.Fragment key={'.0'}>
         <Head>
-          <Row className={`${tableName === 'Cards' ? s.cardsRow : s.decksRow} `}>
+          <Row
+            className={`${tableName === 'Cards' ? s.cardsRow : s.decksRow} ${
+              isMyDeck ? s.lastHeadItem : ''
+            }`}
+          >
             {headCell?.map((el: HeadCellType, i) => {
               return <HeadCell el={el} key={i} tableName={tableName} {...rest} />
             })}
