@@ -15,8 +15,12 @@ type HeadCellcomponentType = {
 const HeadCell = ({ el, tableName, isMyDeck }: HeadCellcomponentType) => {
   return (
     <UIHeadCell
-      className={tableName !== 'Cards' && el.headCellName === 'Grade' ? s.headCellLast : s.headCell}
-      style={tableName !== 'Decks' ? { width: '300px' } : { width: isMyDeck && el.headCellName !== 'Last Updated' ? '100px' : '200px' }}
+      className={`${tableName !== 'Decks' ? s.headCellDecks : s.headCellCards}`}
+      // style={
+      //   tableName !== 'Decks'
+      //     ? { width: '300px' }
+      //     : { width: isMyDeck && el.headCellName !== 'Last Updated' ? '100px' : '200px' }
+      // }
     >
       <Typography variant={'heading3'}>{el.headCellName}</Typography>
 

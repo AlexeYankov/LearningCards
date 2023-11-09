@@ -8,7 +8,14 @@ import { BodyCellHOC } from './bodyCell/bodyCellHOC'
 import HeadCell from './headCell/headCell'
 import { BodyCellType, HeadCellType, TableType } from './types'
 
-export const Table = ({ bodyCell, className, headCell, tableName,isMyDeck, ...rest }: TableType) => {
+export const Table = ({
+  bodyCell,
+  className,
+  headCell,
+  tableName,
+  isMyDeck,
+  ...rest
+}: TableType) => {
   return (
     <Root className={`${className}`}>
       <React.Fragment key={'.0'}>
@@ -29,7 +36,7 @@ export const Table = ({ bodyCell, className, headCell, tableName,isMyDeck, ...re
         </Head>
         <Body>
           {bodyCell?.map((el: BodyCellType, i) => {
-            return <BodyCellHOC el={el} key={i} tableName={tableName || ''} isMyDeck={isMyDeck}/>
+            return <BodyCellHOC el={el} key={i} tableName={tableName || ''} isMyDeck={isMyDeck} />
           })}
         </Body>
       </React.Fragment>

@@ -1,36 +1,48 @@
 span {
+  cursor: pointer;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
-  cursor: pointer;
 }
 
-.headCell {
-  padding: 6px 24px;
-  width: 100px;
+.headCellDecks,
+.headCellCards {
   display: flex;
+  gap: 4px;
   align-items: center;
   justify-content: flex-start;
+
+  width: 100%;
+  padding: 6px 24px;
+
   background-color: var(--color-dark-500);
-  gap: 4px;
+
   svg {
-    fill: white;
     cursor: pointer;
+    fill: white;
   }
 }
-.headCellLast {
-  padding: 6px 24px;
+
+.headCellCards {
   display: flex;
+  gap: 4px;
   align-items: center;
   justify-content: flex-start;
+
+  padding: 6px 24px;
+
   background-color: var(--color-dark-500);
-  gap: 4px;
+
   svg {
-    fill: white;
     cursor: pointer;
+    fill: white;
   }
 }
+
 .headCell:last-child span {
-  opacity: 1;
   z-index: -10;
+  opacity: 1;
+}
+
+.headCellDecks {
 }

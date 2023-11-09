@@ -1,4 +1,3 @@
-import { useGetCardsQuery } from '@/api/common.api'
 import { Row } from '@it-incubator/ui-kit'
 
 import s from '../table.module.scss'
@@ -9,7 +8,7 @@ import BodyCell from './bodyCell'
 type BodyCellHOCType = {
   el: BodyCellType
   tableName: string
-  isMyDeck: boolean
+  isMyDeck?: boolean
 }
 
 export const BodyCellHOC = ({ el, tableName, isMyDeck }: BodyCellHOCType) => {

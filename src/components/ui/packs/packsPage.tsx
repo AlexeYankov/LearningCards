@@ -35,7 +35,7 @@ export const PacksPage = () => {
           className={f.container__common}
           headCell={tableHeadData}
           tableName={'Decks'}
-          isMyDeck={false}
+          isMyDeck={true}
         />
 
         <Pagination
