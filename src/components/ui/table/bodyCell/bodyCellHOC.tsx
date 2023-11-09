@@ -1,3 +1,4 @@
+import { useGetCardsQuery } from '@/api/common.api'
 import { Row } from '@it-incubator/ui-kit'
 
 import s from '../table.module.scss'
@@ -8,9 +9,10 @@ import BodyCell from './bodyCell'
 type BodyCellHOCType = {
   el: BodyCellType
   tableName: string
+  isMyDeck: boolean
 }
 
-export const BodyCellHOC = ({ el, tableName }: BodyCellHOCType) => {
+export const BodyCellHOC = ({ el, tableName, isMyDeck }: BodyCellHOCType) => {
   const starsGrade = Array.from({ length: Math.round(el.grade || 0) }, () => 'star')
   let result = starsGrade
   const emptyStarsGrade = Array.from(
@@ -24,8 +26,10 @@ export const BodyCellHOC = ({ el, tableName }: BodyCellHOCType) => {
   const currentData = new Date(el.updated || 0)
   const currentDay =
     currentData.getDate() < 10 ? '0' + currentData.getDate() : currentData.getDate()
+  const currentMonth =
+    currentData.getMonth() < 10 ? '0' + currentData.getMonth() : currentData.getMonth()
 
-  const convertTimeTo = [currentDay, currentData.getMonth(), currentData.getFullYear()].join('.')
+  const convertTimeTo = [currentDay, currentMonth, currentData.getFullYear()].join('.')
 
   return (
     <Row className={s.row}>
@@ -48,20 +52,30 @@ export const BodyCellHOC = ({ el, tableName }: BodyCellHOCType) => {
             stars: result,
           }}
           tableName={'Decks'}
+          isMyDeck={isMyDeck}
         />
       )}
-      {/*CRUD icons*/}
+      {/*CRUD icons for DECKS PAGE*/}
       {tableName === 'Decks' && (
         <BodyCell
           el={{
             svgs: [
               { id: 'play-circle-outline' },
-              { id: 'edit-2-outline' },
-              { id: 'trash-outline' },
+              /*tableName vs decks will change if is your deck or not!*/
+              { id: tableName === 'Decks' ? 'edit-2-outline' : '' },
+              { id: tableName === 'Decks' ? 'trash-outline' : '' },
             ],
-            id: el.id,
-            author: { id: el.author?.id },
           }}
+          tableName={'Decks'}
+        />
+      )}
+      {/*true will change is your deck or not! is this ONLY FOR CARDS PAGE*/}
+      {tableName === 'Cards' && isMyDeck && (
+        <BodyCell
+          el={{
+            svgs: [{ id: '' }, { id: 'edit-2-outline' }, { id: 'trash-outline' }],
+          }}
+          isMyDeck={isMyDeck}
           tableName={'Decks'}
         />
       )}

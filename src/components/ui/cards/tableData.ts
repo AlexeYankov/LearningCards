@@ -3,4 +3,5 @@ export const tableHeadCardsData = [
   { headCellName: 'Answer' },
   { headCellName: 'Last Updated' },
   { headCellName: 'Grade' },
+  { headCellName: 's' },
 ]

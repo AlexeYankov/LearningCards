@@ -3,6 +3,7 @@ export type TableType = {
   className?: string
   headCell?: HeadCellType[]
   tableName?: string
+  isMyDeck?: boolean
 }
 
 export type HeadCellType = {

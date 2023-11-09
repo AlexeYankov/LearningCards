@@ -22,6 +22,7 @@ export const CardsPage = () => {
         className={f.container__common}
         headCell={tableHeadCardsData}
         tableName={'Cards'}
+        isMyDeck={true}
       />
       {/* <Pagination
           arrowColor={'white'}
