@@ -1,20 +1,14 @@
-span {
-  cursor: pointer;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-img {
-  width: 120px;
-  height: 48px;
-  background: lightgray 50% / cover no-repeat;
-}
-
 .bodyCell,
 .cardsCell {
+  overflow: hidden;
+
+  max-width: 200px;
   padding: 6px 24px;
+
   text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
   border-bottom: 1px solid var(--color-dark-500);
 
   svg:not(.stars) {
@@ -51,21 +45,20 @@ img {
   }
 
   .typography {
+    cursor: pointer;
     font-size: var(--font-size-s);
   }
-}
 
-.iconsBox {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
+  .iconsBox {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
 
-  min-height: 24px;
-}
-
-.bodyCell {
-}
-
-.cardsCell {
+  img {
+    width: 120px;
+    height: 48px;
+    background: lightgray 50% / cover no-repeat;
+  }
 }

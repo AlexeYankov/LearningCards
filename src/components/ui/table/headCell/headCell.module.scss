@@ -1,10 +1,3 @@
-span {
-  cursor: pointer;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .headCell {
   padding: 6px 24px;
   text-align: left;
@@ -16,9 +9,12 @@ span {
   }
 
   .typography {
+    cursor: pointer;
+
     font-size: var(--font-size-s);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-m);
+    white-space: nowrap;
   }
 
   .icon {
