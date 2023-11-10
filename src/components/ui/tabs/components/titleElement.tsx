@@ -2,7 +2,9 @@ import s from './titleElement.module.scss'
 
 import { Typography } from '../../typography'
 import { useAppDispatch } from '@/api/store.ts'
-import { changeShowTabDecks } from '@/api/decks/pagination.reducer'
+import { changeShowAuthorTabDecks } from '@/api/decks/pagination.reducer'
+import { useMeQuery } from '@/api/auth-api/auth.api.ts'
+import { useEffect } from 'react'
 
 type TitleElementType = {
   active: number
@@ -15,10 +17,17 @@ type TitleElementType = {
 export const TitleElement = ({ active, index, length, setActive, title }: TitleElementType) => {
   const dispatch = useAppDispatch()
 
-  const handleChangeShowTabDecksClick = (value: number) => {
-    dispatch(changeShowTabDecks({ showMyTabDecks: !value }))
+  const { data } = useMeQuery()
+
+  const handleChangeOrderByClick = (value: number) => {
+    dispatch(changeShowAuthorTabDecks({ authorId: data.id }))
     setActive(value)
+    if (value === 1) {
+      dispatch(changeShowAuthorTabDecks({ authorId: '' }))
+    }
   }
+
+  useEffect(() => {}, [title])
 
   return (
     <Typography
@@ -26,7 +35,7 @@ export const TitleElement = ({ active, index, length, setActive, title }: TitleE
       className={`${s.container} ${active === index && s.containerActive} ${
         index === length - 1 && s.end
       }`}
-      onClick={() => handleChangeShowTabDecksClick(index)}
+      onClick={() => handleChangeOrderByClick(index)}
       tabIndex={0}
     >
       <Typography variant={'body1'}>{title}</Typography>

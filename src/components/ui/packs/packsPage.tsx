@@ -15,12 +15,14 @@ export const PacksPage = () => {
   const currentPage = useAppSelector(state => state.pagination.currentPage)
   const maxCardsCount = useAppSelector(state => state.pagination.maxCardsCount)
   const minCardsCount = useAppSelector(state => state.pagination.minCardsCount)
+  const authorId = useAppSelector(state => state.pagination.authorId)
 
   const { data } = useGetDecksQuery({
     currentPage,
     itemsPerPage,
     maxCardsCount,
     minCardsCount,
+    authorId,
   })
 
   useEffect(() => {}, [data])
