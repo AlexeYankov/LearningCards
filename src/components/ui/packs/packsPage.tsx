@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useGetDecksQuery } from '@/api/decks/decks.api'
 
 import f from './packsPage.module.scss'
@@ -24,8 +23,6 @@ export const PacksPage = () => {
     minCardsCount,
     authorId,
   })
-
-  useEffect(() => {}, [data])
 
   return (
     <>

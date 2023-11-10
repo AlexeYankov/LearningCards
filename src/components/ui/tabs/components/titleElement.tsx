@@ -4,7 +4,6 @@ import { Typography } from '../../typography'
 import { useAppDispatch } from '@/api/store.ts'
 import { changeCurrentPage, changeShowAuthorTabDecks } from '@/api/decks/pagination.reducer'
 import { useMeQuery } from '@/api/auth-api/auth.api'
-import { useEffect } from 'react'
 
 type TitleElementType = {
   active: number
@@ -27,8 +26,6 @@ export const TitleElement = ({ active, index, length, setActive, title }: TitleE
       dispatch(changeShowAuthorTabDecks({ authorId: '' }))
     }
   }
-
-  useEffect(() => {}, [title])
 
   return (
     <Typography
