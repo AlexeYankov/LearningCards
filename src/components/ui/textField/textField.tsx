@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, KeyboardEvent, ReactNode, forwardRef, useState } from 'react'
+import { ComponentPropsWithoutRef, forwardRef, KeyboardEvent, ReactNode, useState } from 'react'
 
 import { Close } from '@/asserts/icons/components/Close'
 import { Password } from '@/asserts/icons/components/Password'
@@ -70,7 +70,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
           </button>
         )}
         {password && (
-          <button className={`${s.iconEnd} ${disabledIconClass}`} onClick={handleChangeInputType}>
+          <button
+            className={`${s.iconEnd} ${disabledIconClass}`}
+            type={'button'}
+            onClick={handleChangeInputType}
+          >
             <Password iconId={passwordIcon} size={20} />
           </button>
         )}
