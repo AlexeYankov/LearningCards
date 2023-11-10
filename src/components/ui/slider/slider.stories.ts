@@ -1,9 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { SliderDemo } from './slider'
+import { Slider } from './slider'
+import { BrowserRouterDecorator, ReduxStoreProviderDecorator } from '@/api/storybookDecorators.tsx'
 
 const meta = {
-  component: SliderDemo,
+  component: Slider,
   parameters: {
     backgrounds: {
       default: 'black',
@@ -11,15 +12,13 @@ const meta = {
     },
   },
   tags: ['autodocs'],
-  title: 'Components/SliderDemo',
-} satisfies Meta<typeof SliderDemo>
+  title: 'Components/Slider',
+  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator],
+} satisfies Meta<typeof Slider>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const WithInitialProps: Story = {
-  args: {
-    defaultValue: [0, 100],
-    thumbLabels: ['start', 'end'],
-  },
+  args: {},
 }

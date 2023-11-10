@@ -1,9 +1,8 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
 
-import sprite from '@/asserts/sprite.svg'
-
 import s from './check-box.module.scss'
 
+import sprite from '@/asserts/sprite.svg'
 import { Label } from '../label'
 
 export const CheckBox = <T extends ElementType = 'input'>(
@@ -13,18 +12,19 @@ export const CheckBox = <T extends ElementType = 'input'>(
     IconID,
     SelectedIconID,
     as: Component = 'input',
-    checkboxId,
-    checked,
     className,
     disabled = false,
     fullWidth,
     height = '100%',
     label,
-    onChange,
     theme = 'white',
     viewBox = '0 0 24 24',
     width = '100%',
+    checkboxId,
+    onChange,
+    checked,
     ...rest
+
   } = props
 
   return (
@@ -52,6 +52,7 @@ export const CheckBox = <T extends ElementType = 'input'>(
           }}
           type={'checkbox'}
           {...rest}
+
         />
       </div>
       {label && <Label htmlFor={'checkboxId'} label={label} />}
@@ -60,10 +61,9 @@ export const CheckBox = <T extends ElementType = 'input'>(
 }
 
 export type CheckBoxProps<T extends ElementType = 'input'> = {
+  checkboxId?: string
   IconID?: string
   SelectedIconID?: string
-  checkboxId?: string
-  // as?: T
   className?: string
   fullWidth?: boolean
   height?: string

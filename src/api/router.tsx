@@ -13,6 +13,7 @@ import { SignIn } from '@/components/ui/auth/signIn/signIn'
 import { SignUp } from '@/components/ui/auth/signUp/signUp'
 import { CardsPage } from '@/components/ui/cards/cardsPage'
 import { PacksPage } from '@/components/ui/packs/packsPage'
+import { useMeQuery } from '@/api/auth-api/auth.api.ts'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -33,7 +34,7 @@ const publicRoutes: RouteObject[] = [
   },
   {
     element: <ForgotYourPassword />,
-    path: '/forgotPassword',
+    path: '/forgotYourPassword',
   },
   {
     element: <CreateNewPassword />,
@@ -62,9 +63,8 @@ const router = createBrowserRouter([
 ])
 
 function PrivateRoutes() {
-  const isAuthenticated = true
-
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
+  const { isError } = useMeQuery()
+  return !isError ? <Outlet /> : <Navigate to="/login" />
 }
 
 export const Router = () => {

@@ -6,26 +6,25 @@ import s from './headCell.module.scss'
 import { Typography } from '../../typography'
 import { HeadCellType } from '../types'
 
-type HeadCellcomponentType = {
+type HeadCellComponentType = {
   el: HeadCellType
   tableName?: string
 }
 
-const HeadCell = ({ el, tableName }: HeadCellcomponentType) => {
+const HeadCell = ({ el }: HeadCellComponentType) => {
   return (
-    <UIHeadCell
-      className={tableName !== 'Cards' && el.headCellName === 'Grade' ? s.headCellLast : s.headCell}
-      style={tableName !== 'Decks' ? { width: '300px' } : { width: '200px' }}
-    >
-      <Typography variant={'heading3'}>{el.headCellName}</Typography>
+    <UIHeadCell className={s.headCell}>
+      <Typography variant={'heading3'} className={s.typography}>
+        {el.headCellName}
+      </Typography>
 
-      {el.svgSizes?.id && (
-        <div>
+      <span className={s.icon}>
+        {el.svgSizes?.id && (
           <svg viewBox={'0 0 24 24'} width={'12px'}>
             <use xlinkHref={`${sprite}#${el.svgSizes?.id}`} />
           </svg>
-        </div>
-      )}
+        )}
+      </span>
     </UIHeadCell>
   )
 }

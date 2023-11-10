@@ -3,5 +3,5 @@ export const tableHeadData = [
   { headCellName: 'Cards' },
   { headCellName: 'Last Updated', svgSizes: { id: 'arrow-ios-Up' } },
   { headCellName: 'Created by' },
-  { headCellName: 's' },
+  { headCellName: '' },
 ]

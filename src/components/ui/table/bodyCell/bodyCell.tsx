@@ -13,44 +13,33 @@ type BodyCellComponentType = {
   i?: boolean
   onClick?: () => void
   tableName?: string
+  isMyDeck?: boolean
 }
 
-const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) => {
+const BodyCell = ({ el, i, onClick, tableName, isMyDeck }: BodyCellComponentType) => {
   return (
-    <Cell
-      className={s.bodyCell}
-      style={tableName === 'Decks' ? { width: '200px' } : { width: '300px' }}
-    >
-      {/*{el.checkBox && <CheckBox checked />}*/}
-
+    <Cell className={`${tableName === 'Cards' ? s.cardsCell : s.bodyCell}`}>
       {el.cover && (
         <Typography
           alt={el.bodyCellImageAlt || `${el.cover + ' image'}`}
           as={'img'}
           src={el.cover}
+          className={s.typography}
         />
       )}
 
       {el.name && (
-        <Typography onClick={onClick} variant={'body1'}>
+        <Typography onClick={onClick} variant={'body1'} className={s.typography}>
           {i ? <Link to={el.id || ''}>{el.name}</Link> : el.name}
         </Typography>
       )}
       {el.question && (
-        <Typography onClick={onClick} variant={'body1'}>
+        <Typography onClick={onClick} variant={'body1'} className={s.typography}>
           {el.question}
         </Typography>
       )}
       {el.svgs && (
-        <div
-          style={{
-            alignItems: 'center',
-            display: 'flex',
-            justifyContent: 'flex-end',
-            // background: 'red',
-            width: '100%',
-          }}
-        >
+        <div className={`${s.iconsBox} `} data-show-icons={`${isMyDeck ? 'showIcons' : ''}`}>
           {el.svgs?.map((el, i) => {
             const crud: any = {
               0: () => alert('is learn'),
@@ -59,25 +48,28 @@ const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) => {
             }
 
             return (
-              <div className={s.svgsContainer} key={i} onClick={crud[i + '']}>
-                <svg height={'16px'} viewBox={'0 0 24 24'}>
-                  <use xlinkHref={`${sprite}#${el.id}`} />
-                </svg>
-              </div>
+              el.id && (
+                <div className={s.svgsContainer} key={i} onClick={crud[i + '']}>
+                  <svg height={'16px'} viewBox={'0 0 24 24'}>
+                    <use xlinkHref={`${sprite}#${el.id}`} />
+                  </svg>
+                </div>
+              )
             )
           })}
         </div>
       )}
-
-      {el.stars?.map((id, i) => {
-        return (
-          <div className={s.stars} key={i}>
-            <svg height={'16px'} viewBox={'0 0 24 24'}>
-              <use xlinkHref={`${sprite}#${id}`} />
-            </svg>
-          </div>
-        )
-      })}
+      <div className={s.starsContainer}>
+        {el.stars?.map((id, i) => {
+          return (
+            <div className={s.stars} key={i}>
+              <svg height={'16px'} viewBox={'0 0 24 24'}>
+                <use xlinkHref={`${sprite}#${id}`} />
+              </svg>
+            </div>
+          )
+        })}
+      </div>
     </Cell>
   )
 }

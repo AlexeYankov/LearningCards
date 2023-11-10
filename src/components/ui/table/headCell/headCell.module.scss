@@ -1,35 +1,23 @@
-span {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  cursor: pointer;
-}
-
 .headCell {
   padding: 6px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  text-align: left;
   background-color: var(--color-dark-500);
-  gap: 4px;
+
   svg {
-    fill: white;
     cursor: pointer;
-  }
-}
-.headCellLast {
-  padding: 6px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  background-color: var(--color-dark-500);
-  gap: 4px;
-  svg {
     fill: white;
-    cursor: pointer;
   }
-}
-.headCell:last-child span {
-  opacity: 1;
-  z-index: -10;
+
+  .typography {
+    cursor: pointer;
+
+    font-size: var(--font-size-s);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-m);
+    white-space: nowrap;
+  }
+
+  .icon {
+    margin-left: 4px;
+  }
 }

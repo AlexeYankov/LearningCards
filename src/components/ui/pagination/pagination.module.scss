@@ -3,10 +3,19 @@
   gap: 10px;
   align-items: center;
   justify-content: center;
+
+  margin-top: 10px;
 }
 
-// div.trigger {
-//   gap: 2px;
-//   min-width: 50px;
-//   padding-bottom: 6px;
-// }
+.box {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  .select {
+    gap: 2px;
+    height: unset;
+    padding: 0 4px 0 6px;
+  }
+}

@@ -35,6 +35,8 @@ export type PaginationResponseType = {
   itemsPerPage?: number
   totalItems?: number
   totalPages?: number
+  minCardsCount?: number
+  maxCardsCount?: number
 }
 
 export const cardsService: any = baseApi.injectEndpoints({

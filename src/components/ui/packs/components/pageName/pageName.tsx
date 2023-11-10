@@ -1,8 +1,6 @@
 import { ChangeEvent, useState } from 'react'
 
 import { useCreateDeckMutation } from '@/api/decks/decks.api'
-import img from '@/asserts/Mask.png'
-import { Image } from '@/asserts/icons/components/Image'
 import { Button } from '@/components/ui/button'
 import { CheckBox } from '@/components/ui/checkbox'
 import { Modal, ModalTitle } from '@/components/ui/modal'
@@ -10,23 +8,43 @@ import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 
 import f from '../../packsPage.module.scss'
-import s from '@/components/ui/modal/modal.module.scss'
+import { useAppDispatch } from '@/api/store.ts'
+import {
+  changeCurrentPage,
+  changeMaxCardsCount,
+  changeMinCardsCount,
+} from '@/api/decks/pagination.reducer.ts'
 
 export const PageName = () => {
+  const dispatch = useAppDispatch()
+
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState('')
 
-  const [createDeck] = useCreateDeckMutation()
+  const [createDeck, { error, isError, reset }] = useCreateDeckMutation()
 
-  const handleCloseModal = () => setOpen(false)
+  const handleCloseModal = (isOpen: boolean) => {
+    setOpen(isOpen)
+    setValue('')
+    reset()
+  }
 
   const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value)
+    reset()
   }
 
+  // @ts-ignore
+  const errorMessage = error?.data?.errorMessages[0].message
+
   const handleAddNewPackClick = () => {
-    if (value.trim() !== '') {
-      createDeck({ name: value })
+    createDeck({ name: value })
+    if (value.length < 3) {
+      dispatch(changeCurrentPage({ currentPage: 1 }))
+      dispatch(changeMinCardsCount({ minCardsCount: 0 }))
+      dispatch(changeMaxCardsCount({ maxCardsCount: 61 }))
+      setOpen(true)
+    } else {
       setValue('')
       setOpen(false)
     }
@@ -37,13 +55,9 @@ export const PageName = () => {
       <Typography as={'h1'} variant={'large'}>
         Packs list
       </Typography>
-      <Modal onOpenChange={setOpen} open={open} triggerName={'Add New Pack'}>
+      <Modal onOpenChange={handleCloseModal} open={open} triggerName={'Add New Pack'}>
         <ModalTitle title={'Add New Pack'} />
-        <div className={s.contentComponents}>
-          <img alt={'card image'} className={s.img} src={img} />
-          <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
-            Change Cover
-          </Button>
+        <div className={f.contentComponents}>
           <TextField
             inputId={'Name Pack'}
             label={'Name Pack'}
@@ -51,6 +65,7 @@ export const PageName = () => {
             onEnter={handleAddNewPackClick}
             placeholder={'Name'}
             value={value}
+            errorMessage={errorMessage}
           />
           <CheckBox
             IconID={'checkbox-unselected'}
@@ -62,11 +77,20 @@ export const PageName = () => {
             width={'24'}
           />
         </div>
-        <div className={`${s.contentBtn} ${s.contentBtns}`}>
-          <Button classNameBtnBox={s.btnBox} onClick={handleCloseModal} variant={'secondary'}>
+        <div className={`${f.contentBtn} ${f.contentBtns}`}>
+          <Button
+            classNameBtnBox={f.btnBox}
+            onClick={() => handleCloseModal(!open)}
+            variant={'secondary'}
+          >
             Cancel
           </Button>
-          <Button classNameBtnBox={s.btnBox} onClick={handleAddNewPackClick} variant={'primary'}>
+          <Button
+            classNameBtnBox={f.btnBox}
+            onClick={handleAddNewPackClick}
+            variant={'primary'}
+            disabled={isError}
+          >
             Add New Pack
           </Button>
         </div>

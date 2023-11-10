@@ -1,7 +1,5 @@
 import React from 'react'
-
-import { useGetDecksQuery } from '@/api/decks/decks.api.ts'
-import { changeItemsPerPage } from '@/api/decks/pagination.reducer.ts'
+import { changeCurrentPage, changeItemsPerPage } from '@/api/decks/pagination.reducer.ts'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as SelectRadix from '@radix-ui/react-select'
@@ -23,7 +21,6 @@ type SelectProps = {
   disabled?: boolean
   itemsPerPage?: number
   label?: string
-  onSelectChange?: (value: { itemsPerPage: number }) => void
   options: Array<string>
   placeholder?: string
   reversed?: boolean
@@ -44,7 +41,6 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
 export const Select = ({
   classname,
   label,
-  onSelectChange,
   options,
   placeholder = 'select',
   reversed,
@@ -56,11 +52,9 @@ export const Select = ({
   const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
 
   const handleValueChange = (value: string) => {
-    onSelectChange && onSelectChange({ itemsPerPage: +value })
     dispatch(changeItemsPerPage({ itemsPerPage: +value }))
+    dispatch(changeCurrentPage({ currentPage: 1 }))
   }
-
-  useGetDecksQuery({ itemsPerPage })
 
   return (
     <SelectRadix.Root
