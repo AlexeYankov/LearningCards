@@ -33,17 +33,18 @@ export const Pagination = ({
         totalPages={totalPages}
       />
 
-      <div className={s.paginationContainer}>
+      <div className={s.box}>
         <Typography variant={'body2'}>Показать</Typography>
 
         <Select
-          classname={s.trigger}
+          classname={s.select}
           options={options}
           placeholder={placeholder}
           reversed={reversed}
         />
-
-        <Typography variant={'body2'}>на странице</Typography>
+        <Typography variant={'body2'} className={s.typography}>
+          на странице
+        </Typography>
       </div>
     </div>
   )

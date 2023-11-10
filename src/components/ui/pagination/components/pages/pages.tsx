@@ -35,6 +35,7 @@ export const Pages = ({ arrowID, color, reversedArrowID, totalPages = 20 }: Page
     <div className={s.pagesContainer}>
       <Link to={getToCurrentPageUrl(prevPage)}>
         <svg
+          className={s.icons}
           fill={color || 'black'}
           onClick={() => handlePageChange(prevPage)}
           style={currentPage === 1 ? { opacity: '0.7', pointerEvents: 'none' } : {}}
@@ -55,6 +56,7 @@ export const Pages = ({ arrowID, color, reversedArrowID, totalPages = 20 }: Page
         <svg
           fill={color || 'black'}
           onClick={() => handlePageChange(nextPage)}
+          className={s.icons}
           style={
             currentPage === totalPages
               ? {
