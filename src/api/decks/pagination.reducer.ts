@@ -7,6 +7,7 @@ const initialState = {
   maxCardsCount: 61,
   authorId: '',
   name: '',
+  orderBy: 'name-asc' as 'name-asc' | 'name-desc',
 }
 
 const paginationSlice = createSlice({
@@ -31,6 +32,9 @@ const paginationSlice = createSlice({
     searchDeckByName: (state, action: PayloadAction<{ name: string }>) => {
       state.name = action.payload.name
     },
+    changeOrderBy: (state, action: PayloadAction<{ orderBy: 'asc' | 'desc' }>) => {
+      state.orderBy = `name-${action.payload.orderBy}`
+    },
   },
 })
 
@@ -43,4 +47,5 @@ export const {
   changeMaxCardsCount,
   changeShowAuthorTabDecks,
   searchDeckByName,
+  changeOrderBy,
 } = paginationSlice.actions

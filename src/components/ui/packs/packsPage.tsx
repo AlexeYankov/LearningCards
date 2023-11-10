@@ -16,6 +16,7 @@ export const PacksPage = () => {
   const minCardsCount = useAppSelector(state => state.pagination.minCardsCount)
   const authorId = useAppSelector(state => state.pagination.authorId)
   const name = useAppSelector(state => state.pagination.name)
+  const orderBy = useAppSelector(state => state.pagination.orderBy)
 
   const { data } = useGetDecksQuery({
     currentPage,
@@ -24,6 +25,7 @@ export const PacksPage = () => {
     minCardsCount,
     authorId,
     name,
+    orderBy,
   })
 
   return (

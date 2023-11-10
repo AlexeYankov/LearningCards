@@ -8,7 +8,7 @@ type GetDecksParamsType = {
   maxCardsCount?: number
   minCardsCount?: number
   name?: string
-  orderBy?: 'asc' | 'desc'
+  orderBy?: 'name-asc' | 'name-desc'
 }
 
 type DeleteDeckResponseType = {
