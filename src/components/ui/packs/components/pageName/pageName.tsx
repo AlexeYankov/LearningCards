@@ -40,13 +40,13 @@ export const PageName = () => {
   const handleAddNewPackClick = () => {
     createDeck({ name: value })
     if (value.length < 3) {
-      dispatch(changeCurrentPage({ currentPage: 1 }))
-      dispatch(changeMinCardsCount({ minCardsCount: 0 }))
-      dispatch(changeMaxCardsCount({ maxCardsCount: 61 }))
       setOpen(true)
     } else {
       setValue('')
       setOpen(false)
+      dispatch(changeCurrentPage({ currentPage: 1 }))
+      dispatch(changeMinCardsCount({ minCardsCount: 0 }))
+      dispatch(changeMaxCardsCount({ maxCardsCount: 61 }))
     }
   }
 
