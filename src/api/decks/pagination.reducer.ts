@@ -6,6 +6,7 @@ const initialState = {
   minCardsCount: 0,
   maxCardsCount: 61,
   authorId: '',
+  name: '',
 }
 
 const paginationSlice = createSlice({
@@ -27,6 +28,9 @@ const paginationSlice = createSlice({
     changeShowAuthorTabDecks: (state, action: PayloadAction<{ authorId: string }>) => {
       state.authorId = action.payload.authorId
     },
+    searchDeckByName: (state, action: PayloadAction<{ name: string }>) => {
+      state.name = action.payload.name
+    },
   },
 })
 
@@ -38,4 +42,5 @@ export const {
   changeMinCardsCount,
   changeMaxCardsCount,
   changeShowAuthorTabDecks,
+  searchDeckByName,
 } = paginationSlice.actions
