@@ -11,7 +11,7 @@ type TabsType = {
 }
 
 export const Tabs = ({ title }: TabsType) => {
-  const [active, setActive] = useState(0)
+  const [active, setActive] = useState(1)
 
   return (
     <Typography as={'ul'} className={s.container}>
