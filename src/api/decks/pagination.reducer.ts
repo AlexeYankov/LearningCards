@@ -38,7 +38,6 @@ const paginationSlice = createSlice({
         orderBy: 'name-desc' | 'name-asc'
       }>
     ) => {
-      console.log(action.payload)
       state.orderBy = action.payload.orderBy
     },
     resetFilter: state => {

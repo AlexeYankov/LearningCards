@@ -4,8 +4,8 @@ import { Body, Head, Root, Row } from '@it-incubator/ui-kit'
 
 import s from './table.module.scss'
 import { BodyCellType, HeadCellType, TableType } from './types'
-import HeadCell from '@/components/ui/table/headCell/headCell.tsx'
-import { BodyCellHOC } from '@/components/ui/table/bodyCell/bodyCellHOC'
+import { BodyCellHOC } from './bodyCell/bodyCellHOC'
+import { HeadCell } from './headCell/headCell'
 
 export const Table = ({
   bodyCell,
@@ -22,7 +22,7 @@ export const Table = ({
         <Head className={s.tableHead}>
           <Row className={`${tableName === 'Cards' ? s.cardsRow : s.decksRow}`}>
             {headCell?.map((el: HeadCellType, i) => {
-              return <HeadCell el={el} key={i} tableName={tableName} orderBy={orderBy} {...rest} />
+              return <HeadCell el={el} key={i} orderBy={orderBy} {...rest} />
             })}
           </Row>
         </Head>
