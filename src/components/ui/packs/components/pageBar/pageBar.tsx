@@ -13,9 +13,10 @@ import {
   changeCurrentPage,
   changeMaxCardsCount,
   changeMinCardsCount,
+  resetFilter,
   searchDeckByName,
 } from '@/api/decks/pagination.reducer'
-import { useDebounce } from '@/hooks/useDebounce.ts'
+import { useDebounce } from '@/hooks/useDebounce'
 
 export const PageBar = () => {
   const dispatch = useAppDispatch()
@@ -37,6 +38,11 @@ export const PageBar = () => {
     setSearchValue(e.currentTarget.value)
   }
 
+  const handleResetFilter = () => {
+    dispatch(resetFilter())
+    setSearchValue('')
+  }
+
   return (
     <div className={f.container__pageBar}>
       <div>
@@ -49,8 +55,8 @@ export const PageBar = () => {
         />
       </div>
 
-      <div style={{ position: 'relative' }}>
-        <Label label={'Show packs cards'} style={{ position: 'absolute', top: '-25px' }} />
+      <div>
+        <Label label={'Show packs cards'} />
         <Tabs title={['My Cards', 'All Cards']} />
       </div>
 
@@ -59,7 +65,12 @@ export const PageBar = () => {
         <Slider />
       </div>
       <div>
-        <Button className={f.button} icon={<Delete />} variant={'secondary'}>
+        <Button
+          className={f.button}
+          icon={<Delete />}
+          variant={'secondary'}
+          onClick={handleResetFilter}
+        >
           <Typography variant={'body2'}>Clear Filter</Typography>
         </Button>
       </div>

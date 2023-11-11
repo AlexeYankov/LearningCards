@@ -5,8 +5,8 @@ import s from './headCell.module.scss'
 
 import { Typography } from '../../typography'
 import { HeadCellType } from '../types'
-import { useAppDispatch } from '@/api/store.ts'
-import { changeOrderBy } from '@/api/decks/pagination.reducer.ts'
+import { useAppDispatch } from '@/api/store'
+import { changeOrderBy } from '@/api/decks/pagination.reducer'
 
 type HeadCellComponentType = {
   el: HeadCellType
@@ -16,8 +16,6 @@ type HeadCellComponentType = {
 
 const HeadCell = ({ el, orderBy }: HeadCellComponentType) => {
   const dispatch = useAppDispatch()
-
-  console.log('orderBy', orderBy)
 
   const handleOrderByChange = () => {
     dispatch(changeOrderBy({ orderBy: 'name-desc' }))
@@ -32,7 +30,7 @@ const HeadCell = ({ el, orderBy }: HeadCellComponentType) => {
         {el.headCellName}
       </Typography>
 
-      <span
+      <button
         className={`${s.icon} ${orderBy === 'name-asc' ? s.iconRotate : ''}`}
         onClick={handleOrderByChange}
       >
@@ -42,7 +40,7 @@ const HeadCell = ({ el, orderBy }: HeadCellComponentType) => {
             123
           </svg>
         )}
-      </span>
+      </button>
     </UIHeadCell>
   )
 }

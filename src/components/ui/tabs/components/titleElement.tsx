@@ -1,9 +1,10 @@
 import s from './titleElement.module.scss'
 
 import { Typography } from '../../typography'
-import { useAppDispatch } from '@/api/store.ts'
+import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { changeCurrentPage, changeShowAuthorTabDecks } from '@/api/decks/pagination.reducer'
 import { useMeQuery } from '@/api/auth-api/auth.api'
+import { useEffect } from 'react'
 
 type TitleElementType = {
   active: number
@@ -15,6 +16,7 @@ type TitleElementType = {
 
 export const TitleElement = ({ active, index, length, setActive, title }: TitleElementType) => {
   const dispatch = useAppDispatch()
+  const authorId = useAppSelector(state => state.pagination.authorId)
 
   const { data } = useMeQuery()
 
@@ -26,6 +28,12 @@ export const TitleElement = ({ active, index, length, setActive, title }: TitleE
       dispatch(changeShowAuthorTabDecks({ authorId: '' }))
     }
   }
+
+  useEffect(() => {
+    if (authorId === '') {
+      setActive(1)
+    }
+  }, [authorId])
 
   return (
     <Typography
