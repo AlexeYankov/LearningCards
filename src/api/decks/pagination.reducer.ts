@@ -32,8 +32,9 @@ const paginationSlice = createSlice({
     searchDeckByName: (state, action: PayloadAction<{ name: string }>) => {
       state.name = action.payload.name
     },
-    changeOrderBy: (state, action: PayloadAction<{ orderBy: 'asc' | 'desc' }>) => {
-      state.orderBy = `name-${action.payload.orderBy}`
+    changeOrderBy: (state, action: PayloadAction<{ orderBy: 'name-asc' | 'name-desc' }>) => {
+      console.log(action.payload)
+      state.orderBy = action.payload.orderBy
     },
   },
 })

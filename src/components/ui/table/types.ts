@@ -4,6 +4,7 @@ export type TableType = {
   headCell?: HeadCellType[]
   tableName?: string
   isMyDeck?: boolean
+  orderBy?: 'asc' | 'desc'
 }
 
 export type HeadCellType = {

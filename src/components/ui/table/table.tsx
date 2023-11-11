@@ -13,6 +13,7 @@ export const Table = ({
   headCell,
   tableName,
   isMyDeck,
+  orderBy,
   ...rest
 }: TableType) => {
   return (
@@ -21,7 +22,7 @@ export const Table = ({
         <Head className={s.tableHead}>
           <Row className={`${tableName === 'Cards' ? s.cardsRow : s.decksRow}`}>
             {headCell?.map((el: HeadCellType, i) => {
-              return <HeadCell el={el} key={i} tableName={tableName} {...rest} />
+              return <HeadCell el={el} key={i} tableName={tableName} orderBy={orderBy} {...rest} />
             })}
           </Row>
         </Head>
