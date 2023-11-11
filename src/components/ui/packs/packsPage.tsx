@@ -39,7 +39,6 @@ export const PacksPage = () => {
           headCell={tableHeadData}
           tableName={'Decks'}
           isMyDeck={false}
-          orderBy={orderBy}
         />
 
         <Pagination

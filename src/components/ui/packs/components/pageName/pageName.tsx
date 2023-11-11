@@ -9,11 +9,7 @@ import { Typography } from '@/components/ui/typography'
 
 import f from '../../packsPage.module.scss'
 import { useAppDispatch } from '@/api/store.ts'
-import {
-  changeCurrentPage,
-  changeMaxCardsCount,
-  changeMinCardsCount,
-} from '@/api/decks/pagination.reducer.ts'
+import { resetFilter } from '@/api/decks/pagination.reducer.ts'
 
 export const PageName = () => {
   const dispatch = useAppDispatch()
@@ -44,9 +40,7 @@ export const PageName = () => {
     } else {
       setValue('')
       setOpen(false)
-      dispatch(changeCurrentPage({ currentPage: 1 }))
-      dispatch(changeMinCardsCount({ minCardsCount: 0 }))
-      dispatch(changeMaxCardsCount({ maxCardsCount: 61 }))
+      dispatch(resetFilter())
     }
   }
 

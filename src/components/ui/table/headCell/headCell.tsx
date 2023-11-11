@@ -4,32 +4,32 @@ import s from './headCell.module.scss'
 
 import { Typography } from '../../typography'
 import { HeadCellType } from '../types'
-import { useAppDispatch } from '@/api/store'
+import { useAppDispatch, useAppSelector } from '@/api/store'
 import { changeOrderBy } from '@/api/decks/pagination.reducer'
-import { ArrowUp } from '@/asserts/icons/components/ArrowUp.tsx'
+import { ArrowUp } from '@/asserts/icons/components/ArrowUp'
 
 type HeadCellComponentType = {
   el: HeadCellType
-  orderBy?: 'name-asc' | 'name-desc'
 }
 
-export const HeadCell = ({ el, orderBy }: HeadCellComponentType) => {
+export const HeadCell = ({ el }: HeadCellComponentType) => {
   const dispatch = useAppDispatch()
+  const orderBy = useAppSelector(state => state.pagination.orderBy)
 
   const handleOrderByChange = () => {
-    dispatch(changeOrderBy({ orderBy: orderBy === 'name-desc' ? 'name-asc' : 'name-desc' }))
+    const updatedOrderBy = orderBy === 'name-desc' ? 'name-asc' : 'name-desc'
+    dispatch(changeOrderBy({ orderBy: updatedOrderBy }))
   }
+
+  const iconClasses = `${s.icon} ${orderBy === 'name-desc' ? s.iconRotate : ''}`
 
   return (
     <UIHeadCell className={s.headCell}>
       <Typography variant={'heading3'} className={s.typography}>
         {el.headCellName}
       </Typography>
-      <button
-        className={`${s.icon} ${orderBy === 'name-asc' ? s.iconRotate : ''}`}
-        onClick={handleOrderByChange}
-      >
-        {el.svgSizes?.id && <ArrowUp />}
+      <button className={iconClasses} onClick={handleOrderByChange}>
+        {el.svgSizes && <ArrowUp />}
       </button>
     </UIHeadCell>
   )

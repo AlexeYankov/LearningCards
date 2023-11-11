@@ -7,7 +7,7 @@ const initialState = {
   maxCardsCount: 61,
   authorId: '',
   name: '',
-  orderBy: 'name-desc' as 'name-asc' | 'name-desc',
+  orderBy: '' as 'name-asc' | 'name-desc',
 }
 
 const paginationSlice = createSlice({
@@ -44,7 +44,7 @@ const paginationSlice = createSlice({
       state.name = ''
       state.currentPage = 1
       state.maxCardsCount = 61
-      state.orderBy = 'name-asc'
+      state.orderBy = '' as 'name-asc' | 'name-desc'
       state.minCardsCount = 0
       state.itemsPerPage = 10
       state.authorId = ''
