@@ -20,22 +20,22 @@ export const authService: any = baseApi.injectEndpoints({
                     body,
                 }),
             }),
-            verifyEmail: builder.mutation<any, void>({
+            recoverPassword: builder.mutation<any, void>({
                 query: (body: any) => ({
-                    url: `v1/auth/verify-email`,
+                    url: `v1/auth/recover-password`,
                     method: 'Post',
                     body,
                 }),
             }),
             logOut: builder.mutation<any, void>({
-                query: (body: any) => ({
-                    url: `v1/auth/login`,
+                query: () => ({
+                    url: `v1/auth/logout`,
                     method: 'Post',
-                    body,
+
                 }),
             }),
         }
     },
 })
 
-export const {useMeQuery, useCreateUserMutation,useLoginMutation,useVerifyEmailMutation} = authService
+export const {useMeQuery, useCreateUserMutation,useLoginMutation,useRecoverPasswordMutation,useLogOutMutation} = authService
