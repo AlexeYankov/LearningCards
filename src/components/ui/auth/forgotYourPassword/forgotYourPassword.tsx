@@ -6,22 +6,24 @@ import {Card} from "@/components/ui/card";
 import {z} from "zod";
 import {Typography} from "@/components/ui/typography";
 import {Button} from "@/components/ui/button";
-import {useVerifyEmailMutation} from "@/api/auth-api/auth.api.ts";
+import {useRecoverPasswordMutation} from "@/api/auth-api/auth.api.ts";
+import {useNavigate} from "react-router-dom";
 
 type FormValues = z.infer<typeof loginSchema>
 const loginSchema = z.object({
     email: z.string().email(),
 })
 export const ForgotYourPassword = () => {
-
-
-    const [send] = useVerifyEmailMutation()
+    const [sendRequest] = useRecoverPasswordMutation()
+    const navigate = useNavigate()
     const {handleSubmit, control} = useForm<FormValues>({
         resolver: zodResolver(loginSchema),
     })
-    const onSubmit = (data: FormValues) => {
-        const {email: code} = data
-        send({code})
+    const onSubmit = async (data: FormValues) => {
+        const res = await sendRequest(data)
+        if (!res.error) {
+            navigate('/checkEmail')
+        }
     }
     return (
         <Card className={s.forgotYourPassword}>
@@ -56,8 +58,6 @@ export const ForgotYourPassword = () => {
                     Try logging in
                 </Typography>
             </form>
-
-
         </Card>
     );
 };

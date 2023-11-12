@@ -21,17 +21,18 @@ const loginSchema = z.object({
 })
 export const SignUp = () => {
     const navigate = useNavigate()
-    const [sendRequest, {isError}] = useCreateUserMutation();
+    const [sendRequest] = useCreateUserMutation();
 
     const {handleSubmit, control} = useForm<FormValues>({
         resolver: zodResolver(loginSchema),
     })
     const onSubmit = (data: FormValues) => {
         const {email, password} = data
-        sendRequest({email, password})
-        if (!isError) {
+        const res=sendRequest({email, password})
+        if (!res.error) {
             navigate('/login')
         }
+
 
     }
     return (
