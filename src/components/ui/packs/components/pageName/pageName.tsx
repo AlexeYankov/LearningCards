@@ -71,7 +71,7 @@ export const PageName = () => {
               checkboxId={'Private Pack'}
               disabled={false}
               height={'24'}
-              label={'Private Pack'}
+              label={'Private pack'}
               width={'24'}
             />
           </div>
