@@ -65,7 +65,7 @@ export const BodyCell = ({ item, i, onClick, tableName }: BodyCellComponentType)
           {item.question}
         </Typography>
       )}
-      {item && (
+      {item.svgs && (
         <div className={`${s.iconsBox}`}>
           {item.svgs?.map((iconSVG, i) => {
             let modalContent
