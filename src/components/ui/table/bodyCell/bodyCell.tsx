@@ -42,6 +42,7 @@ export const BodyCell = ({ item, i, onClick, tableName }: BodyCellComponentType)
 
   const handleDeleteDeckClick = () => {
     deleteDeck(item.id!)
+    setOpenedModalIndex(null)
   }
 
   return (

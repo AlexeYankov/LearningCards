@@ -4,7 +4,6 @@ export type TableType = {
   headCell?: HeadCellType[]
   tableName?: string
   isMyDeck?: boolean
-  orderBy?: 'name-asc' | 'name-desc'
 }
 
 export type HeadCellType = {
@@ -31,5 +30,5 @@ export type BodyCellType = {
 }
 
 export type HeadCellSvgType = {
-  id: string
+  id?: string
 }
