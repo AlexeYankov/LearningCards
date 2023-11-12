@@ -24,6 +24,31 @@ type DeleteDeckResponseType = {
   cardsCount: number
 }
 
+type UpdateDeckResponseType = {
+  author: UpdateDeckResponseTypeAuthor
+  id: string
+  userId: string
+  name: string
+  isPrivate: boolean
+  shots: number
+  cover: string
+  rating: number
+  created: string
+  updated: string
+  cardsCount: number
+}
+export type UpdateDeckResponseTypeAuthor = {
+  id: string
+  name: string
+}
+
+export type UpdateDeckArgType = {
+  id?: string
+  cover?: File
+  name: string
+  isPrivate?: boolean
+}
+
 export const decksApi = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
@@ -56,6 +81,16 @@ export const decksApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ['Decks'],
       }),
+      updateDeck: builder.mutation<UpdateDeckResponseType, UpdateDeckArgType>({
+        query: body => {
+          return {
+            method: 'PATCH',
+            url: `v1/decks/${body.id}`,
+            body: { ...body, id: undefined },
+          }
+        },
+        invalidatesTags: ['Decks'],
+      }),
       learnRandomCard: builder.query<CardsResponsType, string>({
         query: id => {
           return {
@@ -73,4 +108,5 @@ export const {
   useGetDecksQuery,
   useLearnRandomCardQuery,
   useDeleteDeckMutation,
+  useUpdateDeckMutation,
 } = decksApi

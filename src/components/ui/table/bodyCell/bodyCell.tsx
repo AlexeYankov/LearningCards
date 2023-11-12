@@ -10,10 +10,10 @@ import { BodyCellType } from '../types'
 import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal'
 import f from '@/components/ui/packs/packsPage.module.scss'
 import { Button } from '@/components/ui/button'
-import { useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { TextField } from '@/components/ui/textField'
 import { CheckBox } from '@/components/ui/checkbox'
-import { useDeleteDeckMutation } from '@/api/decks/decks.api'
+import { useDeleteDeckMutation, useUpdateDeckMutation } from '@/api/decks/decks.api'
 
 type BodyCellComponentType = {
   item: BodyCellType
@@ -26,8 +26,10 @@ export const BodyCell = ({ item, i, tableName }: BodyCellComponentType) => {
   const navigate = useNavigate()
 
   const [deleteDeck] = useDeleteDeckMutation()
+  const [updateDeck] = useUpdateDeckMutation()
 
   const [openedModalIndex, setOpenedModalIndex] = useState<null | number>(null)
+  const [value, setValue] = useState('')
 
   const handleModalToggle = (index: number | null) => {
     if (openedModalIndex === index) {
@@ -48,6 +50,16 @@ export const BodyCell = ({ item, i, tableName }: BodyCellComponentType) => {
 
   const moveToLearnRandomCard = () => {
     navigate(item.id!)
+  }
+
+  const handleUpdateDeckChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.currentTarget.value)
+  }
+
+  const handleUpdateDeck = (e: FormEvent) => {
+    e.preventDefault()
+    updateDeck({ id: item.id, name: value })
+    setOpenedModalIndex(null)
   }
 
   return (
@@ -111,15 +123,14 @@ export const BodyCell = ({ item, i, tableName }: BodyCellComponentType) => {
                 modalContent = (
                   <>
                     <ModalTitle title={'Edit Pack'} />
-                    <form>
-                      {/*onSubmit={handleAddNewPackClick}*/}
+                    <form onSubmit={handleUpdateDeck}>
                       <div className={f.contentComponents}>
                         <TextField
                           inputId={'Name Pack'}
                           label={'Name Pack'}
-                          // onChange={handleValueChange}
+                          value={value}
+                          onChange={handleUpdateDeckChange}
                           placeholder={'Name'}
-                          // value={value}
                           // errorMessage={errorMessage}
                         />
                         <CheckBox
@@ -143,7 +154,7 @@ export const BodyCell = ({ item, i, tableName }: BodyCellComponentType) => {
                         </Button>
                         <Button
                           classNameBtnBox={f.btnBox}
-                          // onClick={handleAddNewPackClick}
+                          onClick={handleUpdateDeck}
                           variant={'primary'}
                           // disabled={isError}
                           type={'submit'}
