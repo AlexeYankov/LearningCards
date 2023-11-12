@@ -25,10 +25,10 @@ export const BodyCellHOC = ({ el, tableName, isMyDeck }: BodyCellHOCType) => {
   const currentData = new Date(el.updated || 0)
   const currentDay =
     currentData.getDate() < 10 ? '0' + currentData.getDate() : currentData.getDate()
-  const currentMonth =
-    currentData.getMonth() < 10 ? '0' + currentData.getMonth() : currentData.getMonth()
+  let currentMonth = currentData.getMonth() + 1
+  let formattedMonth = currentMonth < 10 ? '0' + currentMonth : currentMonth.toString()
 
-  const convertTimeTo = [currentDay, currentMonth, currentData.getFullYear()].join('.')
+  const convertTimeTo = [currentDay, formattedMonth, currentData.getFullYear()].join('.')
 
   return (
     <Row className={`${tableName === 'Cards' ? s.cardsRow : s.decksRow}`}>
