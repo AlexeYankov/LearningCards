@@ -1,17 +1,15 @@
-import { ComponentPropsWithoutRef, FC, ReactNode, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, FC, forwardRef, ReactNode } from 'react'
 
 import { Close } from '@/asserts/icons/components/Close'
 import { Typography } from '@/components/ui/typography'
 import * as DialogRadix from '@radix-ui/react-dialog'
 
 import s from './modal.module.scss'
-
-import { Button } from '../button'
 import { ScrollBar } from '../scrollbar'
 
 type ModalProps = {
   className?: string
-  triggerName?: string
+  triggerName?: ReactNode | string
 }
 
 export const Modal = forwardRef<
@@ -24,9 +22,7 @@ export const Modal = forwardRef<
     <div className={s.modal}>
       <DialogRadix.Root onOpenChange={onOpenChange} open={open}>
         <DialogRadix.Trigger asChild className={s.dialogTrigger}>
-          <Button type={'button'} variant={'primary'}>
-            {triggerName}
-          </Button>
+          {triggerName}
         </DialogRadix.Trigger>
         <DialogRadix.Portal>
           <DialogRadix.Overlay className={s.dialogOverlay} />

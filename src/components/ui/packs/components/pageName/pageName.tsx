@@ -52,7 +52,15 @@ export const PageName = () => {
       <Typography as={'h1'} variant={'large'}>
         Packs list
       </Typography>
-      <Modal onOpenChange={handleModalToggle} open={open} triggerName={'Add New Pack'}>
+      <Modal
+        onOpenChange={handleModalToggle}
+        open={open}
+        triggerName={
+          <Button type={'button'} variant={'primary'}>
+            Add New Pack
+          </Button>
+        }
+      >
         <ModalTitle title={'Add New Pack'} />
 
         <form onSubmit={handleAddNewPackClick}>
