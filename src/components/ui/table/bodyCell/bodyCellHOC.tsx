@@ -76,7 +76,7 @@ export const BodyCellHOC = ({ item, tableName, isMyDeck }: BodyCellHOCType) => {
       {tableName === 'Cards' && isMyDeck && (
         <BodyCell
           item={{
-            svgs: [{ id: '' }, { id: 'edit-2-outline' }, { id: 'trash-outline' }],
+            svgs: [{ id: 'edit-2-outline' }, { id: 'trash-outline' }],
           }}
           isMyDeck={isMyDeck}
           tableName={tableName}
