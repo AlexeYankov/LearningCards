@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import sprite from '@/asserts/sprite.svg'
 import { Cell } from '@it-incubator/ui-kit'
@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import { TextField } from '@/components/ui/textField'
 import { CheckBox } from '@/components/ui/checkbox'
-import { useDeleteDeckMutation } from '@/api/decks/decks.api.ts'
+import { useDeleteDeckMutation } from '@/api/decks/decks.api'
 
 type BodyCellComponentType = {
   item: BodyCellType
@@ -24,6 +24,8 @@ type BodyCellComponentType = {
 }
 
 export const BodyCell = ({ item, i, onClick, tableName }: BodyCellComponentType) => {
+  const navigate = useNavigate()
+
   const [deleteDeck] = useDeleteDeckMutation()
 
   const [openedModalIndex, setOpenedModalIndex] = useState<null | number>(null)
@@ -43,6 +45,10 @@ export const BodyCell = ({ item, i, onClick, tableName }: BodyCellComponentType)
   const handleDeleteDeckClick = () => {
     deleteDeck(item.id!)
     setOpenedModalIndex(null)
+  }
+
+  const moveToLearnRandomCard = () => {
+    navigate(`${item.id!}`)
   }
 
   return (
@@ -91,7 +97,7 @@ export const BodyCell = ({ item, i, onClick, tableName }: BodyCellComponentType)
                       </Button>
                       <Button
                         classNameBtnBox={f.btnBox}
-                        // onClick={goToLearnCard}
+                        onClick={moveToLearnRandomCard}
                         variant={'primary'}
                         type={'button'}
                       >
