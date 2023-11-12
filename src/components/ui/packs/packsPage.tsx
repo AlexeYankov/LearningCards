@@ -29,27 +29,25 @@ export const PacksPage = () => {
   })
 
   return (
-    <>
-      <div className={f.container}>
-        <PageName />
-        <PageBar />
-        <Table
-          bodyCell={data?.items}
-          className={f.container__common}
-          headCell={tableHeadData}
-          tableName={'Decks'}
-          isMyDeck={false}
-        />
+    <div className={f.container}>
+      <PageName />
+      <PageBar />
+      <Table
+        bodyCell={data?.items}
+        className={f.container__common}
+        headCell={tableHeadData}
+        tableName={'Decks'}
+        isMyDeck={false}
+      />
 
-        <Pagination
-          arrowColor={'white'}
-          arrowID={'arrow-ios-back'}
-          options={['10', '20', '30', '50', '100']}
-          placeholder={'100'}
-          reversedArrowID={'arrow-ios-forward'}
-          totalPages={data?.pagination?.totalPages}
-        />
-      </div>
-    </>
+      <Pagination
+        arrowColor={'white'}
+        arrowID={'arrow-ios-back'}
+        options={['10', '20', '30', '50', '100']}
+        placeholder={'100'}
+        reversedArrowID={'arrow-ios-forward'}
+        totalPages={data?.pagination?.totalPages}
+      />
+    </div>
   )
 }

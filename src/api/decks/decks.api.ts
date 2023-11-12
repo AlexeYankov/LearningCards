@@ -55,8 +55,21 @@ export const decksApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ['Decks'],
       }),
+      learnRandomCard: builder.query<CardsResponsType, string>({
+        query: id => {
+          return {
+            url: `v1/decks/${id}/learn`,
+          }
+        },
+        providesTags: ['Decks', 'Cards'],
+      }),
     }
   },
 })
 
-export const { useCreateDeckMutation, useGetDecksQuery, useDeleteDeckMutation } = decksApi
+export const {
+  useCreateDeckMutation,
+  useGetDecksQuery,
+  useLearnRandomCardQuery,
+  useDeleteDeckMutation,
+} = decksApi

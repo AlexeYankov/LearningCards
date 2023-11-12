@@ -83,10 +83,9 @@ export const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) =
                       </Button>
                       <Button
                         classNameBtnBox={f.btnBox}
-                        // onClick={handleAddNewPackClick}
+                        // onClick={goToLearnCard}
                         variant={'primary'}
-                        // disabled={isError}
-                        type={'submit'}
+                        type={'button'}
                       >
                         Learn Pack
                       </Button>
@@ -181,7 +180,7 @@ export const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) =
             }
             return (
               <Modal
-                key={el.id}
+                key={i}
                 open={openedModalIndex === i}
                 onOpenChange={() => handleModalToggle(i)}
                 triggerName={

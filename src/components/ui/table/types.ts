@@ -18,7 +18,7 @@ export type BodyCellType = {
     name?: string
   }
   bodyCellImageAlt?: string
-  cardsCount?: string
+  cardsCount?: number
   cover?: string
   grade?: number
   id?: string
