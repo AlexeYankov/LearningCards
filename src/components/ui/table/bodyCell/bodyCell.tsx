@@ -13,16 +13,19 @@ import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import { TextField } from '@/components/ui/textField'
 import { CheckBox } from '@/components/ui/checkbox'
+import { useDeleteDeckMutation } from '@/api/decks/decks.api.ts'
 
 type BodyCellComponentType = {
-  el: BodyCellType
+  item: BodyCellType
   i?: boolean
   onClick?: () => void
   tableName?: string
   isMyDeck?: boolean
 }
 
-export const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) => {
+export const BodyCell = ({ item, i, onClick, tableName }: BodyCellComponentType) => {
+  const [deleteDeck] = useDeleteDeckMutation()
+
   const [openedModalIndex, setOpenedModalIndex] = useState<null | number>(null)
 
   const handleModalToggle = (index: number | null) => {
@@ -37,30 +40,34 @@ export const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) =
     setOpenedModalIndex(null)
   }
 
+  const handleDeleteDeckClick = () => {
+    deleteDeck(item.id!)
+  }
+
   return (
     <Cell className={`${tableName === 'Cards' ? s.cardsCell : s.bodyCell}`}>
-      {el.cover && (
-        <Typography
-          alt={el.bodyCellImageAlt || `${el.cover + ' image'}`}
-          as={'img'}
-          src={el.cover}
-          className={s.typography}
-        />
-      )}
-
-      {el.name && (
+      <div className={s.imageWithNameBox}>
+        {item.cover && (
+          <img
+            className={s.image}
+            src={item.cover}
+            alt={item.bodyCellImageAlt || `${item.cover + ' image'}`}
+          />
+        )}
+        {item.name && (
+          <Typography onClick={onClick} variant={'body1'} className={s.typography}>
+            {i ? <Link to={item.id || ''}>{item.name}</Link> : item.name}
+          </Typography>
+        )}
+      </div>
+      {item.question && (
         <Typography onClick={onClick} variant={'body1'} className={s.typography}>
-          {i ? <Link to={el.id || ''}>{el.name}</Link> : el.name}
+          {item.question}
         </Typography>
       )}
-      {el.question && (
-        <Typography onClick={onClick} variant={'body1'} className={s.typography}>
-          {el.question}
-        </Typography>
-      )}
-      {el.svgs && (
+      {item && (
         <div className={`${s.iconsBox}`}>
-          {el.svgs?.map((iconSVG, i) => {
+          {item.svgs?.map((iconSVG, i) => {
             let modalContent
             switch (i) {
               case 0:
@@ -164,7 +171,7 @@ export const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) =
                       </Button>
                       <Button
                         classNameBtnBox={f.btnBox}
-                        // onClick={handleAddNewPackClick}
+                        onClick={handleDeleteDeckClick}
                         variant={'primary'}
                         // disabled={isError}
                         type={'submit'}
@@ -198,7 +205,7 @@ export const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) =
         </div>
       )}
       <div className={s.starsContainer}>
-        {el.stars?.map((id, i) => {
+        {item.stars?.map((id, i) => {
           return (
             <div className={s.stars} key={i}>
               <svg height={'16px'} viewBox={'0 0 24 24'}>

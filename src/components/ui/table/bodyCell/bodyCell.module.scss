@@ -2,7 +2,6 @@
 .cardsCell {
   overflow: hidden;
 
-  max-width: 200px;
   padding: 6px 24px;
 
   text-align: left;
@@ -47,6 +46,18 @@
   .typography {
     cursor: pointer;
     font-size: var(--font-size-s);
+  }
+
+  .imageWithNameBox {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .image {
+    min-width: 118px;
+    height: 48px;
+    object-fit: cover;
   }
 
   .iconsBox {

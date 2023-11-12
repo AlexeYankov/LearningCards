@@ -27,7 +27,7 @@ export const Table = ({
         </Head>
         <Body>
           {bodyCell?.map((el: BodyCellType, i) => {
-            return <BodyCellHOC el={el} key={i} tableName={tableName || ''} isMyDeck={isMyDeck} />
+            return <BodyCellHOC item={el} key={i} tableName={tableName || ''} isMyDeck={isMyDeck} />
           })}
         </Body>
       </React.Fragment>

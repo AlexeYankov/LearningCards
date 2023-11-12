@@ -48,6 +48,7 @@ export const decksApi = baseApi.injectEndpoints({
       }),
       deleteDeck: builder.mutation<DeleteDeckResponseType, string>({
         query: id => {
+          console.log(id)
           return {
             method: 'DELETE',
             url: `v1/decks/${id}`,
