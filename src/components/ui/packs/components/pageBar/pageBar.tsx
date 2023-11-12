@@ -38,9 +38,13 @@ export const PageBar = () => {
     setSearchValue(e.currentTarget.value)
   }
 
+  const handleClearSearchValueClick = () => {
+    setSearchValue('')
+  }
+
   const handleResetFilter = () => {
     dispatch(resetFilter())
-    setSearchValue('')
+    handleClearSearchValueClick()
   }
 
   return (
@@ -50,6 +54,7 @@ export const PageBar = () => {
           className={f.container__textField}
           placeholder={'Input search'}
           search
+          onClearClick={handleClearSearchValueClick}
           value={searchValue}
           onChange={handleSearchValue}
         />

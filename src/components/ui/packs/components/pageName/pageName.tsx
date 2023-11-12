@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 
 import { useCreateDeckMutation } from '@/api/decks/decks.api'
 import { Button } from '@/components/ui/button'
@@ -19,10 +19,12 @@ export const PageName = () => {
 
   const [createDeck, { error, isError, reset }] = useCreateDeckMutation()
 
-  const handleCloseModal = (isOpen: boolean) => {
+  const handleModalToggle = (isOpen: boolean = !open) => {
     setOpen(isOpen)
-    setValue('')
-    reset()
+    if (isOpen) {
+      setValue('')
+      reset()
+    }
   }
 
   const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +35,8 @@ export const PageName = () => {
   // @ts-ignore
   const errorMessage = error?.data?.errorMessages[0].message
 
-  const handleAddNewPackClick = () => {
+  const handleAddNewPackClick = (event: FormEvent) => {
+    event.preventDefault()
     createDeck({ name: value })
     if (value.length < 3) {
       setOpen(true)
@@ -49,45 +52,49 @@ export const PageName = () => {
       <Typography as={'h1'} variant={'large'}>
         Packs list
       </Typography>
-      <Modal onOpenChange={handleCloseModal} open={open} triggerName={'Add New Pack'}>
+      <Modal onOpenChange={handleModalToggle} open={open} triggerName={'Add New Pack'}>
         <ModalTitle title={'Add New Pack'} />
-        <div className={f.contentComponents}>
-          <TextField
-            inputId={'Name Pack'}
-            label={'Name Pack'}
-            onChange={handleValueChange}
-            onEnter={handleAddNewPackClick}
-            placeholder={'Name'}
-            value={value}
-            errorMessage={errorMessage}
-          />
-          <CheckBox
-            IconID={'checkbox-unselected'}
-            SelectedIconID={'checkbox-selected'}
-            checkboxId={'Private Pack'}
-            disabled={false}
-            height={'24'}
-            label={'Private Pack'}
-            width={'24'}
-          />
-        </div>
-        <div className={`${f.contentBtn} ${f.contentBtns}`}>
-          <Button
-            classNameBtnBox={f.btnBox}
-            onClick={() => handleCloseModal(!open)}
-            variant={'secondary'}
-          >
-            Cancel
-          </Button>
-          <Button
-            classNameBtnBox={f.btnBox}
-            onClick={handleAddNewPackClick}
-            variant={'primary'}
-            disabled={isError}
-          >
-            Add New Pack
-          </Button>
-        </div>
+
+        <form onSubmit={handleAddNewPackClick}>
+          <div className={f.contentComponents}>
+            <TextField
+              inputId={'Name Pack'}
+              label={'Name Pack'}
+              onChange={handleValueChange}
+              placeholder={'Name'}
+              value={value}
+              errorMessage={errorMessage}
+            />
+            <CheckBox
+              IconID={'checkbox-unselected'}
+              SelectedIconID={'checkbox-selected'}
+              checkboxId={'Private Pack'}
+              disabled={false}
+              height={'24'}
+              label={'Private Pack'}
+              width={'24'}
+            />
+          </div>
+          <div className={`${f.contentBtn} ${f.contentBtns}`}>
+            <Button
+              classNameBtnBox={f.btnBox}
+              onClick={() => handleModalToggle(open)}
+              variant={'secondary'}
+              type={'button'}
+            >
+              Cancel
+            </Button>
+            <Button
+              classNameBtnBox={f.btnBox}
+              onClick={handleAddNewPackClick}
+              variant={'primary'}
+              disabled={isError}
+              type={'submit'}
+            >
+              Add New Pack
+            </Button>
+          </div>
+        </form>
       </Modal>
     </div>
   )
