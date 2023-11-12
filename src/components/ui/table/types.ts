@@ -27,6 +27,7 @@ export type BodyCellType = {
   stars?: Array<string>
   svgs?: HeadCellSvgType[]
   updated?: string
+  packName?: string
 }
 
 export type HeadCellSvgType = {

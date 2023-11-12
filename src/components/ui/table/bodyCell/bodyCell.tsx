@@ -18,12 +18,11 @@ import { useDeleteDeckMutation } from '@/api/decks/decks.api'
 type BodyCellComponentType = {
   item: BodyCellType
   i?: boolean
-  onClick?: () => void
   tableName?: string
   isMyDeck?: boolean
 }
 
-export const BodyCell = ({ item, i, onClick, tableName }: BodyCellComponentType) => {
+export const BodyCell = ({ item, i, tableName }: BodyCellComponentType) => {
   const navigate = useNavigate()
 
   const [deleteDeck] = useDeleteDeckMutation()
@@ -48,7 +47,7 @@ export const BodyCell = ({ item, i, onClick, tableName }: BodyCellComponentType)
   }
 
   const moveToLearnRandomCard = () => {
-    navigate(`${item.id!}`)
+    navigate(item.id!)
   }
 
   return (
@@ -62,13 +61,13 @@ export const BodyCell = ({ item, i, onClick, tableName }: BodyCellComponentType)
           />
         )}
         {item.name && (
-          <Typography onClick={onClick} variant={'body1'} className={s.typography}>
+          <Typography variant={'body1'} className={s.typography}>
             {i ? <Link to={item.id || ''}>{item.name}</Link> : item.name}
           </Typography>
         )}
       </div>
       {item.question && (
-        <Typography onClick={onClick} variant={'body1'} className={s.typography}>
+        <Typography variant={'body1'} className={s.typography}>
           {item.question}
         </Typography>
       )}
@@ -83,7 +82,8 @@ export const BodyCell = ({ item, i, onClick, tableName }: BodyCellComponentType)
                     <ModalTitle title={'Learn Pack'} />
                     <ModalDescription>
                       <Typography variant={'body1'} as={'p'}>
-                        Do you really want to move on to learning more about the pack?
+                        Do you really want to move on to learning more about the{' '}
+                        <span className={s.boldText}>{item.packName}</span>?
                       </Typography>
                     </ModalDescription>
                     <div className={`${f.contentBtn} ${f.contentBtns}`}>
@@ -161,7 +161,8 @@ export const BodyCell = ({ item, i, onClick, tableName }: BodyCellComponentType)
                     <ModalTitle title={'Delete Pack'} />
                     <ModalDescription>
                       <Typography variant={'body1'} as={'p'}>
-                        Do you really want to remove Pack Name?
+                        Do you really want to remove{' '}
+                        <span className={s.boldText}>{item.packName}</span>?
                       </Typography>
                       <Typography variant={'body1'} as={'p'}>
                         All cards will be deleted.

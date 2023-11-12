@@ -60,6 +60,7 @@ export const BodyCellHOC = ({ item, tableName, isMyDeck }: BodyCellHOCType) => {
         <BodyCell
           item={{
             id: item.id,
+            packName: item.name,
             svgs: [
               { id: 'play-circle-outline' },
               /*tableName vs decks will change if is your deck or not!*/
