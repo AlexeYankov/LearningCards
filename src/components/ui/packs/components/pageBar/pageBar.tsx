@@ -40,11 +40,12 @@ export const PageBar = () => {
 
   const handleClearSearchValueClick = () => {
     setSearchValue('')
+    dispatch(searchDeckByName({ name: '' }))
   }
 
   const handleResetFilter = () => {
-    dispatch(resetFilter())
     handleClearSearchValueClick()
+    dispatch(resetFilter())
   }
 
   return (
