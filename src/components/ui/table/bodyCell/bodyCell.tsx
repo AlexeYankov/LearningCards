@@ -10,6 +10,9 @@ import { BodyCellType } from '../types'
 import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal'
 import f from '@/components/ui/packs/packsPage.module.scss'
 import { Button } from '@/components/ui/button'
+import { useState } from 'react'
+import { TextField } from '@/components/ui/textField'
+import { CheckBox } from '@/components/ui/checkbox'
 
 type BodyCellComponentType = {
   el: BodyCellType
@@ -19,7 +22,21 @@ type BodyCellComponentType = {
   isMyDeck?: boolean
 }
 
-const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) => {
+export const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) => {
+  const [openedModalIndex, setOpenedModalIndex] = useState<null | number>(null)
+
+  const handleModalToggle = (index: number | null) => {
+    if (openedModalIndex === index) {
+      setOpenedModalIndex(null)
+    } else {
+      setOpenedModalIndex(index)
+    }
+  }
+
+  const handleCloseModal = () => {
+    setOpenedModalIndex(null)
+  }
+
   return (
     <Cell className={`${tableName === 'Cards' ? s.cardsCell : s.bodyCell}`}>
       {el.cover && (
@@ -43,56 +60,140 @@ const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) => {
       )}
       {el.svgs && (
         <div className={`${s.iconsBox}`}>
-          {el.svgs?.map((el, i) => {
-            const crud: any = {
-              0: () => alert('is learn'),
-              1: () => alert('is edit'),
-              2: () => alert('is delete'),
-            }
-
-            return (
-              el.id && (
-                <Modal
-                  // onOpenChange={handleModalToggle}
-                  // open={open}
-                  triggerName={
-                    <div className={s.svgsContainer} key={i} onClick={crud[i + '']}>
-                      <svg height={'16px'} viewBox={'0 0 24 24'}>
-                        <use xlinkHref={`${sprite}#${el.id}`} />
-                      </svg>
+          {el.svgs?.map((iconSVG, i) => {
+            let modalContent
+            switch (i) {
+              case 0:
+                modalContent = (
+                  <>
+                    <ModalTitle title={'Learn Pack'} />
+                    <ModalDescription>
+                      <Typography variant={'body1'} as={'p'}>
+                        Do you really want to move on to learning more about the pack?
+                      </Typography>
+                    </ModalDescription>
+                    <div className={`${f.contentBtn} ${f.contentBtns}`}>
+                      <Button
+                        classNameBtnBox={f.btnBox}
+                        onClick={handleCloseModal}
+                        variant={'secondary'}
+                        type={'button'}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        classNameBtnBox={f.btnBox}
+                        // onClick={handleAddNewPackClick}
+                        variant={'primary'}
+                        // disabled={isError}
+                        type={'submit'}
+                      >
+                        Learn Pack
+                      </Button>
                     </div>
-                  }
-                >
-                  <ModalTitle title={'Delete Pack'} />
-                  <ModalDescription>
-                    <Typography variant={'body1'} as={'p'}>
-                      Do you really want to remove Pack Name?
-                    </Typography>
-                    <Typography variant={'body1'} as={'p'}>
-                      All cards will be deleted.
-                    </Typography>
-                  </ModalDescription>
-                  <div className={`${f.contentBtn} ${f.contentBtns}`}>
-                    <Button
-                      classNameBtnBox={f.btnBox}
-                      // onClick={() => handleModalToggle(open)}
-                      variant={'secondary'}
-                      type={'button'}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      classNameBtnBox={f.btnBox}
-                      // onClick={handleAddNewPackClick}
-                      variant={'primary'}
-                      // disabled={isError}
-                      type={'submit'}
-                    >
-                      Delete Pack
-                    </Button>
+                  </>
+                )
+                break
+              case 1:
+                modalContent = (
+                  <>
+                    <ModalTitle title={'Edit Pack'} />
+                    <form>
+                      {/*onSubmit={handleAddNewPackClick}*/}
+                      <div className={f.contentComponents}>
+                        <TextField
+                          inputId={'Name Pack'}
+                          label={'Name Pack'}
+                          // onChange={handleValueChange}
+                          placeholder={'Name'}
+                          // value={value}
+                          // errorMessage={errorMessage}
+                        />
+                        <CheckBox
+                          IconID={'checkbox-unselected'}
+                          SelectedIconID={'checkbox-selected'}
+                          checkboxId={'Private Pack'}
+                          disabled={false}
+                          height={'24'}
+                          label={'Private pack'}
+                          width={'24'}
+                        />
+                      </div>
+                      <div className={`${f.contentBtn} ${f.contentBtns}`}>
+                        <Button
+                          classNameBtnBox={f.btnBox}
+                          onClick={handleCloseModal}
+                          variant={'secondary'}
+                          type={'button'}
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          classNameBtnBox={f.btnBox}
+                          // onClick={handleAddNewPackClick}
+                          variant={'primary'}
+                          // disabled={isError}
+                          type={'submit'}
+                        >
+                          Save Changes
+                        </Button>
+                      </div>
+                    </form>
+                  </>
+                )
+                break
+              case 2:
+                modalContent = (
+                  <>
+                    <ModalTitle title={'Delete Pack'} />
+                    <ModalDescription>
+                      <Typography variant={'body1'} as={'p'}>
+                        Do you really want to remove Pack Name?
+                      </Typography>
+                      <Typography variant={'body1'} as={'p'}>
+                        All cards will be deleted.
+                      </Typography>
+                    </ModalDescription>
+                    <div className={`${f.contentBtn} ${f.contentBtns}`}>
+                      <Button
+                        classNameBtnBox={f.btnBox}
+                        onClick={handleCloseModal}
+                        variant={'secondary'}
+                        type={'button'}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        classNameBtnBox={f.btnBox}
+                        // onClick={handleAddNewPackClick}
+                        variant={'primary'}
+                        // disabled={isError}
+                        type={'submit'}
+                      >
+                        Delete Pack
+                      </Button>
+                    </div>
+                  </>
+                )
+                break
+              default:
+                return null
+            }
+            return (
+              <Modal
+                key={el.id}
+                open={openedModalIndex === i}
+                onOpenChange={() => handleModalToggle(i)}
+                triggerName={
+                  <div className={s.svgsContainer} key={i}>
+                    <svg height={'16px'} viewBox={'0 0 24 24'}>
+                      <use xlinkHref={`${sprite}#${iconSVG.id}`} />
+                    </svg>
                   </div>
-                </Modal>
-              )
+                }
+              >
+                {modalContent}
+              </Modal>
             )
           })}
         </div>
@@ -111,5 +212,3 @@ const BodyCell = ({ el, i, onClick, tableName }: BodyCellComponentType) => {
     </Cell>
   )
 }
-
-export default BodyCell

@@ -3,7 +3,7 @@ import { Row } from '@it-incubator/ui-kit'
 import s from '../table.module.scss'
 
 import { BodyCellType } from '../types'
-import BodyCell from './bodyCell'
+import { BodyCell } from './bodyCell'
 
 type BodyCellHOCType = {
   el: BodyCellType
