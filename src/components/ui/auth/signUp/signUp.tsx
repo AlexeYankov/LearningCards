@@ -6,7 +6,7 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import {ControlledInput} from '../../controlled/controlled-input'
 import {Button} from '../../button'
 import {Card} from '@/components/ui/card'
-import {useNavigate} from 'react-router-dom'
+import {Navigate} from 'react-router-dom'
 import {useCreateUserMutation} from "@/api/auth-api/auth.api.ts";
 
 type FormValues = z.infer<typeof loginSchema>
@@ -20,20 +20,17 @@ const loginSchema = z.object({
     path: ["confirmPassword"]
 })
 export const SignUp = () => {
-    const navigate = useNavigate()
-    const [sendRequest] = useCreateUserMutation();
 
     const {handleSubmit, control} = useForm<FormValues>({
         resolver: zodResolver(loginSchema),
     })
+
+    const [sendRequest, {isError}] = useCreateUserMutation();
+    if (!isError) return <Navigate to={'/login'} replace={true}/>
+
     const onSubmit = (data: FormValues) => {
         const {email, password} = data
-        const res=sendRequest({email, password})
-        if (!res.error) {
-            navigate('/login')
-        }
-
-
+        sendRequest({email, password})
     }
     return (
         <Card className={s.signUp}>

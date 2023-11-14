@@ -2,17 +2,19 @@ import {createBrowserRouter, Navigate, Outlet, RouteObject, RouterProvider,} fro
 import {CheckEmail} from '@/components/ui/auth/checkEmail'
 import {CreateNewPassword} from '@/components/ui/auth/createNewPassword'
 import {ForgotYourPassword} from '@/components/ui/auth/forgotYourPassword'
-import {SignIn} from '@/components/ui/auth/signIn/signIn'
 import {SignUp} from '@/components/ui/auth/signUp/signUp'
 import {CardsPage} from '@/components/ui/cards/cardsPage'
 import {PacksPage} from '@/components/ui/packs/packsPage'
 import {useMeQuery} from "@/api/auth-api/auth.api.ts";
 import {Layout} from "@/components/ui/header/header.tsx";
+import {Login} from "@/pages/login.tsx";
+
+
 
 
 const publicRoutes: RouteObject[] = [
     {
-        element: <SignIn/>,
+        element: <Login/>,
         path: '/login',
     },
     {
@@ -47,6 +49,7 @@ const privateRoutes: RouteObject[] = [
         element: <CardsPage/>,
         path: '/:id',
     },
+
 ]
 
 const router = createBrowserRouter([
@@ -56,20 +59,22 @@ const router = createBrowserRouter([
             {
                 children: privateRoutes,
                 element: (
-                        <PrivateRoutes/>
+                    <PrivateRoutes/>
 
                 )
             },
-
             ...publicRoutes,
         ]
-    }
+    },
+
 
 ])
 
 function PrivateRoutes() {
-    const {isError} = useMeQuery()
+    const {isError, isLoading} = useMeQuery()
+    if (isLoading) return <div>Loading.....</div>
     return !isError ? <Outlet/> : <Navigate to="/login"/>
+
 }
 
 export const Router = () => {

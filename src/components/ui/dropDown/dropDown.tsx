@@ -10,7 +10,6 @@ import {Typography} from '@/components/ui/typography'
 import * as DropdownRadix from '@radix-ui/react-dropdown-menu'
 import s from './dropDown.module.scss'
 import {useLogOutMutation} from "@/api/auth-api/auth.api.ts";
-import {useNavigate} from "react-router-dom";
 
 
 export type DropDown = {
@@ -79,12 +78,8 @@ export const ItemWithIcon: FC<DropDownItemWithIcon> = ({
                                                            variant = 'caption',
                                                        }) => {
     const [sendRequest] = useLogOutMutation()
-    const navigate = useNavigate()
-    const onClickSendRequest=async ()=>{
-       const res= await sendRequest()
-        if (!res.error){
-            navigate('/login')
-        }
+    const onClickSendRequest= ()=>{
+        sendRequest()
     }
     return (
         <DropdownRadix.Item onClick={onClickSendRequest} className={`${s.item} ${className}`}>
