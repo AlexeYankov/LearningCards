@@ -14,7 +14,7 @@ type PagesType = {
   totalPages?: number
 }
 
-export const Pages = ({ arrowID, color, reversedArrowID, totalPages = 20 }: PagesType) => {
+export const Pages = ({ arrowID, color, reversedArrowID, totalPages }: PagesType) => {
   const dispatch = useAppDispatch()
   const [searchParams] = useSearchParams()
   const currentPage = useAppSelector(state => state.pagination.currentPage)
@@ -24,7 +24,7 @@ export const Pages = ({ arrowID, color, reversedArrowID, totalPages = 20 }: Page
   }
 
   const getToCurrentPageUrl = (pageValue: number) => {
-    searchParams.set('currentPage', String(pageValue))
+    console.log(searchParams)
     return { search: searchParams.toString() }
   }
 

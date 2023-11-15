@@ -32,8 +32,6 @@ export const PacksPage = () => {
     orderBy,
   })
 
-  console.log(_)
-
   useEffect(() => {
     const params = {
       page: currentPage.toString(),
