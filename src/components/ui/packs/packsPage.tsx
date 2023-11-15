@@ -8,6 +8,8 @@ import { PageBar } from './components/pageBar/pageBar'
 import { PageName } from './components/pageName/pageName'
 import { tableHeadData } from './tableData'
 import { useAppSelector } from '@/api/store'
+import { useSearchParams } from 'react-router-dom'
+import { useEffect } from 'react'
 
 export const PacksPage = () => {
   const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
@@ -18,6 +20,8 @@ export const PacksPage = () => {
   const name = useAppSelector(state => state.pagination.name)
   const orderBy = useAppSelector(state => state.pagination.orderBy)
 
+  const [_, setSearchParams] = useSearchParams()
+
   const { data } = useGetDecksQuery({
     currentPage,
     itemsPerPage,
@@ -27,6 +31,21 @@ export const PacksPage = () => {
     name,
     orderBy,
   })
+
+  console.log(_)
+
+  useEffect(() => {
+    const params = {
+      page: currentPage.toString(),
+      itemsPerPage: itemsPerPage.toString(),
+      maxCards: maxCardsCount.toString(),
+      minCards: minCardsCount.toString(),
+      orderBy,
+      name,
+    }
+
+    setSearchParams(params)
+  }, [data])
 
   return (
     <div className={f.container}>
