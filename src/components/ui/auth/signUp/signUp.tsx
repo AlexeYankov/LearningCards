@@ -6,7 +6,7 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import {ControlledInput} from '../../controlled/controlled-input'
 import {Button} from '../../button'
 import {Card} from '@/components/ui/card'
-import {Navigate} from 'react-router-dom'
+import {Link, Navigate} from 'react-router-dom'
 import {useCreateUserMutation} from "@/api/auth-api/auth.api.ts";
 
 type FormValues = z.infer<typeof loginSchema>
@@ -24,13 +24,12 @@ export const SignUp = () => {
     const {handleSubmit, control} = useForm<FormValues>({
         resolver: zodResolver(loginSchema),
     })
-
-    const [sendRequest, {isError}] = useCreateUserMutation();
+    const [signUp, {isError}] = useCreateUserMutation();
     if (!isError) return <Navigate to={'/login'} replace={true}/>
-
     const onSubmit = (data: FormValues) => {
         const {email, password} = data
-        sendRequest({email, password})
+        signUp({email, password})
+
     }
     return (
         <Card className={s.signUp}>
@@ -83,7 +82,7 @@ export const SignUp = () => {
                 type={'button'}
                 variant={'link'}
                 fullWidth
-                children={<Typography children={'Sign In'} variant={'subtitle2'} as={'p'}/>}
+                children={<Typography children={'Sign In'} variant={'subtitle2'} as={Link} to={'/login'}/>}
             />
         </Card>
     )

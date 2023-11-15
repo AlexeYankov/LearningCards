@@ -70,7 +70,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
           </button>
         )}
         {password && (
-          <button className={`${s.iconEnd} ${disabledIconClass}`} onClick={handleChangeInputType}>
+          <button type={'button'} className={`${s.iconEnd} ${disabledIconClass}`} onClick={handleChangeInputType}>
             <Password iconId={passwordIcon} size={20} />
           </button>
         )}

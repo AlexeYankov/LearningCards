@@ -9,6 +9,7 @@ import {Button} from '../../button'
 import {Card} from '@/components/ui/card'
 import {Link, Navigate} from "react-router-dom";
 import {useLoginMutation, useMeQuery} from "@/api/auth-api/auth.api.ts";
+import {CircularProgress} from "@mui/material";
 
 type FormValues = z.infer<typeof loginSchema>
 
@@ -21,12 +22,12 @@ export const SignIn = () => {
     const {handleSubmit, control} = useForm<FormValues>({
         resolver: zodResolver(loginSchema),
     })
-    const [sendRequest] = useLoginMutation()
+    const [login] = useLoginMutation()
     const {isError,isLoading} = useMeQuery()
-    if (isLoading) return <div>Loading.....</div>
+    if (isLoading) return <CircularProgress />
     if (!isError) return <Navigate to="/" replace={true}/>
     const onSubmit = (data: FormValues) => {
-        sendRequest(data)
+        login(data)
     }
 
     return (
@@ -90,7 +91,7 @@ export const SignIn = () => {
                 type={'button'}
                 variant={'link'}
                 fullWidth
-                children={<Typography children={'Sign Up'} variant={'subtitle2'} as={'p'}/>}
+                children={<Typography children={'Sign Up'} variant={'subtitle2'} to={'/signUp'} as={Link} />}
             />
         </Card>
     )

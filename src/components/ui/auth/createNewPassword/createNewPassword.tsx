@@ -1,29 +1,33 @@
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { ControlledInput } from '@/components/ui/controlled/controlled-input'
-import { Typography } from '@/components/ui/typography'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import {useForm} from 'react-hook-form'
+import {Button} from '@/components/ui/button'
+import {Card} from '@/components/ui/card'
+import {ControlledInput} from '@/components/ui/controlled/controlled-input'
+import {Typography} from '@/components/ui/typography'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {z} from 'zod'
 
 import s from './createNewPassword.module.scss'
+import {useResetPasswordMutation} from "@/api/auth-api/auth.api.ts";
+import {Navigate, useParams} from "react-router-dom";
 
 type FormValues = z.infer<typeof loginSchema>
 const loginSchema = z.object({
-  password: z.string().min(3),
+  password: z.string().min(3).max(30),
 })
 
 export const CreateNewPassword = () => {
-  const navigate = useNavigate()
 
   const { control, handleSubmit } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
   })
+
+  const [newPassword,{isSuccess}]=useResetPasswordMutation()
+  const params=useParams<'*'>()
+  if (isSuccess)return <Navigate to={'/login'} replace={true} />
   const onSubmit = (data: FormValues) => {
-    console.log(data)
-    navigate('/checkEmail')
+    const {password}=data
+    const token=params["*"]
+    params&&newPassword({password,token})
   }
 
   return (

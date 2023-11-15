@@ -6,51 +6,53 @@ import s from './header.module.scss'
 import style from '../../../app.module.scss'
 import profileImage from '../../../asserts/profileImage.png'
 import {FC} from 'react'
-import {Outlet} from "react-router-dom";
+import {Link, Outlet} from "react-router-dom";
+import {useMeQuery} from "@/api/auth-api/auth.api.ts";
 
-type Props = {
-    isLoggedIn?: boolean
-}
 
-export const Header: FC<Props> = ({isLoggedIn = true}) => {
+export const Header: FC = () => {
+    const {isError, isLoading} = useMeQuery()
+    const isLoggedIn = !isError
     return (
         <div className={s.container}>
             <header className={s.header}>
-                <img alt={''} className={s.logo} src={logo}/>
-                <div className={s.textHeader}>
-                    <>
-                        {isLoggedIn ? (
-                            <>
-                                <Typography as={'p'} className={s.headerName} variant={'subtitle1'}>
-                                    Ivan
-                                </Typography>
-                                <DropDownMenu avatar={profileImage} email={'j&johnson@gmail.com'} name={'Ivan'}/>
-                            </>
-                        ) : (
-                            <Button
-                                children={<Typography as={'p'} children={'Sign In'} variant={'subtitle2'}/>}
-                                className={s.button}
-                                fullWidth
-                                variant={'primary'}
-                            />
-                        )}
-                    </>
-                </div>
+                <img alt={''}  className={s.logo} src={logo}/>
+                {!isLoading &&
+                    <div className={s.textHeader}>
+                        <>
+                            {isLoggedIn ? (
+                                    <DropDownMenu avatar={profileImage} email={'j&johnson@gmail.com'} name={'Ivan'}/>
+                            ) : (
+                                <Button
+                                    children={<Typography as={Link} to={'/login'} children={'Sign In'}
+                                                          variant={'subtitle2'}/>}
+                                    className={s.button}
+                                    fullWidth
+                                    variant={'primary'}
+                                />
+                            )}
+                        </>
+                    </div>
+                }
+
             </header>
         </div>
     )
 }
 
 
-export const Layout = () => (
-    <>
-        <Header/>
-        <div className={style.container}>
-            <Outlet/>
-        </div>
+export const Layout = () => {
 
-    </>
-);
+    return (
+        <>
+            <Header/>
+            <div className={style.container}>
+                <Outlet/>
+            </div>
+
+        </>
+    )
+}
 
 
 

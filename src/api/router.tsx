@@ -8,6 +8,8 @@ import {PacksPage} from '@/components/ui/packs/packsPage'
 import {useMeQuery} from "@/api/auth-api/auth.api.ts";
 import {Layout} from "@/components/ui/header/header.tsx";
 import {Login} from "@/pages/login.tsx";
+import {CircularProgress} from "@mui/material";
+import {EditProfile} from "@/components/ui/editProfile/editProfile.tsx";
 
 
 
@@ -23,7 +25,7 @@ const publicRoutes: RouteObject[] = [
     },
     {
         element: <CreateNewPassword/>,
-        path: '/createNewPassword',
+        path: '/createNewPassword/',
     },
     {
         element: <CheckEmail/>,
@@ -34,8 +36,8 @@ const publicRoutes: RouteObject[] = [
         path: '/forgotYourPassword',
     },
     {
-        element: <CreateNewPassword/>,
-        path: '/createNewPassword',
+        element: <EditProfile/>,
+        path: '/profile',
     },
 ]
 
@@ -72,7 +74,7 @@ const router = createBrowserRouter([
 
 function PrivateRoutes() {
     const {isError, isLoading} = useMeQuery()
-    if (isLoading) return <div>Loading.....</div>
+    if (isLoading) return <CircularProgress />
     return !isError ? <Outlet/> : <Navigate to="/login"/>
 
 }
