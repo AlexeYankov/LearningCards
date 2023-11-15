@@ -7,7 +7,7 @@ import { Table } from '../table'
 import { PageBar } from './components/pageBar/pageBar'
 import { PageName } from './components/pageName/pageName'
 import { tableHeadCardsData } from './tableData'
-import { ArrowBack } from '@/asserts/icons/components/ArrowBack.tsx'
+import { ArrowBack } from '@/asserts/icons/components/ArrowBack'
 
 export const CardsPage = () => {
   const { id } = useParams()
@@ -20,7 +20,7 @@ export const CardsPage = () => {
         <ArrowBack />
         Back to Packs List
       </Link>
-      <PageName />
+      <PageName isMyDeck={flag} />
       <PageBar />
       <Table
         bodyCell={data?.items || []}

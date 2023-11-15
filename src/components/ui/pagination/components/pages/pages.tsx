@@ -24,7 +24,6 @@ export const Pages = ({ arrowID, color, reversedArrowID, totalPages = 10 }: Page
   }
 
   const getToCurrentPageUrl = (pageValue: number) => {
-    console.log(searchParams)
     return { search: searchParams.toString() }
   }
 

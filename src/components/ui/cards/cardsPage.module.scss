@@ -40,3 +40,10 @@
   color: var(--color-light-100);
   text-decoration: none;
 }
+
+.textWithIconBox {
+  cursor: pointer;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
