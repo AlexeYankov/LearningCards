@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { useGetCardsQuery } from '@/api/common.api'
 
@@ -7,6 +7,7 @@ import { Table } from '../table'
 import { PageBar } from './components/pageBar/pageBar'
 import { PageName } from './components/pageName/pageName'
 import { tableHeadCardsData } from './tableData'
+import { ArrowBack } from '@/asserts/icons/components/ArrowBack.tsx'
 
 export const CardsPage = () => {
   const { id } = useParams()
@@ -15,9 +16,12 @@ export const CardsPage = () => {
   const flag = true
   return (
     <div className={f.container}>
+      <Link className={f.backLink} to={'/'}>
+        <ArrowBack />
+        Back to Packs List
+      </Link>
       <PageName />
       <PageBar />
-
       <Table
         bodyCell={data?.items || []}
         className={f.container__common}
