@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 
 import { useGetCardsQuery } from '@/api/common.api'
 
@@ -10,10 +10,18 @@ import { EmptyPack } from '@/components/ui/cards/components/emptyPack/emptyPack'
 import { Table } from '@/components/ui/table'
 import { PageBar } from '@/components/ui/cards/components/pageBar/pageBar'
 import { Pagination } from '@/components/ui/pagination'
+import { useAppSelector } from '@/api/store.ts'
+import { useEffect } from 'react'
 
 export const CardsPage = () => {
   const { id } = useParams()
-  const { data, isLoading } = useGetCardsQuery({ id: id!, currentPage: 2 })
+
+  const [_, setSearchParams] = useSearchParams()
+
+  const currentPage = useAppSelector(state => state.cards.currentPage)
+  const itemsPerPage = useAppSelector(state => state.cards.itemsPerPage)
+
+  const { data, isLoading } = useGetCardsQuery({ id: id!, currentPage, itemsPerPage })
 
   const flag = true
 
@@ -21,9 +29,19 @@ export const CardsPage = () => {
     ? tableHeadCardsData
     : tableHeadCardsData.filter(el => el.headCellName !== '')
 
+  useEffect(() => {
+    const params = {
+      page: currentPage.toString(),
+      itemsPerPage: itemsPerPage.toString(),
+    }
+
+    setSearchParams(params)
+  }, [data])
+
   if (isLoading) {
     return <div>Loading...</div>
   }
+
   return (
     <div className={f.container}>
       <Link className={f.backLink} to={'/'}>

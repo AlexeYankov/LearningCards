@@ -5,6 +5,7 @@ import sprite from '@/asserts/sprite.svg'
 import s from './pages.module.scss'
 import PagesForRender from './pagesForRender'
 import { Link, useSearchParams } from 'react-router-dom'
+import { changeCardsCurrentPage } from '@/api/cards/cards.ts'
 
 type PagesType = {
   arrowID: string
@@ -21,6 +22,7 @@ export const Pages = ({ arrowID, color, reversedArrowID, totalPages = 10 }: Page
 
   const handlePageChange = (page: number) => {
     dispatch(changeCurrentPage({ currentPage: page }))
+    dispatch(changeCardsCurrentPage({ currentPage: page }))
   }
 
   const getToCurrentPageUrl = (pageValue: number) => {

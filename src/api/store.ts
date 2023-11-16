@@ -2,6 +2,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 import { decksApi } from '@/api/decks/decks.api.ts'
 import paginationReducer from '@/api/decks/pagination.reducer.ts'
+import cardsReducer from '@/api/cards/cards.ts'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query/react'
 
@@ -13,6 +14,7 @@ export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
     pagination: paginationReducer,
+    cards: cardsReducer,
   },
 })
 

@@ -1,4 +1,5 @@
 import { baseApi } from './cards.api'
+import { isEmpty } from 'remeda'
 
 export type CardsResponsType = {
   answer: string
@@ -53,7 +54,12 @@ export const cardsService = baseApi.injectEndpoints({
     return {
       getCards: builder.query<Omit<DecksType, 'maxCardsCount'>, GetCardsParamsType>({
         providesTags: ['Cards'],
-        query: params => `v1/decks/${params.id}/cards`,
+        query: ({ id, ...params }) => {
+          return {
+            url: `v1/decks/${id}/cards`,
+            params: isEmpty(params) ? undefined : params,
+          }
+        },
       }),
       deleteCard: builder.mutation<UpdateCardsType, void>({
         invalidatesTags: ['Cards'],
