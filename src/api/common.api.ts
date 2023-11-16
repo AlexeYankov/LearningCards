@@ -39,9 +39,22 @@ export type PaginationResponseType = {
   maxCardsCount?: number
 }
 
+type GetCardsParamsType = {
+  id?: string
+  answer?: string
+  question?: string
+  orderBy?: 'name-asc' | 'name-desc'
+  currentPage?: number
+  itemsPerPage?: number
+}
+
 export const cardsService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
+      getCards: builder.query<Omit<DecksType, 'maxCardsCount'>, GetCardsParamsType>({
+        providesTags: ['Cards'],
+        query: params => `v1/decks/${params.id}/cards`,
+      }),
       deleteCard: builder.mutation<UpdateCardsType, void>({
         invalidatesTags: ['Cards'],
         query: id => ({
@@ -53,10 +66,7 @@ export const cardsService = baseApi.injectEndpoints({
         providesTags: ['Cards'],
         query: id => `v1/cards/${id}`,
       }),
-      getCards: builder.query<Omit<DecksType, 'maxCardsCount'>, string>({
-        providesTags: ['Cards'],
-        query: id => `v1/decks/${id}/cards`,
-      }),
+
       // getDecks: builder.query<DecksType, void>({
       //   providesTags: ['Decks'],
       //   query: () => `v1/decks`,

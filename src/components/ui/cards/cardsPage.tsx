@@ -13,11 +13,10 @@ import { Pagination } from '@/components/ui/pagination'
 
 export const CardsPage = () => {
   const { id } = useParams()
-  const { data, isLoading } = useGetCardsQuery(`${id}`)
+  const { data, isLoading } = useGetCardsQuery({ id: id!, currentPage: 2 })
 
   const flag = true
 
-  console.log(data)
   const tableHead = flag
     ? tableHeadCardsData
     : tableHeadCardsData.filter(el => el.headCellName !== '')
