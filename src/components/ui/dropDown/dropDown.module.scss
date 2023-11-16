@@ -24,6 +24,12 @@
   fill: var(--color-light-100);
 }
 
+.triggerIcon {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
 .content {
   display: flex;
   flex-direction: column;

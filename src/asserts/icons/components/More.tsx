@@ -1,6 +1,16 @@
-export const MoreIcon = () => {
+import { forwardRef, Ref } from 'react'
+
+export const MoreIcon = forwardRef<SVGSVGElement, any>((props, ref: Ref<SVGSVGElement>) => {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      ref={ref}
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <g id="more-vertical-outline">
         <g id="Group 1399">
           <circle id="Ellipse 106" cx="12" cy="12" r="8.5" stroke="white" />
@@ -34,4 +44,4 @@ export const MoreIcon = () => {
       </defs>
     </svg>
   )
-}
+})

@@ -32,7 +32,10 @@ export const DropDown: FC<DropDown> = ({
 
   return (
     <DropdownRadix.Root onOpenChange={setOpen} open={open}>
-      <DropdownRadix.Trigger asChild className={s.trigger}>
+      <DropdownRadix.Trigger
+        asChild
+        className={`${trigger === 'imageAvatar' ? s.trigger : s.triggerIcon}`}
+      >
         {trigger === 'imageAvatar' ? (
           <img alt={''} className={s.triggerImg} src={profileImage} />
         ) : (
