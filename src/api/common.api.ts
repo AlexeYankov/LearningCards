@@ -39,7 +39,7 @@ export type PaginationResponseType = {
   maxCardsCount?: number
 }
 
-export const cardsService: any = baseApi.injectEndpoints({
+export const cardsService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       deleteCard: builder.mutation<UpdateCardsType, void>({
@@ -53,7 +53,7 @@ export const cardsService: any = baseApi.injectEndpoints({
         providesTags: ['Cards'],
         query: id => `v1/cards/${id}`,
       }),
-      getCards: builder.query<CardsResponsType[], void>({
+      getCards: builder.query<Omit<DecksType, 'maxCardsCount'>, string>({
         providesTags: ['Cards'],
         query: id => `v1/decks/${id}/cards`,
       }),
