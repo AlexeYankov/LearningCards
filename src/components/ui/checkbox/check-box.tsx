@@ -24,7 +24,6 @@ export const CheckBox = <T extends ElementType = 'input'>(
     onChange,
     checked,
     ...rest
-
   } = props
 
   return (
@@ -52,7 +51,6 @@ export const CheckBox = <T extends ElementType = 'input'>(
           }}
           type={'checkbox'}
           {...rest}
-
         />
       </div>
       {label && <Label htmlFor={'checkboxId'} label={label} />}

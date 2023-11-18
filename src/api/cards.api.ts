@@ -1,15 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {createApi} from '@reduxjs/toolkit/query/react'
+import {baseQueryWithReAuth} from "@/api/base-query-with-reauth.ts";
 
 export const baseApi = createApi({
-  reducerPath: 'baseApi',
-  tagTypes: ['Cards', 'Decks'],
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.flashcards.andrii.es/',
-    credentials: 'include',
-    prepareHeaders: headers => {
-      headers.append('x-auth-skip', 'true')
-    },
-  }),
-  endpoints: () => ({}),
-  refetchOnFocus: true,
+    reducerPath: 'baseApi',
+    tagTypes: ['Cards', 'Decks','Me'],
+    baseQuery:baseQueryWithReAuth,
+    endpoints: () => ({}),
+    refetchOnFocus: true,
 })

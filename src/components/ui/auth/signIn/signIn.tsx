@@ -7,8 +7,9 @@ import {ControlledInput} from '../../controlled/controlled-input'
 import {ControlledCheckbox} from '../../controlled/controlled-checkbox'
 import {Button} from '../../button'
 import {Card} from '@/components/ui/card'
-import {useLoginMutation} from "@/api/auth-api/auth.api.ts";
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
+import {useLoginMutation, useMeQuery} from "@/api/auth-api/auth.api.ts";
+import {CircularProgress} from "@mui/material";
 
 type FormValues = z.infer<typeof loginSchema>
 
@@ -18,14 +19,15 @@ const loginSchema = z.object({
     rememberMe: z.boolean().default(false),
 })
 export const SignIn = () => {
-    const [sendRequest] = useLoginMutation()
-
     const {handleSubmit, control} = useForm<FormValues>({
         resolver: zodResolver(loginSchema),
     })
+    const [login] = useLoginMutation()
+    const {isError,isLoading} = useMeQuery()
+    if (isLoading) return <CircularProgress />
+    if (!isError) return <Navigate to="/" replace={true}/>
     const onSubmit = (data: FormValues) => {
-        sendRequest(data)
-
+        login(data)
     }
 
     return (
@@ -89,7 +91,7 @@ export const SignIn = () => {
                 type={'button'}
                 variant={'link'}
                 fullWidth
-                children={<Typography children={'Sign Up'} variant={'subtitle2'} as={'p'}/>}
+                children={<Typography children={'Sign Up'} variant={'subtitle2'} to={'/signUp'} as={Link} />}
             />
         </Card>
     )

@@ -20,4 +20,10 @@
   .icon {
     margin-left: 4px;
   }
+
+  .iconRotate {
+    svg {
+      transform: rotate(180deg);
+    }
+  }
 }

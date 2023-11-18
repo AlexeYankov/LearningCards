@@ -1,8 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-
   width: 100%;
   min-width: 100%;
 }
@@ -27,4 +25,24 @@
   border-collapse: collapse;
   width: 100%;
   border: 1px solid var(--color-dark-500);
+}
+
+.backLink {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+
+  margin-bottom: 30px;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1px;
+  color: var(--color-light-100);
+  text-decoration: none;
+}
+
+.textWithIconBox {
+  display: flex;
+  gap: 15px;
+  align-items: center;
 }

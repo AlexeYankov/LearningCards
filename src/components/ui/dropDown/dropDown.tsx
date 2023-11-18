@@ -8,15 +8,18 @@ import { SignOut } from '@/asserts/icons/components/SignOut'
 import profileImage from '@/asserts/profileImage.png'
 import { Typography } from '@/components/ui/typography'
 import * as DropdownRadix from '@radix-ui/react-dropdown-menu'
-
 import s from './dropDown.module.scss'
+import { MoreIcon } from '@/asserts/icons/components/More'
+import style from '../header/header.module.scss'
+import { useLogOutMutation } from '@/api/auth-api/auth.api.ts'
+import { Link } from 'react-router-dom'
 
 export type DropDown = {
   align?: 'center' | 'end' | 'start'
   children: ReactNode
   className?: string
   sideOffset?: number
-  trigger?: boolean
+  trigger?: 'imageAvatar' | 'iconMore'
 }
 
 export const DropDown: FC<DropDown> = ({
@@ -30,8 +33,22 @@ export const DropDown: FC<DropDown> = ({
 
   return (
     <DropdownRadix.Root onOpenChange={setOpen} open={open}>
-      <DropdownRadix.Trigger asChild className={s.trigger}>
-        {trigger && <img alt={''} className={s.triggerImg} src={profileImage} />}
+      <DropdownRadix.Trigger>
+        {trigger && (
+          <Typography as={'p'} className={style.headerName} variant={'subtitle1'}>
+            Ivan
+          </Typography>
+        )}
+      </DropdownRadix.Trigger>
+      <DropdownRadix.Trigger
+        asChild
+        className={`${trigger === 'imageAvatar' ? s.trigger : s.triggerIcon}`}
+      >
+        {trigger === 'imageAvatar' ? (
+          <img alt={''} className={s.triggerImg} src={profileImage} />
+        ) : (
+          <MoreIcon />
+        )}
       </DropdownRadix.Trigger>
 
       <DropdownRadix.Portal>
@@ -50,6 +67,7 @@ export const DropDown: FC<DropDown> = ({
 }
 
 export type DropDownItemWithIcon = {
+  onClick?: () => void
   children?: ReactNode
   className?: string
   icon?: ReactNode
@@ -70,6 +88,7 @@ export type DropDownItemWithIcon = {
 }
 
 export const ItemWithIcon: FC<DropDownItemWithIcon> = ({
+  onClick,
   children,
   className,
   icon,
@@ -77,12 +96,14 @@ export const ItemWithIcon: FC<DropDownItemWithIcon> = ({
   variant = 'caption',
 }) => {
   return (
-    <DropdownRadix.Item className={`${s.item} ${className}`}>
+    <DropdownRadix.Item onClick={onClick} className={`${s.item} ${className}`}>
       <div className={s.menuItem}>
         <div className={s.menuItemIcon}>
           {icon}
           {children}
-          <Typography variant={variant}>{text}</Typography>
+          <Typography as={Link} to={'/profile'} variant={variant}>
+            {text}
+          </Typography>
         </div>
       </div>
     </DropdownRadix.Item>
@@ -96,8 +117,12 @@ type DropDownMenuProps = {
 }
 
 export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => {
+  const [logout] = useLogOutMutation()
+  const onClickLogOut = () => {
+    logout()
+  }
   return (
-    <DropDown sideOffset={0} trigger>
+    <DropDown sideOffset={0} trigger={'imageAvatar'}>
       <ItemWithIcon className={s.itemProfile}>
         <div className={s.inner}>
           <img alt={''} className={s.img} src={avatar} />
@@ -112,14 +137,14 @@ export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => 
         </div>
       </ItemWithIcon>
       <ItemWithIcon icon={<Profile />} text={'My Profile'} />
-      <ItemWithIcon icon={<SignOut />} text={'Sign Out'} />
+      <ItemWithIcon onClick={onClickLogOut} icon={<SignOut />} text={'Sign Out'} />
     </DropDown>
   )
 }
 
 export const DropDownPackMenu = () => {
   return (
-    <DropDown className={s.content} trigger>
+    <DropDown className={s.content} trigger={'iconMore'}>
       <ItemWithIcon icon={<Learn />} text={'Learn'} />
       <ItemWithIcon icon={<Edit />} text={'Edit'} />
       <ItemWithIcon icon={<Delete />} text={'Delete'} />

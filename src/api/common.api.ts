@@ -1,4 +1,5 @@
 import { baseApi } from './cards.api'
+import { isEmpty } from 'remeda'
 
 export type CardsResponsType = {
   answer: string
@@ -39,9 +40,27 @@ export type PaginationResponseType = {
   maxCardsCount?: number
 }
 
-export const cardsService: any = baseApi.injectEndpoints({
+type GetCardsParamsType = {
+  id?: string
+  answer?: string
+  question?: string
+  orderBy?: 'name-asc' | 'name-desc'
+  currentPage?: number
+  itemsPerPage?: number
+}
+
+export const cardsService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
+      getCards: builder.query<Omit<DecksType, 'maxCardsCount'>, GetCardsParamsType>({
+        providesTags: ['Cards'],
+        query: ({ id, ...params }) => {
+          return {
+            url: `v1/decks/${id}/cards`,
+            params: isEmpty(params) ? undefined : params,
+          }
+        },
+      }),
       deleteCard: builder.mutation<UpdateCardsType, void>({
         invalidatesTags: ['Cards'],
         query: id => ({
@@ -53,10 +72,7 @@ export const cardsService: any = baseApi.injectEndpoints({
         providesTags: ['Cards'],
         query: id => `v1/cards/${id}`,
       }),
-      getCards: builder.query<CardsResponsType[], void>({
-        providesTags: ['Cards'],
-        query: id => `v1/decks/${id}/cards`,
-      }),
+
       // getDecks: builder.query<DecksType, void>({
       //   providesTags: ['Decks'],
       //   query: () => `v1/decks`,

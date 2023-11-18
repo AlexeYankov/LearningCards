@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, KeyboardEvent, ReactNode, forwardRef, useState } from 'react'
+import { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 
 import { Close } from '@/asserts/icons/components/Close'
 import { Password } from '@/asserts/icons/components/Password'
@@ -16,10 +16,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
     inputId,
     label,
     onClearClick,
-    onEnter,
-    onKeyDown,
     password,
-    placeholder,
     search,
     type = 'text',
     ...rest
@@ -33,13 +30,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 
   const handleChangeInputType = () => {
     setValueType(prevType => (prevType === 'text' ? 'password' : 'text'))
-  }
-
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (onEnter && e.key === 'Enter') {
-      onEnter(e)
-    }
-    onKeyDown?.(e)
   }
 
   const isShowClearButton = onClearClick && search && rest.value?.length! > 0
@@ -58,8 +48,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
           className={`${s.input} ${isShowErrorClass}`}
           disabled={disabled}
           id={inputId}
-          onKeyDown={handleKeyDown}
-          placeholder={placeholder}
           ref={ref}
           type={valueType}
           {...rest}
@@ -70,7 +58,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
           </button>
         )}
         {password && (
-          <button className={`${s.iconEnd} ${disabledIconClass}`} onClick={handleChangeInputType}>
+          <button
+            className={`${s.iconEnd} ${disabledIconClass}`}
+            type={'button'}
+            onClick={handleChangeInputType}
+          >
             <Password iconId={passwordIcon} size={20} />
           </button>
         )}
@@ -83,16 +75,12 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 })
 
 export type TextFieldProps = {
-  children?: ReactNode
-  className?: string
   error?: string
   errorMessage?: null | string
   inputId?: string
   label?: string
   onClearClick?: () => void
-  onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
   password?: boolean
-  placeholder?: string
   search?: boolean
   type?: 'password' | 'text'
   value?: string

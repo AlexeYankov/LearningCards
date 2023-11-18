@@ -7,6 +7,7 @@ import * as SelectRadix from '@radix-ui/react-select'
 import s from './selectRadix.module.scss'
 
 import { Label } from '../label'
+import { changeCardsCurrentPage, changeCardsItemsPerPage } from '@/api/cards/cards.ts'
 
 type SelectItemProps = {
   children?: React.ReactNode
@@ -54,6 +55,8 @@ export const Select = ({
   const handleValueChange = (value: string) => {
     dispatch(changeItemsPerPage({ itemsPerPage: +value }))
     dispatch(changeCurrentPage({ currentPage: 1 }))
+    dispatch(changeCardsCurrentPage({ currentPage: 1 }))
+    dispatch(changeCardsItemsPerPage({ itemsPerPage: +value }))
   }
 
   return (

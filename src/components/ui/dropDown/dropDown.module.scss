@@ -24,13 +24,19 @@
   fill: var(--color-light-100);
 }
 
+.triggerIcon {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
 .content {
   display: flex;
   flex-direction: column;
 
   width: 100%;
   min-width: 215px;
-  padding: 12px;
+  padding: 0 12px;
 
   background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
@@ -53,9 +59,10 @@
   display: flex;
   align-items: center;
 
-  padding: 12px 3px;
+  padding: 12px 0;
 
   border-bottom: 1px solid var(--color-dark-500);
+  outline: none;
 }
 
 .menuItem {
@@ -99,5 +106,5 @@ div.itemProfile {
 }
 
 div.content {
-  min-width: 100px;
+  min-width: 80px;
 }

@@ -49,6 +49,18 @@
     font-size: var(--font-size-s);
   }
 
+  .imageWithNameBox {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .image {
+    min-width: 118px;
+    height: 48px;
+    object-fit: cover;
+  }
+
   .iconsBox {
     display: flex;
     gap: 10px;
@@ -61,4 +73,8 @@
     height: 48px;
     background: lightgray 50% / cover no-repeat;
   }
+}
+
+.boldText {
+  font-weight: var(--font-weight-bold);
 }

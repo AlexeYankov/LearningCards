@@ -1,32 +1,36 @@
-import sprite from '@/asserts/sprite.svg'
 import { HeadCell as UIHeadCell } from '@it-incubator/ui-kit'
 
 import s from './headCell.module.scss'
 
 import { Typography } from '../../typography'
 import { HeadCellType } from '../types'
+import { useAppDispatch, useAppSelector } from '@/api/store'
+import { changeOrderBy } from '@/api/decks/pagination.reducer'
+import { ArrowUp } from '@/asserts/icons/components/ArrowUp'
 
 type HeadCellComponentType = {
   el: HeadCellType
-  tableName?: string
 }
 
-const HeadCell = ({ el }: HeadCellComponentType) => {
+export const HeadCell = ({ el }: HeadCellComponentType) => {
+  const dispatch = useAppDispatch()
+  const orderBy = useAppSelector(state => state.pagination.orderBy)
+
+  const handleOrderByChange = () => {
+    const updatedOrderBy = orderBy === 'name-desc' ? 'name-asc' : 'name-desc'
+    dispatch(changeOrderBy({ orderBy: updatedOrderBy }))
+  }
+
+  const iconClasses = `${s.icon} ${orderBy === 'name-desc' ? s.iconRotate : ''}`
+
   return (
     <UIHeadCell className={s.headCell}>
       <Typography variant={'heading3'} className={s.typography}>
         {el.headCellName}
       </Typography>
-
-      <span className={s.icon}>
-        {el.svgSizes?.id && (
-          <svg viewBox={'0 0 24 24'} width={'12px'}>
-            <use xlinkHref={`${sprite}#${el.svgSizes?.id}`} />
-          </svg>
-        )}
-      </span>
+      <button className={iconClasses} onClick={handleOrderByChange}>
+        {el.svgSizes && <ArrowUp />}
+      </button>
     </UIHeadCell>
   )
 }
-
-export default HeadCell
