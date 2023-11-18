@@ -61,6 +61,7 @@ export const PacksPage = () => {
       />
 
       <Pagination
+        reversed
         arrowColor={'white'}
         arrowID={'arrow-ios-back'}
         options={['10', '20', '30', '50', '100']}

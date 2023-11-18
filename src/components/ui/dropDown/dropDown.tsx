@@ -11,9 +11,8 @@ import * as DropdownRadix from '@radix-ui/react-dropdown-menu'
 import s from './dropDown.module.scss'
 import { MoreIcon } from '@/asserts/icons/components/More'
 import style from '../header/header.module.scss'
-import {useLogOutMutation} from "@/api/auth-api/auth.api.ts";
-import {Link} from "react-router-dom";
-
+import { useLogOutMutation } from '@/api/auth-api/auth.api.ts'
+import { Link } from 'react-router-dom'
 
 export type DropDown = {
   align?: 'center' | 'end' | 'start'
@@ -34,6 +33,13 @@ export const DropDown: FC<DropDown> = ({
 
   return (
     <DropdownRadix.Root onOpenChange={setOpen} open={open}>
+      <DropdownRadix.Trigger>
+        {trigger && (
+          <Typography as={'p'} className={style.headerName} variant={'subtitle1'}>
+            Ivan
+          </Typography>
+        )}
+      </DropdownRadix.Trigger>
       <DropdownRadix.Trigger
         asChild
         className={`${trigger === 'imageAvatar' ? s.trigger : s.triggerIcon}`}
@@ -44,9 +50,7 @@ export const DropDown: FC<DropDown> = ({
           <MoreIcon />
         )}
       </DropdownRadix.Trigger>
-      <DropdownRadix.Trigger>
-        {trigger &&   <Typography as={'p'} className={style.headerName} variant={'subtitle1'}>Ivan</Typography>}
-      </DropdownRadix.Trigger>
+
       <DropdownRadix.Portal>
         <DropdownRadix.Content
           align={align}
@@ -63,42 +67,43 @@ export const DropDown: FC<DropDown> = ({
 }
 
 export type DropDownItemWithIcon = {
-    onClick?: () => void
-    children?: ReactNode
-    className?: string
-    icon?: ReactNode
-    text?: string
-    variant?:
-        | 'body1'
-        | 'body2'
-        | 'caption'
-        | 'heading1'
-        | 'heading2'
-        | 'heading3'
-        | 'large'
-        | 'link1'
-        | 'link2'
-        | 'overline'
-        | 'subtitle1'
-        | 'subtitle2'
+  onClick?: () => void
+  children?: ReactNode
+  className?: string
+  icon?: ReactNode
+  text?: string
+  variant?:
+    | 'body1'
+    | 'body2'
+    | 'caption'
+    | 'heading1'
+    | 'heading2'
+    | 'heading3'
+    | 'large'
+    | 'link1'
+    | 'link2'
+    | 'overline'
+    | 'subtitle1'
+    | 'subtitle2'
 }
 
 export const ItemWithIcon: FC<DropDownItemWithIcon> = ({
-                                                         onClick,
-                                                         children,
-                                                         className,
-                                                         icon,
-                                                         text,
-                                                         variant = 'caption',
-                                                       }) => {
-
+  onClick,
+  children,
+  className,
+  icon,
+  text,
+  variant = 'caption',
+}) => {
   return (
     <DropdownRadix.Item onClick={onClick} className={`${s.item} ${className}`}>
       <div className={s.menuItem}>
         <div className={s.menuItemIcon}>
           {icon}
           {children}
-          <Typography as={Link} to={'/profile'} variant={variant}>{text}</Typography>
+          <Typography as={Link} to={'/profile'} variant={variant}>
+            {text}
+          </Typography>
         </div>
       </div>
     </DropdownRadix.Item>
@@ -111,31 +116,30 @@ type DropDownMenuProps = {
   name?: string
 }
 
-
-export const DropDownMenu: FC<DropDownMenuProps> = ({avatar, email, name}) => {
-    const [logout] = useLogOutMutation()
-    const onClickLogOut = () => {
-        logout()
-    }
-    return (
-        <DropDown sideOffset={0} trigger={'imageAvatar'}>
-            <ItemWithIcon className={s.itemProfile}>
-                <div className={s.inner}>
-                    <img alt={''} className={s.img} src={avatar}/>
-                    <div className={s.itemBox}>
-                        <Typography as={'p'} variant={'subtitle2'}>
-                            {name}
-                        </Typography>
-                        <Typography className={s.email} variant={'caption'}>
-                            {email}
-                        </Typography>
-                    </div>
-                </div>
-            </ItemWithIcon>
-            <ItemWithIcon  icon={<Profile/>} text={'My Profile'}/>
-            <ItemWithIcon onClick={onClickLogOut} icon={<SignOut/>} text={'Sign Out'}/>
-        </DropDown>
-    )
+export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => {
+  const [logout] = useLogOutMutation()
+  const onClickLogOut = () => {
+    logout()
+  }
+  return (
+    <DropDown sideOffset={0} trigger={'imageAvatar'}>
+      <ItemWithIcon className={s.itemProfile}>
+        <div className={s.inner}>
+          <img alt={''} className={s.img} src={avatar} />
+          <div className={s.itemBox}>
+            <Typography as={'p'} variant={'subtitle2'}>
+              {name}
+            </Typography>
+            <Typography className={s.email} variant={'caption'}>
+              {email}
+            </Typography>
+          </div>
+        </div>
+      </ItemWithIcon>
+      <ItemWithIcon icon={<Profile />} text={'My Profile'} />
+      <ItemWithIcon onClick={onClickLogOut} icon={<SignOut />} text={'Sign Out'} />
+    </DropDown>
+  )
 }
 
 export const DropDownPackMenu = () => {
