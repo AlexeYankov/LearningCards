@@ -7,11 +7,14 @@ import { Table } from '../table'
 import { PageBar } from './components/pageBar/pageBar'
 import { PageName } from './components/pageName/pageName'
 import { tableHeadData } from './tableData'
-import { useAppSelector } from '@/api/store'
+import { useAppDispatch, useAppSelector } from '@/api/store'
 import { useSearchParams } from 'react-router-dom'
 import { useEffect } from 'react'
+import { resetCardsFilter } from '@/api/cards/cards.ts'
 
 export const PacksPage = () => {
+  const dispatch = useAppDispatch()
+
   const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
   const currentPage = useAppSelector(state => state.pagination.currentPage)
   const maxCardsCount = useAppSelector(state => state.pagination.maxCardsCount)
@@ -41,7 +44,7 @@ export const PacksPage = () => {
       orderBy,
       name,
     }
-
+    dispatch(resetCardsFilter())
     setSearchParams(params)
   }, [data])
 

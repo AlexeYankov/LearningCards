@@ -18,9 +18,14 @@ export const cardsSlice = createSlice({
     changeCardsItemsPerPage: (state, action: PayloadAction<{ itemsPerPage: number }>) => {
       state.itemsPerPage = action.payload.itemsPerPage
     },
+    resetCardsFilter: state => {
+      state.itemsPerPage = 10
+      state.currentPage = 1
+    },
   },
 })
 
 export default cardsSlice.reducer
 
-export const { changeCardsCurrentPage, changeCardsItemsPerPage } = cardsSlice.actions
+export const { changeCardsCurrentPage, changeCardsItemsPerPage, resetCardsFilter } =
+  cardsSlice.actions
