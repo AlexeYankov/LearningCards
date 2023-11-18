@@ -6,10 +6,7 @@ import s from './editProfile.module.scss'
 
 import { EditableSpan } from './editableSpan/editableSpan'
 
-type Props = {
-  name: string
-}
-export const EditProfile = ({ name = 'Ivan' }: Props) => {
+export const EditProfile = ({ name = 'Ivan' }) => {
   const [value, setValue] = useState(name)
   const handleValueChange = (newValue: string) => {
     setValue(newValue)
