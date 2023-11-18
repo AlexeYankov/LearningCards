@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-
-import { Button } from '@/components/ui/button'
-import { TextField } from '@/components/ui/textField'
-
+import React, {useState} from 'react'
+import {Button} from '@/components/ui/button'
+import {TextField} from '@/components/ui/textField'
 import s from '../editProfile.module.scss'
+import {SignOut} from "@/asserts/icons/components/SignOut.tsx";
 
 type EditableSpanPropsType = {
   onChange: (newValue: string) => void
@@ -58,7 +57,7 @@ export const EditableSpan = React.memo(function ({ onChange, value }: EditableSp
         {value}
       </h1>
       <div className={s.email}>j&johnson@gmail.com</div>
-      {/* <Button IconID={'log-out'} children={'Log out'} variant={'secondary'} /> */}
+       <Button icon={<SignOut/>} children={'Log out'} variant={'secondary'} />
     </>
   )
 })
