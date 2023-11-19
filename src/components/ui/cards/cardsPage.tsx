@@ -24,9 +24,6 @@ export const CardsPage = () => {
     itemsPerPage,
   })
   const flag = true
-  const tableHead = flag
-    ? tableHeadCardsData
-    : tableHeadCardsData.filter(el => el.headCellName !== '')
 
   const resetFilterDecks = () => {
     dispatch(changeCardsCurrentPage({ currentPage: 1 }))
@@ -59,7 +56,7 @@ export const CardsPage = () => {
           <Table
             bodyCell={data?.items || []}
             className={f.container__common}
-            headCell={tableHead}
+            headCell={tableHeadCardsData}
             tableName={'Cards'}
             isMyDeck={flag}
           />

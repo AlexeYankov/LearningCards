@@ -64,10 +64,19 @@ export const BodyCellHOC = ({ item, tableName, isMyDeck }: BodyCellHOCType) => {
             packName: item.name,
             svgs: [
               { id: 'play-circle-outline' },
-              { id: tableName === 'Decks' ? 'edit-2-outline' : '' },
-              { id: tableName === 'Decks' ? 'trash-outline' : '' },
-              /*tableName vs decks will change if is your deck or not!*/
+              { id: 'edit-2-outline' },
+              { id: 'trash-outline' },
             ],
+          }}
+          tableName={tableName}
+          isMyDeck={isMyDeck}
+        />
+      ) : !isMyDeck && tableName === 'Cards' ? (
+        <BodyCell
+          item={{
+            id: item.id,
+            packName: item.name,
+            svgs: [{ id: 'edit-2-outline' }, { id: 'trash-outline' }],
           }}
           tableName={tableName}
           isMyDeck={isMyDeck}
@@ -81,15 +90,6 @@ export const BodyCellHOC = ({ item, tableName, isMyDeck }: BodyCellHOCType) => {
           }}
           tableName={tableName}
           isMyDeck={isMyDeck}
-        />
-      )}
-      {isMyDeck && tableName === 'Cards' && (
-        <BodyCell
-          item={{
-            svgs: [{ id: 'edit-2-outline' }, { id: 'trash-outline' }],
-          }}
-          isMyDeck={isMyDeck}
-          tableName={tableName}
         />
       )}
     </Row>
