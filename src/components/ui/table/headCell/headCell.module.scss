@@ -2,6 +2,16 @@
   padding: 6px 24px;
   text-align: left;
   background-color: var(--color-dark-500);
+  transition: 0.3s;
+
+  &:hover {
+    background-color: var(--color-dark-300);
+    transition: 0.3s;
+  }
+
+  &:last-child {
+    background-color: var(--color-dark-500);
+  }
 
   svg {
     cursor: pointer;
