@@ -12,6 +12,7 @@ type BodyCellHOCType = {
 }
 
 export const BodyCellHOC = ({ item, tableName, isMyDeck }: BodyCellHOCType) => {
+  console.log(isMyDeck)
   const starsGrade = Array.from({ length: Math.round(item.grade || 0) }, () => 'star')
   let result = starsGrade
   const emptyStarsGrade = Array.from(
@@ -56,24 +57,33 @@ export const BodyCellHOC = ({ item, tableName, isMyDeck }: BodyCellHOCType) => {
         />
       )}
       {/*CRUD icons for DECKS PAGE*/}
-      {tableName === 'Decks' && (
+      {isMyDeck && tableName === 'Decks' ? (
         <BodyCell
           item={{
             id: item.id,
             packName: item.name,
             svgs: [
               { id: 'play-circle-outline' },
-              /*tableName vs decks will change if is your deck or not!*/
               { id: tableName === 'Decks' ? 'edit-2-outline' : '' },
               { id: tableName === 'Decks' ? 'trash-outline' : '' },
+              /*tableName vs decks will change if is your deck or not!*/
             ],
           }}
           tableName={tableName}
           isMyDeck={isMyDeck}
         />
+      ) : (
+        <BodyCell
+          item={{
+            id: item.id,
+            packName: item.name,
+            svgs: [{ id: 'play-circle-outline' }],
+          }}
+          tableName={tableName}
+          isMyDeck={isMyDeck}
+        />
       )}
-      {/*true will change is your deck or not! is this ONLY FOR CARDS PAGE*/}
-      {tableName === 'Cards' && isMyDeck && (
+      {isMyDeck && tableName === 'Cards' && (
         <BodyCell
           item={{
             svgs: [{ id: 'edit-2-outline' }, { id: 'trash-outline' }],

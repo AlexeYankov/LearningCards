@@ -6,6 +6,7 @@ import s from './table.module.scss'
 import { BodyCellType, HeadCellType, TableType } from './types'
 import { BodyCellHOC } from './bodyCell/bodyCellHOC'
 import { HeadCell } from './headCell/headCell'
+import { useMeQuery } from '@/api/auth-api/auth.api.ts'
 
 export const Table = ({
   bodyCell,
@@ -15,6 +16,8 @@ export const Table = ({
   isMyDeck,
   ...rest
 }: TableType) => {
+  const { data: me } = useMeQuery()
+
   return (
     <Root className={`${className}`}>
       <React.Fragment key={'.0'}>
@@ -27,6 +30,8 @@ export const Table = ({
         </Head>
         <Body>
           {bodyCell?.map((el: BodyCellType, i) => {
+            const isMyDeck = el.userId === me?.id
+
             return <BodyCellHOC item={el} key={i} tableName={tableName || ''} isMyDeck={isMyDeck} />
           })}
         </Body>
