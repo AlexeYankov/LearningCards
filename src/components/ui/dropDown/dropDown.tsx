@@ -72,6 +72,7 @@ export type DropDownItemWithIcon = {
   className?: string
   icon?: ReactNode
   text?: string
+  linkTo?: string
   variant?:
     | 'body1'
     | 'body2'
@@ -94,17 +95,16 @@ export const ItemWithIcon: FC<DropDownItemWithIcon> = ({
   icon,
   text,
   variant = 'caption',
+  linkTo,
 }) => {
   return (
-    <DropdownRadix.Item onClick={onClick} className={`${s.item} ${className}`}>
+    <DropdownRadix.Item onClick={onClick} className={`${s.item} ${className}`} asChild>
       <div className={s.menuItem}>
-        <div className={s.menuItemIcon}>
+        <Link to={linkTo!} className={s.menuItemIcon}>
           {icon}
           {children}
-          <Typography as={Link} to={'/profile'} variant={variant}>
-            {text}
-          </Typography>
-        </div>
+          <Typography variant={variant}>{text}</Typography>
+        </Link>
       </div>
     </DropdownRadix.Item>
   )
@@ -123,7 +123,7 @@ export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => 
   }
   return (
     <DropDown sideOffset={0} trigger={'imageAvatar'}>
-      <ItemWithIcon className={s.itemProfile}>
+      <ItemWithIcon className={s.itemProfile} linkTo={'/'}>
         <div className={s.inner}>
           <img alt={''} className={s.img} src={avatar} />
           <div className={s.itemBox}>
@@ -136,8 +136,13 @@ export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => 
           </div>
         </div>
       </ItemWithIcon>
-      <ItemWithIcon icon={<Profile />} text={'My Profile'} />
-      <ItemWithIcon onClick={onClickLogOut} icon={<SignOut />} text={'Sign Out'} />
+      <ItemWithIcon icon={<Profile />} text={'My Profile'} linkTo={'/profile'} />
+      <ItemWithIcon
+        onClick={onClickLogOut}
+        icon={<SignOut />}
+        text={'Sign Out'}
+        linkTo={'/signUp'}
+      />
     </DropDown>
   )
 }
