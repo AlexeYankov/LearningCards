@@ -7,9 +7,13 @@ import { Table } from '../table'
 import { PageBar } from './components/pageBar/pageBar'
 import { PageName } from './components/pageName/pageName'
 import { tableHeadData } from './tableData'
-import { useAppSelector } from '@/api/store'
+import { useAppDispatch, useAppSelector } from '@/api/store'
+import { useEffect } from 'react'
+import { changeCurrentPage } from '@/api/decks/pagination.reducer'
 
 export const PacksPage = () => {
+  const dispatch = useAppDispatch()
+
   const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
   const currentPage = useAppSelector(state => state.pagination.currentPage)
   const maxCardsCount = useAppSelector(state => state.pagination.maxCardsCount)
@@ -27,6 +31,15 @@ export const PacksPage = () => {
     name,
     orderBy,
   })
+
+  useEffect(() => {
+    const savedCurrentPage = localStorage.getItem('page')
+    if (savedCurrentPage) {
+      dispatch(changeCurrentPage({ currentPage: parseInt(savedCurrentPage) }))
+    } else {
+      dispatch(changeCurrentPage({ currentPage: 1 }))
+    }
+  }, [])
 
   return (
     <div className={f.container}>

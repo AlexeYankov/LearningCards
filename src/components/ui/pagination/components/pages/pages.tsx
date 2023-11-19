@@ -21,6 +21,7 @@ export const Pages = ({ arrowID, color, reversedArrowID, totalPages = 10 }: Page
   const handlePageChange = (page: number) => {
     dispatch(changeCurrentPage({ currentPage: page }))
     dispatch(changeCardsCurrentPage({ currentPage: page }))
+    localStorage.setItem('page', page.toString())
   }
 
   const prevPage = currentPage - 1 === 0 ? 1 : currentPage - 1
