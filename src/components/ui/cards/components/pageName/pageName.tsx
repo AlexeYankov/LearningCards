@@ -3,7 +3,6 @@ import { Typography } from '@/components/ui/typography'
 
 import f from '../../cardsPage.module.scss'
 import { FC } from 'react'
-import s from '@/components/ui/dropDown/dropDown.module.scss'
 import { Learn } from '@/asserts/icons/components/Learn'
 import { Edit } from '@/asserts/icons/components/Edit'
 import { Delete } from '@/asserts/icons/components/Delete'
@@ -19,10 +18,10 @@ export const PageName: FC<PageNameProps> = ({ isMyDeck }) => {
       <Typography as={'h1'} variant={'large'} className={f.textWithIconBox}>
         {isMyDeck ? 'My Pack' : 'Friend’s Pack'}
         {isMyDeck && (
-          <DropDown className={s.content} trigger={'iconMore'}>
-            <ItemWithIcon icon={<Learn />} text={'Learn'} />
-            <ItemWithIcon icon={<Edit />} text={'Edit'} />
-            <ItemWithIcon icon={<Delete />} text={'Delete'} />
+          <DropDown trigger={'iconMore'}>
+            <ItemWithIcon className={f.itemBox} icon={<Learn />} text={'Learn'} />
+            <ItemWithIcon className={f.itemBox} icon={<Edit />} text={'Edit'} />
+            <ItemWithIcon className={f.itemBox} icon={<Delete />} text={'Delete'} />
           </DropDown>
         )}
       </Typography>

@@ -31,32 +31,38 @@ export const DropDown: FC<DropDown> = ({
 }) => {
   const [open, setOpen] = useState(false)
 
+  const handleCloseDropdown = () => {
+    setOpen(false)
+  }
+
   return (
     <DropdownRadix.Root onOpenChange={setOpen} open={open}>
-      <DropdownRadix.Trigger>
-        {trigger && (
-          <Typography as={'p'} className={style.headerName} variant={'subtitle1'}>
-            Ivan
-          </Typography>
-        )}
-      </DropdownRadix.Trigger>
+      {trigger === 'imageAvatar' && (
+        <DropdownRadix.Trigger>
+          {trigger && (
+            <Typography as="p" className={style.headerName} variant="subtitle1">
+              Ivan
+            </Typography>
+          )}
+        </DropdownRadix.Trigger>
+      )}
       <DropdownRadix.Trigger
         asChild
         className={`${trigger === 'imageAvatar' ? s.trigger : s.triggerIcon}`}
       >
         {trigger === 'imageAvatar' ? (
-          <img alt={''} className={s.triggerImg} src={profileImage} />
+          <img alt="" className={s.triggerImg} src={profileImage} />
         ) : (
           <MoreIcon />
         )}
       </DropdownRadix.Trigger>
-
       <DropdownRadix.Portal>
         <DropdownRadix.Content
           align={align}
           className={`${s.content} ${className}`}
           loop
           sideOffset={sideOffset}
+          onClick={handleCloseDropdown}
         >
           {children}
           <DropdownRadix.Arrow className={s.arrow} />
