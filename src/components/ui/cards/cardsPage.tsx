@@ -1,7 +1,5 @@
-import { Link, useParams, useSearchParams } from 'react-router-dom'
-
+import { Link, useParams } from 'react-router-dom'
 import { useGetCardsQuery } from '@/api/common.api'
-
 import f from './cardsPage.module.scss'
 import { PageName } from './components/pageName/pageName'
 import { tableHeadCardsData } from './tableData'
@@ -11,43 +9,35 @@ import { Table } from '@/components/ui/table'
 import { PageBar } from '@/components/ui/cards/components/pageBar/pageBar'
 import { Pagination } from '@/components/ui/pagination'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
-import { useEffect } from 'react'
 import { changeCurrentPage, changeItemsPerPage } from '@/api/decks/pagination.reducer'
+import { useEffect } from 'react'
+import { changeCardsCurrentPage, changeCardsItemsPerPage } from '@/api/cards/cards.ts'
 
 export const CardsPage = () => {
   const { id } = useParams()
-
-  const [_, setSearchParams] = useSearchParams()
   const dispatch = useAppDispatch()
-
-  const currentPage = useAppSelector(state => state.cards.currentPage)
+  const currentPage = useAppSelector(state => state.pagination.currentPage)
   const itemsPerPage = useAppSelector(state => state.cards.itemsPerPage)
-
   const { data, isLoading } = useGetCardsQuery({
     id: id!,
     currentPage,
     itemsPerPage,
   })
-
   const flag = true
-
   const tableHead = flag
     ? tableHeadCardsData
     : tableHeadCardsData.filter(el => el.headCellName !== '')
 
   const resetFilterDecks = () => {
+    dispatch(changeCardsCurrentPage({ currentPage: 1 }))
     dispatch(changeCurrentPage({ currentPage: 1 }))
     dispatch(changeItemsPerPage({ itemsPerPage: 10 }))
+    dispatch(changeCardsItemsPerPage({ itemsPerPage: 10 }))
   }
 
   useEffect(() => {
-    const params = {
-      page: currentPage.toString(),
-      itemsPerPage: itemsPerPage.toString(),
-    }
-
-    setSearchParams(params)
-  }, [data])
+    resetFilterDecks()
+  }, [])
 
   if (isLoading) {
     return <div>Loading...</div>
