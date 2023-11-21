@@ -1,10 +1,8 @@
 import { useNavigate } from 'react-router-dom'
-
 import { Email } from '@/asserts/icons/components/Email'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
-
 import s from './checkEmail.module.scss'
 
 export const CheckEmail = () => {

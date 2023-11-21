@@ -7,7 +7,7 @@ import {ControlledInput} from '../../controlled/controlled-input'
 import {ControlledCheckbox} from '../../controlled/controlled-checkbox'
 import {Button} from '../../button'
 import {Card} from '@/components/ui/card'
-import {Link, Navigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useLoginMutation, useMeQuery} from "@/api/auth-api/auth.api.ts";
 import {CircularProgress} from "@mui/material";
 
@@ -23,9 +23,12 @@ export const SignIn = () => {
         resolver: zodResolver(loginSchema),
     })
     const [login] = useLoginMutation()
-    const {isError,isLoading} = useMeQuery()
+    const {isSuccess,isLoading} = useMeQuery()
+    const navigate=useNavigate()
     if (isLoading) return <CircularProgress />
-    if (!isError) return <Navigate to="/" replace={true}/>
+    if (isSuccess) {
+        navigate('/')
+    }
     const onSubmit = (data: FormValues) => {
         login(data)
     }

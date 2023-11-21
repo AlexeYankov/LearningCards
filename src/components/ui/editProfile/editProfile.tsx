@@ -1,26 +1,99 @@
-import { useState } from 'react'
-
-import profileImage from '@/asserts/profileImage.png'
-
+import {ChangeEvent, useState} from 'react'
 import s from './editProfile.module.scss'
+import photoProfile from '../../../asserts/profileImage.png'
+import {Typography} from "@/components/ui/typography";
+import {Card} from "@/components/ui/card";
+import {Edit} from "@/asserts/icons/components/Edit.tsx";
+import {Button} from "@/components/ui/button";
+import {Logout} from "@/asserts/icons/components/Logout.tsx";
+import {TextField} from "@/components/ui/textField";
+import {useLogOutMutation, useMeQuery, useUpdateUserMutation} from "@/api/auth-api/auth.api.ts";
 
-import { EditableSpan } from './editableSpan/editableSpan'
+export const EditProfile = () => {
+    const {data} = useMeQuery()
+    const [logout] = useLogOutMutation()
+    const [update] = useUpdateUserMutation()
+    const [value, setValue] = useState(data?.name || 'UserName')
+    const [editMode, setEditMode] = useState(false)
+    const [title, setTitle] = useState(value)
 
-export const EditProfile = ({ name = 'Ivan' }) => {
-  const [value, setValue] = useState(name)
-  const handleValueChange = (newValue: string) => {
-    setValue(newValue)
-  }
+    const uploadContent = (event: ChangeEvent<HTMLInputElement>) => {
+        const bodyFormData = new FormData();
+        if (event.target.files) {
+            bodyFormData.append('avatar', event.target.files[0]);
+            update(bodyFormData);
+        }
+    };
 
-  return (
-    <div className={s.container}>
-      <div className={s.cardsContainer}>
-        <div className={s.cards}>
-          <h1 className={s.text}>Personal information</h1>
-          <img alt={''} className={s.logoProfileEdit} src={profileImage} />
-          <EditableSpan onChange={handleValueChange} value={value} />
-        </div>
-      </div>
-    </div>
-  )
+    const activateEditMode = () => {
+        setEditMode(true)
+    }
+    const activateViewMode = () => {
+        setEditMode(false)
+        if (title.trim() === '') {
+            setValue('UserName')
+            update({name: 'UserName'})
+        } else {
+            setValue(title)
+            if (value !== title) {
+                update({name: title})
+            }
+        }
+    }
+    const handleOnchangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.currentTarget.value)
+    }
+
+    const onClickLogOut = () => {
+        logout()
+    }
+
+    return (
+        <Card>
+            <div className={s.cards}>
+                <Typography as={'span'} className={s.text} variant={'large'}>Personal Information</Typography>
+                <div className={s.photoBlock}>
+                    <img alt={'Photo profile'} className={s.logoProfileEdit} src={data?.avatar || photoProfile}/>
+                    <div className={s.editIconBlock}>
+                        <label htmlFor="input__file" className={s.editIcon}><Edit/></label>
+                    </div>
+                    <input onChange={uploadContent} accept={'image/*'} id="input__file" className={s.hidden}
+                           type="file"/>
+                </div>
+                {!editMode &&
+                    <>
+                        <div className={s.nameBlock}>
+                            <Typography variant={'heading1'} className={s.name}>{value}</Typography>
+                            <div onClick={activateEditMode} className={s.editIcon}><Edit/></div>
+                        </div>
+                        <div className={s.email}>{data?.email || 'Email'}</div>
+                        <div>
+                            <Button onClick={onClickLogOut} icon={<Logout/>} children={'Logout'}
+                                    variant={'secondary'}/>
+                        </div>
+                    </>
+                }
+                {editMode &&
+                    <form style={{width: '100%'}}>
+                        <TextField
+                            maxLength={25}
+                            autoFocus
+                            label={'Nickname'}
+                            type={'text'}
+                            className={s.textField}
+                            value={title}
+                            onChange={handleOnchangeTitle}
+                        />
+                        <Button
+                            children={'Save Changes'}
+                            className={s.button}
+                            fullWidth
+                            variant={'primary'}
+                            onClick={activateViewMode}
+                        />
+                    </form>
+                }
+            </div>
+        </Card>
+    )
 }

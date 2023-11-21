@@ -6,5 +6,4 @@ export const baseApi = createApi({
     tagTypes: ['Cards', 'Decks','Me'],
     baseQuery:baseQueryWithReAuth,
     endpoints: () => ({}),
-    refetchOnFocus: true,
 })
