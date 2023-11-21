@@ -8,7 +8,7 @@ export const authService = baseApi.injectEndpoints({
                 query: () => `v1/auth/me`,
                 providesTags: ['Me']
             }),
-            updateUser: builder.mutation<AuthMeResponseType, any>({
+            updateUser: builder.mutation<AuthMeResponseType, UpdateUserArgsType>({
                 query: (body) => {
                     return {
                         url: `v1/auth/me`,

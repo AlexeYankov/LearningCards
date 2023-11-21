@@ -7,7 +7,7 @@ import {Edit} from "@/asserts/icons/components/Edit.tsx";
 import {Button} from "@/components/ui/button";
 import {Logout} from "@/asserts/icons/components/Logout.tsx";
 import {TextField} from "@/components/ui/textField";
-import {useLogOutMutation, useMeQuery, useUpdateUserMutation} from "@/api/auth-api/auth.api.ts";
+import {UpdateUserArgsType, useLogOutMutation, useMeQuery, useUpdateUserMutation} from "@/api/auth-api/auth.api.ts";
 
 export const EditProfile = () => {
     const {data} = useMeQuery()
@@ -21,7 +21,7 @@ export const EditProfile = () => {
         const bodyFormData = new FormData();
         if (event.target.files) {
             bodyFormData.append('avatar', event.target.files[0]);
-            update(bodyFormData);
+            update(bodyFormData as UpdateUserArgsType);
         }
     };
 
