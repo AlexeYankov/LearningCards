@@ -33,11 +33,7 @@
 .content {
   display: flex;
   flex-direction: column;
-
-  width: 100%;
-  min-width: 215px;
   padding: 0 12px;
-
   background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
   border-radius: 4px;
@@ -73,6 +69,11 @@
   display: flex;
   align-items: center;
 
+  min-width: 195px;
+
+  color: white;
+  text-decoration: none;
+
   svg {
     width: 16px;
     height: 16px;
@@ -94,7 +95,6 @@
 .inner {
   display: flex;
   align-items: center;
-  min-width: 195px;
 }
 
 .email {

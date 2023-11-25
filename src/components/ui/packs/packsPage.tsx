@@ -8,9 +8,8 @@ import { PageBar } from './components/pageBar/pageBar'
 import { PageName } from './components/pageName/pageName'
 import { tableHeadData } from './tableData'
 import { useAppDispatch, useAppSelector } from '@/api/store'
-import { useSearchParams } from 'react-router-dom'
 import { useEffect } from 'react'
-import { resetCardsFilter } from '@/api/cards/cards.ts'
+import { changeCurrentPage } from '@/api/decks/pagination.reducer'
 
 export const PacksPage = () => {
   const dispatch = useAppDispatch()
@@ -23,8 +22,6 @@ export const PacksPage = () => {
   const name = useAppSelector(state => state.pagination.name)
   const orderBy = useAppSelector(state => state.pagination.orderBy)
 
-  const [_, setSearchParams] = useSearchParams()
-
   const { data } = useGetDecksQuery({
     currentPage,
     itemsPerPage,
@@ -36,17 +33,13 @@ export const PacksPage = () => {
   })
 
   useEffect(() => {
-    const params = {
-      page: currentPage.toString(),
-      itemsPerPage: itemsPerPage.toString(),
-      maxCards: maxCardsCount.toString(),
-      minCards: minCardsCount.toString(),
-      orderBy,
-      name,
+    const savedCurrentPage = localStorage.getItem('page')
+    if (savedCurrentPage) {
+      dispatch(changeCurrentPage({ currentPage: parseInt(savedCurrentPage) }))
+    } else {
+      dispatch(changeCurrentPage({ currentPage: 1 }))
     }
-    dispatch(resetCardsFilter())
-    setSearchParams(params)
-  }, [data])
+  }, [])
 
   return (
     <div className={f.container}>
@@ -57,7 +50,7 @@ export const PacksPage = () => {
         className={f.container__common}
         headCell={tableHeadData}
         tableName={'Decks'}
-        isMyDeck={false}
+        isMyDeck={true}
       />
 
       <Pagination

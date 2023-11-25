@@ -11,30 +11,34 @@ import {useMeQuery} from "@/api/auth-api/auth.api.ts";
 
 
 export const Header: FC = () => {
-    const {isError, isLoading} = useMeQuery()
+    const {data,isError, isLoading} = useMeQuery()
     const isLoggedIn = !isError
     return (
         <div className={s.container}>
             <header className={s.header}>
-                <img alt={''}  className={s.logo} src={logo}/>
-                {!isLoading &&
-                    <div className={s.textHeader}>
+                <Typography as={Link} to={'/'}>
+                    <img alt={''} className={s.logo} src={logo}/>
+                </Typography>
+                <div className={s.textHeader}>
+                    {!isLoading &&
                         <>
-                            {isLoggedIn ? (
-                                    <DropDownMenu avatar={profileImage} email={'j&johnson@gmail.com'} name={'Ivan'}/>
-                            ) : (
+                            {isLoggedIn &&
+                                <DropDownMenu avatar={data?.avatar||profileImage} email={data?.email} name={data?.name}/>}
+                            {!isLoggedIn &&
                                 <Button
-                                    children={<Typography as={Link} to={'/login'} children={'Sign In'}
-                                                          variant={'subtitle2'}/>}
+                                    children={
+                                        <Typography
+                                            as={Link}
+                                            to={'/login'}
+                                            children={'Sign In'}
+                                            variant={'subtitle2'}
+                                        />}
                                     className={s.button}
                                     fullWidth
                                     variant={'primary'}
-                                />
-                            )}
-                        </>
-                    </div>
-                }
-
+                                />}
+                        </>}
+                </div>
             </header>
         </div>
     )
@@ -42,7 +46,6 @@ export const Header: FC = () => {
 
 
 export const Layout = () => {
-
     return (
         <>
             <Header/>

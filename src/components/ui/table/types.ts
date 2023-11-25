@@ -28,6 +28,7 @@ export type BodyCellType = {
   svgs?: HeadCellSvgType[]
   updated?: string
   packName?: string
+  userId?: string
 }
 
 export type HeadCellSvgType = {

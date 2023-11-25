@@ -1,5 +1,4 @@
 import { ReactNode } from 'react'
-
 import s from './card.module.scss'
 
 type Props = {

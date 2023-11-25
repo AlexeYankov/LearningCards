@@ -21,7 +21,7 @@ export const TitleElement = ({ active, index, length, setActive, title }: TitleE
   const { data } = useMeQuery()
 
   const handleChangeOrderByClick = (value: number) => {
-    dispatch(changeShowAuthorTabDecks({ authorId: data.id }))
+    dispatch(changeShowAuthorTabDecks({ authorId: data!.id }))
     dispatch(changeCurrentPage({ currentPage: 1 }))
     setActive(value)
     if (value === 1) {

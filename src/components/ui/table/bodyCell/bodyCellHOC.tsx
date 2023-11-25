@@ -56,30 +56,39 @@ export const BodyCellHOC = ({ item, tableName, isMyDeck }: BodyCellHOCType) => {
         />
       )}
       {/*CRUD icons for DECKS PAGE*/}
-      {tableName === 'Decks' && (
+      {isMyDeck && tableName === 'Decks' ? (
         <BodyCell
           item={{
             id: item.id,
             packName: item.name,
             svgs: [
               { id: 'play-circle-outline' },
-              /*tableName vs decks will change if is your deck or not!*/
-              { id: tableName === 'Decks' ? 'edit-2-outline' : '' },
-              { id: tableName === 'Decks' ? 'trash-outline' : '' },
+              { id: 'edit-2-outline' },
+              { id: 'trash-outline' },
             ],
           }}
           tableName={tableName}
           isMyDeck={isMyDeck}
         />
-      )}
-      {/*true will change is your deck or not! is this ONLY FOR CARDS PAGE*/}
-      {tableName === 'Cards' && isMyDeck && (
+      ) : !isMyDeck && tableName === 'Cards' ? (
         <BodyCell
           item={{
+            id: item.id,
+            packName: item.name,
             svgs: [{ id: 'edit-2-outline' }, { id: 'trash-outline' }],
           }}
-          isMyDeck={isMyDeck}
           tableName={tableName}
+          isMyDeck={isMyDeck}
+        />
+      ) : (
+        <BodyCell
+          item={{
+            id: item.id,
+            packName: item.name,
+            svgs: [{ id: 'play-circle-outline' }],
+          }}
+          tableName={tableName}
+          isMyDeck={isMyDeck}
         />
       )}
     </Row>

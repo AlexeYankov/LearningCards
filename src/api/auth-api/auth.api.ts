@@ -9,11 +9,13 @@ export const authService = baseApi.injectEndpoints({
                 providesTags: ['Me']
             }),
             updateUser: builder.mutation<AuthMeResponseType, UpdateUserArgsType>({
-                query: (body) => ({
-                    url: `v1/auth/me`,
-                    method: 'Patch',
-                    body,
-                }),
+                query: (body) => {
+                    return {
+                        url: `v1/auth/me`,
+                        method: 'PATCH',
+                        body:body,
+                    }
+                },
                 invalidatesTags: ['Me']
             }),
             createUser: builder.mutation<SignUpResponseType, SignUpArgsType>({
@@ -48,10 +50,10 @@ export const authService = baseApi.injectEndpoints({
                 invalidatesTags: ['Me']
             }),
             resetPassword: builder.mutation<void, ResetPasswordArgsType>({
-                query: ({token,password}) => ({
+                query: ({token, password}) => ({
                     url: `v1/auth/reset-password/${token}`,
                     method: 'Post',
-                    body:{password}
+                    body: {password}
                 }),
                 invalidatesTags: ['Me']
             }),
@@ -63,6 +65,7 @@ export const authService = baseApi.injectEndpoints({
 export const {
     useMeQuery,
     useCreateUserMutation,
+    useUpdateUserMutation,
     useLoginMutation,
     useRecoverPasswordMutation,
     useLogOutMutation,
@@ -116,12 +119,12 @@ export type RecoverPasswordArgsType = {
 }
 
 export type ResetPasswordArgsType = {
-    token?:string
+    token?: string
     password: string
 }
 
 export type UpdateUserArgsType = {
-    avatar:string
-    name: string
-    email:string
+    avatar?: File
+    name?: string
+    email?: string
 }
