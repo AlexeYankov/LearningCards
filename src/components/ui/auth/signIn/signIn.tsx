@@ -9,7 +9,6 @@ import {Button} from '../../button'
 import {Card} from '@/components/ui/card'
 import {Link, useNavigate} from "react-router-dom";
 import {useLoginMutation, useMeQuery} from "@/api/auth-api/auth.api.ts";
-import {CircularProgress} from "@mui/material";
 
 type FormValues = z.infer<typeof loginSchema>
 
@@ -23,12 +22,12 @@ export const SignIn = () => {
         resolver: zodResolver(loginSchema),
     })
     const [login] = useLoginMutation()
-    const {isSuccess,isLoading} = useMeQuery()
+    const {isSuccess} = useMeQuery()
     const navigate=useNavigate()
-    if (isLoading) return <CircularProgress />
     if (isSuccess) {
         navigate('/')
     }
+
     const onSubmit = (data: FormValues) => {
         login(data)
     }
