@@ -8,7 +8,7 @@ import {ControlledCheckbox} from '../../controlled/controlled-checkbox'
 import {Button} from '../../button'
 import {Card} from '@/components/ui/card'
 import {Link, useNavigate} from "react-router-dom";
-import {useLoginMutation, useMeQuery} from "@/api/auth-api/auth.api.ts";
+import {useLoginMutation} from "@/api/auth-api/auth.api.ts";
 
 type FormValues = z.infer<typeof loginSchema>
 
@@ -21,8 +21,7 @@ export const SignIn = () => {
     const {handleSubmit, control} = useForm<FormValues>({
         resolver: zodResolver(loginSchema),
     })
-    const [login] = useLoginMutation()
-    const {isSuccess} = useMeQuery()
+    const [login,{isSuccess}] = useLoginMutation()
     const navigate=useNavigate()
     if (isSuccess) {
         navigate('/')

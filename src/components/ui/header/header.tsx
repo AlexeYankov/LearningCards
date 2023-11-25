@@ -6,12 +6,12 @@ import s from './header.module.scss'
 import style from '../../../app.module.scss'
 import profileImage from '../../../asserts/profileImage.png'
 import {FC} from 'react'
-import {Link, Outlet} from "react-router-dom";
+import {Link, Navigate, Outlet} from "react-router-dom";
 import {useMeQuery} from "@/api/auth-api/auth.api.ts";
 
 
 export const Header: FC = () => {
-    const {data,isError, isLoading} = useMeQuery()
+    const {data, isError, isLoading} = useMeQuery()
     const isLoggedIn = !isError
     return (
         <div className={s.container}>
@@ -23,7 +23,8 @@ export const Header: FC = () => {
                     {!isLoading &&
                         <>
                             {isLoggedIn &&
-                                <DropDownMenu avatar={data?.avatar||profileImage} email={data?.email} name={data?.name}/>}
+                                <DropDownMenu avatar={data?.avatar || profileImage} email={data?.email}
+                                              name={data?.name}/>}
                             {!isLoggedIn &&
                                 <Button
                                     children={
@@ -46,10 +47,12 @@ export const Header: FC = () => {
 
 
 export const Layout = () => {
+    const {isSuccess} = useMeQuery()
     return (
         <>
             <Header/>
             <div className={style.container}>
+                {isSuccess && <Navigate to={'/'}/>}
                 <Outlet/>
             </div>
 
