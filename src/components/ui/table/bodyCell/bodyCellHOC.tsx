@@ -12,7 +12,6 @@ type BodyCellHOCType = {
 }
 
 export const BodyCellHOC = ({ item, tableName, isMyDeck }: BodyCellHOCType) => {
-  console.log(isMyDeck)
   const starsGrade = Array.from({ length: Math.round(item.grade || 0) }, () => 'star')
   let result = starsGrade
   const emptyStarsGrade = Array.from(
