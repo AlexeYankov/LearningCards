@@ -1,7 +1,5 @@
 import { HeadCell as UIHeadCell } from '@it-incubator/ui-kit'
-
 import s from './headCell.module.scss'
-
 import { Typography } from '../../typography'
 import { HeadCellType } from '../types'
 import { useAppDispatch, useAppSelector } from '@/api/store'
@@ -21,16 +19,26 @@ export const HeadCell = ({ el }: HeadCellComponentType) => {
     dispatch(changeOrderBy({ orderBy: updatedOrderBy }))
   }
 
-  const iconClasses = `${s.icon} ${orderBy === 'name-desc' ? s.iconRotate : ''}`
+  const isLastUpdateHead = el.headCellName === 'Last Updated'
+
+  const iconClasses = `${orderBy === 'name-desc' ? s.iconRotate : ''}`
 
   return (
     <UIHeadCell className={s.headCell}>
-      <Typography variant={'heading3'} className={s.typography}>
-        {el.headCellName}
-      </Typography>
-      <button className={iconClasses} onClick={handleOrderByChange}>
-        {el.svgSizes && <ArrowUp />}
-      </button>
+      {!isLastUpdateHead && (
+        <Typography variant={'heading3'} className={s.typography}>
+          {el.headCellName}
+        </Typography>
+      )}
+
+      {isLastUpdateHead && (
+        <button className={iconClasses} onClick={handleOrderByChange}>
+          <Typography variant={'heading3'} className={s.typography}>
+            {el.headCellName}
+          </Typography>
+          {el.svgSizes && <ArrowUp />}
+        </button>
+      )}
     </UIHeadCell>
   )
 }
