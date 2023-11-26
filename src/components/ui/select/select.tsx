@@ -58,7 +58,6 @@ export const Select = ({
     dispatch(changeCardsCurrentPage({ currentPage: 1 }))
     dispatch(changeCardsItemsPerPage({ itemsPerPage: +value }))
   }
-
   return (
     <SelectRadix.Root
       {...rest}
@@ -71,9 +70,12 @@ export const Select = ({
           aria-label={`${placeholder}`}
           className={s.SelectTrigger + ' ' + `${reversed ? s.hoverActive : ''} `}
           id={selectId}
+          disabled={options.length === 0}
         >
           <div className={`${s.selectTriggerBox} ${classname}`}>
-            <SelectRadix.Value placeholder={placeholder} />
+            <SelectRadix.Value>
+              {itemsPerPage.toString() !== options[0] ? itemsPerPage : options[0]}
+            </SelectRadix.Value>
             <SelectRadix.Icon className={reversed ? s.rotate : s.SelectIcon}>
               <ChevronDownIcon />
             </SelectRadix.Icon>

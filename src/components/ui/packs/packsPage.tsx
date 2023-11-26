@@ -34,11 +34,7 @@ export const PacksPage = () => {
 
   useEffect(() => {
     const savedCurrentPage = localStorage.getItem('page')
-    if (savedCurrentPage) {
-      dispatch(changeCurrentPage({ currentPage: parseInt(savedCurrentPage) }))
-    } else {
-      dispatch(changeCurrentPage({ currentPage: 1 }))
-    }
+    dispatch(changeCurrentPage({ currentPage: parseInt(savedCurrentPage!, 10) || 1 }))
   }, [])
 
   return (
@@ -57,10 +53,10 @@ export const PacksPage = () => {
         reversed
         arrowColor={'white'}
         arrowID={'arrow-ios-back'}
-        options={['10', '20', '30', '50', '100']}
         placeholder={'100'}
         reversedArrowID={'arrow-ios-forward'}
         totalPages={data?.pagination?.totalPages}
+        totalItems={data?.pagination?.totalItems}
       />
     </div>
   )
