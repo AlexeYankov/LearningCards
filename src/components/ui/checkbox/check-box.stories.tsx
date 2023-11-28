@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 
 import { CheckBox } from '.'
+import { ThemeDecorator } from '@/api/storybookDecorators.tsx'
 
 const meta = {
   argTypes: {
@@ -14,6 +15,7 @@ const meta = {
   component: CheckBox,
   tags: ['autodocs'],
   title: 'Components/CheckBox',
+  decorators: [ThemeDecorator],
 } satisfies Meta<typeof CheckBox>
 
 export default meta

@@ -1,8 +1,10 @@
 .container {
   display: flex;
   flex-direction: column;
+
   width: 100%;
   min-width: 100%;
+  margin-bottom: 100px;
 }
 
 .container__pageBar {

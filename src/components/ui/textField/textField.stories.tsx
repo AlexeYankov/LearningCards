@@ -3,23 +3,16 @@ import { useState } from 'react'
 import { Meta, StoryObj } from '@storybook/react'
 
 import { TextField } from '.'
+import { ThemeDecorator } from '@/api/storybookDecorators.tsx'
 
 const meta = {
   argTypes: {
     type: ['text', 'password'],
   },
   component: TextField,
-  parameters: {
-    backgrounds: {
-      default: 'black',
-      values: [
-        { name: 'white', value: '#fff' },
-        { name: 'black', value: '#000' },
-      ],
-    },
-  },
   tags: ['autodocs'],
   title: 'Components/TextField',
+  decorators: [ThemeDecorator],
 } satisfies Meta<typeof TextField>
 
 export default meta

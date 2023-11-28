@@ -66,9 +66,9 @@ export const CardsPage = () => {
         <Pagination
           arrowColor={'white'}
           arrowID={'arrow-ios-back'}
-          options={['10', '20', '30', '50', '100']}
-          placeholder={'100'}
+          totalItems={data?.pagination?.totalItems}
           reversedArrowID={'arrow-ios-forward'}
+          reversed
           totalPages={data?.pagination?.totalPages}
         />
       )}

@@ -53,7 +53,6 @@ export const PacksPage = () => {
         reversed
         arrowColor={'white'}
         arrowID={'arrow-ios-back'}
-        placeholder={'100'}
         reversedArrowID={'arrow-ios-forward'}
         totalPages={data?.pagination?.totalPages}
         totalItems={data?.pagination?.totalItems}

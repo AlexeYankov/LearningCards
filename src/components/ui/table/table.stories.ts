@@ -1,6 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Table } from '.'
+import {
+  BrowserRouterDecorator,
+  ReduxStoreProviderDecorator,
+  ThemeDecorator,
+} from '@/api/storybookDecorators.tsx'
 
 const meta = {
   argTypes: {
@@ -10,17 +15,9 @@ const meta = {
     },
   },
   component: Table,
-  parameters: {
-    backgrounds: {
-      default: 'black',
-      values: [
-        { name: 'white', value: '#fff' },
-        { name: 'black', value: '#000' },
-      ],
-    },
-  },
   tags: ['autodocs'],
   title: 'Components/Table',
+  decorators: [ReduxStoreProviderDecorator, ThemeDecorator, BrowserRouterDecorator],
 } satisfies Meta<typeof Table>
 
 export default meta

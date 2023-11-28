@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Tabs } from '.'
+import { ReduxStoreProviderDecorator, ThemeDecorator } from '@/api/storybookDecorators.tsx'
 
 const meta = {
   argTypes: {
@@ -12,6 +13,7 @@ const meta = {
   component: Tabs,
   tags: ['autodocs'],
   title: 'Components/Tabs',
+  decorators: [ThemeDecorator, ReduxStoreProviderDecorator],
 } satisfies Meta<typeof Tabs>
 
 export default meta

@@ -11,15 +11,6 @@ const meta = {
     },
   },
   component: Select,
-  parameters: {
-    backgrounds: {
-      default: 'black',
-      values: [
-        { name: 'white', value: '#fff' },
-        { name: 'black', value: '#000' },
-      ],
-    },
-  },
   tags: ['autodocs'],
   title: 'Components/Select',
   decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator],
@@ -32,7 +23,6 @@ export const Primary: Story = {
   args: {
     label: 'Select-box Primary',
     options: ['Select-box', 'Select-box', 'Select-box'],
-    placeholder: 'Select-box',
     reversed: true,
     selectId: 'Select-box Primary',
     variant: 'Primary',
@@ -43,7 +33,6 @@ export const Secondary: Story = {
     label: 'Select-box Secondary',
     // width: "24",
     options: ['Select-box', 'Select-box', 'Select-box'],
-    placeholder: 'Select-box',
     reversed: true,
     selectId: 'Select-box Secondary',
     variant: 'Secondary',
@@ -55,7 +44,6 @@ export const Thirtery: Story = {
     disabled: true,
     label: 'Select-box Thirtery',
     options: ['Select-box', 'Select-box', 'Select-box'],
-    placeholder: 'Select-box',
     reversed: true,
     selectId: 'Select-box Thirtery',
     variant: 'Thirtery',

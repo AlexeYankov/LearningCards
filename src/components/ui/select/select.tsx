@@ -23,7 +23,6 @@ type SelectProps = {
   itemsPerPage?: number
   label?: string
   options: Array<string>
-  placeholder?: string
   reversed?: boolean
   selectId?: string
   variant?: string
@@ -39,15 +38,7 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
   }
 )
 
-export const Select = ({
-  classname,
-  label,
-  options,
-  placeholder = 'select',
-  reversed,
-  selectId,
-  ...rest
-}: SelectProps) => {
+export const Select = ({ classname, label, options, reversed, selectId, ...rest }: SelectProps) => {
   const dispatch = useAppDispatch()
 
   const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
@@ -67,7 +58,6 @@ export const Select = ({
       <div className={s.box}>
         <Label className={`${s.label} `} htmlFor={selectId} label={label} />
         <SelectRadix.Trigger
-          aria-label={`${placeholder}`}
           className={s.SelectTrigger + ' ' + `${reversed ? s.hoverActive : ''} `}
           id={selectId}
           disabled={options.length === 0}

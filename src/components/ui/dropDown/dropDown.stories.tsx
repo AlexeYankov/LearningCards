@@ -5,15 +5,6 @@ import profileImage from './../../../asserts/profileImage.png'
 
 const meta = {
   component: DropDown,
-  parameters: {
-    backgrounds: {
-      default: 'black',
-      values: [
-        { name: 'white', value: '#fff' },
-        { name: 'black', value: '#000' },
-      ],
-    },
-  },
   tags: ['autodocs'],
   title: 'Components/DropDown',
 } satisfies Meta<typeof DropDown>

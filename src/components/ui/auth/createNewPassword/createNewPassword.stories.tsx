@@ -1,22 +1,17 @@
 import { Meta, StoryObj } from '@storybook/react'
 
 import { CreateNewPassword } from './createNewPassword'
-import { BrowserRouterDecorator, ReduxStoreProviderDecorator } from '@/api/storybookDecorators.tsx'
+import {
+  BrowserRouterDecorator,
+  ReduxStoreProviderDecorator,
+  ThemeDecorator,
+} from '@/api/storybookDecorators.tsx'
 
 const meta = {
   component: CreateNewPassword,
-  parameters: {
-    backgrounds: {
-      default: 'black',
-      values: [
-        { name: 'white', value: '#fff' },
-        { name: 'black', value: '#000' },
-      ],
-    },
-  },
   tags: ['autodocs'],
   title: 'Components/auth/createNewPassword',
-  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator],
+  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator, ThemeDecorator],
 } satisfies Meta<typeof CreateNewPassword>
 
 export default meta

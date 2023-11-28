@@ -1,13 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { ForgotYourPassword } from '@/components/ui/auth/forgotYourPassword/forgotYourPassword'
-import { BrowserRouterDecorator, ReduxStoreProviderDecorator } from '@/api/storybookDecorators'
+import {
+  BrowserRouterDecorator,
+  ReduxStoreProviderDecorator,
+  ThemeDecorator,
+} from '@/api/storybookDecorators'
 
 const meta = {
   component: ForgotYourPassword,
   tags: ['autodocs'],
   title: 'components/auth/forgotYourPassword',
-  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator],
+  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator, ThemeDecorator],
 } satisfies Meta<typeof ForgotYourPassword>
 
 export default meta
