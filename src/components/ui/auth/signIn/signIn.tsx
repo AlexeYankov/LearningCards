@@ -91,13 +91,12 @@ export const SignIn = () => {
         as={'p'}
       />
       <Button
-        className={s.button}
+        className={s.btnSignUp}
         type={'button'}
         variant={'link'}
-        fullWidth
         children={
           <Typography
-            className={s.linkForgotPassword}
+            className={s.linkSignUp}
             children={'Sign Up'}
             variant={'subtitle2'}
             to={'/signUp'}
