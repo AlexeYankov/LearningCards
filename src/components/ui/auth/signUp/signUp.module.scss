@@ -23,9 +23,16 @@
     text-align: center;
   }
 
-  .linkSignIn {
+  .btnSignIn {
     margin: 0 auto;
-    padding-right: 0;
-    padding-left: 0;
+  }
+
+  .linkSignIn {
+    color: var(--color-accent-500);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
