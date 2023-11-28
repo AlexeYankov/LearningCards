@@ -16,6 +16,7 @@ export const PageName = () => {
 
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState('')
+  const [isPrivate, setIsPrivate] = useState(false)
 
   const [createDeck, { error, isError, reset }] = useCreateDeckMutation()
 
@@ -32,12 +33,16 @@ export const PageName = () => {
     reset()
   }
 
+  const handeCheckedChange = () => {
+    setIsPrivate(prevState => !prevState)
+  }
+
   // @ts-ignore
   const errorMessage = error?.data?.errorMessages[0].message
 
   const handleAddNewPackClick = (event: FormEvent) => {
     event.preventDefault()
-    createDeck({ name: value })
+    createDeck({ name: value, isPrivate })
     if (value.length < 3) {
       setOpen(true)
     } else {
@@ -77,10 +82,11 @@ export const PageName = () => {
               IconID={'checkbox-unselected'}
               SelectedIconID={'checkbox-selected'}
               checkboxId={'Private Pack'}
-              disabled={false}
               height={'24'}
               label={'Private pack'}
               width={'24'}
+              checked={isPrivate}
+              onChange={handeCheckedChange}
             />
           </div>
           <div className={`${f.contentBtn} ${f.contentBtns}`}>
