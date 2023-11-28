@@ -1,99 +1,125 @@
-import {ChangeEvent, useState} from 'react'
+import { ChangeEvent, useState } from 'react'
 import s from './editProfile.module.scss'
 import photoProfile from '../../../asserts/profileImage.png'
-import {Typography} from "@/components/ui/typography";
-import {Card} from "@/components/ui/card";
-import {Edit} from "@/asserts/icons/components/Edit.tsx";
-import {Button} from "@/components/ui/button";
-import {Logout} from "@/asserts/icons/components/Logout.tsx";
-import {TextField} from "@/components/ui/textField";
-import {UpdateUserArgsType, useLogOutMutation, useMeQuery, useUpdateUserMutation} from "@/api/auth-api/auth.api.ts";
+import { Typography } from '@/components/ui/typography'
+import { Card } from '@/components/ui/card'
+import { Edit } from '@/asserts/icons/components/Edit.tsx'
+import { Button } from '@/components/ui/button'
+import { Logout } from '@/asserts/icons/components/Logout.tsx'
+import { TextField } from '@/components/ui/textField'
+import {
+  UpdateUserArgsType,
+  useLogOutMutation,
+  useMeQuery,
+  useUpdateUserMutation,
+} from '@/api/auth-api/auth.api.ts'
 
 export const EditProfile = () => {
-    const {data} = useMeQuery()
-    const [logout] = useLogOutMutation()
-    const [update] = useUpdateUserMutation()
-    const [value, setValue] = useState(data?.name || 'UserName')
-    const [editMode, setEditMode] = useState(false)
-    const [title, setTitle] = useState(value)
+  const { data } = useMeQuery()
+  const [logout] = useLogOutMutation()
+  const [update] = useUpdateUserMutation()
+  const [value, setValue] = useState(data?.name || 'UserName')
+  const [editMode, setEditMode] = useState(false)
+  const [title, setTitle] = useState(value)
 
-    const uploadContent = (event: ChangeEvent<HTMLInputElement>) => {
-        const bodyFormData = new FormData();
-        if (event.target.files) {
-            bodyFormData.append('avatar', event.target.files[0]);
-            update(bodyFormData as UpdateUserArgsType);
-        }
-    };
+  const uploadContent = (event: ChangeEvent<HTMLInputElement>) => {
+    const bodyFormData = new FormData()
+    if (event.target.files) {
+      bodyFormData.append('avatar', event.target.files[0])
+      update(bodyFormData as UpdateUserArgsType)
+    }
+  }
 
-    const activateEditMode = () => {
-        setEditMode(true)
+  const activateEditMode = () => {
+    setEditMode(true)
+  }
+  const activateViewMode = () => {
+    setEditMode(false)
+    if (title.trim() === '') {
+      setValue('UserName')
+      update({ name: 'UserName' })
+    } else {
+      setValue(title)
+      if (value !== title) {
+        update({ name: title })
+      }
     }
-    const activateViewMode = () => {
-        setEditMode(false)
-        if (title.trim() === '') {
-            setValue('UserName')
-            update({name: 'UserName'})
-        } else {
-            setValue(title)
-            if (value !== title) {
-                update({name: title})
-            }
-        }
-    }
-    const handleOnchangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
-    }
+  }
+  const handleOnchangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.currentTarget.value)
+  }
 
-    const onClickLogOut = () => {
-        logout()
-    }
+  const onClickLogOut = () => {
+    logout()
+  }
 
-    return (
-        <Card>
-            <div className={s.cards}>
-                <Typography as={'span'} className={s.text} variant={'large'}>Personal Information</Typography>
-                <div className={s.photoBlock}>
-                    <img alt={'Photo profile'} className={s.logoProfileEdit} src={data?.avatar || photoProfile}/>
-                    <div className={s.editIconBlock}>
-                        <label htmlFor="input__file" className={s.editIcon}><Edit/></label>
-                    </div>
-                    <input onChange={uploadContent} accept={'image/*'} id="input__file" className={s.hidden}
-                           type="file"/>
-                </div>
-                {!editMode &&
-                    <>
-                        <div className={s.nameBlock}>
-                            <Typography variant={'heading1'} className={s.name}>{value}</Typography>
-                            <div onClick={activateEditMode} className={s.editIcon}><Edit/></div>
-                        </div>
-                        <div className={s.email}>{data?.email || 'Email'}</div>
-                        <div>
-                            <Button onClick={onClickLogOut} icon={<Logout/>} children={'Logout'}
-                                    variant={'secondary'}/>
-                        </div>
-                    </>
-                }
-                {editMode &&
-                    <form style={{width: '100%'}}>
-                        <TextField
-                            maxLength={25}
-                            autoFocus
-                            label={'Nickname'}
-                            type={'text'}
-                            className={s.textField}
-                            value={title}
-                            onChange={handleOnchangeTitle}
-                        />
-                        <Button
-                            children={'Save Changes'}
-                            className={s.button}
-                            fullWidth
-                            variant={'primary'}
-                            onClick={activateViewMode}
-                        />
-                    </form>
-                }
+  return (
+    <Card>
+      <div className={s.cards}>
+        <Typography as={'span'} className={s.text} variant={'large'}>
+          Personal Information
+        </Typography>
+        <div className={s.photoBlock}>
+          <img
+            alt={'Photo profile'}
+            className={s.logoProfileEdit}
+            src={data?.avatar || photoProfile}
+          />
+          <div className={s.editIconBlock}>
+            <label htmlFor="input__file" className={s.editIcon}>
+              <Edit />
+            </label>
+          </div>
+          <input
+            onChange={uploadContent}
+            accept={'image/*'}
+            id="input__file"
+            className={s.hidden}
+            type="file"
+          />
+        </div>
+        {!editMode && (
+          <>
+            <div className={s.nameBlock}>
+              <Typography variant={'heading1'} className={s.name}>
+                {value}
+              </Typography>
+              <div onClick={activateEditMode} className={s.editIcon}>
+                <Edit />
+              </div>
             </div>
-        </Card>
-    )
+            <div className={s.email}>{data?.email || 'Email'}</div>
+            <div>
+              <Button
+                onClick={onClickLogOut}
+                icon={<Logout />}
+                children={'Logout'}
+                variant={'secondary'}
+              />
+            </div>
+          </>
+        )}
+        {editMode && (
+          <form style={{ width: '100%' }}>
+            <TextField
+              maxLength={25}
+              autoFocus
+              label={'Nickname'}
+              type={'text'}
+              className={s.textField}
+              value={title}
+              onChange={handleOnchangeTitle}
+            />
+            <Button
+              children={'Save Changes'}
+              className={s.button}
+              fullWidth
+              variant={'primary'}
+              onClick={activateViewMode}
+            />
+          </form>
+        )}
+      </div>
+    </Card>
+  )
 }

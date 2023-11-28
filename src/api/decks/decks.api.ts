@@ -61,7 +61,14 @@ export const decksApi = baseApi.injectEndpoints({
           }
         },
       }),
-      createDeck: builder.mutation<CardsResponsType, { name: string; isPrivate: boolean }>({
+      createDeck: builder.mutation<
+        CardsResponsType,
+        {
+          name: string
+          isPrivate?: boolean
+          cover?: File
+        }
+      >({
         invalidatesTags: ['Decks'],
         query: params => {
           return {
