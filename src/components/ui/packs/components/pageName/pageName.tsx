@@ -24,11 +24,10 @@ type Form = z.infer<typeof schema>
 
 export const PageName = () => {
   const dispatch = useAppDispatch()
-
+  const [selectedImage, setSelectedImage] = useState<string>('')
   const [open, setOpen] = useState(false)
   const [isPrivate, setIsPrivate] = useState(false)
   const { register, setValue, handleSubmit } = useForm<Form>()
-
   const [createDeck, { error, isError, reset }] = useCreateDeckMutation()
 
   const handleModalToggle = () => {
@@ -43,11 +42,25 @@ export const PageName = () => {
   // @ts-ignore
   const errorMessage = error?.data?.errorMessages[0].message
 
+  const handleFileChange = event => {
+    const file = event.target.files[0]
+
+    if (file) {
+      const imageUrl = URL.createObjectURL(file)
+      setSelectedImage(imageUrl)
+      setValue('cover', [file])
+    } else {
+      setSelectedImage('')
+      setValue('cover', [])
+    }
+  }
+
   const onSubmit = handleSubmit(data => {
     const form = new FormData()
 
     form.append('cover', data.cover[0])
     form.append('name', data.name)
+
     if (data.name.trim() !== '' && data.name.length >= 3) {
       createDeck(form)
       setOpen(false)
@@ -57,18 +70,6 @@ export const PageName = () => {
       setOpen(true)
     }
   })
-
-  // const handleAddNewPackClick = (event: FormEvent) => {
-  //   event.preventDefault()
-  //   createDeck({ name: value, isPrivate })
-  //   if (value.length < 3) {
-  //     setOpen(true)
-  //   } else {
-  //     setValue('')
-  //     setOpen(false)
-  //     dispatch(resetFilter())
-  //   }
-  // }
 
   return (
     <div className={f.container__pageName}>
@@ -87,12 +88,19 @@ export const PageName = () => {
         <ModalTitle title={'Add New Pack'} />
         <form onSubmit={onSubmit}>
           <div className={f.contentComponents}>
-            <img className={f.img} alt={'card image'} src={'control'} />
+            <img className={f.img} src={selectedImage || ''} />
             <label htmlFor="input__file" className={f.changeCover}>
               <Image />
               Change Cover
             </label>
-            <input className={f.inputFile} id={'input__file'} type="file" {...register('cover')} />
+            <input
+              className={f.inputFile}
+              id={'input__file'}
+              type="file"
+              onChange={e => {
+                handleFileChange(e)
+              }}
+            />
 
             <TextField
               inputId={'Name Pack'}
