@@ -32,16 +32,14 @@ export const PageName = () => {
     setValue,
     setError,
     handleSubmit,
-    clearErrors,
+    reset,
     formState: { errors },
   } = useForm<Form>()
   const [createDeck] = useCreateDeckMutation()
 
   const handleModalToggle = () => {
     setOpen(prevState => !prevState)
-    setValue('name', '')
-    setValue('cover', [])
-    clearErrors('name')
+    reset()
     setSelectedImage('')
     dispatch(resetFilter())
   }
