@@ -27,20 +27,28 @@ export const PageName = () => {
   const [selectedImage, setSelectedImage] = useState('')
   const [open, setOpen] = useState(false)
   const [isPrivate, setIsPrivate] = useState(false)
-  const { register, setValue, handleSubmit } = useForm<Form>()
-  const [createDeck, { error, isError, reset }] = useCreateDeckMutation()
+  const {
+    register,
+    setValue,
+    setError,
+    handleSubmit,
+    clearErrors,
+    formState: { errors },
+  } = useForm<Form>()
+  const [createDeck] = useCreateDeckMutation()
 
   const handleModalToggle = () => {
     setOpen(prevState => !prevState)
-    reset()
+    setValue('name', '')
+    setValue('cover', [])
+    clearErrors('name')
+    setSelectedImage('')
+    dispatch(resetFilter())
   }
 
   const handeCheckedChange = () => {
     setIsPrivate(prevState => !prevState)
   }
-
-  // @ts-ignore
-  const errorMessage = error?.data?.errorMessages[0].message
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -57,19 +65,18 @@ export const PageName = () => {
 
   const onSubmit = handleSubmit(data => {
     const form = new FormData()
-
-    form.append('cover', data.cover[0])
+    if (data.cover && data.cover.length > 0) {
+      form.append('cover', data.cover[0])
+    }
     form.append('name', data.name)
     form.append('isPrivate', String(isPrivate))
 
     if (data.name.trim() !== '' && data.name.length >= 3) {
       // @ts-ignore
       createDeck(form)
-      setOpen(false)
-      setValue('name', '')
-      setSelectedImage('')
-      dispatch(resetFilter())
+      handleModalToggle()
     } else {
+      setError('name', { message: 'String must contain at least 3 character(s)' })
       setOpen(true)
     }
   })
@@ -102,12 +109,11 @@ export const PageName = () => {
               type="file"
               onChange={handleFileChange}
             />
-
             <TextField
               inputId={'Name Pack'}
               label={'Name Pack'}
               placeholder={'Name'}
-              errorMessage={errorMessage}
+              errorMessage={errors.name?.message}
               {...register('name')}
             />
             <CheckBox
@@ -133,7 +139,7 @@ export const PageName = () => {
             <Button
               classNameBtnBox={f.btnBox}
               variant={'primary'}
-              disabled={isError}
+              disabled={!!errors.name?.message}
               type={'submit'}
             >
               Add New Pack

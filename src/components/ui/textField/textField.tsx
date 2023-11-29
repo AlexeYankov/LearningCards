@@ -72,7 +72,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 })
 
 export type TextFieldProps = {
-  error?: string
   errorMessage?: null | string
   inputId?: string
   label?: string
