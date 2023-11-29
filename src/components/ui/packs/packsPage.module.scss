@@ -7,6 +7,34 @@
   margin-bottom: 100px;
 }
 
+.tableHead {
+  min-width: 100%;
+}
+
+.decksRow {
+  th {
+    &:nth-child(1) {
+      min-width: 260px;
+      max-width: 280px;
+    }
+
+    &:nth-child(2) {
+      min-width: 140px;
+      max-width: 200px;
+    }
+
+    &:nth-child(3) {
+      min-width: 200px;
+      max-width: 200px;
+    }
+
+    &:nth-child(4) {
+      min-width: 275px;
+      max-width: 280px;
+    }
+  }
+}
+
 .container__pageBar {
   display: flex;
   align-items: flex-end;
@@ -117,4 +145,108 @@ div.btnBox {
     height: 16px;
     fill: white;
   }
+}
+
+.headCell {
+  padding: 6px 24px;
+  text-align: left;
+  background-color: var(--color-dark-500);
+  transition: 0.3s;
+
+  &:hover {
+    background-color: var(--color-dark-300);
+    transition: 0.3s;
+  }
+
+  &:last-child {
+    background-color: var(--color-dark-500);
+  }
+
+  svg {
+    cursor: pointer;
+    margin-left: 4px;
+    fill: white;
+  }
+
+  .typography {
+    cursor: pointer;
+
+    font-size: var(--font-size-s);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-m);
+    white-space: nowrap;
+  }
+
+  .iconRotate {
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.bodyCell,
+.cardsCell {
+  overflow: hidden;
+
+  max-width: 200px;
+  padding: 6px 24px;
+
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  border-bottom: 1px solid var(--color-dark-500);
+
+  svg:not(.stars) {
+    fill: white;
+  }
+
+  .stars {
+    display: flex;
+  }
+
+  .starsContainer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .stars svg {
+    fill: var(--color-warning-300);
+  }
+
+  a {
+    color: var(--color-light-100);
+    text-decoration: none;
+  }
+
+  a :visited {
+    color: var(--color-light-100);
+  }
+
+  .typography {
+    cursor: pointer;
+    font-size: var(--font-size-s);
+  }
+
+  .imageWithNameBox {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .image {
+    min-width: 118px;
+    height: 48px;
+    object-fit: cover;
+  }
+}
+
+.boldText {
+  font-weight: var(--font-weight-bold);
+}
+
+.modalBox {
+  display: flex;
 }

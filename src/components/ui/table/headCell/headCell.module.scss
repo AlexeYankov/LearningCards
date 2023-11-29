@@ -1,36 +1,36 @@
-.headCell {
-  padding: 6px 24px;
-  text-align: left;
-  background-color: var(--color-dark-500);
-  transition: 0.3s;
-
-  &:hover {
-    background-color: var(--color-dark-300);
-    transition: 0.3s;
-  }
-
-  &:last-child {
-    background-color: var(--color-dark-500);
-  }
-
-  svg {
-    cursor: pointer;
-    margin-left: 4px;
-    fill: white;
-  }
-
-  .typography {
-    cursor: pointer;
-
-    font-size: var(--font-size-s);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-m);
-    white-space: nowrap;
-  }
-
-  .iconRotate {
-    svg {
-      transform: rotate(180deg);
-    }
-  }
-}
+//.headCell {
+//  padding: 6px 24px;
+//  text-align: left;
+//  background-color: var(--color-dark-500);
+//  transition: 0.3s;
+//
+//  &:hover {
+//    background-color: var(--color-dark-300);
+//    transition: 0.3s;
+//  }
+//
+//  &:last-child {
+//    background-color: var(--color-dark-500);
+//  }
+//
+//  svg {
+//    cursor: pointer;
+//    margin-left: 4px;
+//    fill: white;
+//  }
+//
+//  .typography {
+//    cursor: pointer;
+//
+//    font-size: var(--font-size-s);
+//    font-weight: var(--font-weight-bold);
+//    line-height: var(--line-height-m);
+//    white-space: nowrap;
+//  }
+//
+//  .iconRotate {
+//    svg {
+//      transform: rotate(180deg);
+//    }
+//  }
+//}

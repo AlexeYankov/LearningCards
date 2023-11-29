@@ -16,6 +16,7 @@ export type CardsResponsType = {
   updated: string
   userId: string
 }
+
 export type UpdateCardsType = {
   answer: string
   answerImg: string
@@ -25,7 +26,7 @@ export type UpdateCardsType = {
   questionVideo: string
 }
 
-export type DecksType = {
+export type CardsType = {
   items?: CardsResponsType[]
   maxCardsCount?: number
   pagination?: PaginationResponseType
@@ -52,7 +53,7 @@ type GetCardsParamsType = {
 export const cardsService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      getCards: builder.query<Omit<DecksType, 'maxCardsCount'>, GetCardsParamsType>({
+      getCards: builder.query<Omit<CardsType, 'maxCardsCount'>, GetCardsParamsType>({
         providesTags: ['Cards'],
         query: ({ id, ...params }) => {
           return {

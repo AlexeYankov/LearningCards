@@ -1,5 +1,5 @@
 import { baseApi } from '@/api/cards.api.ts'
-import { CardsResponsType, DecksType } from '@/api/common.api.ts'
+import { PaginationResponseType } from '@/api/common.api.ts'
 
 type GetDecksParamsType = {
   authorId?: string
@@ -9,6 +9,30 @@ type GetDecksParamsType = {
   minCardsCount?: number
   name?: string
   orderBy?: 'name-asc' | 'name-desc'
+}
+
+export type DecksType = {
+  items?: ResponseDeckType[]
+  maxCardsCount?: number
+  pagination?: PaginationResponseType
+}
+
+export type ResponseDeckTypeItemsAuthor = {
+  id: string
+  name: string
+}
+export type ResponseDeckType = {
+  author: ResponseDeckTypeItemsAuthor
+  id: string
+  userId: string
+  name: string
+  isPrivate: boolean
+  shots: number
+  cover: string
+  rating: number
+  created: string
+  updated: string
+  cardsCount: number
 }
 
 type DeleteDeckResponseType = {
@@ -42,13 +66,6 @@ export type UpdateDeckResponseTypeAuthor = {
   name: string
 }
 
-export type UpdateDeckArgType = {
-  id: string
-  cover?: File | string
-  name: string
-  isPrivate?: boolean
-}
-
 export type CreateDeckArgType = {
   cover?: File
   name: string
@@ -67,7 +84,7 @@ export const decksApi = baseApi.injectEndpoints({
           }
         },
       }),
-      createDeck: builder.mutation<CardsResponsType, CreateDeckArgType>({
+      createDeck: builder.mutation<ResponseDeckType, CreateDeckArgType>({
         invalidatesTags: ['Decks'],
         query: params => {
           return {
@@ -96,7 +113,7 @@ export const decksApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ['Decks'],
       }),
-      learnRandomCard: builder.query<CardsResponsType, string>({
+      learnRandomCard: builder.query<ResponseDeckType, string>({
         query: id => {
           return {
             url: `v1/decks/${id}/learn`,
@@ -111,7 +128,6 @@ export const decksApi = baseApi.injectEndpoints({
 export const {
   useCreateDeckMutation,
   useGetDecksQuery,
-  useLearnRandomCardQuery,
   useDeleteDeckMutation,
   useUpdateDeckMutation,
 } = decksApi
