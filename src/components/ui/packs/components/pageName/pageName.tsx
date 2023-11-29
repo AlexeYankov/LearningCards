@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import { useCreateDeckMutation } from '@/api/decks/decks.api'
 import { Button } from '@/components/ui/button'
@@ -16,15 +16,15 @@ import { resetFilter } from '@/api/decks/pagination.reducer.ts'
 
 const schema = z.object({
   cover: z.array(z.instanceof(File)),
-  name: z.string(),
-  isPrivate: z.any(),
+  name: z.string().min(3),
+  isPrivate: z.boolean().default(false),
 })
 
 type Form = z.infer<typeof schema>
 
 export const PageName = () => {
   const dispatch = useAppDispatch()
-  const [selectedImage, setSelectedImage] = useState<string>('')
+  const [selectedImage, setSelectedImage] = useState('')
   const [open, setOpen] = useState(false)
   const [isPrivate, setIsPrivate] = useState(false)
   const { register, setValue, handleSubmit } = useForm<Form>()
@@ -42,8 +42,8 @@ export const PageName = () => {
   // @ts-ignore
   const errorMessage = error?.data?.errorMessages[0].message
 
-  const handleFileChange = event => {
-    const file = event.target.files[0]
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
 
     if (file) {
       const imageUrl = URL.createObjectURL(file)
@@ -60,11 +60,14 @@ export const PageName = () => {
 
     form.append('cover', data.cover[0])
     form.append('name', data.name)
+    form.append('isPrivate', String(isPrivate))
 
     if (data.name.trim() !== '' && data.name.length >= 3) {
+      // @ts-ignore
       createDeck(form)
       setOpen(false)
       setValue('name', '')
+      setSelectedImage('')
       dispatch(resetFilter())
     } else {
       setOpen(true)
@@ -97,9 +100,7 @@ export const PageName = () => {
               className={f.inputFile}
               id={'input__file'}
               type="file"
-              onChange={e => {
-                handleFileChange(e)
-              }}
+              onChange={handleFileChange}
             />
 
             <TextField
