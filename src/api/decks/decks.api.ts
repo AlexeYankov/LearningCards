@@ -43,7 +43,13 @@ export type UpdateDeckResponseTypeAuthor = {
 }
 
 export type UpdateDeckArgType = {
-  id?: string
+  id: string
+  cover?: File | string
+  name: string
+  isPrivate?: boolean
+}
+
+export type CreateDeckArgType = {
   cover?: File
   name: string
   isPrivate?: boolean
@@ -61,14 +67,7 @@ export const decksApi = baseApi.injectEndpoints({
           }
         },
       }),
-      createDeck: builder.mutation<
-        CardsResponsType,
-        {
-          name: string
-          isPrivate?: boolean
-          cover?: File
-        }
-      >({
+      createDeck: builder.mutation<CardsResponsType, CreateDeckArgType>({
         invalidatesTags: ['Decks'],
         query: params => {
           return {
@@ -87,12 +86,12 @@ export const decksApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ['Decks'],
       }),
-      updateDeck: builder.mutation<UpdateDeckResponseType, UpdateDeckArgType>({
-        query: body => {
+      updateDeck: builder.mutation<UpdateDeckResponseType, { form: FormData; id: string }>({
+        query: ({ form, id }) => {
           return {
             method: 'PATCH',
-            url: `v1/decks/${body.id}`,
-            body: { ...body, id: undefined },
+            url: `v1/decks/${id}`,
+            body: form,
           }
         },
         invalidatesTags: ['Decks'],

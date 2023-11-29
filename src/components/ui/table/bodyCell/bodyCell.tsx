@@ -10,10 +10,13 @@ import { BodyCellType } from '../types'
 import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal'
 import f from '@/components/ui/packs/packsPage.module.scss'
 import { Button } from '@/components/ui/button'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { TextField } from '@/components/ui/textField'
 import { CheckBox } from '@/components/ui/checkbox'
 import { useDeleteDeckMutation, useUpdateDeckMutation } from '@/api/decks/decks.api'
+import { Image } from '@/asserts/icons/components/Image'
+import { z } from 'zod'
+import { useForm } from 'react-hook-form'
 
 type BodyCellComponentType = {
   item: BodyCellType
@@ -22,14 +25,31 @@ type BodyCellComponentType = {
   isMyDeck?: boolean
 }
 
+const schema = z.object({
+  cover: z.array(z.instanceof(File)),
+  name: z.string().min(3),
+  isPrivate: z.boolean().default(false),
+})
+
+type Form = z.infer<typeof schema>
+
 export const BodyCell = ({ item, i, tableName }: BodyCellComponentType) => {
   const navigate = useNavigate()
 
   const [deleteDeck] = useDeleteDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
 
+  const {
+    register,
+    setValue,
+    setError,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<Form>()
+  const [selectedImage, setSelectedImage] = useState('')
   const [openedModalIndex, setOpenedModalIndex] = useState<null | number>(null)
-  const [value, setValue] = useState('')
+  const [isPrivate, setIsPrivate] = useState(false)
 
   const handleModalToggle = (index: number | null) => {
     if (openedModalIndex === index) {
@@ -41,26 +61,53 @@ export const BodyCell = ({ item, i, tableName }: BodyCellComponentType) => {
 
   const handleCloseModal = () => {
     setOpenedModalIndex(null)
+    reset()
   }
 
   const handleDeleteDeckClick = () => {
     deleteDeck(item.id!)
     setOpenedModalIndex(null)
   }
+  const handeCheckedChange = () => {
+    setIsPrivate(prevState => !prevState)
+  }
 
   const moveToLearnRandomCard = () => {
     navigate(item.id!)
   }
 
-  const handleUpdateDeckChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.currentTarget.value)
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+
+    if (file) {
+      const imageUrl = URL.createObjectURL(file)
+      setSelectedImage(imageUrl)
+      setValue('cover', [file])
+    } else {
+      setSelectedImage('')
+      setValue('cover', [])
+    }
   }
 
-  const handleUpdateDeck = (e: FormEvent) => {
-    e.preventDefault()
-    updateDeck({ id: item.id, name: value })
-    setOpenedModalIndex(null)
-  }
+  const onSubmit = handleSubmit(data => {
+    const form = new FormData()
+    if (data.cover && data.cover.length > 0) {
+      form.append('cover', data.cover[0])
+    }
+    form.append('name', data.name)
+    form.append('isPrivate', String(isPrivate))
+
+    if (data.name.trim() !== '' && data.name.length >= 3) {
+      console.log(form)
+      updateDeck({
+        id: item.id!,
+        form,
+      })
+      setOpenedModalIndex(null)
+    } else {
+      setError('name', { message: 'String must contain at least 3 character(s)' })
+    }
+  })
 
   return (
     <Cell className={`${tableName === 'Cards' ? s.cardsCell : s.bodyCell}`}>
@@ -123,15 +170,25 @@ export const BodyCell = ({ item, i, tableName }: BodyCellComponentType) => {
                 modalContent = (
                   <>
                     <ModalTitle title={'Edit Pack'} />
-                    <form onSubmit={handleUpdateDeck}>
+                    <form onSubmit={onSubmit}>
                       <div className={f.contentComponents}>
+                        <img className={f.img} src={selectedImage} />
+                        <label htmlFor="input__file" className={f.changeCover}>
+                          <Image />
+                          Change Cover
+                        </label>
+                        <input
+                          className={f.inputFile}
+                          id={'input__file'}
+                          type="file"
+                          onChange={handleFileChange}
+                        />
                         <TextField
                           inputId={'Name Pack'}
                           label={'Name Pack'}
-                          value={value}
-                          onChange={handleUpdateDeckChange}
                           placeholder={'Name'}
-                          // errorMessage={errorMessage}
+                          errorMessage={errors.name?.message}
+                          {...register('name')}
                         />
                         <CheckBox
                           IconID={'checkbox-unselected'}
@@ -141,6 +198,8 @@ export const BodyCell = ({ item, i, tableName }: BodyCellComponentType) => {
                           height={'24'}
                           label={'Private pack'}
                           width={'24'}
+                          checked={isPrivate}
+                          onChange={handeCheckedChange}
                         />
                       </div>
                       <div className={`${f.contentBtn} ${f.contentBtns}`}>
@@ -154,9 +213,9 @@ export const BodyCell = ({ item, i, tableName }: BodyCellComponentType) => {
                         </Button>
                         <Button
                           classNameBtnBox={f.btnBox}
-                          onClick={handleUpdateDeck}
+                          onSubmit={onSubmit}
                           variant={'primary'}
-                          // disabled={isError}
+                          disabled={!!errors.name?.message}
                           type={'submit'}
                         >
                           Save Changes

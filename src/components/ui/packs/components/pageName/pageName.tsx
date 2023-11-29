@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react'
 
-import { useCreateDeckMutation } from '@/api/decks/decks.api'
+import { CreateDeckArgType, useCreateDeckMutation } from '@/api/decks/decks.api'
 import { Button } from '@/components/ui/button'
 import { CheckBox } from '@/components/ui/checkbox'
 import { Modal, ModalTitle } from '@/components/ui/modal'
@@ -70,8 +70,7 @@ export const PageName = () => {
     form.append('isPrivate', String(isPrivate))
 
     if (data.name.trim() !== '' && data.name.length >= 3) {
-      // @ts-ignore
-      createDeck(form)
+      createDeck(form as unknown as CreateDeckArgType)
       handleModalToggle()
     } else {
       setError('name', { message: 'String must contain at least 3 character(s)' })
