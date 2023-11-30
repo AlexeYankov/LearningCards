@@ -205,7 +205,6 @@ const EditCardModal = ({ deck }: { deck: ResponseDeckType }) => {
   const onSubmit = handleSubmit(data => {
     const form = new FormData()
 
-    console.log(selectedImage)
     if (data.cover && data.cover.length > 0) {
       form.append('cover', data.cover[0])
     }
@@ -226,7 +225,6 @@ const EditCardModal = ({ deck }: { deck: ResponseDeckType }) => {
       setError('name', { message: 'String must contain at least 3 character(s)' })
     }
   })
-  console.log(selectedImage)
   return (
     <Modal
       open={open}
