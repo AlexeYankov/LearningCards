@@ -122,7 +122,7 @@ export const PacksPage = () => {
                 <Cell className={s.bodyCell}>{deck.author.name}</Cell>
                 <Cell className={`${s.bodyCell} ${s.iconBox}`}>
                   <LearnCardModal deck={deck} />
-                  <EditCardModal deckId={deck.id} />
+                  <EditCardModal deck={deck} />
                   <DeleteCardModal deck={deck} />
                 </Cell>
               </Row>
@@ -151,7 +151,7 @@ const schema = z.object({
 
 type Form = z.infer<typeof schema>
 
-const EditCardModal = ({ deckId }: { deckId: string }) => {
+const EditCardModal = ({ deck }: { deck: ResponseDeckType }) => {
   const [updateDeck] = useUpdateDeckMutation()
   const {
     register,
@@ -196,7 +196,7 @@ const EditCardModal = ({ deckId }: { deckId: string }) => {
 
     if (data.name.trim() !== '' && data.name.length >= 3) {
       updateDeck({
-        id: deckId,
+        id: deck.id,
         form,
       })
       handleCloseModal()
@@ -204,7 +204,6 @@ const EditCardModal = ({ deckId }: { deckId: string }) => {
       setError('name', { message: 'String must contain at least 3 character(s)' })
     }
   })
-
   return (
     <Modal
       open={open}
@@ -218,7 +217,7 @@ const EditCardModal = ({ deckId }: { deckId: string }) => {
       <ModalTitle title={'Edit Pack'} />
       <form onSubmit={onSubmit}>
         <div className={f.contentComponents}>
-          <img className={f.img} src={selectedImage} />
+          <img className={f.img} src={selectedImage || deck.cover} />
           <label htmlFor="input__file" className={f.changeCover}>
             <Image />
             Change Cover
@@ -234,6 +233,7 @@ const EditCardModal = ({ deckId }: { deckId: string }) => {
             label={'Name Pack'}
             placeholder={'Name'}
             errorMessage={errors.name?.message}
+            value={deck.name}
             {...register('name')}
           />
           <CheckBox
