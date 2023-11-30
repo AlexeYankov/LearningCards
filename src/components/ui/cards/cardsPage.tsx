@@ -14,6 +14,7 @@ import { PageBar } from '@/components/ui/cards/components/pageBar/pageBar.tsx'
 import { ArrowBack } from '@/asserts/icons/components/ArrowBack.tsx'
 import { Pagination } from '@/components/ui/pagination'
 import { Star } from '@/asserts/icons/components/Star.tsx'
+import { convertedTime } from '@/helpers/convertedTime.ts'
 
 export const CardsPage = () => {
   const { id } = useParams()
@@ -79,18 +80,6 @@ export const CardsPage = () => {
             </Head>
             <Body>
               {cards?.items?.map(card => {
-                const currentData = new Date(card.updated || 0)
-                const currentDay =
-                  currentData.getDate() < 10 ? '0' + currentData.getDate() : currentData.getDate()
-                let currentMonth = currentData.getMonth() + 1
-                let formattedMonth =
-                  currentMonth < 10 ? '0' + currentMonth : currentMonth.toString()
-
-                const convertTimeTo = [currentDay, formattedMonth, currentData.getFullYear()].join(
-                  '.'
-                )
-
-                console.log(card)
                 const starsGrade = Array.from({ length: Math.round(card.grade || 0) }, () => 'star')
                 let result = starsGrade
                 const emptyStarsGrade = Array.from(
@@ -106,7 +95,7 @@ export const CardsPage = () => {
                   <Row key={card.id}>
                     <Cell className={s.bodyCell}>{card.question}</Cell>
                     <Cell className={s.bodyCell}>{card.answer}</Cell>
-                    <Cell className={s.bodyCell}>{convertTimeTo}</Cell>
+                    <Cell className={s.bodyCell}>{convertedTime(card.updated)}</Cell>
                     <Cell className={`${s.bodyCell} ${s.starsBox}`}>
                       {result.map((star, i) => {
                         return <Star iconId={star} key={i} />

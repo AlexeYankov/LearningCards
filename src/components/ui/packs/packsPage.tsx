@@ -28,6 +28,7 @@ import { z } from 'zod'
 import { Edit } from '@/asserts/icons/components/Edit'
 import { Learn } from '@/asserts/icons/components/Learn.tsx'
 import { Delete } from '@/asserts/icons/components/Delete.tsx'
+import { convertedTime } from '@/helpers/convertedTime.ts'
 
 export const PacksPage = () => {
   const dispatch = useAppDispatch()
@@ -102,13 +103,6 @@ export const PacksPage = () => {
         </Head>
         <Body>
           {decks?.items?.map(deck => {
-            const currentData = new Date(deck.updated || 0)
-            const currentDay =
-              currentData.getDate() < 10 ? '0' + currentData.getDate() : currentData.getDate()
-            let currentMonth = currentData.getMonth() + 1
-            let formattedMonth = currentMonth < 10 ? '0' + currentMonth : currentMonth.toString()
-
-            const convertTimeTo = [currentDay, formattedMonth, currentData.getFullYear()].join('.')
             return (
               <Row className={s.decksRow} key={deck.id}>
                 <Cell className={s.bodyCell}>
@@ -124,7 +118,7 @@ export const PacksPage = () => {
                   </div>
                 </Cell>
                 <Cell className={s.bodyCell}>{deck.cardsCount}</Cell>
-                <Cell className={s.bodyCell}>{convertTimeTo}</Cell>
+                <Cell className={s.bodyCell}>{convertedTime(deck.updated)}</Cell>
                 <Cell className={s.bodyCell}>{deck.author.name}</Cell>
                 <Cell className={`${s.bodyCell} ${s.iconBox}`}>
                   <LearnCardModal deck={deck} />
