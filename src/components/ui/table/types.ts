@@ -37,12 +37,7 @@ export type BodyCellType = {
   name?: string
   question?: string
   stars?: Array<string>
-  // svgs?: HeadCellSvgType[]
   updated?: string
   packName?: string
   userId?: string
 }
-
-// export type HeadCellSvgType = {
-//   id?: string
-// }

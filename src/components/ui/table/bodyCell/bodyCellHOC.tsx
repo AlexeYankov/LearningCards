@@ -12,16 +12,6 @@ type BodyCellHOCType = {
 }
 
 export const BodyCellHOC = ({ item, tableName, isMyDeck }: BodyCellHOCType) => {
-  const starsGrade = Array.from({ length: Math.round(item.grade || 0) }, () => 'star')
-  let result = starsGrade
-  const emptyStarsGrade = Array.from(
-    { length: 5 - Math.round(item.grade || 0) },
-    () => 'star-outline'
-  )
-
-  if (Math.round(item.grade || 0) - 5 < 0) {
-    result = starsGrade.concat(emptyStarsGrade)
-  }
   // const currentData = new Date(item.updated || 0)
   // const currentDay =
   //   currentData.getDate() < 10 ? '0' + currentData.getDate() : currentData.getDate()

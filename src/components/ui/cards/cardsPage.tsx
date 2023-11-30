@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useGetCardsQuery } from '@/api/common.api'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { changeCurrentPage, changeItemsPerPage } from '@/api/decks/pagination.reducer'
@@ -8,6 +8,12 @@ import { Column } from '@/components/ui/table/types.ts'
 import { Body, Cell, Head, HeadCell, Root, Row } from '@it-incubator/ui-kit'
 import s from './cardsPage.module.scss'
 import { Edit } from '@/asserts/icons/components/Edit.tsx'
+import { EmptyPack } from '@/components/ui/cards/components/emptyPack/emptyPack.tsx'
+import { PageName } from '@/components/ui/cards/components/pageName/pageName.tsx'
+import { PageBar } from '@/components/ui/cards/components/pageBar/pageBar.tsx'
+import { ArrowBack } from '@/asserts/icons/components/ArrowBack.tsx'
+import { Pagination } from '@/components/ui/pagination'
+import { Star } from '@/asserts/icons/components/Star.tsx'
 
 export const CardsPage = () => {
   const { id } = useParams()
@@ -38,85 +44,96 @@ export const CardsPage = () => {
   const columns: Column[] = [
     { key: 'question', sortable: true, title: 'Question' },
     { key: 'answer', sortable: true, title: 'Answer' },
-    { key: 'updated', sortable: true, title: 'Updated' },
+    { key: 'updated', sortable: true, title: 'Last updated' },
     { key: 'grade', sortable: true, title: 'Grade' },
     { key: 'actions', sortable: false, title: '' },
   ]
 
   return (
-    // <div className={f.container}>
-    //   <Link className={f.backLink} to={'/'} onClick={resetFilterDecks}>
-    //     <ArrowBack />
-    //     Back to Packs List
-    //   </Link>
-    //
-    //   {!data?.items?.length ? (
-    //     <EmptyPack packTitle={'Name Pack'} />
-    //   ) : (
-    //     <>
-    //       <PageName isMyDeck={flag} />
-    //       <PageBar />
-    //       <Table
-    //         bodyCell={data?.items || []}
-    //         className={f.container__common}
-    //         headCell={tableHeadData}
-    //         tableName={'Cards'}
-    //         isMyDeck={flag}
-    //       />
-    //     </>
-    //   )}
-    //   {data?.pagination?.totalPages! > 1 && (
-    //     <Pagination
-    //       arrowColor={'white'}
-    //       arrowID={'arrow-ios-back'}
-    //       totalItems={data?.pagination?.totalItems}
-    //       reversedArrowID={'arrow-ios-forward'}
-    //       reversed
-    //       totalPages={data?.pagination?.totalPages}
-    //     />
-    //   )}
-    //
-    //
-    // </div>
     <div className={s.container}>
-      <Root className={'w-full'}>
-        <Head className={s.tableHead}>
-          {/*<Row className={`${tableName === 'Cards' ? s.cardsRow : s.decksRow}`}>*/}
-          <Row className={s.cardsRow}>
-            {columns.map(({ title, key }) => {
-              return (
-                <HeadCell key={key}>
-                  {/*<HeadCell key={key} onClick={handleSort(key, sortable)} sortable={sortable}>*/}
-                  {title}
-                  {/*{sort?.key === key ? <ArrowUp /> : ''}*/}
-                </HeadCell>
-              )
-            })}
-          </Row>
-        </Head>
-        <Body>
-          {cards?.items?.map(card => (
-            <Row key={card.id}>
-              <Cell>{card.question}</Cell>
-              <Cell>{card.answer}</Cell>
-              <Cell>{'day'}</Cell>
-              <Cell>{card.rating}</Cell>
-              <Cell className={'flex gap-4 items-center'}>
-                <Edit />
-                {/*<button className={'unset'}>/!*<FaEdit />*!/</button>*/}
-                {/*<button*/}
-                {/*  className={'unset'}*/}
-                {/*  // onClick={() => {*/}
-                {/*  //   deleteCard({ cardId: card.id })*/}
-                {/*  // }}*/}
-                {/*>*/}
-                {/*  /!*<FaTrash />*!/*/}
-                {/*</button>*/}
-              </Cell>
-            </Row>
-          ))}
-        </Body>
-      </Root>
+      <Link className={s.backLink} to={'/'} onClick={resetFilterDecks}>
+        <ArrowBack />
+        Back to Packs List
+      </Link>
+
+      {!cards?.items?.length ? (
+        <EmptyPack packTitle={'Name Pack'} />
+      ) : (
+        <>
+          <PageName isMyDeck={true} />
+          <PageBar />
+          <Root className={s.container__common}>
+            <Head className={s.tableHead}>
+              {/*<Row className={`${tableName === 'Cards' ? s.cardsRow : s.decksRow}`}>*/}
+              <Row className={s.cardsRow}>
+                {columns.map(({ title, key }) => {
+                  return (
+                    <HeadCell className={s.headCell} key={key}>
+                      {/*<HeadCell key={key} onClick={handleSort(key, sortable)} sortable={sortable}>*/}
+                      {title}
+                      {/*{sort?.key === key ? <ArrowUp /> : ''}*/}
+                    </HeadCell>
+                  )
+                })}
+              </Row>
+            </Head>
+            <Body>
+              {cards?.items?.map(card => {
+                const currentData = new Date(card.updated || 0)
+                const currentDay =
+                  currentData.getDate() < 10 ? '0' + currentData.getDate() : currentData.getDate()
+                let currentMonth = currentData.getMonth() + 1
+                let formattedMonth =
+                  currentMonth < 10 ? '0' + currentMonth : currentMonth.toString()
+
+                const convertTimeTo = [currentDay, formattedMonth, currentData.getFullYear()].join(
+                  '.'
+                )
+
+                const starsGrade = Array.from(
+                  { length: Math.round(card.rating || 0) },
+                  () => 'star'
+                )
+                let result = starsGrade
+                const emptyStarsGrade = Array.from(
+                  { length: 5 - Math.round(card.rating || 0) },
+                  () => 'star-outline'
+                )
+
+                if (Math.round(card.rating || 0) - 5 < 0) {
+                  result = starsGrade.concat(emptyStarsGrade)
+                }
+                return (
+                  <Row key={card.id}>
+                    <Cell className={s.bodyCell}>{card.question}</Cell>
+                    <Cell className={s.bodyCell}>{card.answer}</Cell>
+                    <Cell className={s.bodyCell}>{convertTimeTo}</Cell>
+                    <Cell className={`${s.bodyCell} ${s.starsBox}`}>
+                      {result.map((star, i) => {
+                        console.log(star)
+                        return <Star iconId={star} key={i} />
+                      })}
+                    </Cell>
+                    <Cell className={`${s.bodyCell} ${s.iconBox}`}>
+                      <Edit />
+                    </Cell>
+                  </Row>
+                )
+              })}
+            </Body>
+          </Root>
+        </>
+      )}
+      {cards?.pagination?.totalPages! > 1 && (
+        <Pagination
+          arrowColor={'white'}
+          arrowID={'arrow-ios-back'}
+          totalItems={cards?.pagination?.totalItems}
+          reversedArrowID={'arrow-ios-forward'}
+          reversed
+          totalPages={cards?.pagination?.totalPages}
+        />
+      )}
     </div>
   )
 }
