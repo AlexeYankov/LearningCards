@@ -29,6 +29,7 @@ import { Edit } from '@/asserts/icons/components/Edit'
 import { Learn } from '@/asserts/icons/components/Learn.tsx'
 import { Delete } from '@/asserts/icons/components/Delete.tsx'
 import { convertedTime } from '@/helpers/convertedTime.ts'
+import { useMeQuery } from '@/api/auth-api/auth.api.ts'
 
 export const PacksPage = () => {
   const dispatch = useAppDispatch()
@@ -40,6 +41,8 @@ export const PacksPage = () => {
   const authorId = useAppSelector(state => state.pagination.authorId)
   const name = useAppSelector(state => state.pagination.name)
   const orderBy = useAppSelector(state => state.pagination.orderBy)
+
+  const { data: me } = useMeQuery()
 
   const { data: decks } = useGetDecksQuery({
     currentPage,
@@ -103,6 +106,7 @@ export const PacksPage = () => {
         </Head>
         <Body>
           {decks?.items?.map(deck => {
+            const myDeck = me?.id === deck.author.id
             return (
               <Row className={s.decksRow} key={deck.id}>
                 <Cell className={s.bodyCell}>
@@ -121,9 +125,15 @@ export const PacksPage = () => {
                 <Cell className={s.bodyCell}>{convertedTime(deck.updated)}</Cell>
                 <Cell className={s.bodyCell}>{deck.author.name}</Cell>
                 <Cell className={`${s.bodyCell} ${s.iconBox}`}>
-                  <LearnCardModal deck={deck} />
-                  <EditCardModal deck={deck} />
-                  <DeleteCardModal deck={deck} />
+                  {myDeck ? (
+                    <>
+                      <EditCardModal deck={deck} />
+                      <LearnCardModal deck={deck} disabled={myDeck} />
+                      <DeleteCardModal deck={deck} />
+                    </>
+                  ) : (
+                    <LearnCardModal deck={deck} disabled={myDeck} />
+                  )}
                 </Cell>
               </Row>
             )
@@ -272,7 +282,7 @@ const EditCardModal = ({ deck }: { deck: ResponseDeckType }) => {
   )
 }
 
-const LearnCardModal = ({ deck }: { deck: ResponseDeckType }) => {
+const LearnCardModal = ({ deck, disabled }: { deck: ResponseDeckType; disabled: boolean }) => {
   const [open, setOpen] = useState(false)
 
   const handleCloseModal = () => {
@@ -284,7 +294,7 @@ const LearnCardModal = ({ deck }: { deck: ResponseDeckType }) => {
       open={open}
       onOpenChange={setOpen}
       triggerName={
-        <button>
+        <button className={disabled ? s.disabledIcon : ''} disabled={disabled}>
           <Learn />
         </button>
       }
