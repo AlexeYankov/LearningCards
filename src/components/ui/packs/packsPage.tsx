@@ -125,15 +125,17 @@ export const PacksPage = () => {
                 <Cell className={s.bodyCell}>{convertedTime(deck.updated)}</Cell>
                 <Cell className={s.bodyCell}>{deck.author.name}</Cell>
                 <Cell className={`${s.bodyCell} ${s.iconBox}`}>
-                  {myDeck ? (
-                    <>
-                      <EditCardModal deck={deck} />
+                  <div className={s.test}>
+                    {myDeck ? (
+                      <>
+                        <EditCardModal deck={deck} />
+                        <LearnCardModal deck={deck} disabled={myDeck} />
+                        <DeleteCardModal deck={deck} />
+                      </>
+                    ) : (
                       <LearnCardModal deck={deck} disabled={myDeck} />
-                      <DeleteCardModal deck={deck} />
-                    </>
-                  ) : (
-                    <LearnCardModal deck={deck} disabled={myDeck} />
-                  )}
+                    )}
+                  </div>
                 </Cell>
               </Row>
             )

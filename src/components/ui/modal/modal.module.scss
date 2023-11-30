@@ -1,5 +1,34 @@
 .dialogTrigger {
   cursor: pointer;
+  position: relative;
+}
+
+.dialogTrigger::after {
+  content: '';
+
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 24px;
+  height: 24px;
+
+  opacity: 0;
+  background: var(--color-dark-100);
+  border-radius: 50%;
+
+  transition: opacity 0.3s ease;
+}
+
+.dialogTrigger:hover::after {
+  z-index: -1;
+  opacity: 1;
+}
+
+.dialogTrigger:hover::after:disabled {
+  opacity: 0;
 }
 
 .dialogOverlay {

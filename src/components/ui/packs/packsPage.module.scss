@@ -251,19 +251,20 @@ div.btnBox {
   font-weight: var(--font-weight-bold);
 }
 
-.iconBox {
-  div {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
+.disabledIcon {
+  opacity: 0.5;
+}
+
+.test {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+
+  line-height: 1;
 
   svg {
     width: 16px;
     height: 16px;
   }
-}
-
-.disabledIcon {
-  opacity: 0.5;
 }
