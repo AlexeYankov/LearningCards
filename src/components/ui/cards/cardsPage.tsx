@@ -90,19 +90,18 @@ export const CardsPage = () => {
                   '.'
                 )
 
-                const starsGrade = Array.from(
-                  { length: Math.round(card.rating || 0) },
-                  () => 'star'
-                )
+                console.log(card)
+                const starsGrade = Array.from({ length: Math.round(card.grade || 0) }, () => 'star')
                 let result = starsGrade
                 const emptyStarsGrade = Array.from(
-                  { length: 5 - Math.round(card.rating || 0) },
+                  { length: 5 - Math.round(card.grade || 0) },
                   () => 'star-outline'
                 )
 
-                if (Math.round(card.rating || 0) - 5 < 0) {
+                if (Math.round(card.grade || 0) - 5 < 0) {
                   result = starsGrade.concat(emptyStarsGrade)
                 }
+
                 return (
                   <Row key={card.id}>
                     <Cell className={s.bodyCell}>{card.question}</Cell>
@@ -110,7 +109,6 @@ export const CardsPage = () => {
                     <Cell className={s.bodyCell}>{convertTimeTo}</Cell>
                     <Cell className={`${s.bodyCell} ${s.starsBox}`}>
                       {result.map((star, i) => {
-                        console.log(star)
                         return <Star iconId={star} key={i} />
                       })}
                     </Cell>

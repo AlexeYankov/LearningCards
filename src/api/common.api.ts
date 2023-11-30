@@ -1,7 +1,7 @@
 import { baseApi } from './cards.api'
 import { isEmpty } from 'remeda'
 
-export type CardsResponsType = {
+export type CardsResponseType = {
   answer: string
   answerImg: string
   answerVideo: string
@@ -11,7 +11,7 @@ export type CardsResponsType = {
   question: string
   questionImg: string
   questionVideo: string
-  rating: number
+  grade: number
   shots: number
   updated: string
   userId: string
@@ -27,7 +27,7 @@ export type UpdateCardsType = {
 }
 
 export type CardsType = {
-  items?: CardsResponsType[]
+  items?: CardsResponseType[]
   maxCardsCount?: number
   pagination?: PaginationResponseType
 }
@@ -69,7 +69,7 @@ export const cardsService = baseApi.injectEndpoints({
           url: `v1/cards/${id}`,
         }),
       }),
-      getCard: builder.query<CardsResponsType, void>({
+      getCard: builder.query<CardsResponseType, void>({
         providesTags: ['Cards'],
         query: id => `v1/cards/${id}`,
       }),
@@ -78,7 +78,7 @@ export const cardsService = baseApi.injectEndpoints({
       //   providesTags: ['Decks'],
       //   query: () => `v1/decks`,
       // }),
-      updateCard: builder.mutation<UpdateCardsType, CardsResponsType>({
+      updateCard: builder.mutation<UpdateCardsType, CardsResponseType>({
         invalidatesTags: ['Cards'],
         query: ({ id, ...patch }) => ({
           body: patch,
