@@ -16,6 +16,7 @@ import { Pagination } from '@/components/ui/pagination'
 import { Star } from '@/asserts/icons/components/Star.tsx'
 import { convertedTime } from '@/helpers/convertedTime.ts'
 import { Typography } from '@/components/ui/typography'
+import { useMeQuery } from '@/api/auth-api/auth.api.ts'
 
 export const CardsPage = () => {
   const { id } = useParams()
@@ -27,6 +28,8 @@ export const CardsPage = () => {
     currentPage,
     itemsPerPage,
   })
+
+  const { data: me } = useMeQuery()
 
   const resetFilterDecks = () => {
     dispatch(changeCardsCurrentPage({ currentPage: 1 }))
@@ -41,6 +44,12 @@ export const CardsPage = () => {
 
   if (isLoading) {
     return <div>Loading...</div>
+  }
+  let isMyCard: boolean = false
+
+  if (cards) {
+    // @ts-ignore
+    isMyCard = cards.items[0]?.userId === me?.id
   }
 
   const columns: Column[] = [
@@ -62,12 +71,16 @@ export const CardsPage = () => {
         <EmptyPack packTitle={'Name Pack'} />
       ) : (
         <>
-          <PageName isMyDeck={true} />
+          <PageName isMyCard={isMyCard} />
           <PageBar />
           <Root className={s.container__common}>
             <Head className={s.tableHead}>
               <Row className={s.cardsRow}>
                 {columns.map(({ title, key }) => {
+                  if (!isMyCard && key === 'actions') {
+                    return null
+                  }
+
                   return (
                     <HeadCell className={s.headCell} key={key}>
                       {/*<HeadCell key={key} onClick={handleSort(key, sortable)} sortable={sortable}>*/}
@@ -129,9 +142,11 @@ export const CardsPage = () => {
                         return <Star iconId={star} key={i} />
                       })}
                     </Cell>
-                    <Cell className={`${s.bodyCell} ${s.iconBox}`}>
-                      <Edit />
-                    </Cell>
+                    {isMyCard && (
+                      <Cell className={`${s.bodyCell} ${s.iconBox}`}>
+                        <Edit />
+                      </Cell>
+                    )}
                   </Row>
                 )
               })}
