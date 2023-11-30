@@ -51,7 +51,7 @@ export const CardsPage = () => {
         <EmptyPack packTitle={'Name Pack'} />
       ) : (
         <>
-          <PageName isMyDeck={flag} />
+          <PageName isMyDeck={flag} id={id} />
           <PageBar />
           <Table
             bodyCell={data?.items || []}
