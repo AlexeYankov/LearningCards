@@ -27,6 +27,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Edit } from '@/asserts/icons/components/Edit'
 import { Learn } from '@/asserts/icons/components/Learn.tsx'
+import { Delete } from '@/asserts/icons/components/Delete.tsx'
 
 export const PacksPage = () => {
   const dispatch = useAppDispatch()
@@ -125,7 +126,7 @@ export const PacksPage = () => {
                 <Cell className={s.bodyCell}>{deck.cardsCount}</Cell>
                 <Cell className={s.bodyCell}>{convertTimeTo}</Cell>
                 <Cell className={s.bodyCell}>{deck.author.name}</Cell>
-                <Cell className={s.bodyCell}>
+                <Cell className={`${s.bodyCell} ${s.iconBox}`}>
                   <LearnCardModal deck={deck} />
                   <EditCardModal deckId={deck.id} />
                   <DeleteCardModal deck={deck} />
@@ -215,9 +216,9 @@ const EditCardModal = ({ deckId }: { deckId: string }) => {
       open={open}
       onOpenChange={setOpen}
       triggerName={
-        <div className={s.svgsContainer}>
+        <button>
           <Edit />
-        </div>
+        </button>
       }
     >
       <ModalTitle title={'Edit Pack'} />
@@ -289,9 +290,9 @@ const LearnCardModal = ({ deck }: { deck: ResponseDeckType }) => {
       open={open}
       onOpenChange={setOpen}
       triggerName={
-        <div className={s.svgsContainer}>
+        <button>
           <Learn />
-        </div>
+        </button>
       }
     >
       <ModalTitle title={'Learn Pack'} />
@@ -335,9 +336,9 @@ const DeleteCardModal = ({ deck }: { deck: ResponseDeckType }) => {
       open={open}
       onOpenChange={setOpen}
       triggerName={
-        <div className={s.svgsContainer}>
-          <Learn />
-        </div>
+        <button>
+          <Delete />
+        </button>
       }
     >
       <ModalTitle title={'Delete Pack'} />
