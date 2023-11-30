@@ -1,117 +1,116 @@
-import {baseApi} from './cards.api'
-import {isEmpty} from 'remeda'
+import { baseApi } from './cards.api'
+import { isEmpty } from 'remeda'
 
 export type CardsResponsType = {
-    answer: string
-    answerImg: string
-    answerVideo: string
-    created: string
-    deckId: string
-    id: string
-    question: string
-    questionImg: string
-    questionVideo: string
-    rating: number
-    shots: number
-    updated: string
-    userId: string
+  answer: string
+  answerImg: string
+  answerVideo: string
+  created: string
+  deckId: string
+  id: string
+  question: string
+  questionImg: string
+  questionVideo: string
+  rating: number
+  shots: number
+  updated: string
+  userId: string
 }
 export type UpdateCardsType = {
-    answer: string
-    answerImg: string
-    answerVideo: string
-    question: string
-    questionImg: string
-    questionVideo: string
+  answer: string
+  answerImg: string
+  answerVideo: string
+  question: string
+  questionImg: string
+  questionVideo: string
 }
 
 export type DecksType = {
-    items?: CardsResponsType[]
-    maxCardsCount?: number
-    pagination?: PaginationResponseType
+  items?: CardsResponsType[]
+  maxCardsCount?: number
+  pagination?: PaginationResponseType
 }
 export type CreateCardParams = {
-    id:string|undefined
-    questionImg?:string
-    answerImg?:string
-    questionVideo?:string
-    answerVideo?:string
-    answer?:string
-    question?:string
-};
+  questionImg?: File
+  answerImg?: File
+  questionVideo?: string
+  answerVideo?: string
+  answer?: string
+  question?: string
+}
 export type PaginationResponseType = {
-    currentPage?: number
-    itemsPerPage?: number
-    totalItems?: number
-    totalPages?: number
-    minCardsCount?: number
-    maxCardsCount?: number
+  currentPage?: number
+  itemsPerPage?: number
+  totalItems?: number
+  totalPages?: number
+  minCardsCount?: number
+  maxCardsCount?: number
 }
 
 type GetCardsParamsType = {
-    id?: string
-    answer?: string
-    question?: string
-    orderBy?: 'name-asc' | 'name-desc'
-    currentPage?: number
-    itemsPerPage?: number
+  id?: string
+  answer?: string
+  question?: string
+  orderBy?: 'name-asc' | 'name-desc'
+  currentPage?: number
+  itemsPerPage?: number
 }
 
 export const cardsService = baseApi.injectEndpoints({
-    endpoints: builder => {
-        return {
-            getCards: builder.query<Omit<DecksType, 'maxCardsCount'>, GetCardsParamsType>({
-                providesTags: ['Cards'],
-                query: ({id, ...params}) => {
-                    return {
-                        url: `v1/decks/${id}/cards`,
-                        params: isEmpty(params) ? undefined : params,
-                    }
-                },
-            }),
-            deleteCard: builder.mutation<UpdateCardsType, void>({
-                invalidatesTags: ['Cards'],
-                query: id => ({
-                    method: 'DELETE',
-                    url: `v1/cards/${id}`,
-                }),
-            }),
-            getCard: builder.query<CardsResponsType, void>({
-                providesTags: ['Cards'],
-                query: id => `v1/cards/${id}`,
-            }),
+  endpoints: builder => {
+    return {
+      getCards: builder.query<Omit<DecksType, 'maxCardsCount'>, GetCardsParamsType>({
+        providesTags: ['Cards'],
+        query: ({ id, ...params }) => {
+          return {
+            url: `v1/decks/${id}/cards`,
+            params: isEmpty(params) ? undefined : params,
+          }
+        },
+      }),
+      deleteCard: builder.mutation<UpdateCardsType, void>({
+        invalidatesTags: ['Cards'],
+        query: id => ({
+          method: 'DELETE',
+          url: `v1/cards/${id}`,
+        }),
+      }),
+      getCard: builder.query<CardsResponsType, void>({
+        providesTags: ['Cards'],
+        query: id => `v1/cards/${id}`,
+      }),
 
-            // getDecks: builder.query<DecksType, void>({
-            //   providesTags: ['Decks'],
-            //   query: () => `v1/decks`,
-            // }),
-            updateCard: builder.mutation<UpdateCardsType, CardsResponsType>({
-                invalidatesTags: ['Cards'],
-                query: ({id, ...patch}) => ({
-                    body: patch,
-                    method: 'PATCH',
-                    url: `v1/cards/${id}`,
-                }),
-            }),
+      // getDecks: builder.query<DecksType, void>({
+      //   providesTags: ['Decks'],
+      //   query: () => `v1/decks`,
+      // }),
+      updateCard: builder.mutation<UpdateCardsType, CardsResponsType>({
+        invalidatesTags: ['Cards'],
+        query: ({ id, ...patch }) => ({
+          body: patch,
+          method: 'PATCH',
+          url: `v1/cards/${id}`,
+        }),
+      }),
 
-            createCard: builder.mutation<CardsResponsType,{id:string,data:CreateCardParams}>({
-                invalidatesTags: ['Cards'],
-                query: ({id,data }) => {
-                    return {
-                        method: 'POST',
-                        url: `v1/decks/${id}/cards`,
-                        body: data,
-                    }
-                },
-            }),
-        }
-    },
+      createCard: builder.mutation<CardsResponsType, { id: string; data: FormData }>({
+        invalidatesTags: ['Cards'],
+        query: ({ id, data }) => {
+          return {
+            method: 'POST',
+            url: `v1/decks/${id}/cards`,
+            body: data,
+          }
+        },
+      }),
+    }
+  },
 })
 
 export const {
-    useCreateCardMutation,
-    useDeleteCardMutation,
-    useGetCardQuery,
-    useGetCardsQuery,
-    useUpdateCardMutation
+  useCreateCardMutation,
+  useDeleteCardMutation,
+  useGetCardQuery,
+  useGetCardsQuery,
+  useUpdateCardMutation,
 } = cardsService

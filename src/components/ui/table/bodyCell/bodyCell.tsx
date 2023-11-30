@@ -98,7 +98,6 @@ export const BodyCell = ({ item, i, tableName }: BodyCellComponentType) => {
     form.append('isPrivate', String(isPrivate))
 
     if (data.name.trim() !== '' && data.name.length >= 3) {
-      console.log(form)
       updateDeck({
         id: item.id!,
         form,
