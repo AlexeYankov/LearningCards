@@ -105,8 +105,6 @@
   }
 
   .typography {
-    cursor: pointer;
-
     font-size: var(--font-size-s);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-m);
@@ -165,7 +163,6 @@
   }
 
   .typography {
-    cursor: pointer;
     font-size: var(--font-size-s);
   }
 
@@ -176,8 +173,7 @@
   }
 
   .image {
-    min-width: 118px;
-    height: 48px;
+    height: 50px;
     object-fit: cover;
   }
 }

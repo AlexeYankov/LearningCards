@@ -15,6 +15,7 @@ import { ArrowBack } from '@/asserts/icons/components/ArrowBack.tsx'
 import { Pagination } from '@/components/ui/pagination'
 import { Star } from '@/asserts/icons/components/Star.tsx'
 import { convertedTime } from '@/helpers/convertedTime.ts'
+import { Typography } from '@/components/ui/typography'
 
 export const CardsPage = () => {
   const { id } = useParams()
@@ -65,7 +66,6 @@ export const CardsPage = () => {
           <PageBar />
           <Root className={s.container__common}>
             <Head className={s.tableHead}>
-              {/*<Row className={`${tableName === 'Cards' ? s.cardsRow : s.decksRow}`}>*/}
               <Row className={s.cardsRow}>
                 {columns.map(({ title, key }) => {
                   return (
@@ -93,8 +93,36 @@ export const CardsPage = () => {
 
                 return (
                   <Row key={card.id}>
-                    <Cell className={s.bodyCell}>{card.question}</Cell>
-                    <Cell className={s.bodyCell}>{card.answer}</Cell>
+                    <Cell className={s.bodyCell}>
+                      <div className={s.imageWithNameBox}>
+                        {card.question && card.questionImg && (
+                          <img
+                            className={s.image}
+                            src={card.questionImg}
+                            alt={`${card.questionImg + ' image'}`}
+                          />
+                        )}
+                        <Typography variant={'body1'} className={s.typography}>
+                          {card.question}
+                        </Typography>
+                      </div>
+                    </Cell>
+                    <Cell className={s.bodyCell}>
+                      {' '}
+                      <div className={s.imageWithNameBox}>
+                        {card.answer && card.answerImg && (
+                          <img
+                            className={s.image}
+                            src={card.answerImg}
+                            alt={`${card.answerImg + ' image'}`}
+                          />
+                        )}
+
+                        <Typography variant={'body1'} className={s.typography}>
+                          {card.answer}
+                        </Typography>
+                      </div>
+                    </Cell>
                     <Cell className={s.bodyCell}>{convertedTime(card.updated)}</Cell>
                     <Cell className={`${s.bodyCell} ${s.starsBox}`}>
                       {result.map((star, i) => {
