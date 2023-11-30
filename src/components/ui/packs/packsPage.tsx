@@ -125,7 +125,7 @@ export const PacksPage = () => {
                 <Cell className={s.bodyCell}>{convertedTime(deck.updated)}</Cell>
                 <Cell className={s.bodyCell}>{deck.author.name}</Cell>
                 <Cell className={`${s.bodyCell} ${s.iconBox}`}>
-                  <div className={s.test}>
+                  <div className={s.iconsBox}>
                     {myDeck ? (
                       <>
                         <EditCardModal deck={deck} />
@@ -173,7 +173,7 @@ const EditCardModal = ({ deck }: { deck: ResponseDeckType }) => {
     reset,
     formState: { errors },
   } = useForm<Form>()
-  const [selectedImage, setSelectedImage] = useState('')
+  const [selectedImage, setSelectedImage] = useState(deck.cover)
   const [isPrivate, setIsPrivate] = useState(false)
   const [open, setOpen] = useState(false)
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -198,10 +198,20 @@ const EditCardModal = ({ deck }: { deck: ResponseDeckType }) => {
     setIsPrivate(prevState => !prevState)
   }
 
+  const deleteDeckCover = () => {
+    setSelectedImage('')
+  }
+
   const onSubmit = handleSubmit(data => {
     const form = new FormData()
+
+    console.log(selectedImage)
     if (data.cover && data.cover.length > 0) {
       form.append('cover', data.cover[0])
+    }
+
+    if (!selectedImage) {
+      form.append('cover', selectedImage)
     }
     form.append('name', data.name)
     form.append('isPrivate', String(isPrivate))
@@ -216,6 +226,7 @@ const EditCardModal = ({ deck }: { deck: ResponseDeckType }) => {
       setError('name', { message: 'String must contain at least 3 character(s)' })
     }
   })
+  console.log(selectedImage)
   return (
     <Modal
       open={open}
@@ -229,11 +240,19 @@ const EditCardModal = ({ deck }: { deck: ResponseDeckType }) => {
       <ModalTitle title={'Edit Pack'} />
       <form onSubmit={onSubmit}>
         <div className={f.contentComponents}>
-          <img className={f.img} src={selectedImage || deck.cover} />
-          <label htmlFor="input__file" className={f.changeCover}>
-            <Image />
-            Change Cover
-          </label>
+          <img className={f.img} src={selectedImage} />
+          <div className={s.btnCoverBox}>
+            {selectedImage && (
+              <Button variant={'secondary'} className={f.changeCover} onClick={deleteDeckCover}>
+                <Delete />
+                Delete Cover
+              </Button>
+            )}
+            <label htmlFor="input__file" className={f.changeCover}>
+              <Image />
+              Change Cover
+            </label>
+          </div>
           <input
             className={f.inputFile}
             id={'input__file'}

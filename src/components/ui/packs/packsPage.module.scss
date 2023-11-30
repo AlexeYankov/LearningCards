@@ -135,7 +135,7 @@ div.btnBox {
 
   width: 100%;
   margin-bottom: 24px;
-  padding: 6px 0;
+  padding: 6px;
 
   background: var(--color-dark-300);
   border-radius: 4px;
@@ -255,7 +255,7 @@ div.btnBox {
   opacity: 0.5;
 }
 
-.test {
+.iconsBox {
   display: flex;
   gap: 12px;
   align-items: center;
@@ -266,5 +266,20 @@ div.btnBox {
   svg {
     width: 16px;
     height: 16px;
+  }
+}
+
+.btnCoverBox {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  justify-content: space-around;
+
+  width: 100%;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--color-light-100);
   }
 }
