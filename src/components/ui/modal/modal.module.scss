@@ -22,13 +22,13 @@
   transition: opacity 0.3s ease;
 }
 
-.dialogTrigger:hover::after {
+.dialogTrigger:hover:not(:disabled)::after {
   z-index: -1;
   opacity: 1;
 }
 
-.dialogTrigger:hover::after:disabled {
-  opacity: 0;
+.dialogTrigger:disabled {
+  cursor: default;
 }
 
 .dialogOverlay {

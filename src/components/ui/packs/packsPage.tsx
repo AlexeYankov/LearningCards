@@ -106,7 +106,7 @@ export const PacksPage = () => {
         </Head>
         <Body>
           {decks?.items?.map(deck => {
-            const myDeck = me?.id === deck.author.id
+            const isMyDeck = me?.id === deck.author.id
             return (
               <Row className={s.decksRow} key={deck.id}>
                 <Cell className={s.bodyCell}>
@@ -126,14 +126,14 @@ export const PacksPage = () => {
                 <Cell className={s.bodyCell}>{deck.author.name}</Cell>
                 <Cell className={`${s.bodyCell} ${s.iconBox}`}>
                   <div className={s.iconsBox}>
-                    {myDeck ? (
+                    {isMyDeck ? (
                       <>
                         <EditCardModal deck={deck} />
-                        <LearnCardModal deck={deck} disabled={myDeck} />
+                        <LearnCardModal deck={deck} isMyDeck={isMyDeck} />
                         <DeleteCardModal deck={deck} />
                       </>
                     ) : (
-                      <LearnCardModal deck={deck} disabled={myDeck} />
+                      <LearnCardModal deck={deck} isMyDeck={isMyDeck} />
                     )}
                   </div>
                 </Cell>
@@ -301,19 +301,22 @@ const EditCardModal = ({ deck }: { deck: ResponseDeckType }) => {
   )
 }
 
-const LearnCardModal = ({ deck, disabled }: { deck: ResponseDeckType; disabled: boolean }) => {
+const LearnCardModal = ({ deck, isMyDeck }: { deck: ResponseDeckType; isMyDeck: boolean }) => {
   const [open, setOpen] = useState(false)
 
   const handleCloseModal = () => {
     setOpen(prevState => !prevState)
   }
 
+  const isBtnDisabled = deck.cardsCount === 0 || (isMyDeck && deck.cardsCount === 0)
+
   return (
     <Modal
       open={open}
       onOpenChange={setOpen}
+      disabled={isBtnDisabled}
       triggerName={
-        <button className={disabled ? s.disabledIcon : ''} disabled={disabled}>
+        <button className={isBtnDisabled ? s.disabledIcon : ''}>
           <Learn />
         </button>
       }

@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { useGetCardsQuery } from '@/api/common.api'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
-import { changeCurrentPage, resetFilter } from '@/api/decks/pagination.reducer'
+import { resetFilter } from '@/api/decks/pagination.reducer'
 import { useEffect } from 'react'
 import { changeCardsCurrentPage, changeCardsItemsPerPage } from '@/api/cards/cards.ts'
 import { Column } from '@/components/ui/table/types.ts'
@@ -35,7 +35,6 @@ export const CardsPage = () => {
     dispatch(changeCardsCurrentPage({ currentPage: 1 }))
     dispatch(changeCardsItemsPerPage({ itemsPerPage: 10 }))
     localStorage.setItem('page', '1')
-    dispatch(changeCurrentPage({ currentPage: 1 }))
     dispatch(resetFilter())
   }
 

@@ -10,18 +10,19 @@ import { ScrollBar } from '../scrollbar'
 type ModalProps = {
   className?: string
   triggerName?: ReactNode | string
+  disabled?: boolean
 }
 
 export const Modal = forwardRef<
   HTMLDivElement,
   ComponentPropsWithoutRef<typeof DialogRadix.Root> & ModalProps
 >((props, ref) => {
-  const { children, className, modal, onOpenChange, open, triggerName, ...rest } = props
+  const { children, className, modal, onOpenChange, open, triggerName, disabled, ...rest } = props
 
   return (
     <div className={s.modal}>
       <DialogRadix.Root onOpenChange={onOpenChange} open={open}>
-        <DialogRadix.Trigger asChild className={s.dialogTrigger}>
+        <DialogRadix.Trigger asChild className={s.dialogTrigger} disabled={disabled}>
           {triggerName}
         </DialogRadix.Trigger>
         <DialogRadix.Portal>
