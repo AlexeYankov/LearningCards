@@ -7,16 +7,14 @@ import {CardsPage} from '@/components/ui/cards/cardsPage'
 import {PacksPage} from '@/components/ui/packs/packsPage'
 import {useMeQuery} from "@/api/auth-api/auth.api.ts";
 import {Layout} from "@/components/ui/header/header.tsx";
-import {Login} from "@/pages/login.tsx";
 import {CircularProgress} from "@mui/material";
 import {EditProfile} from "@/components/ui/editProfile/editProfile.tsx";
-
-
+import {SignIn} from "@/components/ui/auth/signIn";
 
 
 const publicRoutes: RouteObject[] = [
     {
-        element: <Login/>,
+        element:<SignIn/>,
         path: '/login',
     },
     {
@@ -72,7 +70,7 @@ const router = createBrowserRouter([
 
 ])
 
-function PrivateRoutes() {
+export function PrivateRoutes() {
     const {isError, isLoading} = useMeQuery()
     if (isLoading) return <CircularProgress />
     return !isError ? <Outlet/> : <Navigate to="/login"/>

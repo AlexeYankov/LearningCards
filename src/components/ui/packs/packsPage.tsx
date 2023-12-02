@@ -10,7 +10,6 @@ import { tableHeadData } from './tableData'
 import { useAppDispatch, useAppSelector } from '@/api/store'
 import { useEffect } from 'react'
 import { changeCurrentPage } from '@/api/decks/pagination.reducer'
-
 export const PacksPage = () => {
   const dispatch = useAppDispatch()
 

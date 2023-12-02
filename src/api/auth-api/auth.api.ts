@@ -57,6 +57,13 @@ export const authService = baseApi.injectEndpoints({
                 }),
                 invalidatesTags: ['Me']
             }),
+            refreshToken: builder.mutation<void, void>({
+                query: () => ({
+                    url: `v1/auth/refresh-token`,
+                    method: 'Post',
+                }),
+                invalidatesTags: ['Me']
+            }),
 
         }
     },
@@ -69,7 +76,8 @@ export const {
     useLoginMutation,
     useRecoverPasswordMutation,
     useLogOutMutation,
-    useResetPasswordMutation
+    useResetPasswordMutation,
+    useRefreshTokenMutation
 } = authService
 
 

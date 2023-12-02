@@ -26,6 +26,7 @@ export const SignUp = () => {
         resolver: zodResolver(loginSchema),
     })
     const [signUp,{isSuccess}] = useCreateUserMutation()
+
     if (isSuccess) {
         return <Navigate to={'/login'}/>
     }

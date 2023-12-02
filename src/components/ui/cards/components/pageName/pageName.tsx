@@ -4,6 +4,8 @@ import {Typography} from '@/components/ui/typography'
 import f from '../../cardsPage.module.scss'
 import {FC} from 'react'
 import {DropDownPackMenu} from '@/components/ui/dropDown/dropDown'
+import {Modal} from "@/components/ui/modal";
+import {Learn1} from "@/components/ui/cards/components/learnPack/learnPack.tsx";
 
 type PageNameProps = {
     isMyDeck?: boolean
@@ -19,7 +21,14 @@ export const PageName: FC<PageNameProps> = ({isMyDeck}) => {
                 )}
             </Typography>
             <div>
-                <Button>{isMyDeck ? 'Add New Card' : 'Learn to Pack'}</Button>
+                <Modal
+                    triggerName={
+                        <Button>{isMyDeck ? 'Add New Card' : 'Learn to Pack'}</Button>
+                    }
+                >
+                    <Learn1/>
+                </Modal>
+
             </div>
         </div>
     )

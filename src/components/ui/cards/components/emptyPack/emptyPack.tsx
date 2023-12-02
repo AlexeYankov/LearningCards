@@ -16,7 +16,7 @@ export const EmptyPack: FC<EmptyPackPropsType> = ({ packTitle }) => {
       <Typography as={'p'} variant={'body1'} className={s.description}>
         This pack is empty. Click add new card to fill this pack
       </Typography>
-      <Button className={s.button}>Add New Card</Button>
+      <Button  className={s.button}>Add New Card</Button>
     </>
   )
 }

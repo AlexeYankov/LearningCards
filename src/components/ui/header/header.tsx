@@ -11,8 +11,8 @@ import {useMeQuery} from "@/api/auth-api/auth.api.ts";
 
 
 export const Header: FC = () => {
-    const {data, isError, isLoading} = useMeQuery()
-    const isLoggedIn = !isError
+    const {data, isSuccess, isLoading} = useMeQuery()
+    const isLoggedIn = isSuccess
     return (
         <div className={s.container}>
             <header className={s.header}>
@@ -47,15 +47,16 @@ export const Header: FC = () => {
 
 
 export const Layout = () => {
-    const {isSuccess} = useMeQuery()
+    const {isLoading, isSuccess} = useMeQuery()
     return (
         <>
             <Header/>
-            <div className={style.container}>
-                {isSuccess && <Navigate to={'/'}/>}
-                <Outlet/>
-            </div>
-
+            {!isLoading &&
+                <div className={style.container}>
+                    {isSuccess && <Navigate to={'/'}/>}
+                    <Outlet/>
+                </div>
+            }
         </>
     )
 }

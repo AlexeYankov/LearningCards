@@ -1,7 +1,7 @@
 import * as RadioGroup from '@radix-ui/react-radio-group';
+import * as RadioGroupLib from '@radix-ui/react-radio-group';
 import s from './radio.module.scss'
 import {ComponentPropsWithoutRef, ElementRef, forwardRef} from "react";
-import * as RadioGroupLib from "@radix-ui/react-radio-group";
 import {Label} from "@/components/ui/label";
 import {Typography} from "@/components/ui/typography";
 
@@ -14,6 +14,7 @@ export type RadioGroupPropsType = RadioGroupLib.RadioGroupProps & {
     disabled?: boolean;
     defaultValue?: string;
     errorMessage?: string
+    className?:string
 
 };
 export const Radio = forwardRef<
@@ -25,11 +26,12 @@ export const Radio = forwardRef<
             errorMessage,
             options,
             disabled = false,
+            className,
         }: RadioGroupPropsType,
         ref
     ) => {
         return (
-            <RadioGroup.Root className={s.RadioGroupRoot} disabled={disabled} ref={ref}>
+            <RadioGroup.Root className={`${s.RadioGroupRoot} ${className}`} disabled={disabled} ref={ref}>
                 {options?.map((el) => {
                     return (
                         <div key={el.value} className={s.RadioGroupBlock}>

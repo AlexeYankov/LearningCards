@@ -1,0 +1,39 @@
+.Title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 33px 0 45px 0;
+}
+
+.Button {
+  margin: 0 36px 36px 36px;
+}
+
+
+.MainBlock {
+  margin-left: 36px;
+
+  .Question {
+    margin-bottom: 1px;
+  }
+
+  .Text {
+    color: #808080;
+    margin-bottom: 35px;
+  }
+
+  .Radio {
+    gap: 20px;
+    margin-bottom: 29px;
+  }
+
+  .Answer {
+    margin-bottom: 12px;
+  }
+
+  .Rate {
+    margin-bottom: 13px;
+  }
+}
+
+
