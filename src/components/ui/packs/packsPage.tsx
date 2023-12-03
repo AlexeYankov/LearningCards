@@ -150,12 +150,12 @@ export const PacksPage = () => {
                   <div className={s.iconsBox}>
                     {isMyDeck ? (
                       <>
-                        <EditCardModal deck={deck} />
-                        <LearnCardModal deck={deck} isMyDeck={isMyDeck} />
-                        <DeleteCardModal deck={deck} />
+                        <EditDeckModal deck={deck} />
+                        <LearnDeckModal deck={deck} isMyDeck={isMyDeck} />
+                        <DeleteDeckModal deck={deck} />
                       </>
                     ) : (
-                      <LearnCardModal deck={deck} isMyDeck={isMyDeck} />
+                      <LearnDeckModal deck={deck} isMyDeck={isMyDeck} />
                     )}
                   </div>
                 </Cell>
@@ -185,7 +185,7 @@ const schema = z.object({
 
 type Form = z.infer<typeof schema>
 
-const EditCardModal = ({ deck }: { deck: ResponseDeckType }) => {
+const EditDeckModal = ({ deck }: { deck: ResponseDeckType }) => {
   const [updateDeck] = useUpdateDeckMutation()
   const {
     register,
@@ -323,7 +323,7 @@ const EditCardModal = ({ deck }: { deck: ResponseDeckType }) => {
   )
 }
 
-const LearnCardModal = ({ deck, isMyDeck }: { deck: ResponseDeckType; isMyDeck: boolean }) => {
+const LearnDeckModal = ({ deck, isMyDeck }: { deck: ResponseDeckType; isMyDeck: boolean }) => {
   const [open, setOpen] = useState(false)
 
   const handleCloseModal = () => {
@@ -369,7 +369,7 @@ const LearnCardModal = ({ deck, isMyDeck }: { deck: ResponseDeckType; isMyDeck: 
   )
 }
 
-const DeleteCardModal = ({ deck }: { deck: ResponseDeckType }) => {
+const DeleteDeckModal = ({ deck }: { deck: ResponseDeckType }) => {
   const [deleteDeck] = useDeleteDeckMutation()
   const [open, setOpen] = useState(false)
 

@@ -72,8 +72,7 @@ export const CardsPage = () => {
         <EmptyPack packTitle={'Name Pack'} />
       ) : (
         <>
-          <PageName isMyCard={isMyCard} />
-          <PageName isMyDeck={flag} id={id} />
+          <PageName isMyCard={isMyCard} id={id} />
           <PageBar />
           <Root className={s.container__common}>
             <Head>
