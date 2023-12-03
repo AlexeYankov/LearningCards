@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {Sort} from '@/components/ui/table/types.ts'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Sort } from '@/components/ui/table/types.ts'
 
 const initialState = {
   answer: '',
@@ -7,7 +7,7 @@ const initialState = {
   currentPage: 1,
   itemsPerPage: 10,
   valueSelect: '',
-  orderBy: null as Sort,
+  sort: null as Sort,
 }
 
 export const cardsSlice = createSlice({
@@ -37,6 +37,9 @@ export const cardsSlice = createSlice({
     selectedOptionSlice: (state, action: PayloadAction<{ valueSelect: string }>) => {
       state.valueSelect = action.payload.valueSelect
     },
+    changeCardOrderBy: (state, action: PayloadAction<Sort>) => {
+      state.sort = action.payload
+    },
   },
 })
 
@@ -46,5 +49,6 @@ export const {
   changeCardsCurrentPage,
   changeCardsItemsPerPage,
   resetCardsFilter,
-  selectedOptionSlice
+  selectedOptionSlice,
+  changeCardOrderBy,
 } = cardsSlice.actions

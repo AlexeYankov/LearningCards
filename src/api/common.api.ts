@@ -1,5 +1,6 @@
 import { baseApi } from './cards.api'
 import { isEmpty } from 'remeda'
+import { Sort } from '@/components/ui/table/types.ts'
 
 export type CardsResponseType = {
   answer: string
@@ -52,7 +53,7 @@ type GetCardsParamsType = {
   id?: string
   answer?: string
   question?: string
-  orderBy?: 'name-asc' | 'name-desc'
+  orderBy?: Sort
   currentPage?: number
   itemsPerPage?: number
 }
