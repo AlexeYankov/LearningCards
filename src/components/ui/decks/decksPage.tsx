@@ -163,7 +163,6 @@ export const DecksPage = () => {
           })}
         </Body>
       </Root>
-
       <Pagination
         reversed
         arrowColor={'white'}
