@@ -1,6 +1,11 @@
 .dialogTrigger {
   cursor: pointer;
+
   position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dialogTrigger::after {
@@ -23,6 +28,11 @@
 }
 
 .dialogTrigger:hover:not(:disabled)::after {
+  z-index: -1;
+  opacity: 1;
+}
+
+.dialogTrigger:focus-visible::after {
   z-index: -1;
   opacity: 1;
 }

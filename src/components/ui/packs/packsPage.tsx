@@ -132,22 +132,16 @@ export const PacksPage = () => {
             return (
               <Row className={s.decksRow} key={deck.id}>
                 <Cell className={s.bodyCell}>
-                  <div className={s.imageWithNameBox}>
+                  <Link to={deck.id || ''} className={s.deckNameWithImgBox}>
                     {deck.cover && (
                       <img className={s.image} src={deck.cover} alt={`${deck.cover + ' image'}`} />
                     )}
                     {deck.name && (
-                      <Typography variant={'body1'} className={s.typography}>
-                        {'1' ? (
-                          <Link to={deck.id || ''} className={s.deckNameLink}>
-                            {deck.name}
-                          </Link>
-                        ) : (
-                          deck.name
-                        )}
+                      <Typography variant={'body1'} className={s.deckName}>
+                        {deck.name}
                       </Typography>
                     )}
-                  </div>
+                  </Link>
                 </Cell>
                 <Cell className={s.bodyCell}>{deck.cardsCount}</Cell>
                 <Cell className={s.bodyCell}>{convertedTime(deck.updated)}</Cell>

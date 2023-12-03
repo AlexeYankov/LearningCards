@@ -41,7 +41,7 @@
   &:focus,
   &:active:not(:disabled) {
     color: var(--color-light-100);
-    border-color: var(--color-light-100);
+    border-color: var(--color-info-500);
   }
 
   &:hover:not(&:disabled) {
