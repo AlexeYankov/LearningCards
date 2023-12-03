@@ -37,44 +37,22 @@
   object-fit: cover;
 }
 
-.buttonModal {
-  margin-bottom: 24px;
-}
-
-.container__textField {
-  position: relative;
-  top: 24px;
-}
-
-.container__common {
-  border-collapse: collapse;
-  width: 100%;
-  border: 1px solid var(--color-dark-500);
-}
-
 .contentComponents {
   display: flex;
   flex-direction: column;
-
-  //align-items: flex-start;
-
-  padding: 24px;
-
+  margin-top: 24px;
   background-color: var(--color-dark-700);
+}
 
-  //border: 1px solid var(--color-dark-500);
-  border-bottom: none;
+.contentBox {
+  padding: 24px;
+  border: 1px solid var(--color-dark-500);
 }
 
 .contentBtn {
   display: flex;
   justify-content: flex-end;
-
-  padding: 0 24px 36px;
-
   background-color: var(--color-dark-700);
-
-  //border: 1px solid var(--color-dark-500);
   border-top: none;
 }
 
@@ -120,13 +98,4 @@ div.btnBox {
     height: 16px;
     fill: white;
   }
-}
-
-.select {
-  display: inline-flex;
-  align-items: center;
-}
-
-.selectBox {
-  padding: 24px;
 }

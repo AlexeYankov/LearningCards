@@ -7,8 +7,8 @@ import { useAppSelector } from '@/api/store.ts'
 import { useCreateCardMutation } from '@/api/common.api.ts'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
-import { ImageIcon } from '@/asserts/icons/components/ImageIcon.tsx'
-import f from './addCard.module.scss'
+import { ImageIcon } from '@/asserts/icons/components/ImageIcon'
+import s from './addCard.module.scss'
 
 type Props = {
   id?: string
@@ -93,89 +93,84 @@ export const AddCard: FC<Props> = ({ id }) => {
   })
 
   return (
-    <div className={f.container__pageName}>
-      <Modal
-        onOpenChange={handleModalToggle}
-        open={open}
-        className={f.contentComponents}
-        triggerName={<Button>Add new card</Button>}
-      >
-        <ModalTitle title={'Add New Card'} />
+    <Modal
+      onOpenChange={handleModalToggle}
+      open={open}
+      className={s.contentComponents}
+      triggerName={<Button>Add new card</Button>}
+    >
+      <ModalTitle title={'Add New Card'} />
+      <div className={s.contentBox}>
         <Select
-          classname={f.select}
           label={'Choose question format'}
           options={['Text', 'Picture']}
           reversed
           selectId={'Select-box'}
         />
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className={s.contentComponents}>
           {valueSelect === 'Picture' ? (
-            <div className={f.contentComponents}>
+            <>
               Question:
-              <img className={f.img} src={selectedQuestionImage || ''} />
-              <label htmlFor="question-img-input" className={f.changeCover}>
+              <img className={s.img} src={selectedQuestionImage || ''} />
+              <label htmlFor="question-img-input" className={s.changeCover}>
                 <ImageIcon />
                 Change Question Image
               </label>
               <input
-                className={f.inputFile}
+                className={s.inputFile}
                 id="question-img-input"
                 type="file"
                 onChange={handleQuestionFileChange}
               />
-            </div>
+            </>
           ) : (
-            <div className={f.contentComponents}>
-              <TextField
-                inputId={'Input1'}
-                label={'Question'}
-                placeholder={'Question'}
-                errorMessage={errors.question?.message}
-                {...register('question')}
-              />
-            </div>
+            <TextField
+              inputId={'Input1'}
+              label={'Question'}
+              placeholder={'Question'}
+              errorMessage={errors.question?.message}
+              {...register('question')}
+            />
           )}
           {valueSelect === 'Picture' ? (
-            <div className={f.contentComponents}>
+            <div>
               Answer:
-              <img className={f.img} src={selectedAnswerImage || ''} />
-              <label htmlFor="answer-img-input" className={f.changeCover}>
+              <img className={s.img} src={selectedAnswerImage || ''} />
+              <label htmlFor="answer-img-input" className={s.changeCover}>
                 <ImageIcon />
                 Change Answer Image
               </label>
               <input
-                className={f.inputFile}
+                className={s.inputFile}
                 id="answer-img-input"
                 type="file"
                 onChange={handleAnswerFileChange}
               />
             </div>
           ) : (
-            <div className={f.contentComponents}>
-              <TextField
-                inputId={'Input2'}
-                label={'Answer'}
-                placeholder={'Answer'}
-                errorMessage={errors.answer?.message}
-                {...register('answer')}
-              />
-            </div>
+            <TextField
+              inputId={'Input2'}
+              label={'Answer'}
+              placeholder={'Answer'}
+              errorMessage={errors.answer?.message}
+              {...register('answer')}
+            />
           )}
-          <div className={`${f.contentBtn} ${f.contentBtns}`}>
-            <Button classNameBtnBox={f.btnBox} onClick={handleModalToggle} variant={'secondary'}>
+          <div className={`${s.contentBtn} ${s.contentBtns}`}>
+            <Button classNameBtnBox={s.btnBox} onClick={handleModalToggle} variant={'secondary'}>
               Close
             </Button>
             <Button
-              classNameBtnBox={f.btnBox}
+              classNameBtnBox={s.btnBox}
               variant={'primary'}
               disabled={!!errors.answer?.message}
               type={'submit'}
             >
-              Add Card
+              Add new card
             </Button>
           </div>
         </form>
-      </Modal>
-    </div>
+      </div>
+    </Modal>
   )
 }
