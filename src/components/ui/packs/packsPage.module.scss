@@ -149,9 +149,14 @@ div.btnBox {
 }
 
 .headCell {
+  cursor: pointer;
+
   padding: 6px 24px;
+
   text-align: left;
+
   background-color: var(--color-dark-500);
+
   transition: 0.3s;
 
   &:hover {
@@ -160,6 +165,7 @@ div.btnBox {
   }
 
   &:last-child {
+    cursor: default;
     background-color: var(--color-dark-500);
   }
 
