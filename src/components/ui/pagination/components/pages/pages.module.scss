@@ -6,6 +6,7 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-size: var(--font-size-s);
 
   .icons {
     display: flex;
@@ -29,7 +30,7 @@ button {
     justify-content: center;
 
     width: 30px;
-    margin: 0 10px;
+    margin: 0 3px;
 
     line-height: var(--line-height-m);
     color: var(--color-light-100);

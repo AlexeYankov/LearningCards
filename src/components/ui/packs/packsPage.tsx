@@ -138,7 +138,13 @@ export const PacksPage = () => {
                     )}
                     {deck.name && (
                       <Typography variant={'body1'} className={s.typography}>
-                        {'1' ? <Link to={deck.id || ''}>{deck.name}</Link> : deck.name}
+                        {'1' ? (
+                          <Link to={deck.id || ''} className={s.deckNameLink}>
+                            {deck.name}
+                          </Link>
+                        ) : (
+                          deck.name
+                        )}
                       </Typography>
                     )}
                   </div>

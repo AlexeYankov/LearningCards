@@ -44,10 +44,10 @@ export const Pagination = ({
       />
 
       <div className={s.box}>
-        <Typography variant={'body2'}>Показать</Typography>
+        <Typography variant={'body2'}>Show</Typography>
         <Select classname={s.select} options={options} reversed={reversed} />
         <Typography variant={'body2'} className={s.typography}>
-          на странице
+          on the page
         </Typography>
       </div>
     </div>
