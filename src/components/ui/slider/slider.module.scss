@@ -60,6 +60,10 @@
 
   background-color: var(--color-accent-500);
   border-radius: 10px;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-info-500);
+  }
 }
 
 .sliderThumb::after {

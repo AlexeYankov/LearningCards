@@ -225,7 +225,9 @@ div.btnBox {
     text-decoration: none;
 
     &:focus-visible {
-      color: var(--color-accent-500);
+      color: var(--color-accent-300);
+      text-decoration: underline;
+      border-radius: 2px;
       outline: 0.125rem solid var(--color-info-700);
     }
 
