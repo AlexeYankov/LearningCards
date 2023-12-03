@@ -8,6 +8,7 @@ import { Typography } from '@/components/ui/typography'
 import { Button } from '@/components/ui/button'
 import { useRecoverPasswordMutation } from '@/api/auth-api/auth.api.ts'
 import { Link, Navigate } from 'react-router-dom'
+import { Loader } from '@/components/ui/loader/loader.tsx'
 
 type FormValues = z.infer<typeof loginSchema>
 const loginSchema = z.object({
@@ -22,7 +23,7 @@ export const ForgotYourPassword = () => {
   })
 
   const [sendRequest, { isSuccess, isLoading }] = useRecoverPasswordMutation()
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <Loader />
   if (isSuccess) return <Navigate to={'/checkEmail'} replace={true} />
   const onSubmit = (data: FormValues) => {
     const { email } = data

@@ -9,7 +9,6 @@ import { Typography } from '@/components/ui/typography'
 import * as DropdownRadix from '@radix-ui/react-dropdown-menu'
 import s from './dropDown.module.scss'
 import { MoreIcon } from '@/asserts/icons/components/MoreIcon.tsx'
-import style from '../header/header.module.scss'
 import { useLogOutMutation } from '@/api/auth-api/auth.api.ts'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -41,7 +40,7 @@ export const DropDown: FC<DropDown> = ({
     <DropdownRadix.Root onOpenChange={setOpen} open={open}>
       <DropdownRadix.Trigger>
         {trigger && (
-          <Typography as={'p'} className={style.headerName} variant={'subtitle1'}>
+          <Typography as={'p'} className={s.headerName} variant={'subtitle1'} tabIndex="0">
             {name}
           </Typography>
         )}
@@ -51,7 +50,7 @@ export const DropDown: FC<DropDown> = ({
         className={`${trigger === 'imageAvatar' ? s.trigger : s.triggerIcon}`}
       >
         {trigger === 'imageAvatar' ? (
-          <img alt={''} className={s.triggerImg} src={avatar} />
+          <img alt={''} className={s.triggerImg} src={avatar} tabIndex={0} />
         ) : (
           <MoreIcon />
         )}
@@ -147,7 +146,7 @@ export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => 
           </div>
         </div>
       </ItemWithIcon>
-      <ItemWithIcon onClick={onClickToProfile} icon={<ProfileIcon />} text={'My ProfileIcon'} />
+      <ItemWithIcon onClick={onClickToProfile} icon={<ProfileIcon />} text={'My Profile'} />
       <ItemWithIcon onClick={onClickLogOut} icon={<SignOutIcon />} text={'Sign Out'} />
     </DropDown>
   )

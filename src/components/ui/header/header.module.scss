@@ -12,11 +12,6 @@
   border-bottom: 1px solid var(--color-dark-500);
 }
 
-.headerName {
-  margin-right: 15px;
-  border-bottom-style: dashed;
-}
-
 .header {
   display: flex;
   align-items: center;
@@ -42,6 +37,13 @@
   .logo {
     cursor: pointer;
     display: flex;
+  }
+
+  .logoBox {
+    &:focus-visible {
+      border-radius: 2px;
+      outline: 2px solid var(--color-info-500);
+    }
   }
 
   .logoProfile {

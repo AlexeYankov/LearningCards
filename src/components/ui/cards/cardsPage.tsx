@@ -18,6 +18,7 @@ import { convertedTime } from '@/helpers/convertedTime.ts'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/api/auth-api/auth.api.ts'
 import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon.tsx'
+import { Loader } from '@/components/ui/loader/loader.tsx'
 
 export const CardsPage = () => {
   const { id } = useParams()
@@ -44,7 +45,7 @@ export const CardsPage = () => {
   }, [])
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loader />
   }
   let isMyCard: boolean = false
 

@@ -8,9 +8,15 @@
   width: 36px;
   height: 36px;
 
+  color: inherit;
+
   background-color: var(--color-dark-500);
   border: none;
   border-radius: 50%;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-info-500);
+  }
 }
 
 .triggerImg {
@@ -107,7 +113,7 @@ div.itemProfile {
   padding-top: 0;
 }
 
-div.content {
+.content {
   min-width: 80px;
 }
 
@@ -124,5 +130,15 @@ div.content {
 
   :nth-child(3) {
     border-bottom: none;
+  }
+}
+
+.headerName {
+  margin-right: 15px;
+  border-bottom-style: dashed;
+
+  &:focus-visible {
+    border-radius: 2px;
+    outline: 2px solid var(--color-info-500);
   }
 }

@@ -15,7 +15,7 @@ export const Header: FC = () => {
   return (
     <div className={s.container}>
       <header className={s.header}>
-        <Typography as={Link} to={'/'}>
+        <Typography as={Link} to={'/'} tabIndex={0} className={s.logoBox}>
           <img alt={''} className={s.logo} src={logo} />
         </Typography>
         <div className={s.textHeader}>

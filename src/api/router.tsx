@@ -15,6 +15,7 @@ import { useMeQuery } from '@/api/auth-api/auth.api.ts'
 import { Layout } from '@/components/ui/header/header.tsx'
 import { Login } from '@/pages/login.tsx'
 import { EditProfile } from '@/components/ui/editProfile/editProfile.tsx'
+import { Loader } from '@/components/ui/loader/loader.tsx'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -69,7 +70,7 @@ const router = createBrowserRouter([
 
 function PrivateRoutes() {
   const { isError, isLoading } = useMeQuery()
-  if (isLoading) return <div>Loading</div>
+  if (isLoading) return <Loader />
   return !isError ? <Outlet /> : <Navigate to="/login" />
 }
 
