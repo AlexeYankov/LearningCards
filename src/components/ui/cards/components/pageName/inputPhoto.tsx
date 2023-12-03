@@ -1,4 +1,3 @@
-// import f from "@/components/ui/packs/packsPage.module.scss";
 // import {Image} from "@/asserts/icons/components/Image.tsx";
 // import {useForm} from "react-hook-form";
 // import {CreateCardParams, useCreateCardMutation} from "@/api/common.api.ts";

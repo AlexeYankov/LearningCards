@@ -3,9 +3,9 @@ import s from './editProfile.module.scss'
 import photoProfile from '../../../asserts/profileImage.png'
 import { Typography } from '@/components/ui/typography'
 import { Card } from '@/components/ui/card'
-import { Edit } from '@/asserts/icons/components/Edit.tsx'
+import { EditIcon } from '@/asserts/icons/components/EditIcon.tsx'
 import { Button } from '@/components/ui/button'
-import { Logout } from '@/asserts/icons/components/Logout.tsx'
+import { LogoutIcon } from '@/asserts/icons/components/LogoutIcon.tsx'
 import { TextField } from '@/components/ui/textField'
 import {
   UpdateUserArgsType,
@@ -67,7 +67,7 @@ export const EditProfile = () => {
           />
           <div className={s.editIconBlock}>
             <label htmlFor="input__file" className={s.editIcon}>
-              <Edit />
+              <EditIcon />
             </label>
           </div>
           <input
@@ -85,14 +85,14 @@ export const EditProfile = () => {
                 {value}
               </Typography>
               <div onClick={activateEditMode} className={s.editIcon}>
-                <Edit />
+                <EditIcon />
               </div>
             </div>
             <div className={s.email}>{data?.email || 'Email'}</div>
             <div>
               <Button
                 onClick={onClickLogOut}
-                icon={<Logout />}
+                icon={<LogoutIcon />}
                 children={'Logout'}
                 variant={'secondary'}
               />

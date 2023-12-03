@@ -3,11 +3,10 @@ import { FC } from 'react'
 import sprite from '@/asserts/sprite.svg'
 
 type Props = {
-  iconId?: string
   size?: number
 }
 
-export const Password: FC<Props> = ({ iconId, size }) => {
+export const SearchIcon: FC<Props> = ({ size }) => {
   return (
     <svg
       fill={'none'}
@@ -16,7 +15,7 @@ export const Password: FC<Props> = ({ iconId, size }) => {
       width={size}
       xmlns={'http://www.w3.org/2000/svg'}
     >
-      <use xlinkHref={`${sprite}#${iconId}`} />
+      <use xlinkHref={`${sprite}#search-outline`} />
     </svg>
   )
 }

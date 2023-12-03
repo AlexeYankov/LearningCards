@@ -1,14 +1,14 @@
-import {useForm} from 'react-hook-form'
-import {Button} from '@/components/ui/button'
-import {Card} from '@/components/ui/card'
-import {ControlledInput} from '@/components/ui/controlled/controlled-input'
-import {Typography} from '@/components/ui/typography'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {z} from 'zod'
+import { useForm } from 'react-hook-form'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { ControlledInput } from '@/components/ui/controlled/controlled-input'
+import { Typography } from '@/components/ui/typography'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 import s from './createNewPassword.module.scss'
-import {useResetPasswordMutation} from "@/api/auth-api/auth.api.ts";
-import {Navigate, useParams} from "react-router-dom";
+import { useResetPasswordMutation } from '@/api/auth-api/auth.api.ts'
+import { Navigate, useParams } from 'react-router-dom'
 
 type FormValues = z.infer<typeof loginSchema>
 const loginSchema = z.object({
@@ -16,18 +16,17 @@ const loginSchema = z.object({
 })
 
 export const CreateNewPassword = () => {
-
   const { control, handleSubmit } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
   })
 
-  const [newPassword,{isSuccess}]=useResetPasswordMutation()
-  const params=useParams<'*'>()
-  if (isSuccess)return <Navigate to={'/login'} replace={true} />
+  const [newPassword, { isSuccess }] = useResetPasswordMutation()
+  const params = useParams<'*'>()
+  if (isSuccess) return <Navigate to={'/login'} replace={true} />
   const onSubmit = (data: FormValues) => {
-    const {password}=data
-    const token=params["*"]
-    params&&newPassword({password,token})
+    const { password } = data
+    const token = params['*']
+    params && newPassword({ password, token })
   }
 
   return (
@@ -43,7 +42,7 @@ export const CreateNewPassword = () => {
           label={'Password'}
           name={'password'}
           password
-          placeholder={'Create New Password'}
+          placeholder={'Create New PasswordIcon'}
           type={'password'}
         />
         <Typography as={'p'} className={s.text} variant={'body2'}>
