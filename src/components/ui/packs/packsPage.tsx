@@ -1,67 +1,424 @@
-import { useGetDecksQuery } from '@/api/decks/decks.api'
+import {
+  ResponseDeckType,
+  useDeleteDeckMutation,
+  useGetDecksQuery,
+  useUpdateDeckMutation,
+} from '@/api/decks/decks.api'
 
-import f from './packsPage.module.scss'
+import s from './packsPage.module.scss'
 
 import { Pagination } from '../pagination'
-import { Table } from '../table'
 import { PageBar } from './components/pageBar/pageBar'
 import { PageName } from './components/pageName/pageName'
-import { tableHeadData } from './tableData'
 import { useAppDispatch, useAppSelector } from '@/api/store'
-import { useEffect } from 'react'
-import { changeCurrentPage } from '@/api/decks/pagination.reducer'
+import { ChangeEvent, useEffect, useState } from 'react'
+import { changeCurrentPage, changeOrderBy } from '@/api/decks/pagination.reducer'
+import { Body, Cell, Head, HeadCell, Root, Row } from '@it-incubator/ui-kit'
+import { Column, Sort } from '@/components/ui/table/types.ts'
+import { Typography } from '@/components/ui/typography'
+import { Link } from 'react-router-dom'
+import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal'
+import f from '@/components/ui/packs/packsPage.module.scss'
+import { Button } from '@/components/ui/button'
+import { Image } from '@/asserts/icons/components/Image.tsx'
+import { TextField } from '@/components/ui/textField'
+import { CheckBox } from '@/components/ui/checkbox'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { Edit } from '@/asserts/icons/components/Edit'
+import { Learn } from '@/asserts/icons/components/Learn.tsx'
+import { Delete } from '@/asserts/icons/components/Delete.tsx'
+import { convertedTime } from '@/helpers/convertedTime.ts'
+import { useMeQuery } from '@/api/auth-api/auth.api.ts'
 
 export const PacksPage = () => {
   const dispatch = useAppDispatch()
 
   const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
+  const sort = useAppSelector(state => state.pagination.sort)
   const currentPage = useAppSelector(state => state.pagination.currentPage)
   const maxCardsCount = useAppSelector(state => state.pagination.maxCardsCount)
   const minCardsCount = useAppSelector(state => state.pagination.minCardsCount)
   const authorId = useAppSelector(state => state.pagination.authorId)
   const name = useAppSelector(state => state.pagination.name)
-  const orderBy = useAppSelector(state => state.pagination.orderBy)
 
-  const { data } = useGetDecksQuery({
+  const { data: me } = useMeQuery()
+  const { data: decks } = useGetDecksQuery({
     currentPage,
     itemsPerPage,
     maxCardsCount,
     minCardsCount,
     authorId,
     name,
-    orderBy,
+    orderBy: sort?.direction as Sort,
   })
+
+  const handleSort = (key: string) => {
+    if (key !== 'actions') {
+      dispatch(
+        changeOrderBy({
+          key,
+          direction: sort?.direction === `${key}-asc` ? `${key}-desc` : `${key}-asc`,
+        })
+      )
+    }
+    if (sort?.direction === `${key}-desc`) {
+      dispatch(
+        changeOrderBy({
+          key,
+          direction: null,
+        })
+      )
+    }
+  }
 
   useEffect(() => {
     const savedCurrentPage = localStorage.getItem('page')
-    if (savedCurrentPage) {
-      dispatch(changeCurrentPage({ currentPage: parseInt(savedCurrentPage) }))
-    } else {
-      dispatch(changeCurrentPage({ currentPage: 1 }))
-    }
+    dispatch(changeCurrentPage({ currentPage: parseInt(savedCurrentPage!, 10) || 1 }))
   }, [])
 
+  const columns: Column[] = [
+    {
+      key: 'name',
+      title: 'Name',
+      sortable: true,
+    },
+    {
+      key: 'cardsCount',
+      title: 'Cards',
+      sortable: true,
+    },
+    {
+      key: 'updated',
+      title: 'Last Updated',
+      sortable: true,
+    },
+    {
+      key: 'author.name',
+      title: 'Created by',
+      sortable: true,
+    },
+    {
+      key: 'actions',
+      title: '',
+      sortable: false,
+    },
+  ]
+
   return (
-    <div className={f.container}>
+    <div className={s.container}>
       <PageName />
       <PageBar />
-      <Table
-        bodyCell={data?.items}
-        className={f.container__common}
-        headCell={tableHeadData}
-        tableName={'Decks'}
-        isMyDeck={true}
-      />
+      <Root className={s.container__common}>
+        <Head className={s.tableHead}>
+          <Row className={s.decksRow}>
+            {columns.map(({ title, key, sortable }) => {
+              return (
+                <HeadCell className={s.headCell} key={key} onClick={() => handleSort(key)}>
+                  {title}
+                  {sort && sort.key === key && sortable && sort.direction && (
+                    <button className={s.sortIcon}>
+                      {sort.direction === `${key}-desc` ? '▲' : '▼'}
+                    </button>
+                  )}
+                </HeadCell>
+              )
+            })}
+          </Row>
+        </Head>
+        <Body>
+          {decks?.items?.map(deck => {
+            const isMyDeck = me?.id === deck.author.id
+            return (
+              <Row className={s.decksRow} key={deck.id}>
+                <Cell className={s.bodyCell}>
+                  <Link to={deck.id || ''} className={s.deckNameWithImgBox}>
+                    {deck.cover && (
+                      <img className={s.image} src={deck.cover} alt={`${deck.cover + ' image'}`} />
+                    )}
+                    {deck.name && (
+                      <Typography variant={'body1'} className={s.deckName}>
+                        {deck.name}
+                      </Typography>
+                    )}
+                  </Link>
+                </Cell>
+                <Cell className={s.bodyCell}>{deck.cardsCount}</Cell>
+                <Cell className={s.bodyCell}>{convertedTime(deck.updated)}</Cell>
+                <Cell className={s.bodyCell}>{deck.author.name}</Cell>
+                <Cell className={`${s.bodyCell}`}>
+                  <div className={s.iconsBox}>
+                    {isMyDeck ? (
+                      <>
+                        <EditDeckModal deck={deck} />
+                        <LearnDeckModal deck={deck} isMyDeck={isMyDeck} />
+                        <DeleteDeckModal deck={deck} />
+                      </>
+                    ) : (
+                      <LearnDeckModal deck={deck} isMyDeck={isMyDeck} />
+                    )}
+                  </div>
+                </Cell>
+              </Row>
+            )
+          })}
+        </Body>
+      </Root>
 
       <Pagination
         reversed
         arrowColor={'white'}
         arrowID={'arrow-ios-back'}
-        options={['10', '20', '30', '50', '100']}
-        placeholder={'100'}
         reversedArrowID={'arrow-ios-forward'}
-        totalPages={data?.pagination?.totalPages}
+        totalPages={decks?.pagination?.totalPages}
+        totalItems={decks?.pagination?.totalItems}
       />
     </div>
+  )
+}
+
+const schema = z.object({
+  cover: z.array(z.instanceof(File)),
+  name: z.string().min(3),
+  isPrivate: z.boolean().default(false),
+})
+
+type Form = z.infer<typeof schema>
+
+const EditDeckModal = ({ deck }: { deck: ResponseDeckType }) => {
+  const [updateDeck] = useUpdateDeckMutation()
+  const {
+    register,
+    setValue,
+    setError,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<Form>()
+  const [selectedImage, setSelectedImage] = useState(deck.cover)
+  const [isPrivate, setIsPrivate] = useState(false)
+  const [open, setOpen] = useState(false)
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+
+    if (file) {
+      const imageUrl = URL.createObjectURL(file)
+      setSelectedImage(imageUrl)
+      setValue('cover', [file])
+    } else {
+      setSelectedImage('')
+      setValue('cover', [])
+    }
+  }
+
+  const handleCloseModal = () => {
+    reset()
+    setOpen(false)
+  }
+
+  const handeCheckedChange = () => {
+    setIsPrivate(prevState => !prevState)
+  }
+
+  const deleteDeckCover = () => {
+    setSelectedImage('')
+  }
+
+  const onSubmit = handleSubmit(data => {
+    const form = new FormData()
+
+    if (data.cover && data.cover.length > 0) {
+      form.append('cover', data.cover[0])
+    }
+
+    if (!selectedImage) {
+      form.append('cover', selectedImage)
+    }
+    form.append('name', data.name)
+    form.append('isPrivate', String(isPrivate))
+
+    if (data.name.trim() !== '' && data.name.length >= 3) {
+      updateDeck({
+        id: deck.id,
+        form,
+      })
+      handleCloseModal()
+    } else {
+      setError('name', { message: 'String must contain at least 3 character(s)' })
+    }
+  })
+  return (
+    <Modal
+      open={open}
+      onOpenChange={setOpen}
+      triggerName={
+        <button>
+          <Edit />
+        </button>
+      }
+    >
+      <ModalTitle title={'Edit Pack'} />
+      <form onSubmit={onSubmit}>
+        <div className={f.contentComponents}>
+          <img className={f.img} src={selectedImage} />
+          <div className={s.btnCoverBox}>
+            {selectedImage && (
+              <Button variant={'secondary'} className={f.changeCover} onClick={deleteDeckCover}>
+                <Delete />
+                Delete Cover
+              </Button>
+            )}
+            <label htmlFor="input__file" className={f.changeCover}>
+              <Image />
+              Change Cover
+            </label>
+          </div>
+          <input
+            className={f.inputFile}
+            id={'input__file'}
+            type="file"
+            onChange={handleFileChange}
+          />
+          <TextField
+            inputId={'Name Pack'}
+            label={'Name Pack'}
+            placeholder={'Name'}
+            errorMessage={errors.name?.message}
+            value={deck.name}
+            {...register('name')}
+          />
+          <CheckBox
+            IconID={'checkbox-unselected'}
+            SelectedIconID={'checkbox-selected'}
+            checkboxId={'Private Pack'}
+            disabled={false}
+            height={'24'}
+            label={'Private pack'}
+            width={'24'}
+            checked={isPrivate}
+            onChange={handeCheckedChange}
+          />
+        </div>
+        <div className={`${f.contentBtn} ${f.contentBtns}`}>
+          <Button
+            classNameBtnBox={f.btnBox}
+            onClick={handleCloseModal}
+            variant={'secondary'}
+            type={'button'}
+          >
+            Cancel
+          </Button>
+          <Button
+            classNameBtnBox={f.btnBox}
+            onSubmit={onSubmit}
+            variant={'primary'}
+            disabled={!!errors.name?.message}
+            type={'submit'}
+          >
+            Save Changes
+          </Button>
+        </div>
+      </form>
+    </Modal>
+  )
+}
+
+const LearnDeckModal = ({ deck, isMyDeck }: { deck: ResponseDeckType; isMyDeck: boolean }) => {
+  const [open, setOpen] = useState(false)
+
+  const handleCloseModal = () => {
+    setOpen(prevState => !prevState)
+  }
+
+  const emptyCardsInDeck = deck.cardsCount === 0
+
+  const isBtnDisabled = emptyCardsInDeck || (isMyDeck && emptyCardsInDeck)
+
+  return (
+    <Modal
+      open={open}
+      onOpenChange={setOpen}
+      disabled={isBtnDisabled}
+      triggerName={
+        <button className={isBtnDisabled ? s.disabledIcon : ''}>
+          <Learn />
+        </button>
+      }
+    >
+      <ModalTitle title={'Learn Pack'} />
+      <ModalDescription>
+        <Typography variant={'body1'} as={'p'}>
+          Do you really want to move on to learning more about the{' '}
+          <span className={s.boldText}>{deck.name}</span>?
+        </Typography>
+      </ModalDescription>
+      <div className={`${f.contentBtn} ${f.contentBtns}`}>
+        <Button
+          classNameBtnBox={f.btnBox}
+          onClick={handleCloseModal}
+          variant={'secondary'}
+          type={'button'}
+        >
+          Cancel
+        </Button>
+        <Button classNameBtnBox={f.btnBox} variant={'primary'} type={'button'}>
+          Learn Pack
+        </Button>
+      </div>
+    </Modal>
+  )
+}
+
+const DeleteDeckModal = ({ deck }: { deck: ResponseDeckType }) => {
+  const [deleteDeck] = useDeleteDeckMutation()
+  const [open, setOpen] = useState(false)
+
+  const handleCloseModal = () => {
+    setOpen(prevState => !prevState)
+  }
+
+  const handleDeleteDeckClick = () => {
+    deleteDeck(deck.id!)
+    handleCloseModal()
+  }
+  return (
+    <Modal
+      open={open}
+      onOpenChange={setOpen}
+      triggerName={
+        <button>
+          <Delete />
+        </button>
+      }
+    >
+      <ModalTitle title={'Delete Pack'} />
+      <ModalDescription>
+        <Typography variant={'body1'} as={'p'}>
+          Do you really want to remove <span className={s.boldText}>{deck.name}</span>?
+        </Typography>
+        <Typography variant={'body1'} as={'p'}>
+          All cards will be deleted.
+        </Typography>
+      </ModalDescription>
+      <div className={`${f.contentBtn} ${f.contentBtns}`}>
+        <Button
+          classNameBtnBox={f.btnBox}
+          onClick={handleCloseModal}
+          variant={'secondary'}
+          type={'button'}
+        >
+          Cancel
+        </Button>
+        <Button
+          classNameBtnBox={f.btnBox}
+          onClick={handleDeleteDeckClick}
+          variant={'primary'}
+          // disabled={isError}
+          type={'submit'}
+        >
+          Delete Pack
+        </Button>
+      </div>
+    </Modal>
   )
 }

@@ -1,17 +1,13 @@
 import { Meta, StoryObj } from '@storybook/react'
 
 import { EditProfile } from './editProfile'
+import { ReduxStoreProviderDecorator, ThemeDecorator } from '@/api/storybookDecorators.tsx'
 
 const meta = {
   component: EditProfile,
-  parameters: {
-    backgrounds: {
-      default: 'black',
-      values: [{ name: 'black', value: '#000' }],
-    },
-  },
   tags: ['autodocs'],
   title: 'Components/EditProfile',
+  decorators: [ReduxStoreProviderDecorator, ThemeDecorator],
 } satisfies Meta<typeof EditProfile>
 
 export default meta

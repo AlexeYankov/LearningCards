@@ -1,19 +1,12 @@
 import { Typography } from '@/components/ui/typography/typography'
 import { Meta, StoryObj } from '@storybook/react'
+import { ThemeDecorator } from '@/api/storybookDecorators'
 
 const meta = {
   component: Typography,
-  parameters: {
-    backgrounds: {
-      default: 'black',
-      values: [
-        { name: 'white', value: '#fff' },
-        { name: 'black', value: '#000' },
-      ],
-    },
-  },
   tags: ['autodocs'],
   title: 'Components/Typography',
+  decorators: [ThemeDecorator],
 } satisfies Meta<typeof Typography>
 
 export default meta

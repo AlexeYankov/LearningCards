@@ -1,22 +1,17 @@
 import { Meta, StoryObj } from '@storybook/react'
 
 import { CheckEmail } from './checkEmail'
-import { BrowserRouterDecorator, ReduxStoreProviderDecorator } from '@/api/storybookDecorators'
+import {
+  BrowserRouterDecorator,
+  ReduxStoreProviderDecorator,
+  ThemeDecorator,
+} from '@/api/storybookDecorators'
 
 const meta = {
   component: CheckEmail,
-  parameters: {
-    backgrounds: {
-      default: 'black',
-      values: [
-        { name: 'white', value: '#fff' },
-        { name: 'black', value: '#000' },
-      ],
-    },
-  },
   tags: ['autodocs'],
   title: 'Components/auth/checkEmail',
-  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator],
+  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator, ThemeDecorator],
 } satisfies Meta<typeof CheckEmail>
 
 export default meta

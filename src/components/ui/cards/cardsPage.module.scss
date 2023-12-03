@@ -1,8 +1,10 @@
 .container {
   display: flex;
   flex-direction: column;
+
   width: 100%;
   min-width: 100%;
+  margin-bottom: 100px;
 }
 
 .container__pageBar {
@@ -27,7 +29,7 @@
   border: 1px solid var(--color-dark-500);
 }
 
-.backLink {
+.nk {
   display: flex;
   gap: 4px;
   align-items: center;
@@ -43,12 +45,127 @@
 
 .textWithIconBox {
   display: flex;
-  gap: 15px;
   align-items: center;
 }
 
 .itemBox {
   a {
     min-width: 60px;
+  }
+}
+
+.cardsRow {
+  th {
+    &:nth-child(1) {
+      min-width: 300px;
+      max-width: 300px;
+    }
+
+    &:nth-child(2) {
+      min-width: 250px;
+      max-width: 250px;
+    }
+
+    &:nth-child(3) {
+      min-width: 180px;
+      max-width: 180px;
+    }
+
+    &:nth-child(4) {
+      min-width: 170px;
+      max-width: 170px;
+    }
+  }
+}
+
+.headCell {
+  cursor: pointer;
+
+  padding: 6px 24px;
+
+  text-align: left;
+
+  background-color: var(--color-dark-500);
+
+  transition: 0.3s;
+
+  &:hover {
+    background-color: var(--color-dark-300);
+    transition: 0.3s;
+  }
+
+  &:last-child {
+    cursor: default;
+    background-color: var(--color-dark-500);
+  }
+}
+
+.bodyCell {
+  overflow: hidden;
+
+  max-width: 200px;
+  padding: 6px 24px;
+
+  font-size: var(--font-size-s);
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  border-bottom: 1px solid var(--color-dark-500);
+
+  .typography {
+    font-size: var(--font-size-s);
+  }
+
+  .imageWithNameBox {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .image {
+    height: 50px;
+    object-fit: cover;
+  }
+}
+
+.starsBox {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  line-height: 1;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.iconBox {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  line-height: 1;
+
+  svg {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    fill: var(--color-light-100);
+  }
+}
+
+.backLink {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+
+  margin-bottom: 24px;
+
+  font-size: var(--font-size-s);
+  text-decoration: none;
+
+  svg {
+    fill: var(--color-light-100);
   }
 }

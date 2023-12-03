@@ -2,20 +2,17 @@ import { DropDown, DropDownMenu, DropDownPackMenu } from '@/components/ui/dropDo
 import { Meta, StoryObj } from '@storybook/react'
 
 import profileImage from './../../../asserts/profileImage.png'
+import {
+  BrowserRouterDecorator,
+  ReduxStoreProviderDecorator,
+  ThemeDecorator,
+} from '@/api/storybookDecorators.tsx'
 
 const meta = {
   component: DropDown,
-  parameters: {
-    backgrounds: {
-      default: 'black',
-      values: [
-        { name: 'white', value: '#fff' },
-        { name: 'black', value: '#000' },
-      ],
-    },
-  },
   tags: ['autodocs'],
   title: 'Components/DropDown',
+  decorators: [ReduxStoreProviderDecorator, ThemeDecorator, BrowserRouterDecorator],
 } satisfies Meta<typeof DropDown>
 
 export default meta
@@ -23,13 +20,9 @@ type Story = StoryObj<typeof meta>
 
 export const DropDownMenuDemo: Story = {
   args: {
-    children: (
-      <DropDownMenu avatar={profileImage} email={'j&johnson@gmail.com'} name={'12312312'} />
-    ),
+    children: <DropDownMenu avatar={profileImage} email={'j&johnson@gmail.com'} />,
   },
-  render: () => (
-    <DropDownMenu avatar={profileImage} email={'j&johnson@gmail.com'} name={'12312312'} />
-  ),
+  render: () => <DropDownMenu avatar={profileImage} email={'j&johnson@gmail.com'} />,
 }
 
 export const DropDownPackMenuDemo: Story = {

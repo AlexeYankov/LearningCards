@@ -1,5 +1,44 @@
 .dialogTrigger {
   cursor: pointer;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialogTrigger::after {
+  content: '';
+
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 24px;
+  height: 24px;
+
+  opacity: 0;
+  background: var(--color-dark-100);
+  border-radius: 50%;
+
+  transition: opacity 0.3s ease;
+}
+
+.dialogTrigger:hover:not(:disabled)::after {
+  z-index: -1;
+  opacity: 1;
+}
+
+.dialogTrigger:focus-visible::after {
+  z-index: -1;
+  opacity: 1;
+}
+
+.dialogTrigger:disabled {
+  cursor: default;
 }
 
 .dialogOverlay {
@@ -29,6 +68,7 @@
   align-items: center;
   justify-content: space-between;
 
+  margin-bottom: -1px;
   padding: 18px 24px;
 
   background-color: var(--color-dark-700);

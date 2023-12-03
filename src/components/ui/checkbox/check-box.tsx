@@ -41,7 +41,6 @@ export const CheckBox = <T extends ElementType = 'input'>(
         </div>
 
         <Component
-          // className={`${fullWidth ? s.fullWidth : ''}`}
           className={`${fullWidth ? s.fullWidth : ''} ${className}`}
           style={{
             display: 'flex',

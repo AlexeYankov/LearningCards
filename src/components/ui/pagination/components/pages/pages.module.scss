@@ -6,11 +6,16 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-size: var(--font-size-s);
 
   .icons {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    width: 16px;
+    height: 16px;
+
     opacity: 0.5;
   }
 
@@ -28,8 +33,8 @@ button {
     align-items: center;
     justify-content: center;
 
-    width: 24px;
-    margin: 0 10px;
+    width: 30px;
+    margin: 0 3px;
 
     line-height: var(--line-height-m);
     color: var(--color-light-100);

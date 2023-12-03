@@ -1,51 +1,80 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
-
-import { useCreateDeckMutation } from '@/api/decks/decks.api'
+import { ChangeEvent, useState } from 'react'
+import { CreateDeckArgType, useCreateDeckMutation } from '@/api/decks/decks.api'
 import { Button } from '@/components/ui/button'
 import { CheckBox } from '@/components/ui/checkbox'
 import { Modal, ModalTitle } from '@/components/ui/modal'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
-
 import f from '../../packsPage.module.scss'
 import { useAppDispatch } from '@/api/store.ts'
+import { Image } from '@/asserts/icons/components/Image.tsx'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import { resetFilter } from '@/api/decks/pagination.reducer.ts'
+
+const schema = z.object({
+  cover: z.array(z.instanceof(File)),
+  name: z.string().min(3),
+  isPrivate: z.boolean().default(false),
+})
+
+type Form = z.infer<typeof schema>
 
 export const PageName = () => {
   const dispatch = useAppDispatch()
-
+  const [selectedImage, setSelectedImage] = useState('')
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState('')
+  const [isPrivate, setIsPrivate] = useState(false)
+  const {
+    register,
+    setValue,
+    setError,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<Form>()
+  const [createDeck] = useCreateDeckMutation()
 
-  const [createDeck, { error, isError, reset }] = useCreateDeckMutation()
-
-  const handleModalToggle = (isOpen: boolean = !open) => {
-    setOpen(isOpen)
-    if (isOpen) {
-      setValue('')
-      reset()
-    }
-  }
-
-  const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.currentTarget.value)
+  const handleModalToggle = () => {
+    setOpen(prevState => !prevState)
     reset()
+    setSelectedImage('')
+    dispatch(resetFilter())
   }
 
-  // @ts-ignore
-  const errorMessage = error?.data?.errorMessages[0].message
+  const handeCheckedChange = () => {
+    setIsPrivate(prevState => !prevState)
+  }
 
-  const handleAddNewPackClick = (event: FormEvent) => {
-    event.preventDefault()
-    createDeck({ name: value })
-    if (value.length < 3) {
-      setOpen(true)
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+
+    if (file) {
+      const imageUrl = URL.createObjectURL(file)
+      setSelectedImage(imageUrl)
+      setValue('cover', [file])
     } else {
-      setValue('')
-      setOpen(false)
-      dispatch(resetFilter())
+      setSelectedImage('')
+      setValue('cover', [])
     }
   }
+
+  const onSubmit = handleSubmit(data => {
+    const form = new FormData()
+    if (data.cover && data.cover.length > 0) {
+      form.append('cover', data.cover[0])
+    }
+    form.append('name', data.name)
+    form.append('isPrivate', String(isPrivate))
+
+    if (data.name.trim() !== '' && data.name.length >= 3) {
+      createDeck(form as unknown as CreateDeckArgType)
+      handleModalToggle()
+    } else {
+      setError('name', { message: 'String must contain at least 3 character(s)' })
+      setOpen(true)
+    }
+  })
 
   return (
     <div className={f.container__pageName}>
@@ -62,31 +91,41 @@ export const PageName = () => {
         }
       >
         <ModalTitle title={'Add New Pack'} />
-
-        <form onSubmit={handleAddNewPackClick}>
+        <form onSubmit={onSubmit}>
           <div className={f.contentComponents}>
+            <img className={f.img} src={selectedImage || ''} />
+            <label htmlFor="input__file" className={f.changeCover}>
+              <Image />
+              Change Cover
+            </label>
+            <input
+              className={f.inputFile}
+              id={'input__file'}
+              type="file"
+              onChange={handleFileChange}
+            />
             <TextField
               inputId={'Name Pack'}
               label={'Name Pack'}
-              onChange={handleValueChange}
               placeholder={'Name'}
-              value={value}
-              errorMessage={errorMessage}
+              errorMessage={errors.name?.message}
+              {...register('name')}
             />
             <CheckBox
               IconID={'checkbox-unselected'}
               SelectedIconID={'checkbox-selected'}
               checkboxId={'Private Pack'}
-              disabled={false}
               height={'24'}
               label={'Private pack'}
               width={'24'}
+              checked={isPrivate}
+              onChange={handeCheckedChange}
             />
           </div>
           <div className={`${f.contentBtn} ${f.contentBtns}`}>
             <Button
               classNameBtnBox={f.btnBox}
-              onClick={() => handleModalToggle(open)}
+              onClick={handleModalToggle}
               variant={'secondary'}
               type={'button'}
             >
@@ -94,9 +133,8 @@ export const PageName = () => {
             </Button>
             <Button
               classNameBtnBox={f.btnBox}
-              onClick={handleAddNewPackClick}
               variant={'primary'}
-              disabled={isError}
+              disabled={!!errors.name?.message}
               type={'submit'}
             >
               Add New Pack

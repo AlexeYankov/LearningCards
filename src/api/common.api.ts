@@ -1,7 +1,7 @@
 import { baseApi } from './cards.api'
 import { isEmpty } from 'remeda'
 
-export type CardsResponsType = {
+export type CardsResponseType = {
   answer: string
   answerImg: string
   answerVideo: string
@@ -11,11 +11,12 @@ export type CardsResponsType = {
   question: string
   questionImg: string
   questionVideo: string
-  rating: number
+  grade: number
   shots: number
   updated: string
   userId: string
 }
+
 export type UpdateCardsType = {
   answer: string
   answerImg: string
@@ -25,12 +26,19 @@ export type UpdateCardsType = {
   questionVideo: string
 }
 
-export type DecksType = {
-  items?: CardsResponsType[]
+export type CardsType = {
+  items?: CardsResponseType[]
   maxCardsCount?: number
   pagination?: PaginationResponseType
 }
-
+export type CreateCardParams = {
+  questionImg?: File
+  answerImg?: File
+  questionVideo?: string
+  answerVideo?: string
+  answer?: string
+  question?: string
+}
 export type PaginationResponseType = {
   currentPage?: number
   itemsPerPage?: number
@@ -52,7 +60,7 @@ type GetCardsParamsType = {
 export const cardsService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      getCards: builder.query<Omit<DecksType, 'maxCardsCount'>, GetCardsParamsType>({
+      getCards: builder.query<Omit<CardsType, 'maxCardsCount'>, GetCardsParamsType>({
         providesTags: ['Cards'],
         query: ({ id, ...params }) => {
           return {
@@ -68,7 +76,7 @@ export const cardsService = baseApi.injectEndpoints({
           url: `v1/cards/${id}`,
         }),
       }),
-      getCard: builder.query<CardsResponsType, void>({
+      getCard: builder.query<CardsResponseType, void>({
         providesTags: ['Cards'],
         query: id => `v1/cards/${id}`,
       }),
@@ -77,7 +85,7 @@ export const cardsService = baseApi.injectEndpoints({
       //   providesTags: ['Decks'],
       //   query: () => `v1/decks`,
       // }),
-      updateCard: builder.mutation<UpdateCardsType, CardsResponsType>({
+      updateCard: builder.mutation<UpdateCardsType, CardsResponseType>({
         invalidatesTags: ['Cards'],
         query: ({ id, ...patch }) => ({
           body: patch,
@@ -85,9 +93,25 @@ export const cardsService = baseApi.injectEndpoints({
           url: `v1/cards/${id}`,
         }),
       }),
+
+      createCard: builder.mutation<CardsResponsType, { id: string; data: FormData }>({
+        invalidatesTags: ['Cards'],
+        query: ({ id, data }) => {
+          return {
+            method: 'POST',
+            url: `v1/decks/${id}/cards`,
+            body: data,
+          }
+        },
+      }),
     }
   },
 })
 
-export const { useDeleteCardMutation, useGetCardQuery, useGetCardsQuery, useUpdateCardMutation } =
-  cardsService
+export const {
+  useCreateCardMutation,
+  useDeleteCardMutation,
+  useGetCardQuery,
+  useGetCardsQuery,
+  useUpdateCardMutation,
+} = cardsService

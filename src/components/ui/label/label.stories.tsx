@@ -1,20 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Label } from './label'
+import { ThemeDecorator } from '@/api/storybookDecorators.tsx'
 
 const meta = {
   component: Label,
-  parameters: {
-    backgrounds: {
-      default: 'black',
-      values: [
-        { name: 'white', value: '#fff' },
-        { name: 'black', value: '#000' },
-      ],
-    },
-  },
   tags: ['autodocs'],
   title: 'Components/Label',
+  decorators: [ThemeDecorator],
 } satisfies Meta<typeof Label>
 
 export default meta

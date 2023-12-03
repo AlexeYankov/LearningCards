@@ -4,6 +4,7 @@ import { Delete } from '@/asserts/icons/components/Delete'
 import { Logout } from '@/asserts/icons/components/Logout'
 
 import { Button } from './button'
+import { ThemeDecorator } from '@/api/storybookDecorators.tsx'
 
 const meta = {
   argTypes: {
@@ -13,17 +14,9 @@ const meta = {
     },
   },
   component: Button,
-  parameters: {
-    backgrounds: {
-      default: 'black',
-      values: [
-        { name: 'white', value: '#fff' },
-        { name: 'black', value: '#000' },
-      ],
-    },
-  },
   tags: ['autodocs'],
   title: 'Components/Button',
+  decorators: [ThemeDecorator],
 } satisfies Meta<typeof Button>
 
 export default meta

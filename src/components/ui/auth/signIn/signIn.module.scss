@@ -13,7 +13,7 @@
     color: var(--color-light-100);
 
     .checkbox {
-      justify-content: flex-start;
+      cursor: pointer;
       margin-left: -9px;
     }
 
@@ -22,11 +22,23 @@
     }
   }
 
-  .forgotPassLink {
-    text-decoration: none;
-    cursor: pointer;
-    margin-bottom: 56px;
+  .checkboxContainer {
+    text-align: left;
+  }
+
+  .linkContainer {
     text-align: right;
+  }
+
+  .forgotPassLink {
+    display: inline-block;
+    margin-bottom: 65px;
+    color: var(--color-light-100);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   .linkDontHaveAccount {
@@ -39,5 +51,18 @@
     margin: 0 auto;
     padding-right: 0;
     padding-left: 0;
+  }
+
+  .btnSignUp {
+    margin: 0 auto;
+  }
+
+  .linkSignUp {
+    color: var(--color-accent-500);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

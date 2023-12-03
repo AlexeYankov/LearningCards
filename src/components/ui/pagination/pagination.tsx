@@ -7,23 +7,33 @@ import { Pages } from './components/pages/pages'
 type PaginationType = {
   arrowColor: string
   arrowID: string
-  options: Array<string>
-  placeholder: string
   reversed?: boolean
   reversedArrowID: string
   totalPages?: number
   variant?: string
+  totalItems?: number
 }
 
 export const Pagination = ({
   arrowColor,
   arrowID,
-  options,
-  placeholder,
   reversed,
   reversedArrowID,
+  totalItems,
   totalPages,
 }: PaginationType) => {
+  const generateOptions = (total: number) => {
+    const dynamicOptions: number[] = []
+    for (let i = 10; i <= total && i <= 100; i += 10) {
+      if (i !== 40 && i !== 60 && i !== 70 && i !== 80 && i !== 90) {
+        dynamicOptions.push(i)
+      }
+    }
+    return dynamicOptions.map(option => option.toString())
+  }
+  const options =
+    totalItems! <= 100 ? generateOptions(totalItems!) : ['10', '20', '30', '50', '100']
+
   return (
     <div className={s.paginationContainer}>
       <Pages
@@ -34,16 +44,10 @@ export const Pagination = ({
       />
 
       <div className={s.box}>
-        <Typography variant={'body2'}>Показать</Typography>
-
-        <Select
-          classname={s.select}
-          options={options}
-          placeholder={placeholder}
-          reversed={reversed}
-        />
+        <Typography variant={'body2'}>Show</Typography>
+        <Select classname={s.select} options={options} reversed={reversed} />
         <Typography variant={'body2'} className={s.typography}>
-          на странице
+          on the page
         </Typography>
       </div>
     </div>

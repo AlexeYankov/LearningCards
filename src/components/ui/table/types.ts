@@ -1,14 +1,28 @@
 export type TableType = {
   bodyCell?: BodyCellType[]
   className?: string
-  headCell?: HeadCellType[]
+  headCell?: HeadCellType
   tableName?: string
   isMyDeck?: boolean
 }
 
+export type SortDescriptionType = `${string}-desc` | `${string}-asc` | null
+
+export type Column = {
+  title: string
+  key: string
+  sortable?: boolean
+}
+
+export type Sort = {
+  key: string
+  direction: SortDescriptionType
+} | null
+
 export type HeadCellType = {
-  headCellName?: string
-  svgSizes?: HeadCellSvgType
+  columns: Column[]
+  sort?: Sort
+  onSort?: (sort: Sort) => void
 }
 export type BodyCellType = {
   answer?: string
@@ -25,12 +39,7 @@ export type BodyCellType = {
   name?: string
   question?: string
   stars?: Array<string>
-  svgs?: HeadCellSvgType[]
   updated?: string
   packName?: string
   userId?: string
-}
-
-export type HeadCellSvgType = {
-  id?: string
 }

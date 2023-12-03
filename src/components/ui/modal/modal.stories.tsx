@@ -13,23 +13,18 @@ import { ScrollBar } from '../scrollbar'
 import { Select } from '../select'
 import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal/modal'
 import { TextField } from '@/components/ui/textField'
-import { BrowserRouterDecorator, ReduxStoreProviderDecorator } from '@/api/storybookDecorators.tsx'
+import {
+  BrowserRouterDecorator,
+  ReduxStoreProviderDecorator,
+  ThemeDecorator,
+} from '@/api/storybookDecorators.tsx'
 
 const meta = {
   argTypes: {},
   component: Modal,
-  parameters: {
-    backgrounds: {
-      default: 'black',
-      values: [
-        { name: 'white', value: '#fff' },
-        { name: 'black', value: '#000' },
-      ],
-    },
-  },
   tags: ['autodocs'],
   title: 'Components/Modal',
-  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator],
+  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator, ThemeDecorator],
 } satisfies Meta<typeof Modal>
 
 export default meta
@@ -39,7 +34,7 @@ const loremText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
 
 export const ModalTitleDemo: Story = {
   render: () => (
-    <Modal>
+    <Modal triggerName={<Button>Test</Button>}>
       <ModalTitle title={'Title'} />
     </Modal>
   ),
@@ -47,7 +42,7 @@ export const ModalTitleDemo: Story = {
 
 export const ModalDescriptionDemo: Story = {
   render: () => (
-    <Modal>
+    <Modal triggerName={<Button>Test</Button>}>
       <ModalDescription>
         <ScrollBar maxHeight={'40vh'}>
           <Typography as={'p'} variant={'body1'}>
@@ -61,7 +56,7 @@ export const ModalDescriptionDemo: Story = {
 
 export const ModalScrollbarDescriptionDemo: Story = {
   render: () => (
-    <Modal>
+    <Modal triggerName={<Button>Test</Button>}>
       <ModalDescription>
         <ScrollBar maxHeight={'40vh'}>
           <Typography as={'p'} variant={'body1'}>
@@ -93,12 +88,11 @@ export const ModalWithComponentsDemo: Story = {
     const [isCheck, setIsCheck] = useState(false)
 
     return (
-      <Modal className={s.contentComponents}>
+      <Modal className={s.contentComponents} triggerName={<Button>Test</Button>}>
         <Select
           classname={s.select}
           label={'Select-box'}
           options={['Select item 1', 'Select item 2', 'Select item 3']}
-          placeholder={'Select-box'}
           reversed
           selectId={'Select-box'}
         />
@@ -119,12 +113,11 @@ export const ModalWithComponentsDemo: Story = {
 
 export const ModalWithImageDemo: Story = {
   render: () => (
-    <Modal className={s.contentComponents}>
+    <Modal className={s.contentComponents} triggerName={<Button>Test</Button>}>
       <Select
         classname={s.select}
         label={'Select-box'}
         options={['Select item 1', 'Select item 2', 'Select item 3']}
-        placeholder={'Select-box'}
         reversed
         selectId={'Select-box'}
       />
@@ -158,7 +151,7 @@ export const ModalWithImageDemo: Story = {
 
 export const ModalPrimaryButton: Story = {
   render: () => (
-    <Modal className={s.contentBtn}>
+    <Modal className={s.contentBtn} triggerName={<Button>Test</Button>}>
       <div>
         <Button className={s.buttonModal} variant={'primary'}>
           Button primary
@@ -170,7 +163,7 @@ export const ModalPrimaryButton: Story = {
 
 export const ModalButtons: Story = {
   render: () => (
-    <Modal>
+    <Modal triggerName={<Button>Test</Button>}>
       <div className={`${s.contentBtn} ${s.contentBtns}`}>
         <Button classNameBtnBox={s.btnBox} variant={'secondary'}>
           Button secondary
@@ -188,7 +181,7 @@ export const ModalAddNewPack: Story = {
     // const [isCheck, setIsCheck] = useState(false)
 
     return (
-      <Modal>
+      <Modal triggerName={<Button>Test</Button>}>
         <ModalTitle title={'Add New Pack'} />
         <div className={s.contentComponents}>
           <img alt={'card image'} className={s.img} src={img} />
@@ -221,14 +214,13 @@ export const ModalAddNewPack: Story = {
 
 export const ModalAddNewCard: Story = {
   render: () => (
-    <Modal>
+    <Modal triggerName={<Button>Test</Button>}>
       <ModalTitle title={'Add New Card'} />
       <div className={s.contentComponents}>
         <Select
           classname={s.select}
           label={'Choose a question format'}
           options={['Select item 1', 'Select item 2', 'Select item 3']}
-          placeholder={'Picture'}
           reversed
           selectId={'newCardSelectId'}
         />
