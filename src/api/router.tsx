@@ -14,7 +14,6 @@ import { DecksPage } from '@/components/ui/decks/decksPage'
 import { useMeQuery } from '@/api/auth-api/auth.api.ts'
 import { Layout } from '@/components/ui/header/header.tsx'
 import { Login } from '@/pages/login.tsx'
-import { CircularProgress } from '@mui/material'
 import { EditProfile } from '@/components/ui/editProfile/editProfile.tsx'
 
 const publicRoutes: RouteObject[] = [
@@ -70,7 +69,7 @@ const router = createBrowserRouter([
 
 function PrivateRoutes() {
   const { isError, isLoading } = useMeQuery()
-  if (isLoading) return <CircularProgress />
+  if (isLoading) return <div>Loading</div>
   return !isError ? <Outlet /> : <Navigate to="/login" />
 }
 
