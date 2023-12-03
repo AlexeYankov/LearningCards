@@ -6,7 +6,7 @@ type Props = {
   size?: number
 }
 
-export const Close: FC<Props> = ({ size }) => {
+export const CloseIcon: FC<Props> = ({ size }) => {
   return (
     <svg
       fill={'white'}

@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
-import { Close } from '@/asserts/icons/components/Close'
-import { Password } from '@/asserts/icons/components/Password'
-import { Search } from '@/asserts/icons/components/Search'
+import { CloseIcon } from '@/asserts/icons/components/CloseIcon.tsx'
+import { PasswordIcon } from '@/asserts/icons/components/PasswordIcon.tsx'
+import { SearchIcon } from '@/asserts/icons/components/SearchIcon.tsx'
 import s from './textField.module.scss'
 import { Label } from '../label'
 
@@ -38,7 +38,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
       <div className={`${s.inputContainer}`}>
         {search && (
           <div className={`${s.iconStart} ${disabledIconClass}`}>
-            <Search size={20} />
+            <SearchIcon size={20} />
           </div>
         )}
         <input
@@ -51,7 +51,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
         />
         {isShowClearButton && (
           <button className={`${s.iconEnd} ${disabledIconClass}`} onClick={onClearClick}>
-            <Close size={20} />
+            <CloseIcon size={20} />
           </button>
         )}
         {password && (
@@ -60,7 +60,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
             type={'button'}
             onClick={handleChangeInputType}
           >
-            <Password iconId={passwordIcon} size={20} />
+            <PasswordIcon iconId={passwordIcon} size={20} />
           </button>
         )}
       </div>

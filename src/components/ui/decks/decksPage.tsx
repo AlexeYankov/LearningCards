@@ -5,11 +5,10 @@ import {
   useUpdateDeckMutation,
 } from '@/api/decks/decks.api'
 
-import s from './packsPage.module.scss'
+import s from './decksPage.module.scss'
 
 import { Pagination } from '../pagination'
-import { PageBar } from './components/pageBar/pageBar'
-import { PageName } from './components/pageName/pageName'
+import { DecksPageBar } from './components/decksPageBar/decksPageBar'
 import { useAppDispatch, useAppSelector } from '@/api/store'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { changeCurrentPage, changeOrderBy } from '@/api/decks/pagination.reducer'
@@ -18,20 +17,20 @@ import { Column, Sort } from '@/components/ui/table/types.ts'
 import { Typography } from '@/components/ui/typography'
 import { Link } from 'react-router-dom'
 import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal'
-import f from '@/components/ui/packs/packsPage.module.scss'
 import { Button } from '@/components/ui/button'
-import { Image } from '@/asserts/icons/components/Image.tsx'
+import { ImageIcon } from '@/asserts/icons/components/ImageIcon.tsx'
 import { TextField } from '@/components/ui/textField'
 import { CheckBox } from '@/components/ui/checkbox'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { Edit } from '@/asserts/icons/components/Edit'
-import { Learn } from '@/asserts/icons/components/Learn.tsx'
-import { Delete } from '@/asserts/icons/components/Delete.tsx'
+import { EditIcon } from '@/asserts/icons/components/EditIcon.tsx'
+import { LearnIcon } from '@/asserts/icons/components/LearnIcon.tsx'
 import { convertedTime } from '@/helpers/convertedTime.ts'
 import { useMeQuery } from '@/api/auth-api/auth.api.ts'
+import { DecksPageName } from '@/components/ui/decks/components/decksPageName/decksPageName.tsx'
+import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon.tsx'
 
-export const PacksPage = () => {
+export const DecksPage = () => {
   const dispatch = useAppDispatch()
 
   const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
@@ -107,8 +106,8 @@ export const PacksPage = () => {
 
   return (
     <div className={s.container}>
-      <PageName />
-      <PageBar />
+      <DecksPageName />
+      <DecksPageBar />
       <Root className={s.container__common}>
         <Head className={s.tableHead}>
           <Row className={s.decksRow}>
@@ -253,28 +252,28 @@ const EditDeckModal = ({ deck }: { deck: ResponseDeckType }) => {
       onOpenChange={setOpen}
       triggerName={
         <button>
-          <Edit />
+          <EditIcon />
         </button>
       }
     >
       <ModalTitle title={'Edit Pack'} />
       <form onSubmit={onSubmit}>
-        <div className={f.contentComponents}>
-          <img className={f.img} src={selectedImage} />
+        <div className={s.contentComponents}>
+          <img className={s.img} src={selectedImage} />
           <div className={s.btnCoverBox}>
             {selectedImage && (
-              <Button variant={'secondary'} className={f.changeCover} onClick={deleteDeckCover}>
-                <Delete />
+              <Button variant={'secondary'} className={s.changeCover} onClick={deleteDeckCover}>
+                <DeleteIcon />
                 Delete Cover
               </Button>
             )}
-            <label htmlFor="input__file" className={f.changeCover}>
-              <Image />
+            <label htmlFor="input__file" className={s.changeCover}>
+              <ImageIcon />
               Change Cover
             </label>
           </div>
           <input
-            className={f.inputFile}
+            className={s.inputFile}
             id={'input__file'}
             type="file"
             onChange={handleFileChange}
@@ -299,9 +298,9 @@ const EditDeckModal = ({ deck }: { deck: ResponseDeckType }) => {
             onChange={handeCheckedChange}
           />
         </div>
-        <div className={`${f.contentBtn} ${f.contentBtns}`}>
+        <div className={`${s.contentBtn} ${s.contentBtns}`}>
           <Button
-            classNameBtnBox={f.btnBox}
+            classNameBtnBox={s.btnBox}
             onClick={handleCloseModal}
             variant={'secondary'}
             type={'button'}
@@ -309,7 +308,7 @@ const EditDeckModal = ({ deck }: { deck: ResponseDeckType }) => {
             Cancel
           </Button>
           <Button
-            classNameBtnBox={f.btnBox}
+            classNameBtnBox={s.btnBox}
             onSubmit={onSubmit}
             variant={'primary'}
             disabled={!!errors.name?.message}
@@ -341,7 +340,7 @@ const LearnDeckModal = ({ deck, isMyDeck }: { deck: ResponseDeckType; isMyDeck: 
       disabled={isBtnDisabled}
       triggerName={
         <button className={isBtnDisabled ? s.disabledIcon : ''}>
-          <Learn />
+          <LearnIcon />
         </button>
       }
     >
@@ -352,16 +351,16 @@ const LearnDeckModal = ({ deck, isMyDeck }: { deck: ResponseDeckType; isMyDeck: 
           <span className={s.boldText}>{deck.name}</span>?
         </Typography>
       </ModalDescription>
-      <div className={`${f.contentBtn} ${f.contentBtns}`}>
+      <div className={`${s.contentBtn} ${s.contentBtns}`}>
         <Button
-          classNameBtnBox={f.btnBox}
+          classNameBtnBox={s.btnBox}
           onClick={handleCloseModal}
           variant={'secondary'}
           type={'button'}
         >
           Cancel
         </Button>
-        <Button classNameBtnBox={f.btnBox} variant={'primary'} type={'button'}>
+        <Button classNameBtnBox={s.btnBox} variant={'primary'} type={'button'}>
           Learn Pack
         </Button>
       </div>
@@ -387,7 +386,7 @@ const DeleteDeckModal = ({ deck }: { deck: ResponseDeckType }) => {
       onOpenChange={setOpen}
       triggerName={
         <button>
-          <Delete />
+          <DeleteIcon />
         </button>
       }
     >
@@ -400,9 +399,9 @@ const DeleteDeckModal = ({ deck }: { deck: ResponseDeckType }) => {
           All cards will be deleted.
         </Typography>
       </ModalDescription>
-      <div className={`${f.contentBtn} ${f.contentBtns}`}>
+      <div className={`${s.contentBtn} ${s.contentBtns}`}>
         <Button
-          classNameBtnBox={f.btnBox}
+          classNameBtnBox={s.btnBox}
           onClick={handleCloseModal}
           variant={'secondary'}
           type={'button'}
@@ -410,7 +409,7 @@ const DeleteDeckModal = ({ deck }: { deck: ResponseDeckType }) => {
           Cancel
         </Button>
         <Button
-          classNameBtnBox={f.btnBox}
+          classNameBtnBox={s.btnBox}
           onClick={handleDeleteDeckClick}
           variant={'primary'}
           // disabled={isError}

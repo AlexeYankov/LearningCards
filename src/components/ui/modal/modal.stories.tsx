@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import img from '@/asserts/Mask.png'
-import { Image } from '@/asserts/icons/components/Image'
+import { ImageIcon } from '@/asserts/icons/components/ImageIcon.tsx'
 import { Typography } from '@/components/ui/typography'
 import { Meta, StoryObj } from '@storybook/react'
 
@@ -125,14 +125,14 @@ export const ModalWithImageDemo: Story = {
         Question:
       </Typography>
       <img alt={'card image'} className={s.img} src={img} />
-      <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
+      <Button className={s.buttonModal} fullWidth icon={<ImageIcon />} variant={'secondary'}>
         Change Cover
       </Button>
       <Typography as={'p'} variant={'subtitle2'}>
         Answer:
       </Typography>
       <img alt={'card image'} className={s.img} src={img} />
-      <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
+      <Button className={s.buttonModal} fullWidth icon={<ImageIcon />} variant={'secondary'}>
         Change Cover
       </Button>
       <TextField inputId={'Input'} label={'Input'} placeholder={'Input'} />
@@ -185,7 +185,7 @@ export const ModalAddNewPack: Story = {
         <ModalTitle title={'Add New Pack'} />
         <div className={s.contentComponents}>
           <img alt={'card image'} className={s.img} src={img} />
-          <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
+          <Button className={s.buttonModal} fullWidth icon={<ImageIcon />} variant={'secondary'}>
             Change Cover
           </Button>
           <TextField inputId={'Name Pack'} label={'Name Pack'} placeholder={'Name'} />
@@ -228,14 +228,14 @@ export const ModalAddNewCard: Story = {
           Question:
         </Typography>
         <img alt={'card image'} className={s.img} src={img} />
-        <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
+        <Button className={s.buttonModal} fullWidth icon={<ImageIcon />} variant={'secondary'}>
           Change Cover
         </Button>
         <Typography as={'p'} variant={'subtitle2'}>
           Answer:
         </Typography>
         <img alt={'card image'} className={s.img} src={img} />
-        <Button className={s.buttonModal} fullWidth icon={<Image />} variant={'secondary'}>
+        <Button className={s.buttonModal} fullWidth icon={<ImageIcon />} variant={'secondary'}>
           Change Cover
         </Button>
       </div>

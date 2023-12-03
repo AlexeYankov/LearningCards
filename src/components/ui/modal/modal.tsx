@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, FC, forwardRef, ReactNode } from 'react'
 
-import { Close } from '@/asserts/icons/components/Close'
+import { CloseIcon } from '@/asserts/icons/components/CloseIcon.tsx'
 import { Typography } from '@/components/ui/typography'
 import * as DialogRadix from '@radix-ui/react-dialog'
 
@@ -56,7 +56,7 @@ export const ModalTitle: FC<ModalTitleProps> = ({ title }) => {
 export const ModalClose = () => {
   return (
     <DialogRadix.Close aria-label={'Close'} className={s.dialogClose}>
-      <Close size={24} />
+      <CloseIcon size={24} />
     </DialogRadix.Close>
   )
 }

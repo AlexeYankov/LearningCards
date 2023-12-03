@@ -1,4 +1,4 @@
-import { Delete } from '@/asserts/icons/components/Delete'
+import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon.tsx'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
@@ -6,7 +6,7 @@ import { Tabs } from '@/components/ui/tabs'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 
-import f from '../../packsPage.module.scss'
+import f from '../../decksPage.module.scss'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useAppDispatch } from '@/api/store.ts'
 import {
@@ -18,7 +18,7 @@ import {
 } from '@/api/decks/pagination.reducer'
 import { useDebounce } from '@/hooks/useDebounce'
 
-export const PageBar = () => {
+export const DecksPageBar = () => {
   const dispatch = useAppDispatch()
 
   const [searchValue, setSearchValue] = useState('')
@@ -62,7 +62,7 @@ export const PageBar = () => {
       </div>
 
       <div>
-        <Label label={'Show packs cards'} />
+        <Label label={'Show decks cards'} />
         <Tabs title={['My Cards', 'All Cards']} />
       </div>
 
@@ -73,7 +73,7 @@ export const PageBar = () => {
       <div>
         <Button
           className={f.button}
-          icon={<Delete />}
+          icon={<DeleteIcon />}
           variant={'secondary'}
           onClick={handleResetFilter}
         >

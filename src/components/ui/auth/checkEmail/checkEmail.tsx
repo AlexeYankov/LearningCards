@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Email } from '@/asserts/icons/components/Email'
+import { EmailIcon } from '@/asserts/icons/components/EmailIcon.tsx'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
@@ -18,7 +18,7 @@ export const CheckEmail = () => {
         Check Email
       </Typography>
       <div className={s.icon}>
-        <Email />
+        <EmailIcon />
       </div>
       <Typography as={'p'} className={s.text} variant={'body2'}>
         We’ve sent an Email with instructions to example@mail.com

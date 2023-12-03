@@ -56,11 +56,11 @@ export const SignUp = () => {
         />
         <ControlledInput
           className={s.inputConfirmPassword}
-          placeholder={'Confirm Password'}
+          placeholder={'Confirm PasswordIcon'}
           control={control}
           name={'confirmPassword'}
           type={'password'}
-          label={'Confirm Password'}
+          label={'Confirm PasswordIcon'}
           password
           inputId={'inputConfirmPassword'}
         />

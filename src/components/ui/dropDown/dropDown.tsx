@@ -1,14 +1,14 @@
 import { FC, ReactNode, useState } from 'react'
 
-import { Delete } from '@/asserts/icons/components/Delete'
-import { Edit } from '@/asserts/icons/components/Edit'
-import { Learn } from '@/asserts/icons/components/Learn'
-import { Profile } from '@/asserts/icons/components/Profile'
-import { SignOut } from '@/asserts/icons/components/SignOut'
+import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon.tsx'
+import { EditIcon } from '@/asserts/icons/components/EditIcon.tsx'
+import { LearnIcon } from '@/asserts/icons/components/LearnIcon.tsx'
+import { ProfileIcon } from '@/asserts/icons/components/ProfileIcon.tsx'
+import { SignOutIcon } from '@/asserts/icons/components/SignOutIcon.tsx'
 import { Typography } from '@/components/ui/typography'
 import * as DropdownRadix from '@radix-ui/react-dropdown-menu'
 import s from './dropDown.module.scss'
-import { MoreIcon } from '@/asserts/icons/components/More'
+import { MoreIcon } from '@/asserts/icons/components/MoreIcon.tsx'
 import style from '../header/header.module.scss'
 import { useLogOutMutation } from '@/api/auth-api/auth.api.ts'
 import { Link, useNavigate } from 'react-router-dom'
@@ -147,8 +147,8 @@ export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => 
           </div>
         </div>
       </ItemWithIcon>
-      <ItemWithIcon onClick={onClickToProfile} icon={<Profile />} text={'My Profile'} />
-      <ItemWithIcon onClick={onClickLogOut} icon={<SignOut />} text={'Sign Out'} />
+      <ItemWithIcon onClick={onClickToProfile} icon={<ProfileIcon />} text={'My ProfileIcon'} />
+      <ItemWithIcon onClick={onClickLogOut} icon={<SignOutIcon />} text={'Sign Out'} />
     </DropDown>
   )
 }
@@ -156,9 +156,9 @@ export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => 
 export const DropDownPackMenu = () => {
   return (
     <DropDown className={s.cardsContent} trigger={'iconMore'}>
-      <ItemWithIcon icon={<Learn />} text={'Learn'} />
-      <ItemWithIcon icon={<Edit />} text={'Edit'} />
-      <ItemWithIcon icon={<Delete />} text={'Delete'} />
+      <ItemWithIcon icon={<LearnIcon />} text={'Learn'} />
+      <ItemWithIcon icon={<EditIcon />} text={'Edit'} />
+      <ItemWithIcon icon={<DeleteIcon />} text={'Delete'} />
     </DropDown>
   )
 }

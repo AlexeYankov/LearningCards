@@ -94,7 +94,7 @@ export const cardsService = baseApi.injectEndpoints({
         }),
       }),
 
-      createCard: builder.mutation<CardsResponsType, { id: string; data: FormData }>({
+      createCard: builder.mutation<CardsResponseType, { id: string; data: FormData }>({
         invalidatesTags: ['Cards'],
         query: ({ id, data }) => {
           return {

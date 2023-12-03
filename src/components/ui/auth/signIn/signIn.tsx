@@ -69,7 +69,7 @@ export const SignIn = () => {
         <div className={s.linkContainer}>
           <Typography
             className={s.forgotPassLink}
-            children={'Forgot Password?'}
+            children={'Forgot PasswordIcon?'}
             variant={'body2'}
             as={Link}
             to={'/forgotYourPassword'}

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Delete } from '@/asserts/icons/components/Delete'
-import { Logout } from '@/asserts/icons/components/Logout'
+import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon.tsx'
+import { LogoutIcon } from '@/asserts/icons/components/LogoutIcon.tsx'
 
 import { Button } from './button'
 import { ThemeDecorator } from '@/api/storybookDecorators.tsx'
@@ -49,7 +49,7 @@ export const PrimaryWithIcon: Story = {
     fullWidth: false,
     variant: 'primary',
   },
-  render: args => <Button icon={<Delete />} {...args} />,
+  render: args => <Button icon={<DeleteIcon />} {...args} />,
 }
 
 export const Tertiary: Story = {
@@ -79,7 +79,7 @@ export const SecondaryWithIcon: Story = {
     fullWidth: false,
     variant: 'secondary',
   },
-  render: args => <Button icon={<Logout />} {...args} />,
+  render: args => <Button icon={<LogoutIcon />} {...args} />,
 }
 
 export const FullWidthButton: Story = {

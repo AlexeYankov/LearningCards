@@ -1,4 +1,4 @@
-export const Email = () => {
+export const EmailIcon = () => {
   return (
     <svg
       fill={'none'}

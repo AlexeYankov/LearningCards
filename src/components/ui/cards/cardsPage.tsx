@@ -7,17 +7,17 @@ import { changeCardsCurrentPage, changeCardsItemsPerPage } from '@/api/cards/car
 import { Column } from '@/components/ui/table/types.ts'
 import { Body, Cell, Head, HeadCell, Root, Row } from '@it-incubator/ui-kit'
 import s from './cardsPage.module.scss'
-import { Edit } from '@/asserts/icons/components/Edit.tsx'
+import { EditIcon } from '@/asserts/icons/components/EditIcon.tsx'
 import { EmptyPack } from '@/components/ui/cards/components/emptyPack/emptyPack.tsx'
 import { PageName } from '@/components/ui/cards/components/pageName/pageName.tsx'
 import { PageBar } from '@/components/ui/cards/components/pageBar/pageBar.tsx'
-import { ArrowBack } from '@/asserts/icons/components/ArrowBack.tsx'
+import { ArrowBackIcon } from '@/asserts/icons/components/ArrowBackIcon.tsx'
 import { Pagination } from '@/components/ui/pagination'
-import { Star } from '@/asserts/icons/components/Star.tsx'
+import { StarIcon } from '@/asserts/icons/components/StarIcon.tsx'
 import { convertedTime } from '@/helpers/convertedTime.ts'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/api/auth-api/auth.api.ts'
-import { Delete } from '@/asserts/icons/components/Delete.tsx'
+import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon.tsx'
 
 export const CardsPage = () => {
   const { id } = useParams()
@@ -64,7 +64,7 @@ export const CardsPage = () => {
   return (
     <div className={s.container}>
       <Link className={s.backLink} to={'/'} onClick={resetFilterDecks}>
-        <ArrowBack />
+        <ArrowBackIcon />
         Back to Packs List
       </Link>
 
@@ -137,15 +137,15 @@ export const CardsPage = () => {
                     <Cell className={`${s.bodyCell} `}>
                       <div className={s.starsBox}>
                         {result.map((star, i) => {
-                          return <Star iconId={star} key={i} />
+                          return <StarIcon iconId={star} key={i} />
                         })}
                       </div>
                     </Cell>
                     {isMyCard && (
                       <Cell className={`${s.bodyCell} `}>
                         <div className={s.iconBox}>
-                          <Edit />
-                          <Delete />
+                          <EditIcon />
+                          <DeleteIcon />
                         </div>
                       </Cell>
                     )}

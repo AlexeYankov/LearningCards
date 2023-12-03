@@ -1,18 +1,17 @@
-import {ChangeEvent, FC, useState} from 'react'
-import {Button} from '../../../button/button.tsx'
-import {Select} from '@/components/ui/select'
-import {TextField} from '@/components/ui/textField'
-import {Modal, ModalTitle} from '@/components/ui/modal'
-import {useAppSelector} from '@/api/store.ts'
-import {useCreateCardMutation} from '@/api/common.api.ts'
-import {z} from 'zod'
-import {useForm} from 'react-hook-form'
-// import f from '@/components/ui/packs/packsPage.module.scss'
-import {Image} from '@/asserts/icons/components/Image.tsx'
+import { ChangeEvent, FC, useState } from 'react'
+import { Button } from '../../../button/button.tsx'
+import { Select } from '@/components/ui/select'
+import { TextField } from '@/components/ui/textField'
+import { Modal, ModalTitle } from '@/components/ui/modal'
+import { useAppSelector } from '@/api/store.ts'
+import { useCreateCardMutation } from '@/api/common.api.ts'
+import { z } from 'zod'
+import { useForm } from 'react-hook-form'
+import { ImageIcon } from '@/asserts/icons/components/ImageIcon.tsx'
 import f from './addCard.module.scss'
 
 type Props = {
-  id: string | undefined
+  id?: string
 }
 
 const schema = z.object({
@@ -25,8 +24,8 @@ const schema = z.object({
 type Form = z.infer<typeof schema>
 
 export const AddCard: FC<Props> = ({ id }) => {
-  const [selectedQuestionImage, setSelectedQuestionImage] = useState('');
-  const [selectedAnswerImage, setSelectedAnswerImage] = useState('');
+  const [selectedQuestionImage, setSelectedQuestionImage] = useState('')
+  const [selectedAnswerImage, setSelectedAnswerImage] = useState('')
   const [open, setOpen] = useState(false)
   // const [isPrivate, setIsPrivate] = useState(false)
   const valueSelect = useAppSelector(state => state.cards.valueSelect)
@@ -50,29 +49,28 @@ export const AddCard: FC<Props> = ({ id }) => {
   }
 
   const handleQuestionFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+    const file = event.target.files?.[0]
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setSelectedQuestionImage(imageUrl);
-      setValue('questionImg', [file]);
+      const imageUrl = URL.createObjectURL(file)
+      setSelectedQuestionImage(imageUrl)
+      setValue('questionImg', [file])
     } else {
-      setSelectedQuestionImage('');
-      setValue('questionImg', []);
+      setSelectedQuestionImage('')
+      setValue('questionImg', [])
     }
-  };
+  }
 
   const handleAnswerFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+    const file = event.target.files?.[0]
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setSelectedAnswerImage(imageUrl);
-      setValue('answerImg', [file]);
+      const imageUrl = URL.createObjectURL(file)
+      setSelectedAnswerImage(imageUrl)
+      setValue('answerImg', [file])
     } else {
-      setSelectedAnswerImage('');
-      setValue('answerImg', []);
+      setSelectedAnswerImage('')
+      setValue('answerImg', [])
     }
-  };
-
+  }
 
   const onSubmit = handleSubmit(data => {
     const form = new FormData()
@@ -88,7 +86,6 @@ export const AddCard: FC<Props> = ({ id }) => {
     ) {
       createCard({ id: id!, data: form })
       handleModalToggle()
-
     } else {
       setError('question', { message: 'String must contain at least 3 character(s)' })
       setError('answer', { message: 'String must contain at least 3 character(s)' })
@@ -98,13 +95,11 @@ export const AddCard: FC<Props> = ({ id }) => {
   return (
     <div className={f.container__pageName}>
       <Modal
-          onOpenChange={handleModalToggle}
-          open={open}
-          className={f.contentComponents}
-          triggerName={
-        <Button>
-          Add new card
-        </Button>}>
+        onOpenChange={handleModalToggle}
+        open={open}
+        className={f.contentComponents}
+        triggerName={<Button>Add new card</Button>}
+      >
         <ModalTitle title={'Add New Card'} />
         <Select
           classname={f.select}
@@ -115,56 +110,56 @@ export const AddCard: FC<Props> = ({ id }) => {
         />
         <form onSubmit={onSubmit}>
           {valueSelect === 'Picture' ? (
-              <div className={f.contentComponents}>
-                Question:
-                <img className={f.img} src={selectedQuestionImage || ''} />
-                <label htmlFor="question-img-input" className={f.changeCover}>
-                  <Image />
-                  Change Question Image
-                </label>
-                <input
-                    className={f.inputFile}
-                    id="question-img-input"
-                    type="file"
-                    onChange={handleQuestionFileChange}
-                />
-              </div>
+            <div className={f.contentComponents}>
+              Question:
+              <img className={f.img} src={selectedQuestionImage || ''} />
+              <label htmlFor="question-img-input" className={f.changeCover}>
+                <ImageIcon />
+                Change Question Image
+              </label>
+              <input
+                className={f.inputFile}
+                id="question-img-input"
+                type="file"
+                onChange={handleQuestionFileChange}
+              />
+            </div>
           ) : (
-              <div className={f.contentComponents}>
-                <TextField
-                    inputId={'Input1'}
-                    label={'Question'}
-                    placeholder={'Question'}
-                    errorMessage={errors.question?.message}
-                    {...register('question')}
-                />
-              </div>
+            <div className={f.contentComponents}>
+              <TextField
+                inputId={'Input1'}
+                label={'Question'}
+                placeholder={'Question'}
+                errorMessage={errors.question?.message}
+                {...register('question')}
+              />
+            </div>
           )}
           {valueSelect === 'Picture' ? (
-              <div className={f.contentComponents}>
-                Answer:
-                <img className={f.img} src={selectedAnswerImage || ''} />
-                <label htmlFor="answer-img-input" className={f.changeCover}>
-                  <Image />
-                  Change Answer Image
-                </label>
-                <input
-                    className={f.inputFile}
-                    id="answer-img-input"
-                    type="file"
-                    onChange={handleAnswerFileChange}
-                />
-              </div>
+            <div className={f.contentComponents}>
+              Answer:
+              <img className={f.img} src={selectedAnswerImage || ''} />
+              <label htmlFor="answer-img-input" className={f.changeCover}>
+                <ImageIcon />
+                Change Answer Image
+              </label>
+              <input
+                className={f.inputFile}
+                id="answer-img-input"
+                type="file"
+                onChange={handleAnswerFileChange}
+              />
+            </div>
           ) : (
-              <div className={f.contentComponents}>
-                <TextField
-                    inputId={'Input2'}
-                    label={'Answer'}
-                    placeholder={'Answer'}
-                    errorMessage={errors.answer?.message}
-                    {...register('answer')}
-                />
-              </div>
+            <div className={f.contentComponents}>
+              <TextField
+                inputId={'Input2'}
+                label={'Answer'}
+                placeholder={'Answer'}
+                errorMessage={errors.answer?.message}
+                {...register('answer')}
+              />
+            </div>
           )}
           <div className={`${f.contentBtn} ${f.contentBtns}`}>
             <Button classNameBtnBox={f.btnBox} onClick={handleModalToggle} variant={'secondary'}>

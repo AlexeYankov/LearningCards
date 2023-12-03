@@ -5,9 +5,9 @@ import { CheckBox } from '@/components/ui/checkbox'
 import { Modal, ModalTitle } from '@/components/ui/modal'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
-import f from '../../packsPage.module.scss'
+import f from '../../decksPage.module.scss'
 import { useAppDispatch } from '@/api/store.ts'
-import { Image } from '@/asserts/icons/components/Image.tsx'
+import { ImageIcon } from '@/asserts/icons/components/ImageIcon.tsx'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { resetFilter } from '@/api/decks/pagination.reducer.ts'
@@ -20,7 +20,7 @@ const schema = z.object({
 
 type Form = z.infer<typeof schema>
 
-export const PageName = () => {
+export const DecksPageName = () => {
   const dispatch = useAppDispatch()
   const [selectedImage, setSelectedImage] = useState('')
   const [open, setOpen] = useState(false)
@@ -95,7 +95,7 @@ export const PageName = () => {
           <div className={f.contentComponents}>
             <img className={f.img} src={selectedImage || ''} />
             <label htmlFor="input__file" className={f.changeCover}>
-              <Image />
+              <ImageIcon />
               Change Cover
             </label>
             <input
