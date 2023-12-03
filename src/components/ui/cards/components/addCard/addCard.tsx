@@ -116,6 +116,7 @@ export const AddCard: FC<Props> = ({ id }) => {
         <form onSubmit={onSubmit}>
           {valueSelect === 'Picture' ? (
               <div className={f.contentComponents}>
+                Question:
                 <img className={f.img} src={selectedQuestionImage || ''} />
                 <label htmlFor="question-img-input" className={f.changeCover}>
                   <Image />
@@ -141,6 +142,7 @@ export const AddCard: FC<Props> = ({ id }) => {
           )}
           {valueSelect === 'Picture' ? (
               <div className={f.contentComponents}>
+                Answer:
                 <img className={f.img} src={selectedAnswerImage || ''} />
                 <label htmlFor="answer-img-input" className={f.changeCover}>
                   <Image />
