@@ -12,7 +12,7 @@ button {
 
 .label {
   margin-bottom: 1px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: var(--font-weight-regular);
   color: var(--color-dark-100);
 }
@@ -28,8 +28,6 @@ button {
 
   background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
-
-  transition: all 0.25s;
 }
 
 .selectTriggerBox {
@@ -38,7 +36,7 @@ button {
   justify-content: space-between;
 
   width: 100%;
-  padding: 8px 0;
+  padding: 8px;
 }
 
 .hoverActive:focus {
@@ -63,8 +61,6 @@ button {
 }
 
 .SelectTrigger[data-state='open'] {
-  border-radius: 4px 4px 0 0;
-
   & .rotate {
     transform: rotate(180deg);
     transition: all 0.25s;
@@ -75,7 +71,6 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.25s;
 }
 
 .SelectContent {
@@ -106,7 +101,7 @@ button {
   height: 36px;
   padding: 6px 12px;
 
-  font-size: 16px;
+  font-size: var(--font-size-s);
   color: var(--color-light-100);
 }
 

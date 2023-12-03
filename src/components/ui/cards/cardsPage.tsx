@@ -3,8 +3,12 @@ import { useGetCardsQuery } from '@/api/common.api'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { resetFilter } from '@/api/decks/pagination.reducer'
 import { useEffect } from 'react'
-import { changeCardsCurrentPage, changeCardsItemsPerPage } from '@/api/cards/cards.ts'
-import { Column } from '@/components/ui/table/types.ts'
+import {
+  changeCardOrderBy,
+  changeCardsCurrentPage,
+  changeCardsItemsPerPage,
+} from '@/api/cards/cards.ts'
+import { Column, Sort } from '@/components/ui/table/types.ts'
 import { Body, Cell, Head, HeadCell, Root, Row } from '@it-incubator/ui-kit'
 import s from './cardsPage.module.scss'
 import { EditIcon } from '@/asserts/icons/components/EditIcon.tsx'
@@ -24,11 +28,13 @@ export const CardsPage = () => {
   const { id } = useParams()
   const dispatch = useAppDispatch()
   const currentPage = useAppSelector(state => state.pagination.currentPage)
+  const sort = useAppSelector(state => state.cards.sort)
   const itemsPerPage = useAppSelector(state => state.cards.itemsPerPage)
   const { data: cards, isLoading } = useGetCardsQuery({
     id: id!,
     currentPage,
     itemsPerPage,
+    orderBy: sort?.direction as Sort,
   })
 
   const { data: me } = useMeQuery()
@@ -38,6 +44,23 @@ export const CardsPage = () => {
     dispatch(changeCardsItemsPerPage({ itemsPerPage: 10 }))
     localStorage.setItem('page', '1')
     dispatch(resetFilter())
+  }
+
+  const handleSort = (key: string) => {
+    dispatch(
+      changeCardOrderBy({
+        key,
+        direction: sort?.direction === `${key}-asc` ? `${key}-desc` : `${key}-asc`,
+      })
+    )
+    if (sort?.direction === `${key}-desc`) {
+      dispatch(
+        changeCardOrderBy({
+          key,
+          direction: null,
+        })
+      )
+    }
   }
 
   useEffect(() => {
@@ -78,14 +101,18 @@ export const CardsPage = () => {
           <Root className={s.container__common}>
             <Head>
               <Row className={s.cardsRow}>
-                {columns.map(({ title, key }) => {
+                {columns.map(({ title, key, sortable }) => {
                   if (!isMyCard && key === 'actions') {
                     return null
                   }
-
                   return (
-                    <HeadCell className={s.headCell} key={key}>
+                    <HeadCell className={s.headCell} key={key} onClick={() => handleSort(key)}>
                       {title}
+                      {sort && sort.key === key && sortable && sort.direction && (
+                        <button className={s.sortIcon}>
+                          {sort.direction === `${key}-desc` ? '▲' : '▼'}
+                        </button>
+                      )}
                     </HeadCell>
                   )
                 })}
