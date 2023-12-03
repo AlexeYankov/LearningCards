@@ -109,7 +109,9 @@ export const PacksPage = () => {
                 <HeadCell className={s.headCell} key={key} onClick={() => handleSort(key)}>
                   {title}
                   {sort && sort.key === key && sortable && (
-                    <span>{sort.direction === `${key}-desc` ? '▲' : '▼'}</span>
+                    <span className={s.sortIcon}>
+                      {sort.direction === `${key}-desc` ? '▲' : '▼'}
+                    </span>
                   )}
                 </HeadCell>
               )

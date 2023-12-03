@@ -153,6 +153,7 @@ div.btnBox {
 
   padding: 6px 24px;
 
+  font-size: var(--font-size-s);
   text-align: left;
 
   background-color: var(--color-dark-500);
@@ -288,4 +289,8 @@ div.btnBox {
     height: 20px;
     fill: var(--color-light-100);
   }
+}
+
+.sortIcon {
+  margin-left: 5px;
 }
