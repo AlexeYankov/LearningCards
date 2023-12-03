@@ -62,6 +62,14 @@ export const PacksPage = () => {
         })
       )
     }
+    if (sort?.direction === `${key}-desc`) {
+      dispatch(
+        changeOrderBy({
+          key,
+          direction: null,
+        })
+      )
+    }
   }
 
   useEffect(() => {
@@ -108,10 +116,10 @@ export const PacksPage = () => {
               return (
                 <HeadCell className={s.headCell} key={key} onClick={() => handleSort(key)}>
                   {title}
-                  {sort && sort.key === key && sortable && (
-                    <span className={s.sortIcon}>
+                  {sort && sort.key === key && sortable && sort.direction && (
+                    <button className={s.sortIcon}>
                       {sort.direction === `${key}-desc` ? '▲' : '▼'}
-                    </span>
+                    </button>
                   )}
                 </HeadCell>
               )
