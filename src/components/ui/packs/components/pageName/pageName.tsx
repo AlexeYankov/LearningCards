@@ -1,12 +1,10 @@
 import { ChangeEvent, useState } from 'react'
-
 import { CreateDeckArgType, useCreateDeckMutation } from '@/api/decks/decks.api'
 import { Button } from '@/components/ui/button'
 import { CheckBox } from '@/components/ui/checkbox'
 import { Modal, ModalTitle } from '@/components/ui/modal'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
-
 import f from '../../packsPage.module.scss'
 import { useAppDispatch } from '@/api/store.ts'
 import { Image } from '@/asserts/icons/components/Image.tsx'

@@ -1,15 +1,17 @@
-import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 
 import f from '../../cardsPage.module.scss'
 import { FC } from 'react'
 import { DropDownPackMenu } from '@/components/ui/dropDown/dropDown'
+import {AddCard} from "@/components/ui/cards/components/addCard/addCard.tsx";
+
 
 type PageNameProps = {
   isMyCard?: boolean
+  id: string | undefined
 }
 
-export const PageName: FC<PageNameProps> = ({ isMyCard }) => {
+export const PageName: FC<PageNameProps> = ({ id, isMyCard }) => {
   return (
     <div className={f.container__pageName}>
       <Typography as={'h1'} variant={'large'} className={f.textWithIconBox}>
@@ -17,7 +19,7 @@ export const PageName: FC<PageNameProps> = ({ isMyCard }) => {
         {isMyCard && <DropDownPackMenu />}
       </Typography>
       <div>
-        <Button>{isMyCard ? 'Add New Card' : 'Learn to Pack'}</Button>
+        <AddCard id={id} />
       </div>
     </div>
   )

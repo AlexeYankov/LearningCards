@@ -31,7 +31,14 @@ export type CardsType = {
   maxCardsCount?: number
   pagination?: PaginationResponseType
 }
-
+export type CreateCardParams = {
+  questionImg?: File
+  answerImg?: File
+  questionVideo?: string
+  answerVideo?: string
+  answer?: string
+  question?: string
+}
 export type PaginationResponseType = {
   currentPage?: number
   itemsPerPage?: number
@@ -86,9 +93,25 @@ export const cardsService = baseApi.injectEndpoints({
           url: `v1/cards/${id}`,
         }),
       }),
+
+      createCard: builder.mutation<CardsResponsType, { id: string; data: FormData }>({
+        invalidatesTags: ['Cards'],
+        query: ({ id, data }) => {
+          return {
+            method: 'POST',
+            url: `v1/decks/${id}/cards`,
+            body: data,
+          }
+        },
+      }),
     }
   },
 })
 
-export const { useDeleteCardMutation, useGetCardQuery, useGetCardsQuery, useUpdateCardMutation } =
-  cardsService
+export const {
+  useCreateCardMutation,
+  useDeleteCardMutation,
+  useGetCardQuery,
+  useGetCardsQuery,
+  useUpdateCardMutation,
+} = cardsService

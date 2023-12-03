@@ -73,6 +73,7 @@ export const CardsPage = () => {
       ) : (
         <>
           <PageName isMyCard={isMyCard} />
+          <PageName isMyDeck={flag} id={id} />
           <PageBar />
           <Root className={s.container__common}>
             <Head>
