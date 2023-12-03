@@ -1,5 +1,6 @@
 import { baseApi } from '@/api/cards.api.ts'
 import { PaginationResponseType } from '@/api/common.api.ts'
+import { Sort } from '@/components/ui/table/types.ts'
 
 type GetDecksParamsType = {
   authorId?: string
@@ -8,7 +9,7 @@ type GetDecksParamsType = {
   maxCardsCount?: number
   minCardsCount?: number
   name?: string
-  orderBy?: 'name-asc' | 'name-desc'
+  orderBy?: Sort
 }
 
 export type DecksType = {

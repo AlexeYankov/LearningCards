@@ -12,9 +12,9 @@ import { PageBar } from './components/pageBar/pageBar'
 import { PageName } from './components/pageName/pageName'
 import { useAppDispatch, useAppSelector } from '@/api/store'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { changeCurrentPage } from '@/api/decks/pagination.reducer'
+import { changeCurrentPage, changeOrderBy } from '@/api/decks/pagination.reducer'
 import { Body, Cell, Head, HeadCell, Root, Row } from '@it-incubator/ui-kit'
-import { Column } from '@/components/ui/table/types.ts'
+import { Column, Sort } from '@/components/ui/table/types.ts'
 import { Typography } from '@/components/ui/typography'
 import { Link } from 'react-router-dom'
 import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal'
@@ -35,15 +35,14 @@ export const PacksPage = () => {
   const dispatch = useAppDispatch()
 
   const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
+  const sort = useAppSelector(state => state.pagination.sort)
   const currentPage = useAppSelector(state => state.pagination.currentPage)
   const maxCardsCount = useAppSelector(state => state.pagination.maxCardsCount)
   const minCardsCount = useAppSelector(state => state.pagination.minCardsCount)
   const authorId = useAppSelector(state => state.pagination.authorId)
   const name = useAppSelector(state => state.pagination.name)
-  const orderBy = useAppSelector(state => state.pagination.orderBy)
 
   const { data: me } = useMeQuery()
-
   const { data: decks } = useGetDecksQuery({
     currentPage,
     itemsPerPage,
@@ -51,8 +50,20 @@ export const PacksPage = () => {
     minCardsCount,
     authorId,
     name,
-    orderBy,
+    orderBy: sort?.direction as Sort,
   })
+
+  const handleSort = (key: string) => {
+    if (key !== 'actions') {
+      dispatch(
+        changeOrderBy({
+          key,
+          direction: sort?.direction === `${key}-asc` ? `${key}-desc` : `${key}-asc`,
+        })
+      )
+    }
+  }
+
   useEffect(() => {
     const savedCurrentPage = localStorage.getItem('page')
     dispatch(changeCurrentPage({ currentPage: parseInt(savedCurrentPage!, 10) || 1 }))
@@ -82,6 +93,7 @@ export const PacksPage = () => {
     {
       key: 'actions',
       title: '',
+      sortable: false,
     },
   ]
 
@@ -91,14 +103,14 @@ export const PacksPage = () => {
       <PageBar />
       <Root className={s.container__common}>
         <Head className={s.tableHead}>
-          {/*<Row className={`${tableName === 'Cards' ? s.cardsRow : s.decksRow}`}>*/}
           <Row className={s.decksRow}>
-            {columns.map(({ title, key }) => {
+            {columns.map(({ title, key, sortable }) => {
               return (
-                <HeadCell className={s.headCell} key={key}>
-                  {/*<HeadCell key={key} onClick={handleSort(key, sortable)} sortable={sortable}>*/}
+                <HeadCell className={s.headCell} key={key} onClick={() => handleSort(key)}>
                   {title}
-                  {/*{sort?.key === key ? <ArrowUp /> : ''}*/}
+                  {sort && sort.key === key && sortable && (
+                    <span>{sort.direction === `${key}-desc` ? '▲' : '▼'}</span>
+                  )}
                 </HeadCell>
               )
             })}
@@ -308,7 +320,9 @@ const LearnCardModal = ({ deck, isMyDeck }: { deck: ResponseDeckType; isMyDeck: 
     setOpen(prevState => !prevState)
   }
 
-  const isBtnDisabled = deck.cardsCount === 0 || (isMyDeck && deck.cardsCount === 0)
+  const emptyCardsInDeck = deck.cardsCount === 0
+
+  const isBtnDisabled = emptyCardsInDeck || (isMyDeck && emptyCardsInDeck)
 
   return (
     <Modal

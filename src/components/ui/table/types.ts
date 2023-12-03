@@ -6,6 +6,8 @@ export type TableType = {
   isMyDeck?: boolean
 }
 
+export type SortDescriptionType = `${string}-desc` | `${string}-asc` | null
+
 export type Column = {
   title: string
   key: string
@@ -14,7 +16,7 @@ export type Column = {
 
 export type Sort = {
   key: string
-  direction: 'asc' | 'desc'
+  direction: SortDescriptionType
 } | null
 
 export type HeadCellType = {

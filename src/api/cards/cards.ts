@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Sort } from '@/components/ui/table/types.ts'
 
 const initialState = {
   answer: '',
   question: '',
-  orderBy: '',
+  orderBy: null as Sort,
   currentPage: 1,
   itemsPerPage: 10,
 }
@@ -12,10 +13,20 @@ export const cardsSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
-    changeCardsCurrentPage: (state, action: PayloadAction<{ currentPage: number }>) => {
+    changeCardsCurrentPage: (
+      state,
+      action: PayloadAction<{
+        currentPage: number
+      }>
+    ) => {
       state.currentPage = action.payload.currentPage
     },
-    changeCardsItemsPerPage: (state, action: PayloadAction<{ itemsPerPage: number }>) => {
+    changeCardsItemsPerPage: (
+      state,
+      action: PayloadAction<{
+        itemsPerPage: number
+      }>
+    ) => {
       state.itemsPerPage = action.payload.itemsPerPage
     },
     resetCardsFilter: state => {

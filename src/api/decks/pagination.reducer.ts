@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Sort } from '@/components/ui/table/types.ts'
 
 const initialState = {
   currentPage: 1,
@@ -7,7 +8,7 @@ const initialState = {
   maxCardsCount: 61,
   authorId: '',
   name: '',
-  orderBy: '' as 'name-asc' | 'name-desc',
+  sort: null as Sort,
 }
 
 const paginationSlice = createSlice({
@@ -32,19 +33,14 @@ const paginationSlice = createSlice({
     searchDeckByName: (state, action: PayloadAction<{ name: string }>) => {
       state.name = action.payload.name
     },
-    changeOrderBy: (
-      state,
-      action: PayloadAction<{
-        orderBy: 'name-desc' | 'name-asc'
-      }>
-    ) => {
-      state.orderBy = action.payload.orderBy
+    changeOrderBy: (state, action: PayloadAction<Sort>) => {
+      state.sort = action.payload
     },
     resetFilter: state => {
       state.name = ''
       state.currentPage = 1
       state.maxCardsCount = 61
-      state.orderBy = '' as 'name-asc' | 'name-desc'
+      state.sort = null
       state.minCardsCount = 0
       state.itemsPerPage = 10
       state.authorId = ''
