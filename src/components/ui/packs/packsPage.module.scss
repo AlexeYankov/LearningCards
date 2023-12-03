@@ -213,21 +213,6 @@ div.btnBox {
     fill: white;
   }
 
-  .stars {
-    display: flex;
-  }
-
-  .starsContainer {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: flex-start;
-  }
-
-  .stars svg {
-    fill: var(--color-warning-300);
-  }
-
   a {
     color: var(--color-light-100);
     text-decoration: none;

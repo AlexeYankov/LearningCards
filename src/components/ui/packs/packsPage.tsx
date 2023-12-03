@@ -146,7 +146,7 @@ export const PacksPage = () => {
                 <Cell className={s.bodyCell}>{deck.cardsCount}</Cell>
                 <Cell className={s.bodyCell}>{convertedTime(deck.updated)}</Cell>
                 <Cell className={s.bodyCell}>{deck.author.name}</Cell>
-                <Cell className={`${s.bodyCell} ${s.iconBox}`}>
+                <Cell className={`${s.bodyCell}`}>
                   <div className={s.iconsBox}>
                     {isMyDeck ? (
                       <>

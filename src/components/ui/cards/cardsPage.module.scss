@@ -29,7 +29,7 @@
   border: 1px solid var(--color-dark-500);
 }
 
-.backLink {
+.nk {
   display: flex;
   gap: 4px;
   align-items: center;
@@ -79,9 +79,14 @@
 }
 
 .headCell {
+  cursor: pointer;
+
   padding: 6px 24px;
+
   text-align: left;
+
   background-color: var(--color-dark-500);
+
   transition: 0.3s;
 
   &:hover {
@@ -90,26 +95,8 @@
   }
 
   &:last-child {
+    cursor: default;
     background-color: var(--color-dark-500);
-  }
-
-  svg {
-    cursor: pointer;
-    margin-left: 4px;
-    fill: white;
-  }
-
-  .typography {
-    font-size: var(--font-size-s);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-m);
-    white-space: nowrap;
-  }
-
-  .iconRotate {
-    svg {
-      transform: rotate(180deg);
-    }
   }
 }
 
@@ -119,39 +106,12 @@
   max-width: 200px;
   padding: 6px 24px;
 
+  font-size: var(--font-size-s);
   text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
 
   border-bottom: 1px solid var(--color-dark-500);
-
-  svg:not(.stars) {
-    fill: white;
-  }
-
-  .stars {
-    display: flex;
-  }
-
-  .starsContainer {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: flex-start;
-  }
-
-  .stars svg {
-    fill: var(--color-warning-300);
-  }
-
-  a {
-    color: var(--color-light-100);
-    text-decoration: none;
-  }
-
-  a :visited {
-    color: var(--color-light-100);
-  }
 
   .typography {
     font-size: var(--font-size-s);
@@ -169,12 +129,11 @@
   }
 }
 
-.iconBox {
-  div {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
+.starsBox {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  line-height: 1;
 
   svg {
     width: 16px;
@@ -182,15 +141,30 @@
   }
 }
 
-.starsBox {
-  div {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
+.iconBox {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  line-height: 1;
 
   svg {
+    cursor: pointer;
     width: 16px;
     height: 16px;
+    fill: var(--color-light-100);
+  }
+}
+
+.backLink {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+
+  margin-bottom: 24px;
+
+  text-decoration: none;
+
+  svg {
+    fill: var(--color-light-100);
   }
 }

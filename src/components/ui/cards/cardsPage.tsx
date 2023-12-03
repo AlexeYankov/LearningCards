@@ -17,6 +17,7 @@ import { Star } from '@/asserts/icons/components/Star.tsx'
 import { convertedTime } from '@/helpers/convertedTime.ts'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/api/auth-api/auth.api.ts'
+import { Delete } from '@/asserts/icons/components/Delete.tsx'
 
 export const CardsPage = () => {
   const { id } = useParams()
@@ -74,7 +75,7 @@ export const CardsPage = () => {
           <PageName isMyCard={isMyCard} />
           <PageBar />
           <Root className={s.container__common}>
-            <Head className={s.tableHead}>
+            <Head>
               <Row className={s.cardsRow}>
                 {columns.map(({ title, key }) => {
                   if (!isMyCard && key === 'actions') {
@@ -83,9 +84,7 @@ export const CardsPage = () => {
 
                   return (
                     <HeadCell className={s.headCell} key={key}>
-                      {/*<HeadCell key={key} onClick={handleSort(key, sortable)} sortable={sortable}>*/}
                       {title}
-                      {/*{sort?.key === key ? <ArrowUp /> : ''}*/}
                     </HeadCell>
                   )
                 })}
@@ -121,7 +120,6 @@ export const CardsPage = () => {
                       </div>
                     </Cell>
                     <Cell className={s.bodyCell}>
-                      {' '}
                       <div className={s.imageWithNameBox}>
                         {card.answer && card.answerImg && (
                           <img
@@ -130,21 +128,25 @@ export const CardsPage = () => {
                             alt={`${card.answerImg + ' image'}`}
                           />
                         )}
-
                         <Typography variant={'body1'} className={s.typography}>
                           {card.answer}
                         </Typography>
                       </div>
                     </Cell>
                     <Cell className={s.bodyCell}>{convertedTime(card.updated)}</Cell>
-                    <Cell className={`${s.bodyCell} ${s.starsBox}`}>
-                      {result.map((star, i) => {
-                        return <Star iconId={star} key={i} />
-                      })}
+                    <Cell className={`${s.bodyCell} `}>
+                      <div className={s.starsBox}>
+                        {result.map((star, i) => {
+                          return <Star iconId={star} key={i} />
+                        })}
+                      </div>
                     </Cell>
                     {isMyCard && (
-                      <Cell className={`${s.bodyCell} ${s.iconBox}`}>
-                        <Edit />
+                      <Cell className={`${s.bodyCell} `}>
+                        <div className={s.iconBox}>
+                          <Edit />
+                          <Delete />
+                        </div>
                       </Cell>
                     )}
                   </Row>
