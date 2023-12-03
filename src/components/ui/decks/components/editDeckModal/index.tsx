@@ -98,7 +98,7 @@ export const EditDeckModal = ({ deck }: EditDeckModalProps) => {
       <ModalTitle title={'Edit Pack'} />
       <form onSubmit={onSubmit}>
         <div className={s.contentComponents}>
-          <img className={s.img} src={selectedImage} />
+          <img alt={''} className={s.img} src={selectedImage} />
           <div className={s.btnCoverBox}>
             {selectedImage && (
               <Button variant={'secondary'} className={s.changeCover} onClick={deleteDeckCover}>

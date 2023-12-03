@@ -3,15 +3,15 @@ import { useGetDecksQuery } from '@/api/decks/decks.api'
 import s from './decksPage.module.scss'
 
 import { Pagination } from '../pagination'
-import { DecksPageBar } from './components/decksPageBar/decksPageBar'
+import { DecksPageBar } from './components/decksPageBar'
 import { useAppDispatch, useAppSelector } from '@/api/store'
 import { useEffect } from 'react'
 import { changeCurrentPage } from '@/api/decks/pagination.reducer'
 import { Root } from '@it-incubator/ui-kit'
-import { Sort } from '@/components/ui/table/types.ts'
-import { DecksPageName } from '@/components/ui/decks/components/decksPageName/decksPageName.tsx'
-import { DecksHead } from '@/components/ui/decks/components/decksHead/decksHead.tsx'
-import { DecksBody } from '@/components/ui/decks/components/decksBody/decksBody.tsx'
+import { Sort } from '@/components/ui/table/types'
+import { DecksPageName } from './components/decksPageName'
+import { DecksHead } from './components/decksHead'
+import { DecksBody } from './components/decksBody'
 
 export const DecksPage = () => {
   const dispatch = useAppDispatch()

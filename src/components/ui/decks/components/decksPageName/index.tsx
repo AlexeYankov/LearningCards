@@ -7,10 +7,10 @@ import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 import f from '../../decksPage.module.scss'
 import { useAppDispatch } from '@/api/store.ts'
-import { ImageIcon } from '@/asserts/icons/components/ImageIcon.tsx'
+import { ImageIcon } from '@/asserts/icons/components/ImageIcon'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { resetFilter } from '@/api/decks/pagination.reducer.ts'
+import { resetFilter } from '@/api/decks/pagination.reducer'
 
 const schema = z.object({
   cover: z.array(z.instanceof(File)),
@@ -93,7 +93,7 @@ export const DecksPageName = () => {
         <ModalTitle title={'Add New Pack'} />
         <form onSubmit={onSubmit}>
           <div className={f.contentComponents}>
-            <img className={f.img} src={selectedImage || ''} />
+            <img alt={''} className={f.img} src={selectedImage || ''} />
             <label htmlFor="input__file" className={f.changeCover}>
               <ImageIcon />
               Change Cover
