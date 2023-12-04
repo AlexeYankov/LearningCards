@@ -57,7 +57,6 @@ export const authService = baseApi.injectEndpoints({
                 }),
                 invalidatesTags: ['Me']
             }),
-
         }
     },
 })
@@ -69,7 +68,7 @@ export const {
     useLoginMutation,
     useRecoverPasswordMutation,
     useLogOutMutation,
-    useResetPasswordMutation
+    useResetPasswordMutation,
 } = authService
 
 

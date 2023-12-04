@@ -10,16 +10,17 @@ import { CreateNewPassword } from '@/components/ui/auth/createNewPassword'
 import { ForgotYourPassword } from '@/components/ui/auth/forgotYourPassword'
 import { SignUp } from '@/components/ui/auth/signUp/signUp'
 import { CardsPage } from '@/components/ui/cards/cardsPage'
-import { DecksPage } from '@/components/ui/decks/decksPage'
 import { useMeQuery } from '@/api/auth-api/auth.api.ts'
 import { Layout } from '@/components/ui/header/header.tsx'
-import { Login } from '@/pages/login.tsx'
 import { EditProfile } from '@/components/ui/editProfile/editProfile.tsx'
+import { SignIn } from '@/components/ui/auth/signIn'
+import { LearnPack } from '@/components/ui/cards/components/learnPack/learnPack.tsx'
+import { DecksPage } from '@/components/ui/decks/decksPage.tsx'
 import { Loader } from '@/components/ui/loader/loader.tsx'
 
 const publicRoutes: RouteObject[] = [
   {
-    element: <Login />,
+    element: <SignIn />,
     path: '/login',
   },
   {
@@ -53,6 +54,10 @@ const privateRoutes: RouteObject[] = [
     element: <EditProfile />,
     path: '/profile',
   },
+  {
+    element: <LearnPack />,
+    path: '/:id/learn',
+  },
 ]
 
 const router = createBrowserRouter([
@@ -68,7 +73,7 @@ const router = createBrowserRouter([
   },
 ])
 
-function PrivateRoutes() {
+export function PrivateRoutes() {
   const { isError, isLoading } = useMeQuery()
   if (isLoading) return <Loader />
   return !isError ? <Outlet /> : <Navigate to="/login" />
