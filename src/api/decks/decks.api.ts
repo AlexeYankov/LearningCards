@@ -1,5 +1,5 @@
 import { baseApi } from '@/api/cards.api.ts'
-import { PaginationResponseType } from '@/api/common.api.ts'
+import { CardsResponseType, PaginationResponseType } from '@/api/common.api.ts'
 import { Sort } from '@/components/ui/table/types.ts'
 
 type GetDecksParamsType = {
@@ -74,9 +74,9 @@ export type CreateDeckArgType = {
 }
 
 export type LearnRandomPostArg = {
-    id?:string
-    cardId?: string
-    grade: number
+  id?: string
+  cardId?: string
+  grade: number
 }
 
 export const decksApi = baseApi.injectEndpoints({
@@ -143,7 +143,7 @@ export const decksApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ['Decks'],
       }),
-      learnRandomCard: builder.query<ResponseDeckType, string>({
+      learnRandomCard: builder.query<CardsResponseType, string>({
         query: id => {
           return {
             url: `v1/decks/${id}/learn`,
@@ -156,10 +156,10 @@ export const decksApi = baseApi.injectEndpoints({
           return {
             method: 'POST',
             url: `v1/decks/${body.id}/learn`,
-            body: {cardId: body.cardId, grade: body.grade}
+            body: { cardId: body.cardId, grade: body.grade },
           }
         },
-        invalidatesTags: ['Cards','Me'],
+        invalidatesTags: ['Cards', 'Me'],
       }),
     }
   },

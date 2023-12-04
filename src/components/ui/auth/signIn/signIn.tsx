@@ -8,7 +8,8 @@ import { ControlledCheckbox } from '../../controlled/controlled-checkbox'
 import { Button } from '../../button'
 import { Card } from '@/components/ui/card'
 import { Link, useNavigate } from 'react-router-dom'
-import { useLoginMutation, useMeQuery } from '@/api/auth-api/auth.api.ts'
+import { useLoginMutation } from '@/api/auth-api/auth.api.ts'
+import { Loader } from '@/components/ui/loader/loader.tsx'
 
 type FormValues = z.infer<typeof loginSchema>
 
@@ -21,10 +22,10 @@ export const SignIn = () => {
   const { handleSubmit, control } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
   })
-  const [login, {isSuccess, isLoading}] = useLoginMutation()
+  const [login, { isSuccess, isLoading }] = useLoginMutation()
   const navigate = useNavigate()
   if (isLoading) {
-    return <Loader/>
+    return <Loader />
   }
   if (isSuccess) {
     navigate('/')
@@ -71,7 +72,7 @@ export const SignIn = () => {
         <div className={s.linkContainer}>
           <Typography
             className={s.forgotPassLink}
-            children={'Forgot PasswordIcon?'}
+            children={'Forgot Password?'}
             variant={'body2'}
             as={Link}
             to={'/forgotYourPassword'}

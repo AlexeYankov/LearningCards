@@ -1,18 +1,17 @@
 import { Typography } from '@/components/ui/typography'
-import {Button} from '@/components/ui/button'
-import {Typography} from '@/components/ui/typography'
 import f from '../../cardsPage.module.scss'
-import {FC} from 'react'
-import {DropDownPackMenu} from '@/components/ui/dropDown/dropDown'
-import {useNavigate} from "react-router-dom";
+import { FC } from 'react'
+import { DropDownPackMenu } from '@/components/ui/dropDown/dropDown'
+import { useNavigate } from 'react-router-dom'
+import { AddCard } from '../addCard/addCard'
 
 type PageNameProps = {
-    isMyDeck?: boolean
-    id?:string
+  isMyCard?: boolean
+  id?: string
 }
 
 export const PageName: FC<PageNameProps> = ({ id, isMyCard }) => {
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const toLearn = () => {
     navigate(`/${id}/learn`)
   }
@@ -22,9 +21,7 @@ export const PageName: FC<PageNameProps> = ({ id, isMyCard }) => {
         {isMyCard ? 'My Pack' : 'Friend’s Pack'}
         {isMyCard && <DropDownPackMenu />}
       </Typography>
-      <div>
-        <AddCard id={id} />
-      </div>
+      <div>{isMyCard ? <AddCard id={id} /> : <button onClick={toLearn}>Learn to pack</button>}</div>
     </div>
   )
 }
