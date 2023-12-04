@@ -50,7 +50,8 @@ export type UpdateDeckArgType = {
 }
 
 export type LearnRandomPostArg = {
-    cardId: string,
+    id?:string
+    cardId?: string
     grade: number
 }
 
@@ -104,7 +105,7 @@ export const decksApi = baseApi.injectEndpoints({
                 },
 
             }),
-            learnRandomPost: builder.mutation<any, any>({
+            learnRandomPost: builder.mutation<void, LearnRandomPostArg>({
                 query: body => {
                     return {
                         method: 'POST',

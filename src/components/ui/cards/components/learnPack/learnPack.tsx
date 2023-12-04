@@ -30,14 +30,14 @@ export const LearnPack = () => {
     if (isLoading) return <CircularProgress/>
     if (isFetching) return <CircularProgress/>
     const sendHandler = () => {
-        learn({id, grade: gradeValue, cardId: data?.id}).unwrap().then(()=>setShow(false))
+        learn({id, grade: gradeValue, cardId: data?.id}).unwrap().then(() => setShow(false))
     }
     const onShowAnswer = () => {
         setShow(true)
     }
     return (
         <>
-            <Link className={s.backLink} to={`/${id}`} >
+            <Link className={s.backLink} to={`/${id}`}>
                 <ArrowBack/>
                 Back to Packs List
             </Link>
@@ -45,14 +45,16 @@ export const LearnPack = () => {
                 <Typography className={s.Title} variant={'large'}>Learn “Pack Name”</Typography>
                 <div className={s.MainBlock}>
                     <Typography className={s.Question}
-                                variant={'subtitle1'}>Question:{data?.question || ''}</Typography>
-                    <p className={s.Text}>Количество попыток ответов на вопрос:{data?.shots || ''}</p>
+                                variant={'subtitle1'}>Question: <Typography
+                        variant={'body1'}>{data?.question || ''}</Typography></Typography>
+                    <p className={s.Text}>Количество попыток ответов на вопрос: {data?.shots || ''}</p>
                 </div>
 
                 {show ?
                     <>
                         <div className={s.MainBlock}>
-                            <p className={s.Answer}>Answer:{data?.answer}</p>
+                            <p className={s.Answer}>Answer: <Typography
+                                variant={'body1'}>{data?.answer || ''}</Typography></p>
                             <p className={s.Rate}>Rate yourself:</p>
                             <Radio value={value} onChange={(e) => onChangeValue(e)} className={s.Radio}
                                    options={options}/>
