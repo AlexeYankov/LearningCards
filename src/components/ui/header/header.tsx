@@ -5,13 +5,13 @@ import { Typography } from '@/components/ui/typography'
 import s from './header.module.scss'
 import style from '../../../app.module.scss'
 import profileImage from '../../../asserts/profileImage.png'
-import { FC } from 'react'
-import { Link, Outlet } from 'react-router-dom'
-import { useMeQuery } from '@/api/auth-api/auth.api.ts'
+import {FC} from 'react'
+import {Link, Navigate, Outlet} from "react-router-dom";
+import {useMeQuery} from "@/api/auth-api/auth.api.ts";
 
 export const Header: FC = () => {
-  const { data, isError, isLoading } = useMeQuery()
-  const isLoggedIn = !isError
+  const {data, isSuccess, isLoading} = useMeQuery()
+  const isLoggedIn = isSuccess
   return (
     <div className={s.container}>
       <header className={s.header}>
@@ -53,12 +53,21 @@ export const Header: FC = () => {
 }
 
 export const Layout = () => {
+  const {isLoading, isSuccess} = useMeQuery()
   return (
     <>
-      <Header />
-      <div className={style.container}>
-        <Outlet />
-      </div>
+      <Header/>
+      {!isLoading &&
+        <div className={style.container}>
+          {isSuccess && <Navigate to={'/'}/>}
+          <Outlet/>
+        </div>
+      }
     </>
   )
 }
+
+
+
+
+

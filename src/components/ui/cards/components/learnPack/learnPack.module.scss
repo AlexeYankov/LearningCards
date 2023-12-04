@@ -1,0 +1,55 @@
+.backLink{
+  display: flex;
+  width: 100%;
+  gap: 4px;
+  align-items: center;
+  margin-bottom: 36px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1px;
+  color: var(--color-light-100);
+  text-decoration: none;
+}
+
+.Title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 33px 0 45px 0;
+}
+
+.Button {
+  margin: 0 36px 36px 36px;
+  width: 100%;
+}
+
+.MainBlock {
+  margin-left: 36px;
+  .Question {
+    margin-bottom: 1px;
+  }
+
+  .Text {
+    color: #808080;
+    margin-bottom: 35px;
+  }
+
+  .Radio {
+    gap: 20px;
+    margin-bottom: 29px;
+  }
+
+  .Answer {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    margin-bottom: 12px;
+  }
+
+  .Rate {
+    margin-bottom: 13px;
+  }
+}
+
+

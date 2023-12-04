@@ -73,6 +73,12 @@ export type CreateDeckArgType = {
   isPrivate?: boolean
 }
 
+export type LearnRandomPostArg = {
+    id?:string
+    cardId?: string
+    grade: number
+}
+
 export const decksApi = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
@@ -143,15 +149,27 @@ export const decksApi = baseApi.injectEndpoints({
             url: `v1/decks/${id}/learn`,
           }
         },
-        providesTags: ['Decks', 'Cards'],
+        providesTags: ['Cards'],
+      }),
+      learnRandomPost: builder.mutation<void, LearnRandomPostArg>({
+        query: body => {
+          return {
+            method: 'POST',
+            url: `v1/decks/${body.id}/learn`,
+            body: {cardId: body.cardId, grade: body.grade}
+          }
+        },
+        invalidatesTags: ['Cards','Me'],
       }),
     }
   },
 })
 
 export const {
+  useLearnRandomCardQuery,
   useCreateDeckMutation,
   useGetDecksQuery,
   useDeleteDeckMutation,
   useUpdateDeckMutation,
+  useLearnRandomPostMutation,
 } = decksApi

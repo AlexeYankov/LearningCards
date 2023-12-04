@@ -21,9 +21,11 @@ export const SignIn = () => {
   const { handleSubmit, control } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
   })
-  const [login] = useLoginMutation()
-  const { isSuccess } = useMeQuery()
+  const [login, {isSuccess, isLoading}] = useLoginMutation()
   const navigate = useNavigate()
+  if (isLoading) {
+    return <Loader/>
+  }
   if (isSuccess) {
     navigate('/')
   }
