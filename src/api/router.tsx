@@ -10,11 +10,12 @@ import {Layout} from "@/components/ui/header/header.tsx";
 import {CircularProgress} from "@mui/material";
 import {EditProfile} from "@/components/ui/editProfile/editProfile.tsx";
 import {SignIn} from "@/components/ui/auth/signIn";
+import {LearnPack} from "@/components/ui/cards/components/learnPack/learnPack.tsx";
 
 
 const publicRoutes: RouteObject[] = [
     {
-        element:<SignIn/>,
+        element: <SignIn/>,
         path: '/login',
     },
     {
@@ -49,6 +50,10 @@ const privateRoutes: RouteObject[] = [
         element: <EditProfile/>,
         path: '/profile',
     },
+    {
+        element: <LearnPack/>,
+        path: '/:id/learn',
+    },
 
 ]
 
@@ -72,7 +77,7 @@ const router = createBrowserRouter([
 
 export function PrivateRoutes() {
     const {isError, isLoading} = useMeQuery()
-    if (isLoading) return <CircularProgress />
+    if (isLoading) return <CircularProgress/>
     return !isError ? <Outlet/> : <Navigate to="/login"/>
 
 }

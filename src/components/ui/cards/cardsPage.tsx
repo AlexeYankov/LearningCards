@@ -42,7 +42,6 @@ export const CardsPage = () => {
     if (isLoading) {
         return <div>Loading...</div>
     }
-
     return (
         <div className={f.container}>
             <Link className={f.backLink} to={'/'} onClick={resetFilterDecks}>
@@ -54,7 +53,7 @@ export const CardsPage = () => {
                 <EmptyPack packTitle={'Name Pack'}/>
             ) : (
                 <>
-                    <PageName isMyDeck={flag}/>
+                    <PageName id={id} isMyDeck={flag}/>
                     <PageBar/>
                     <Table
                         bodyCell={data?.items || []}

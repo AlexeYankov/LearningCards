@@ -7,12 +7,16 @@ button {
   display: flex;
   flex-direction: column;
   gap: 10px;
+
 }
 
 .RadioGroupItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #171717;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 100%;
   border: 2px solid var(--color-accent-500);
 }
@@ -30,7 +34,7 @@ button {
 
 .RadioGroupItem:active {
   box-shadow: 0 0 0 6px #382766;
-  background: var(--primary-900, #382766);
+  background:  #382766;
 }
 
 .RadioGroupItem[data-disabled],
@@ -55,8 +59,8 @@ button {
   content: '';
   display: block;
   border-radius: 50%;
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
   background-color: var(--color-accent-500);
 }
 

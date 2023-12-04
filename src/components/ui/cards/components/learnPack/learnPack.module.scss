@@ -7,12 +7,24 @@
 
 .Button {
   margin: 0 36px 36px 36px;
+  width: 100%;
 }
 
+.backLink{
+  display: flex;
+  width: 100%;
+  gap: 4px;
+  align-items: center;
+  margin-bottom: 36px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1px;
+  color: var(--color-light-100);
+  text-decoration: none;
+}
 
 .MainBlock {
   margin-left: 36px;
-
   .Question {
     margin-bottom: 1px;
   }
