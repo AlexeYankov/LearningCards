@@ -42,7 +42,7 @@ export const CreateNewPassword = () => {
           label={'Password'}
           name={'password'}
           password
-          placeholder={'Create New PasswordIcon'}
+          placeholder={'Create New Password'}
           type={'password'}
         />
         <Typography as={'p'} className={s.text} variant={'body2'}>

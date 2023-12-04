@@ -69,7 +69,7 @@ export const Select = ({ classname, label, options, reversed, selectId, ...rest 
         >
           <div className={`${s.selectTriggerBox} ${classname}`}>
             <SelectRadix.Value>
-              {/*{itemsPerPage.toString() !== options[0] ? itemsPerPage : options[0]}*/}
+              {itemsPerPage.toString() !== options[0] ? itemsPerPage : options[0]}
             </SelectRadix.Value>
             <SelectRadix.Icon className={reversed ? s.rotate : s.SelectIcon}>
               <ChevronDownIcon />

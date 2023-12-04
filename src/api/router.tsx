@@ -17,7 +17,6 @@ import { SignIn } from '@/components/ui/auth/signIn'
 import { LearnPack } from '@/components/ui/cards/components/learnPack/learnPack.tsx'
 import { DecksPage } from '@/components/ui/decks/decksPage.tsx'
 import { Loader } from '@/components/ui/loader/loader.tsx'
-import {LearnPack} from "@/components/ui/decks/components/learnDeckModal/learnPack.tsx";
 
 const publicRoutes: RouteObject[] = [
   {
@@ -44,8 +43,8 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element:<LearnPack/>,
-    path:'/:id/learn'
+    element: <LearnPack />,
+    path: '/:id/learn',
   },
   {
     element: <DecksPage />,
