@@ -15,7 +15,7 @@ import {
   changeMinCardsCount,
   resetFilter,
   searchDeckByName,
-} from '@/api/decks/pagination.reducer'
+} from '@/api/decks/decks.reducer.ts'
 import { useDebounce } from '@/hooks/useDebounce'
 
 export const DecksPageBar = () => {

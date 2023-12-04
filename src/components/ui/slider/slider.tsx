@@ -4,7 +4,7 @@ import {
   changeCurrentPage,
   changeMaxCardsCount,
   changeMinCardsCount,
-} from '@/api/decks/pagination.reducer'
+} from '@/api/decks/decks.reducer.ts'
 import { forwardRef, useEffect, useState } from 'react'
 import s from './slider.module.scss'
 import { Label } from '@/components/ui/label'
@@ -13,8 +13,8 @@ type SliderProps = {}
 
 export const Slider = forwardRef<HTMLDivElement, SliderProps>((props, forwardedRef) => {
   const dispatch = useAppDispatch()
-  const maxCardsCount = useAppSelector(state => state.pagination.maxCardsCount)
-  const minCardsCount = useAppSelector(state => state.pagination.minCardsCount)
+  const maxCardsCount = useAppSelector(state => state.decks.maxCardsCount)
+  const minCardsCount = useAppSelector(state => state.decks.minCardsCount)
 
   const [values, setValues] = useState([minCardsCount, maxCardsCount])
   const onValuesCountChange = (values: number[]) => {

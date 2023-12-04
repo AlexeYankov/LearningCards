@@ -2,7 +2,7 @@ import s from './titleElement.module.scss'
 
 import { Typography } from '../../typography'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
-import { changeCurrentPage, changeShowAuthorTabDecks } from '@/api/decks/pagination.reducer'
+import { changeCurrentPage, changeShowAuthorTabDecks } from '@/api/decks/decks.reducer.ts'
 import { useMeQuery } from '@/api/auth-api/auth.api'
 import { useEffect } from 'react'
 
@@ -16,7 +16,7 @@ type TitleElementType = {
 
 export const TitleElement = ({ active, index, length, setActive, title }: TitleElementType) => {
   const dispatch = useAppDispatch()
-  const authorId = useAppSelector(state => state.pagination.authorId)
+  const authorId = useAppSelector(state => state.decks.authorId)
 
   const { data } = useMeQuery()
 

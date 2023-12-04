@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { useGetCardsQuery } from '@/api/common.api'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
-import { resetFilter } from '@/api/decks/pagination.reducer'
+import { resetFilter } from '@/api/decks/decks.reducer.ts'
 import { useEffect } from 'react'
 import {
   changeCardOrderBy,
@@ -27,7 +27,7 @@ import { Loader } from '@/components/ui/loader/loader.tsx'
 export const CardsPage = () => {
   const { id } = useParams()
   const dispatch = useAppDispatch()
-  const currentPage = useAppSelector(state => state.pagination.currentPage)
+  const currentPage = useAppSelector(state => state.decks.currentPage)
   const sort = useAppSelector(state => state.cards.sort)
   const itemsPerPage = useAppSelector(state => state.cards.itemsPerPage)
   const { data: cards, isLoading } = useGetCardsQuery({
