@@ -55,6 +55,7 @@ export const LearnPack = () => {
             Question: <Typography variant={'body1'}>{data?.question || ''}</Typography>
           </Typography>
           <p className={s.Text}>Количество попыток ответов на вопрос: {data?.shots || ''}</p>
+          <img src={data?.questionImg} alt="" />
         </div>
 
         {show ? (
@@ -63,6 +64,7 @@ export const LearnPack = () => {
               <p className={s.Answer}>
                 Answer: <Typography variant={'body1'}>{data?.answer || ''}</Typography>
               </p>
+              <img src={data?.answerImg} alt="" />
               <p className={s.Rate}>Rate yourself:</p>
               <Radio
                 value={value}
