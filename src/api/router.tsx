@@ -16,6 +16,7 @@ import { Layout } from '@/components/ui/header/header.tsx'
 import { Login } from '@/pages/login.tsx'
 import { EditProfile } from '@/components/ui/editProfile/editProfile.tsx'
 import { Loader } from '@/components/ui/loader/loader.tsx'
+import {LearnPack} from "@/components/ui/decks/components/learnDeckModal/learnPack.tsx";
 
 const publicRoutes: RouteObject[] = [
   {
@@ -41,6 +42,10 @@ const publicRoutes: RouteObject[] = [
 ]
 
 const privateRoutes: RouteObject[] = [
+  {
+    element:<LearnPack/>,
+    path:'/:id/learn'
+  },
   {
     element: <DecksPage />,
     path: '/',
