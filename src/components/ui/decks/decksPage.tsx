@@ -24,7 +24,7 @@ export const DecksPage = () => {
   const authorId = useAppSelector(state => state.pagination.authorId)
   const name = useAppSelector(state => state.pagination.name)
 
-  const { data: decks } = useGetDecksQuery({
+  const { currentData: decks } = useGetDecksQuery({
     currentPage,
     itemsPerPage,
     maxCardsCount,

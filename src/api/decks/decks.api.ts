@@ -1,6 +1,7 @@
 import { baseApi } from '@/api/cards.api.ts'
 import { PaginationResponseType } from '@/api/common.api.ts'
 import { Sort } from '@/components/ui/table/types.ts'
+import { RootState } from '@/api/store.ts'
 
 type GetDecksParamsType = {
   authorId?: string
@@ -87,12 +88,35 @@ export const decksApi = baseApi.injectEndpoints({
       }),
       createDeck: builder.mutation<ResponseDeckType, CreateDeckArgType>({
         invalidatesTags: ['Decks'],
-        query: params => {
+        query: body => {
           return {
             method: 'POST',
             url: `v1/decks`,
-            body: params,
+            body,
           }
+        },
+        onQueryStarted: async (_, { dispatch, queryFulfilled, getState }) => {
+          const result = await queryFulfilled
+          const state = getState() as RootState
+          const { name, sort, itemsPerPage, currentPage, authorId, minCardsCount, maxCardsCount } =
+            state.pagination
+          dispatch(
+            decksApi.util.updateQueryData(
+              'getDecks',
+              {
+                name,
+                maxCardsCount,
+                minCardsCount,
+                authorId,
+                currentPage,
+                itemsPerPage,
+                orderBy: sort?.direction as Sort,
+              },
+              draft => {
+                draft.items?.unshift(result.data)
+              }
+            )
+          )
         },
       }),
       deleteDeck: builder.mutation<DeleteDeckResponseType, string>({
