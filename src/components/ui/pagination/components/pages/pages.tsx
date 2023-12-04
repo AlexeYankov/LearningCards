@@ -1,4 +1,4 @@
-import { changeCurrentPage } from '@/api/decks/pagination.reducer.ts'
+import { changeCurrentPage } from '@/api/decks/decks.reducer.ts'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import sprite from '@/asserts/sprite.svg'
 
@@ -16,7 +16,7 @@ type PagesType = {
 
 export const Pages = ({ arrowID, color, reversedArrowID, totalPages = 10 }: PagesType) => {
   const dispatch = useAppDispatch()
-  const currentPage = useAppSelector(state => state.pagination.currentPage)
+  const currentPage = useAppSelector(state => state.decks.currentPage)
 
   const handlePageChange = (page: number) => {
     dispatch(changeCurrentPage({ currentPage: page }))

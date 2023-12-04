@@ -10,7 +10,7 @@ import { useAppDispatch } from '@/api/store.ts'
 import { ImageIcon } from '@/asserts/icons/components/ImageIcon'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { resetFilter } from '@/api/decks/pagination.reducer'
+import { resetFilter } from '@/api/decks/decks.reducer.ts'
 
 const schema = z.object({
   cover: z.array(z.instanceof(File)),
@@ -60,6 +60,7 @@ export const DecksPageName = () => {
   }
 
   const onSubmit = handleSubmit(data => {
+    console.log(123)
     const form = new FormData()
     if (data.cover && data.cover.length > 0) {
       form.append('cover', data.cover[0])

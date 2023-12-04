@@ -1,5 +1,5 @@
 import React from 'react'
-import { changeCurrentPage, changeItemsPerPage } from '@/api/decks/pagination.reducer.ts'
+import { changeCurrentPage, changeItemsPerPage } from '@/api/decks/decks.reducer.ts'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as SelectRadix from '@radix-ui/react-select'
@@ -45,7 +45,7 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
 export const Select = ({ classname, label, options, reversed, selectId, ...rest }: SelectProps) => {
   const dispatch = useAppDispatch()
 
-  const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
+  const itemsPerPage = useAppSelector(state => state.decks.itemsPerPage)
 
   const handleValueChange = (value: string) => {
     dispatch(selectedOptionSlice({ valueSelect: value }))

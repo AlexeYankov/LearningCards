@@ -11,7 +11,7 @@ const initialState = {
   sort: null as Sort,
 }
 
-const paginationSlice = createSlice({
+const decksSlice = createSlice({
   initialState,
   name: 'pagination',
   reducers: {
@@ -48,7 +48,7 @@ const paginationSlice = createSlice({
   },
 })
 
-export default paginationSlice.reducer
+export default decksSlice.reducer
 
 export const {
   changeCurrentPage,
@@ -59,4 +59,4 @@ export const {
   searchDeckByName,
   changeOrderBy,
   resetFilter,
-} = paginationSlice.actions
+} = decksSlice.actions

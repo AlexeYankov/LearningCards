@@ -6,7 +6,7 @@ import { Pagination } from '../pagination'
 import { DecksPageBar } from './components/decksPageBar'
 import { useAppDispatch, useAppSelector } from '@/api/store'
 import { useEffect } from 'react'
-import { changeCurrentPage } from '@/api/decks/pagination.reducer'
+import { changeCurrentPage } from '@/api/decks/decks.reducer.ts'
 import { Root } from '@it-incubator/ui-kit'
 import { Sort } from '@/components/ui/table/types'
 import { DecksPageName } from './components/decksPageName'
@@ -16,15 +16,15 @@ import { DecksBody } from './components/decksBody'
 export const DecksPage = () => {
   const dispatch = useAppDispatch()
 
-  const itemsPerPage = useAppSelector(state => state.pagination.itemsPerPage)
-  const sort = useAppSelector(state => state.pagination.sort)
-  const currentPage = useAppSelector(state => state.pagination.currentPage)
-  const maxCardsCount = useAppSelector(state => state.pagination.maxCardsCount)
-  const minCardsCount = useAppSelector(state => state.pagination.minCardsCount)
-  const authorId = useAppSelector(state => state.pagination.authorId)
-  const name = useAppSelector(state => state.pagination.name)
+  const itemsPerPage = useAppSelector(state => state.decks.itemsPerPage)
+  const sort = useAppSelector(state => state.decks.sort)
+  const currentPage = useAppSelector(state => state.decks.currentPage)
+  const maxCardsCount = useAppSelector(state => state.decks.maxCardsCount)
+  const minCardsCount = useAppSelector(state => state.decks.minCardsCount)
+  const authorId = useAppSelector(state => state.decks.authorId)
+  const name = useAppSelector(state => state.decks.name)
 
-  const { currentData: decks } = useGetDecksQuery({
+  const { data: decks } = useGetDecksQuery({
     currentPage,
     itemsPerPage,
     maxCardsCount,
