@@ -34,11 +34,13 @@ export const DecksPage = () => {
     orderBy: sort?.direction as Sort,
   })
 
+  const isShowPagination =
+    decks?.pagination?.totalItems !== 0 && decks?.pagination?.totalPages !== 1
+
   useEffect(() => {
     const savedCurrentPage = localStorage.getItem('page')
     dispatch(changeCurrentPage({ currentPage: parseInt(savedCurrentPage!, 10) || 1 }))
   }, [])
-
   return (
     <div className={s.container}>
       <DecksPageName />
@@ -47,14 +49,16 @@ export const DecksPage = () => {
         <DecksHead />
         <DecksBody decks={decks} />
       </Root>
-      <Pagination
-        reversed
-        arrowColor={'white'}
-        arrowID={'arrow-ios-back'}
-        reversedArrowID={'arrow-ios-forward'}
-        totalPages={decks?.pagination?.totalPages}
-        totalItems={decks?.pagination?.totalItems}
-      />
+      {isShowPagination && (
+        <Pagination
+          reversed
+          arrowColor="white"
+          arrowID="arrow-ios-back"
+          reversedArrowID="arrow-ios-forward"
+          totalPages={decks?.pagination?.totalPages}
+          totalItems={decks?.pagination?.totalItems}
+        />
+      )}
     </div>
   )
 }
