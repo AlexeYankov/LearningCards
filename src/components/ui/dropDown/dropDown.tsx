@@ -132,7 +132,7 @@ export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => 
     navigate('/profile')
   }
   return (
-    <DropDown avatar={avatar} name={name} sideOffset={0} trigger={'imageAvatar'}>
+    <DropDown avatar={avatar} name={name} sideOffset={-1} trigger={'imageAvatar'}>
       <ItemWithIcon className={s.itemProfile}>
         <div className={s.inner}>
           <img alt={''} className={s.img} src={avatar} />
