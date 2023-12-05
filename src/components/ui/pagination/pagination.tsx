@@ -9,9 +9,9 @@ type PaginationType = {
   arrowID: string
   reversed?: boolean
   reversedArrowID: string
-  totalPages?: number
+  totalPages: number
   variant?: string
-  totalItems?: number
+  totalItems: number
 }
 
 export const Pagination = ({
