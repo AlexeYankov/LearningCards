@@ -34,7 +34,7 @@ export const DecksBody = ({ decks }: DecksBodyProps) => {
                 )}
               </Link>
             </Cell>
-            <Cell className={s.bodyCell}>{deck.cardsCount}</Cell>
+            <Cell className={s.bodyCell}>{deck.cardsCount < 0 ? 0 : deck.cardsCount}</Cell>
             <Cell className={s.bodyCell}>{convertedTime(deck.updated)}</Cell>
             <Cell className={s.bodyCell}>{deck.author.name}</Cell>
             <Cell className={`${s.bodyCell}`}>
