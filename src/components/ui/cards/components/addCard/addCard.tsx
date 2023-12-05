@@ -27,7 +27,6 @@ export const AddCard: FC<Props> = ({ id }) => {
   const [selectedQuestionImage, setSelectedQuestionImage] = useState('')
   const [selectedAnswerImage, setSelectedAnswerImage] = useState('')
   const [open, setOpen] = useState(false)
-  // const [isPrivate, setIsPrivate] = useState(false)
   const valueSelect = useAppSelector(state => state.cards.valueSelect)
 
   const {
@@ -91,7 +90,6 @@ export const AddCard: FC<Props> = ({ id }) => {
       setError('answer', { message: 'String must contain at least 3 character(s)' })
     }
   })
-
   return (
     <Modal
       onOpenChange={handleModalToggle}
