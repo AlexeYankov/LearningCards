@@ -3,7 +3,7 @@ import f from '../../cardsPage.module.scss'
 import { FC } from 'react'
 import { DropDownPackMenu } from '@/components/ui/dropDown/dropDown'
 import { useNavigate } from 'react-router-dom'
-import { AddCard } from '../addCard/addCard'
+import { AddEditCard } from '@/components/ui/cards/components/addEditCard/addEditCard.tsx'
 
 type PageNameProps = {
   isMyCard?: boolean
@@ -19,9 +19,9 @@ export const PageName: FC<PageNameProps> = ({ id, isMyCard }) => {
     <div className={f.container__pageName}>
       <Typography as={'h1'} variant={'large'} className={f.textWithIconBox}>
         {isMyCard ? 'My Pack' : 'Friend’s Pack'}
-        {isMyCard && <DropDownPackMenu isMyDeck={isMyCard}/>}
+        {isMyCard && <DropDownPackMenu/>}
       </Typography>
-      <div>{isMyCard ? <AddCard id={id} /> : <button onClick={toLearn}>Learn to pack</button>}</div>
+      <div>{isMyCard ? <AddEditCard id={id} /> : <button onClick={toLearn}>Learn to pack</button>}</div>
     </div>
   )
 }

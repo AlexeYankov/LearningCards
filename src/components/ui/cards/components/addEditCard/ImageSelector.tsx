@@ -1,7 +1,7 @@
 import {Button} from "@/components/ui/button";
 import {DeleteIcon} from "@/asserts/icons/components/DeleteIcon.tsx";
 import {ImageIcon} from "@/asserts/icons/components/ImageIcon.tsx";
-import s from '../addCard/addCard.module.scss'
+import s from './addEditCard.module.scss'
 
 type Props = {
     label?: any

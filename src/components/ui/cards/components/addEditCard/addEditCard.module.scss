@@ -1,34 +1,34 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+//.container {
+//  display: flex;
+//  flex-direction: column;
+//  align-items: center;
+//
+//  min-width: 100%;
+//  margin-bottom: 100px;
+//}
 
-  min-width: 100%;
-  margin-bottom: 100px;
-}
+//.container__pageBar {
+//  display: flex;
+//  align-items: flex-end;
+//  justify-content: space-between;
+//
+//  width: 100%;
+//  padding-bottom: 36px;
+//
+//  label {
+//    font-size: var(--font-size-s);
+//    color: var(--color-light-100);
+//  }
+//}
 
-.container__pageBar {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-
-  width: 100%;
-  padding-bottom: 36px;
-
-  label {
-    font-size: var(--font-size-s);
-    color: var(--color-light-100);
-  }
-}
-
-.container__pageName {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  width: 100%;
-  margin-bottom: 24px;
-}
+//.container__pageName {
+//  display: flex;
+//  align-items: center;
+//  justify-content: space-between;
+//
+//  width: 100%;
+//  margin-bottom: 24px;
+//}
 
 .img {
   width: 100%;
@@ -65,7 +65,7 @@ div.btnBox {
   margin-top: -1px;
 }
 
-.inputFile {
+.inputFile  {
   overflow: hidden;
 
   width: 0;
@@ -99,7 +99,7 @@ div.btnBox {
     fill: white;
   }
 }
-.btnCoverBox {
+.btnCoverBox  {
   display: flex;
   gap: 50px;
   align-items: center;

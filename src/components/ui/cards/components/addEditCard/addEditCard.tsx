@@ -7,10 +7,10 @@ import {useAppSelector} from '@/api/store.ts'
 import {CardsResponseType, useCreateCardMutation, useUpdateCardMutation} from '@/api/common.api.ts'
 import {z} from 'zod'
 import {useForm} from 'react-hook-form'
-import s from './addCard.module.scss'
-import {handleFileChange} from "@/components/ui/cards/components/addCard/handleFileChange.ts";
+import s from './addEditCard.module.scss'
+import {handleFileChange} from "@/components/ui/cards/components/addEditCard/handleFileChange.ts";
 import {EditIcon} from "@/asserts/icons/components/EditIcon.tsx";
-import {ImageSelector} from "@/components/ui/cards/components/addCard/ImageSelector.tsx";
+import {ImageSelector} from "@/components/ui/cards/components/addEditCard/ImageSelector.tsx";
 
 type Props = {
     id?: string
@@ -27,7 +27,7 @@ const schema = z.object({
 
 type Form = z.infer<typeof schema>
 
-export const AddCard: FC<Props> = ({id, editIcon, card}) => {
+export const AddEditCard: FC<Props> = ({id, editIcon, card}) => {
     const [selectedQuestionImage, setSelectedQuestionImage] = useState('')
     const [selectedAnswerImage, setSelectedAnswerImage] = useState('')
     const [open, setOpen] = useState(false)
@@ -86,6 +86,10 @@ export const AddCard: FC<Props> = ({id, editIcon, card}) => {
         }
         form.append('question', data.question)
         form.append('answer', data.answer)
+        if (editIcon) {
+            form.append('questionImg', selectedEditQuestionImage!)
+            form.append('answerImg', selectedEditAnswerImage!)
+        }
         if (
             (data.answer.trim() !== '' && data.answer.length >= 3) ||
             (data.question.trim() !== '' && data.question.length >= 3)
@@ -126,10 +130,17 @@ export const AddCard: FC<Props> = ({id, editIcon, card}) => {
                     reversed
                     selectId={'Select-box'}
                 />
-                <form onSubmit={onSubmit} className={s.contentComponents}>
+                <form onSubmit={onSubmit}>
                     {valueSelect === 'Picture' ? (
                         <>
                             <>
+                                <TextField
+                                    inputId={'Input1'}
+                                    label={'Question'}
+                                    placeholder={'Question'}
+                                    errorMessage={errors.question?.message}
+                                    {...register('question', {value: card?.answer})}
+                                />
                                 <ImageSelector
                                     selectedImage={editIcon ? selectedEditQuestionImage : selectedQuestionImage}
                                     deleteLabel={editIcon ? 'Delete Image' : ''}
@@ -146,11 +157,18 @@ export const AddCard: FC<Props> = ({id, editIcon, card}) => {
                             label={'Question'}
                             placeholder={'Question'}
                             errorMessage={errors.question?.message}
-                            {...register('question')}
+                            {...register('question', {value: card?.answer})}
                         />
                     )}
                     {valueSelect === 'Picture' ? (
                         <>
+                            <TextField
+                                inputId={'Input2'}
+                                label={'Answer'}
+                                placeholder={'Answer'}
+                                errorMessage={errors.answer?.message}
+                                {...register('answer', {value: card?.answer})}
+                            />
                             <ImageSelector selectedImage={editIcon ? selectedEditAnswerImage : selectedAnswerImage}
                                            deleteLabel={editIcon ? 'Delete Image' : ''}
                                            onChange={handleAnswerFileChange}
@@ -164,7 +182,7 @@ export const AddCard: FC<Props> = ({id, editIcon, card}) => {
                             label={'Answer'}
                             placeholder={'Answer'}
                             errorMessage={errors.answer?.message}
-                            {...register('answer')}
+                            {...register('answer', {value: card?.answer})}
                         />
                     )}
                     <div className={`${s.contentBtn} ${s.contentBtns}`}>

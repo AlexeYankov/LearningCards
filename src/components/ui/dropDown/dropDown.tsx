@@ -155,9 +155,9 @@ export const DropDownPackMenu = () => {
 
     return (
         <DropDown className={s.cardsContent} trigger={'iconMore'}>
-            <ItemWithIcon  icon={<LearnIcon />}  text={'Learn'} />
-            <ItemWithIcon  icon={<EditIcon />} text={'Edit'} />
-            <ItemWithIcon icon={<DeleteIcon />} text={'Delete'} />
+            <ItemWithIcon icon={<LearnIcon/>} text={'Learn'}/>
+            <ItemWithIcon icon={<EditIcon/>} text={'Edit'}/>
+            <ItemWithIcon icon={<DeleteIcon/>} text={'Delete'}/>
         </DropDown>
     )
 }

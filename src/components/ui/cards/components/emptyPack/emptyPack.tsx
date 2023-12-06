@@ -1,7 +1,7 @@
 import {FC} from 'react'
 import s from './emptyPack.module.scss'
 import {Typography} from '@/components/ui/typography'
-import {AddCard} from '@/components/ui/cards/components/addCard/addCard'
+import {AddEditCard} from '@/components/ui/cards/components/addEditCard/addEditCard.tsx'
 import {useParams} from "react-router-dom";
 
 type EmptyPackPropsType = {
@@ -27,9 +27,9 @@ export const EmptyPack: FC<EmptyPackPropsType> = ({ packTitle }) => {
       {/*  Add New Card*/}
       {/*</Button>*/}
         <div className={s.button}>
-            <AddCard id={id}/>
+            <AddEditCard id={id}/>
         </div>
-      {/*{isOpen && <AddCard />}*/}
+      {/*{isOpen && <AddEditCard />}*/}
     </>
   )
 }

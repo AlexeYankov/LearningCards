@@ -18,7 +18,7 @@ import {convertedTime} from '@/helpers/convertedTime.ts'
 import {Typography} from '@/components/ui/typography'
 import {useMeQuery} from '@/api/auth-api/auth.api.ts'
 import {Loader} from '@/components/ui/loader/loader.tsx'
-import {AddCard} from "@/components/ui/cards/components/addCard/addCard.tsx";
+import {AddEditCard} from "@/components/ui/cards/components/addEditCard/addEditCard.tsx";
 import {DeleteCardModal} from "@/components/ui/cards/components/deleteCardModal/deleteCardModel.tsx";
 
 export const CardsPage = () => {
@@ -170,7 +170,7 @@ export const CardsPage = () => {
                     {isMyCard && (
                       <Cell className={`${s.bodyCell} `}>
                         <div className={s.iconBox}>
-                          <AddCard editIcon={<EditIcon/>} card={card} />
+                          <AddEditCard editIcon={<EditIcon/>} card={card} />
                           <DeleteCardModal card={card} />
                         </div>
                       </Cell>
