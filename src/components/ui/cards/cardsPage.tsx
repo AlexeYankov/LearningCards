@@ -1,28 +1,25 @@
-import { Link, useParams } from 'react-router-dom'
-import { useGetCardsQuery } from '@/api/common.api'
-import { useAppDispatch, useAppSelector } from '@/api/store.ts'
-import { resetFilter } from '@/api/decks/decks.reducer.ts'
-import { useEffect } from 'react'
-import {
-  changeCardOrderBy,
-  changeCardsCurrentPage,
-  changeCardsItemsPerPage,
-} from '@/api/cards/cards.ts'
-import { Column, Sort } from '@/components/ui/table/types.ts'
-import { Body, Cell, Head, HeadCell, Root, Row } from '@it-incubator/ui-kit'
+import {Link, useParams} from 'react-router-dom'
+import {useGetCardsQuery} from '@/api/common.api'
+import {useAppDispatch, useAppSelector} from '@/api/store.ts'
+import {resetFilter} from '@/api/decks/decks.reducer.ts'
+import {useEffect} from 'react'
+import {changeCardOrderBy, changeCardsCurrentPage, changeCardsItemsPerPage,} from '@/api/cards/cards.ts'
+import {Column, Sort} from '@/components/ui/table/types.ts'
+import {Body, Cell, Head, HeadCell, Root, Row} from '@it-incubator/ui-kit'
 import s from './cardsPage.module.scss'
-import { EditIcon } from '@/asserts/icons/components/EditIcon.tsx'
-import { EmptyPack } from '@/components/ui/cards/components/emptyPack/emptyPack.tsx'
-import { PageName } from '@/components/ui/cards/components/pageName/pageName.tsx'
-import { PageBar } from '@/components/ui/cards/components/pageBar/pageBar.tsx'
-import { ArrowBackIcon } from '@/asserts/icons/components/ArrowBackIcon.tsx'
-import { Pagination } from '@/components/ui/pagination'
-import { StarIcon } from '@/asserts/icons/components/StarIcon.tsx'
-import { convertedTime } from '@/helpers/convertedTime.ts'
-import { Typography } from '@/components/ui/typography'
-import { useMeQuery } from '@/api/auth-api/auth.api.ts'
-import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon.tsx'
-import { Loader } from '@/components/ui/loader/loader.tsx'
+import {EditIcon} from '@/asserts/icons/components/EditIcon.tsx'
+import {EmptyPack} from '@/components/ui/cards/components/emptyPack/emptyPack.tsx'
+import {PageName} from '@/components/ui/cards/components/pageName/pageName.tsx'
+import {PageBar} from '@/components/ui/cards/components/pageBar/pageBar.tsx'
+import {ArrowBackIcon} from '@/asserts/icons/components/ArrowBackIcon.tsx'
+import {Pagination} from '@/components/ui/pagination'
+import {StarIcon} from '@/asserts/icons/components/StarIcon.tsx'
+import {convertedTime} from '@/helpers/convertedTime.ts'
+import {Typography} from '@/components/ui/typography'
+import {useMeQuery} from '@/api/auth-api/auth.api.ts'
+import {Loader} from '@/components/ui/loader/loader.tsx'
+import {AddCard} from "@/components/ui/cards/components/addCard/addCard.tsx";
+import {DeleteCardModal} from "@/components/ui/cards/components/deleteCardModal/deleteCardModel.tsx";
 
 export const CardsPage = () => {
   const { id } = useParams()
@@ -173,8 +170,8 @@ export const CardsPage = () => {
                     {isMyCard && (
                       <Cell className={`${s.bodyCell} `}>
                         <div className={s.iconBox}>
-                          <EditIcon />
-                          <DeleteIcon />
+                          <AddCard editIcon={<EditIcon/>} card={card} />
+                          <DeleteCardModal card={card} />
                         </div>
                       </Cell>
                     )}

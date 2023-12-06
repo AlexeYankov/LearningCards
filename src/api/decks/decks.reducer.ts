@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Sort } from '@/components/ui/table/types.ts'
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {Sort} from '@/components/ui/table/types.ts'
+import {ResponseDeckType} from "@/api/decks/decks.api.ts";
 
 const initialState = {
   currentPage: 1,
@@ -9,6 +10,7 @@ const initialState = {
   authorId: '',
   name: '',
   sort: null as Sort,
+  deck: null as unknown as ResponseDeckType
 }
 
 const decksSlice = createSlice({
@@ -36,6 +38,9 @@ const decksSlice = createSlice({
     changeOrderBy: (state, action: PayloadAction<Sort>) => {
       state.sort = action.payload
     },
+    setDecks: (state, action: PayloadAction<ResponseDeckType>) => {
+      state.deck = action.payload
+    },
     resetFilter: state => {
       state.name = ''
       state.currentPage = 1
@@ -51,6 +56,7 @@ const decksSlice = createSlice({
 export default decksSlice.reducer
 
 export const {
+  setDecks,
   changeCurrentPage,
   changeItemsPerPage,
   changeMinCardsCount,

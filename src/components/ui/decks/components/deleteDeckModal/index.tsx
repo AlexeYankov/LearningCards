@@ -33,6 +33,7 @@ export const DeleteDeckModal = ({ deck }: DeleteDeckModalProps) => {
       }
     >
       <ModalTitle title={'Delete Pack'} />
+
       <ModalDescription>
         <Typography variant={'body1'} as={'p'}>
           Do you really want to remove <span className={s.boldText}>{deck.name}</span>?

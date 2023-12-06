@@ -77,6 +77,7 @@ export const DecksPageBar = () => {
           variant={'secondary'}
           onClick={handleResetFilter}
         >
+
           <Typography variant={'body2'}>Clear Filter</Typography>
         </Button>
       </div>
