@@ -188,10 +188,10 @@ export const CardsPage = () => {
         <Pagination
           arrowColor={'white'}
           arrowID={'arrow-ios-back'}
-          totalItems={cards?.pagination?.totalItems}
+          totalItems={cards?.pagination?.totalItems!}
           reversedArrowID={'arrow-ios-forward'}
           reversed
-          totalPages={cards?.pagination?.totalPages}
+          totalPages={cards?.pagination?.totalPages!}
         />
       )}
     </div>
