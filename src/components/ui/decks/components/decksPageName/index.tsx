@@ -60,7 +60,6 @@ export const DecksPageName = () => {
   }
 
   const onSubmit = handleSubmit(data => {
-    console.log(123)
     const form = new FormData()
     if (data.cover && data.cover.length > 0) {
       form.append('cover', data.cover[0])

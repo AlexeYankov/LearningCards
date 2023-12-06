@@ -37,7 +37,6 @@ export const CardsPage = () => {
     orderBy: sort?.direction as Sort,
   })
 
-  console.log(itemsPerPage)
   const { data: me } = useMeQuery()
 
   const resetFilterDecks = () => {
