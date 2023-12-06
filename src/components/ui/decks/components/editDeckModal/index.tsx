@@ -5,11 +5,11 @@ import {Modal, ModalTitle} from '@/components/ui/modal'
 import {EditIcon} from '@/asserts/icons/components/EditIcon.tsx'
 import s from '@/components/ui/decks/decksPage.module.scss'
 import {Button} from '@/components/ui/button'
-import {DeleteIcon} from '@/asserts/icons/components/DeleteIcon.tsx'
-import {ImageIcon} from '@/asserts/icons/components/ImageIcon.tsx'
 import {TextField} from '@/components/ui/textField'
 import {CheckBox} from '@/components/ui/checkbox'
 import {z} from 'zod'
+import {handleFileChange} from "@/components/ui/cards/components/addEditCard/handleFileChange.ts";
+import {ImageSelector} from "@/components/ui/cards/components/addEditCard/ImageSelector.tsx";
 
 const schema = z.object({
     cover: z.array(z.instanceof(File)),
@@ -38,18 +38,25 @@ export const EditDeckModal = ({deck}: EditDeckModalProps) => {
     const [isPrivate, setIsPrivate] = useState(false)
     const [open, setOpen] = useState(false)
 
-    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0]
-        if (file) {
-            const imageUrl = URL.createObjectURL(file)
-            setSelectedImage(imageUrl)
-            setValue('cover', [file])
-        } else {
-            setSelectedImage('')
-            setValue('cover', [])
-        }
-    }
-
+    // const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    //     const file = event.target.files?.[0]
+    //     if (file) {
+    //         const imageUrl = URL.createObjectURL(file)
+    //         setSelectedImage(imageUrl)
+    //         setValue('cover', [file])
+    //     } else {
+    //         setSelectedImage('')
+    //         setValue('cover', [])
+    //     }
+    // }
+    const handleEditFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+        handleFileChange({
+            event: event,
+            setSelectedImage: setSelectedImage,
+            setValue: setValue,
+            inputName: 'cover',
+        });
+    };
     const handleCloseModal = () => {
         reset()
         setOpen(false)
@@ -99,32 +106,39 @@ export const EditDeckModal = ({deck}: EditDeckModalProps) => {
             <ModalTitle title={'Edit Pack'}/>
             <form onSubmit={onSubmit}>
                 <div className={s.contentComponents}>
-                    <img alt={''} className={s.img} src={selectedImage}/>
-                    <div className={s.btnCoverBox}>
-                        {selectedImage && (
-                            <Button variant={'secondary'} className={s.changeCover} onClick={deleteDeckCover}>
-                                <DeleteIcon/>
-                                Delete Cover
-                            </Button>
-                        )}
-                        <label htmlFor="input__file" className={s.changeCover}>
-                            <ImageIcon/>
-                            Change Cover
-                        </label>
-                    </div>
-                    <input
-                        className={s.inputFile}
-                        id={'input__file'}
-                        type="file"
-                        onChange={handleFileChange}
-                    />
+                    {/*<img alt={''} className={s.img} src={selectedImage}/>*/}
+                    {/*<div className={s.btnCoverBox}>*/}
+                    {/*    {selectedImage && (*/}
+                    {/*        <Button variant={'secondary'} className={s.changeCover} onClick={deleteDeckCover}>*/}
+                    {/*            <DeleteIcon/>*/}
+                    {/*            Delete Cover*/}
+                    {/*        </Button>*/}
+                    {/*    )}*/}
+                    {/*    <label htmlFor="input__file" className={s.changeCover}>*/}
+                    {/*        <ImageIcon/>*/}
+                    {/*        Change Cover*/}
+                    {/*    </label>*/}
+                    {/*</div>*/}
+                    {/*<input*/}
+                    {/*    className={s.inputFile}*/}
+                    {/*    id={'input__file'}*/}
+                    {/*    type="file"*/}
+                    {/*    onChange={handleEditFileChange}*/}
+                    {/*/>*/}
+                    <ImageSelector
+                        selectedImage={selectedImage}
+                        deleteLabel={'Delete Cover'}
+                        onChange={handleEditFileChange}
+                        changeLabel={'Change Cover'}
+                        inputId={'input__file'}
+                        onImageDelete={deleteDeckCover}/>
+
                     <TextField
                         inputId={'Name Pack'}
                         label={'Name Pack'}
                         placeholder={'Name'}
                         errorMessage={errors.name?.message}
-                        value={deck.name}
-                        {...register('name')}
+                        {...register('name',{value:deck.name})}
                     />
                     <CheckBox
                         IconID={'checkbox-unselected'}
