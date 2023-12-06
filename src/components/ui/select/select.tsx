@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { changeCurrentPage, changeItemsPerPage } from '@/api/decks/decks.reducer.ts'
-import { useAppDispatch, useAppSelector } from '@/api/store.ts'
+import { useAppDispatch } from '@/api/store.ts'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as SelectRadix from '@radix-ui/react-select'
 
@@ -42,24 +42,42 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
   }
 )
 
+const SelectContent = ({ options }: { options: string[] }) => {
+  return (
+    <SelectRadix.Content className={`${s.SelectContent}`} position={'popper'}>
+      <SelectRadix.Viewport className={s.SelectViewport}>
+        <SelectRadix.Group>
+          {options.map((el, i) => (
+            <SelectItem key={el + i} value={el}>
+              {el}
+            </SelectItem>
+          ))}
+        </SelectRadix.Group>
+      </SelectRadix.Viewport>
+    </SelectRadix.Content>
+  )
+}
+
 export const Select = ({ classname, label, options, reversed, selectId, ...rest }: SelectProps) => {
   const dispatch = useAppDispatch()
-
-  const itemsPerPage = useAppSelector(state => state.decks.itemsPerPage)
+  const [selectedValue, setSelectedValue] = useState(options[0])
 
   const handleValueChange = (value: string) => {
-    dispatch(selectedOptionSlice({ valueSelect: value }))
-    dispatch(changeItemsPerPage({ itemsPerPage: +value }))
-    dispatch(changeCurrentPage({ currentPage: 1 }))
-    dispatch(changeCardsCurrentPage({ currentPage: 1 }))
-    dispatch(changeCardsItemsPerPage({ itemsPerPage: +value }))
+    if (options.includes(value)) {
+      setSelectedValue(value)
+      dispatch(selectedOptionSlice({ valueSelect: value }))
+      dispatch(changeCurrentPage({ currentPage: 1 }))
+      dispatch(changeCardsCurrentPage({ currentPage: 1 }))
+
+      if (value !== 'Picture' && value !== 'Text') {
+        dispatch(changeItemsPerPage({ itemsPerPage: +value }))
+        dispatch(changeCardsItemsPerPage({ itemsPerPage: +value }))
+      }
+    }
   }
+
   return (
-    <SelectRadix.Root
-      defaultValue={String(itemsPerPage)}
-      onValueChange={handleValueChange}
-      {...rest}
-    >
+    <SelectRadix.Root defaultValue={selectedValue} onValueChange={handleValueChange} {...rest}>
       <div className={s.box}>
         <Label className={`${s.label} `} htmlFor={selectId} label={label} />
         <SelectRadix.Trigger
@@ -68,9 +86,7 @@ export const Select = ({ classname, label, options, reversed, selectId, ...rest 
           disabled={options.length === 0}
         >
           <div className={`${s.selectTriggerBox} ${classname}`}>
-            <SelectRadix.Value>
-              {itemsPerPage.toString() !== options[0] ? itemsPerPage : options[0]}
-            </SelectRadix.Value>
+            <SelectRadix.Value>{selectedValue}</SelectRadix.Value>
             <SelectRadix.Icon className={reversed ? s.rotate : s.SelectIcon}>
               <ChevronDownIcon />
             </SelectRadix.Icon>
@@ -78,17 +94,7 @@ export const Select = ({ classname, label, options, reversed, selectId, ...rest 
         </SelectRadix.Trigger>
       </div>
       <SelectRadix.Portal>
-        <SelectRadix.Content className={`${s.SelectContent}`} position={'popper'}>
-          <SelectRadix.Viewport className={s.SelectViewport}>
-            <SelectRadix.Group>
-              {options.map((el, i) => (
-                <SelectItem key={el + i} value={el}>
-                  {el}
-                </SelectItem>
-              ))}
-            </SelectRadix.Group>
-          </SelectRadix.Viewport>
-        </SelectRadix.Content>
+        <SelectContent options={options} />
       </SelectRadix.Portal>
     </SelectRadix.Root>
   )

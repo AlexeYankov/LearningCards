@@ -13,9 +13,9 @@ type GetDecksParamsType = {
 }
 
 export type DecksType = {
-  items?: ResponseDeckType[]
-  maxCardsCount?: number
-  pagination?: PaginationResponseType
+  items: ResponseDeckType[]
+  maxCardsCount: number
+  pagination: PaginationResponseType
 }
 
 export type ResponseDeckTypeItemsAuthor = {
