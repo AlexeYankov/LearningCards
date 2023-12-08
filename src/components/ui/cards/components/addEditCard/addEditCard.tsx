@@ -135,12 +135,14 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
       {editIcon ? <ModalTitle title={'Edit Card'} /> : <ModalTitle title={'Add New Card'} />}
 
       <div className={s.contentBox}>
-        <Select
-          label={'Choose question format'}
-          options={['Text', 'Picture']}
-          reversed
-          selectId={'Select-box'}
-        />
+        <div className={s.select}>
+          <Select
+            label={'Choose question format'}
+            options={['Text', 'Picture']}
+            reversed
+            selectId={'Select-box'}
+          />
+        </div>
         <form onSubmit={onSubmit}>
           {valueSelect === 'Picture' ? (
             <>
