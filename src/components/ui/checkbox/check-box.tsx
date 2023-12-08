@@ -28,7 +28,6 @@ export const CheckBox = <T extends ElementType = 'input'>(
 
   return (
     <div
-      // className={`${s.checkboxContainer}`}
       className={`${s.checkboxContainer} ${className}`}
       onClick={() => (onChange ? onChange(!checked) : '')}
       style={disabled ? { cursor: 'not-allowed', opacity: '0.7', pointerEvents: 'none' } : {}}
@@ -66,6 +65,4 @@ export type CheckBoxProps<T extends ElementType = 'input'> = {
   height?: string
   label?: string
   width?: string
-  // checked?: boolean
-  // onChange?: (isCheck: boolean) => void
 } & ComponentPropsWithoutRef<T>

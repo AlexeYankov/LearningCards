@@ -50,7 +50,7 @@ export const LearnDeckModal = ({ deck, isMyDeck }: LearnDeckModalProps) => {
         >
           Cancel
         </Button>
-        <Link to={`/${deck.id}/learn`}>
+        <Link to={`/${deck.id}/learn`} className={s.link}>
           <Button classNameBtnBox={s.btnBox} variant={'primary'} type={'button'}>
             Learn Pack
           </Button>
