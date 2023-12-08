@@ -13,6 +13,8 @@ import {
   useMeQuery,
   useUpdateUserMutation,
 } from '@/api/auth-api/auth.api.ts'
+import { ArrowBackIcon } from '@/asserts/icons/components/ArrowBackIcon.tsx'
+import { Link } from 'react-router-dom'
 
 export const EditProfile = () => {
   const { data } = useMeQuery()
@@ -54,72 +56,78 @@ export const EditProfile = () => {
   }
 
   return (
-    <Card>
-      <div className={s.cards}>
-        <Typography as={'span'} className={s.text} variant={'large'}>
-          Personal Information
-        </Typography>
-        <div className={s.photoBlock}>
-          <img
-            alt={'Photo profile'}
-            className={s.logoProfileEdit}
-            src={data?.avatar || photoProfile}
-          />
-          <div className={s.editIconBlock}>
-            <label htmlFor="input__file" className={s.editIcon}>
-              <EditIcon />
-            </label>
-          </div>
-          <input
-            onChange={uploadContent}
-            accept={'image/*'}
-            id="input__file"
-            className={s.hidden}
-            type="file"
-          />
-        </div>
-        {!editMode && (
-          <>
-            <div className={s.nameBlock}>
-              <Typography variant={'heading1'} className={s.name}>
-                {value}
-              </Typography>
-              <div onClick={activateEditMode} className={s.editIcon}>
+    <>
+      <Link className={s.backLink} to={'/'}>
+        <ArrowBackIcon />
+        Back to Packs List
+      </Link>
+      <Card>
+        <div className={s.cards}>
+          <Typography as={'span'} className={s.text} variant={'large'}>
+            Personal Information
+          </Typography>
+          <div className={s.photoBlock}>
+            <img
+              alt={'Photo profile'}
+              className={s.logoProfileEdit}
+              src={data?.avatar || photoProfile}
+            />
+            <div className={s.editIconBlock}>
+              <label htmlFor="input__file" className={s.editIcon}>
                 <EditIcon />
+              </label>
+            </div>
+            <input
+              onChange={uploadContent}
+              accept={'image/*'}
+              id="input__file"
+              className={s.hidden}
+              type="file"
+            />
+          </div>
+          {!editMode && (
+            <>
+              <div className={s.nameBlock}>
+                <Typography variant={'heading1'} className={s.name}>
+                  {value}
+                </Typography>
+                <div onClick={activateEditMode} className={s.editIcon}>
+                  <EditIcon />
+                </div>
               </div>
-            </div>
-            <div className={s.email}>{data?.email || 'Email'}</div>
-            <div>
-              <Button
-                onClick={onClickLogOut}
-                icon={<LogoutIcon />}
-                children={'Logout'}
-                variant={'secondary'}
+              <div className={s.email}>{data?.email || 'Email'}</div>
+              <div>
+                <Button
+                  onClick={onClickLogOut}
+                  icon={<LogoutIcon />}
+                  children={'Logout'}
+                  variant={'secondary'}
+                />
+              </div>
+            </>
+          )}
+          {editMode && (
+            <form style={{ width: '100%' }}>
+              <TextField
+                maxLength={25}
+                autoFocus
+                label={'Nickname'}
+                type={'text'}
+                className={s.textField}
+                value={title}
+                onChange={handleOnchangeTitle}
               />
-            </div>
-          </>
-        )}
-        {editMode && (
-          <form style={{ width: '100%' }}>
-            <TextField
-              maxLength={25}
-              autoFocus
-              label={'Nickname'}
-              type={'text'}
-              className={s.textField}
-              value={title}
-              onChange={handleOnchangeTitle}
-            />
-            <Button
-              children={'Save Changes'}
-              className={s.button}
-              fullWidth
-              variant={'primary'}
-              onClick={activateViewMode}
-            />
-          </form>
-        )}
-      </div>
-    </Card>
+              <Button
+                children={'Save Changes'}
+                className={s.button}
+                fullWidth
+                variant={'primary'}
+                onClick={activateViewMode}
+              />
+            </form>
+          )}
+        </div>
+      </Card>
+    </>
   )
 }
