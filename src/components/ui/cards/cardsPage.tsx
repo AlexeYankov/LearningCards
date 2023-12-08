@@ -34,7 +34,6 @@ export const CardsPage = () => {
     orderBy: sort?.direction as Sort,
   })
 
-  console.log(itemsPerPage)
   const { data: me } = useMeQuery()
 
   const resetFilterDecks = () => {
@@ -186,10 +185,10 @@ export const CardsPage = () => {
         <Pagination
           arrowColor={'white'}
           arrowID={'arrow-ios-back'}
-          totalItems={cards?.pagination?.totalItems}
+          totalItems={cards?.pagination?.totalItems!}
           reversedArrowID={'arrow-ios-forward'}
           reversed
-          totalPages={cards?.pagination?.totalPages}
+          totalPages={cards?.pagination?.totalPages!}
         />
       )}
     </div>

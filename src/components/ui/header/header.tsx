@@ -4,13 +4,13 @@ import { DropDownMenu } from '@/components/ui/dropDown/dropDown'
 import { Typography } from '@/components/ui/typography'
 import s from './header.module.scss'
 import style from '../../../app.module.scss'
-import profileImage from '../../../asserts/profileImage.png'
-import {FC} from 'react'
-import {Link, Navigate, Outlet} from "react-router-dom";
-import {useMeQuery} from "@/api/auth-api/auth.api.ts";
+import userImg from '../../../asserts/userImg.png'
+import { FC } from 'react'
+import { Link, Navigate, Outlet } from 'react-router-dom'
+import { useMeQuery } from '@/api/auth-api/auth.api.ts'
 
 export const Header: FC = () => {
-  const {data, isSuccess, isLoading} = useMeQuery()
+  const { data, isSuccess, isLoading } = useMeQuery()
   const isLoggedIn = isSuccess
   return (
     <div className={s.container}>
@@ -23,7 +23,7 @@ export const Header: FC = () => {
             <>
               {isLoggedIn && (
                 <DropDownMenu
-                  avatar={data?.avatar || profileImage}
+                  avatar={data?.avatar || userImg}
                   email={data?.email}
                   name={data?.name}
                 />
@@ -53,21 +53,16 @@ export const Header: FC = () => {
 }
 
 export const Layout = () => {
-  const {isLoading, isSuccess} = useMeQuery()
+  const { isLoading, isSuccess } = useMeQuery()
   return (
     <>
-      <Header/>
-      {!isLoading &&
+      <Header />
+      {!isLoading && (
         <div className={style.container}>
-          {isSuccess && <Navigate to={'/'}/>}
-          <Outlet/>
+          {isSuccess && <Navigate to={'/'} />}
+          <Outlet />
         </div>
-      }
+      )}
     </>
   )
 }
-
-
-
-
-

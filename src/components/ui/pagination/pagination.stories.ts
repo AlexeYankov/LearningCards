@@ -29,6 +29,8 @@ export const Primary: Story = {
     arrowID: 'arrow-ios-back',
     reversedArrowID: 'arrow-ios-forward',
     variant: 'primary',
+    totalItems: 10,
+    totalPages: 100,
   },
 }
 
@@ -39,5 +41,7 @@ export const Secondary: Story = {
     reversed: false,
     reversedArrowID: 'arrow-ios-forward',
     variant: 'secondary',
+    totalItems: 10,
+    totalPages: 100,
   },
 }
