@@ -8,15 +8,23 @@ import userImg from '../../../asserts/userImg.png'
 import { FC } from 'react'
 import { Link, Navigate, Outlet } from 'react-router-dom'
 import { useMeQuery } from '@/api/auth-api/auth.api.ts'
+import { useAppDispatch } from '@/api/store.ts'
+import { resetFilter } from '@/api/decks/decks.reducer.ts'
 
 export const Header: FC = () => {
+  const dispatch = useAppDispatch()
+
   const { data, isSuccess, isLoading } = useMeQuery()
   const isLoggedIn = isSuccess
+
+  const handleResetFilter = () => {
+    dispatch(resetFilter())
+  }
   return (
     <div className={s.container}>
       <header className={s.header}>
         <Typography as={Link} to={'/'} tabIndex={0} className={s.logoBox}>
-          <img alt={''} className={s.logo} src={logo} />
+          <img alt={''} className={s.logo} src={logo} onClick={handleResetFilter} />
         </Typography>
         <div className={s.textHeader}>
           {!isLoading && (
