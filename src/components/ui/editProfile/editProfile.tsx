@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react'
 import s from './editProfile.module.scss'
-import photoProfile from '../../../asserts/profileImage.png'
+import userImg from '../../../asserts/userImg.png'
 import { Typography } from '@/components/ui/typography'
 import { Card } from '@/components/ui/card'
 import { EditIcon } from '@/asserts/icons/components/EditIcon.tsx'
@@ -70,7 +70,7 @@ export const EditProfile = () => {
             <img
               alt={'Photo profile'}
               className={s.logoProfileEdit}
-              src={data?.avatar || photoProfile}
+              src={data?.avatar || userImg}
             />
             <div className={s.editIconBlock}>
               <label htmlFor="input__file" className={s.editIcon}>
