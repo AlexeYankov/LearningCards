@@ -106,25 +106,6 @@ export const EditDeckModal = ({deck}: EditDeckModalProps) => {
             <ModalTitle title={'Edit Pack'}/>
             <form onSubmit={onSubmit}>
                 <div className={s.contentComponents}>
-                    {/*<img alt={''} className={s.img} src={selectedImage}/>*/}
-                    {/*<div className={s.btnCoverBox}>*/}
-                    {/*    {selectedImage && (*/}
-                    {/*        <Button variant={'secondary'} className={s.changeCover} onClick={deleteDeckCover}>*/}
-                    {/*            <DeleteIcon/>*/}
-                    {/*            Delete Cover*/}
-                    {/*        </Button>*/}
-                    {/*    )}*/}
-                    {/*    <label htmlFor="input__file" className={s.changeCover}>*/}
-                    {/*        <ImageIcon/>*/}
-                    {/*        Change Cover*/}
-                    {/*    </label>*/}
-                    {/*</div>*/}
-                    {/*<input*/}
-                    {/*    className={s.inputFile}*/}
-                    {/*    id={'input__file'}*/}
-                    {/*    type="file"*/}
-                    {/*    onChange={handleEditFileChange}*/}
-                    {/*/>*/}
                     <ImageSelector
                         selectedImage={selectedImage}
                         deleteLabel={'Delete Cover'}

@@ -1,4 +1,4 @@
-import {ChangeEvent, FC, useState} from 'react'
+import {ChangeEvent, FC, ReactNode, useState} from 'react'
 import {Button} from '../../../button/button.tsx'
 import {Select} from '@/components/ui/select'
 import {TextField} from '@/components/ui/textField'
@@ -14,7 +14,7 @@ import {ImageSelector} from "@/components/ui/cards/components/addEditCard/ImageS
 
 type Props = {
     id?: string
-    editIcon?: any
+    editIcon?: ReactNode
     card?: CardsResponseType
 }
 
