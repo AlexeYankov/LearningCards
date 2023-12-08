@@ -82,14 +82,11 @@ export const cardsService = baseApi.injectEndpoints({
         query: id => `v1/cards/${id}`,
       }),
 
-      // getDecks: builder.query<DecksType, void>({
-      //   providesTags: ['Decks'],
-      //   query: () => `v1/decks`,
-      // }),
-      updateCard: builder.mutation<UpdateCardsType, CardsResponseType>({
+
+      updateCard: builder.mutation<UpdateCardsType, { id:string , data:FormData }>({
         invalidatesTags: ['Cards'],
-        query: ({ id, ...patch }) => ({
-          body: patch,
+        query: ({ id, ...data }) => ({
+          body: data,
           method: 'PATCH',
           url: `v1/cards/${id}`,
         }),

@@ -38,17 +38,7 @@ export const EditDeckModal = ({deck}: EditDeckModalProps) => {
     const [isPrivate, setIsPrivate] = useState(false)
     const [open, setOpen] = useState(false)
 
-    // const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    //     const file = event.target.files?.[0]
-    //     if (file) {
-    //         const imageUrl = URL.createObjectURL(file)
-    //         setSelectedImage(imageUrl)
-    //         setValue('cover', [file])
-    //     } else {
-    //         setSelectedImage('')
-    //         setValue('cover', [])
-    //     }
-    // }
+
     const handleEditFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         handleFileChange({
             event: event,

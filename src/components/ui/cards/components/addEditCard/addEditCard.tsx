@@ -97,7 +97,7 @@ export const AddEditCard: FC<Props> = ({id, editIcon, card}) => {
             if (editIcon) {
                 updateCard({
                     id: card?.id!,
-                    form
+                    data:form
                 })
             } else {
                 createCard({id: id!, data: form})
