@@ -60,7 +60,7 @@ export const EditProfile = () => {
       <div className={s.boxLink}>
         <Link className={s.backLink} to={'/'}>
           <ArrowBackIcon />
-          Back to Packs List
+          Back to Decks List
         </Link>
       </div>
       <Card>

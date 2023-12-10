@@ -63,7 +63,7 @@ export const DecksPageBar = () => {
 
       <div>
         <Label label={'Show decks cards'} />
-        <Tabs title={['My Cards', 'All Cards']} />
+        <Tabs title={['My Decks', 'All Decks']} />
       </div>
 
       <div style={{ position: 'relative', maxWidth: '250px', width: '100%' }}>
@@ -77,7 +77,6 @@ export const DecksPageBar = () => {
           variant={'secondary'}
           onClick={handleResetFilter}
         >
-
           <Typography variant={'body2'}>Clear Filter</Typography>
         </Button>
       </div>

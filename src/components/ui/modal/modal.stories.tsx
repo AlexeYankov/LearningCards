@@ -176,26 +176,26 @@ export const ModalButtons: Story = {
   ),
 }
 
-export const ModalAddNewPack: Story = {
+export const ModalAddNewDeck: Story = {
   render: () => {
     // const [isCheck, setIsCheck] = useState(false)
 
     return (
       <Modal triggerName={<Button>Test</Button>}>
-        <ModalTitle title={'Add New Pack'} />
+        <ModalTitle title={'Add New Deck'} />
         <div className={s.contentComponents}>
           <img alt={'card image'} className={s.img} src={img} />
           <Button className={s.buttonModal} fullWidth icon={<ImageIcon />} variant={'secondary'}>
             Change Cover
           </Button>
-          <TextField inputId={'Name Pack'} label={'Name Pack'} placeholder={'Name'} />
+          <TextField inputId={'Name Deck'} label={'Name Deck'} placeholder={'Name'} />
           <CheckBox
             IconID={'checkbox-unselected'}
             SelectedIconID={'checkbox-selected'}
-            checkboxId={'Private Pack'}
+            checkboxId={'Private Deck'}
             disabled={false}
             height={'24'}
-            label={'Private Pack'}
+            label={'Private Deck'}
             width={'24'}
           />
         </div>

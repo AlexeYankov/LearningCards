@@ -91,12 +91,12 @@ export const CardsPage = () => {
       <div className={s.boxLink}>
         <Link className={s.backLink} to={'/'} onClick={resetFilterDecks}>
           <ArrowBackIcon />
-          Back to Packs List
+          Back to Decks List
         </Link>
       </div>
 
       {!cards?.items?.length ? (
-        <EmptyPack packTitle={'Name Pack'} />
+        <EmptyPack packTitle={'Name Deck'} />
       ) : (
         <>
           <PageName isMyCard={isMyCard} id={id} />
