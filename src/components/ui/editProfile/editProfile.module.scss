@@ -85,15 +85,21 @@
   }
 }
 
+.boxLink {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
 .backLink {
   display: flex;
   gap: 5px;
   align-items: center;
   justify-content: flex-start;
 
-  width: 100%;
   margin-bottom: 24px;
 
+  font-size: var(--font-size-s);
   text-decoration: none;
 
   svg {

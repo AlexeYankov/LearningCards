@@ -57,10 +57,12 @@ export const EditProfile = () => {
 
   return (
     <>
-      <Link className={s.backLink} to={'/'}>
-        <ArrowBackIcon />
-        Back to Packs List
-      </Link>
+      <div className={s.boxLink}>
+        <Link className={s.backLink} to={'/'}>
+          <ArrowBackIcon />
+          Back to Packs List
+        </Link>
+      </div>
       <Card>
         <div className={s.cards}>
           <Typography as={'span'} className={s.text} variant={'large'}>
