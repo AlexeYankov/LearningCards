@@ -10,7 +10,7 @@ import * as DropdownRadix from '@radix-ui/react-dropdown-menu'
 import s from './dropDown.module.scss'
 import { MoreIcon } from '@/asserts/icons/components/MoreIcon.tsx'
 import { useLogOutMutation } from '@/api/auth-api/auth.api.ts'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export type DropDown = {
   avatar?: string
@@ -38,13 +38,10 @@ export const DropDown: FC<DropDown> = ({
 
   return (
     <DropdownRadix.Root onOpenChange={setOpen} open={open}>
-      <DropdownRadix.Trigger>
-        {trigger && (
-          <Typography as={'p'} className={s.headerName} variant={'subtitle1'} tabIndex="0">
-            {name}
-          </Typography>
-        )}
-      </DropdownRadix.Trigger>
+      <Link className={s.headerLinkToProfile} to={'/profile'}>
+        {name}
+      </Link>
+      <DropdownRadix.Trigger></DropdownRadix.Trigger>
       <DropdownRadix.Trigger
         asChild
         className={`${trigger === 'imageAvatar' ? s.trigger : s.triggerIcon}`}
@@ -105,13 +102,11 @@ export const ItemWithIcon: FC<DropDownItemWithIcon> = ({
 }) => {
   return (
     <DropdownRadix.Item onClick={onClick} className={`${s.item} ${className}`} asChild>
-      <div className={s.menuItem}>
-        <Link to={linkTo!} className={s.menuItemIcon}>
-          {icon}
-          {children}
-          <Typography variant={variant}>{text}</Typography>
-        </Link>
-      </div>
+      <Link to={linkTo!} className={s.menuItemIcon}>
+        {icon}
+        {children}
+        <Typography variant={variant}>{text}</Typography>
+      </Link>
     </DropdownRadix.Item>
   )
 }
@@ -124,29 +119,24 @@ type DropDownMenuProps = {
 
 export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => {
   const [logout] = useLogOutMutation()
-  const navigate = useNavigate()
   const onClickLogOut = () => {
     logout()
   }
-  const onClickToProfile = () => {
-    navigate('/profile')
-  }
+
   return (
     <DropDown avatar={avatar} name={name} sideOffset={-1} trigger={'imageAvatar'}>
-      <ItemWithIcon className={s.itemProfile}>
-        <div className={s.inner}>
-          <img alt={''} className={s.img} src={avatar} />
-          <div className={s.itemBox}>
-            <Typography as={'p'} variant={'subtitle2'}>
-              {name}
-            </Typography>
-            <Typography className={s.email} variant={'caption'}>
-              {email}
-            </Typography>
-          </div>
+      <div className={s.inner}>
+        <img alt={''} className={s.img} src={avatar} />
+        <div className={s.itemBox}>
+          <Typography as={'p'} variant={'subtitle2'}>
+            {name}
+          </Typography>
+          <Typography className={s.email} variant={'caption'}>
+            {email}
+          </Typography>
         </div>
-      </ItemWithIcon>
-      <ItemWithIcon onClick={onClickToProfile} icon={<ProfileIcon />} text={'My Profile'} />
+      </div>
+      <ItemWithIcon linkTo={'/profile'} icon={<ProfileIcon />} text={'Profile'} />
       <ItemWithIcon onClick={onClickLogOut} icon={<SignOutIcon />} text={'Sign Out'} />
     </DropDown>
   )
