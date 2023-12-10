@@ -70,7 +70,7 @@ export const cardsService = baseApi.injectEndpoints({
           }
         },
       }),
-      deleteCard: builder.mutation<UpdateCardsType, void>({
+      deleteCard: builder.mutation<UpdateCardsType, string>({
         invalidatesTags: ['Cards'],
         query: id => ({
           method: 'DELETE',
