@@ -33,7 +33,9 @@
   display: flex;
   gap: 4px;
   align-items: center;
+
   margin-bottom: 30px;
+
   font-size: 14px;
   font-weight: 400;
   line-height: 1px;
@@ -151,6 +153,12 @@
     height: 16px;
     fill: var(--color-light-100);
   }
+}
+
+.boxLink {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .backLink {
