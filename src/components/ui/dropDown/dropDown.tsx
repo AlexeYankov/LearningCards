@@ -11,6 +11,7 @@ import s from './dropDown.module.scss'
 import { MoreIcon } from '@/asserts/icons/components/MoreIcon.tsx'
 import { useLogOutMutation } from '@/api/auth-api/auth.api.ts'
 import { Link } from 'react-router-dom'
+import {Loader} from "@/components/ui/loader/loader.tsx";
 
 export type DropDown = {
   avatar?: string
@@ -118,10 +119,12 @@ type DropDownMenuProps = {
 }
 
 export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => {
-  const [logout] = useLogOutMutation()
+  const [logout,{isLoading}] = useLogOutMutation()
+    if (isLoading)return <div style={{position:'fixed',top:'10%',left:'50%'}}><Loader/></div>
   const onClickLogOut = () => {
     logout()
   }
+
 
   return (
     <DropDown avatar={avatar} name={name} sideOffset={-1} trigger={'imageAvatar'}>

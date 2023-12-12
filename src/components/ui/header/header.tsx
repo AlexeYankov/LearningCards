@@ -1,15 +1,15 @@
 import logo from '@/asserts/Logo.png'
-import { Button } from '@/components/ui/button'
-import { DropDownMenu } from '@/components/ui/dropDown/dropDown'
-import { Typography } from '@/components/ui/typography'
+import {Button} from '@/components/ui/button'
+import {DropDownMenu} from '@/components/ui/dropDown/dropDown'
+import {Typography} from '@/components/ui/typography'
 import s from './header.module.scss'
 import style from '../../../app.module.scss'
 import userImg from '../../../asserts/userImg.png'
-import { FC } from 'react'
-import { Link, Navigate, Outlet } from 'react-router-dom'
-import { useMeQuery } from '@/api/auth-api/auth.api.ts'
-import { useAppDispatch } from '@/api/store.ts'
-import { resetFilter } from '@/api/decks/decks.reducer.ts'
+import {FC} from 'react'
+import {Link, Outlet} from 'react-router-dom'
+import {useMeQuery} from '@/api/auth-api/auth.api.ts'
+import {useAppDispatch} from '@/api/store.ts'
+import {resetFilter} from '@/api/decks/decks.reducer.ts'
 
 export const Header: FC = () => {
   const dispatch = useAppDispatch()
@@ -61,16 +61,12 @@ export const Header: FC = () => {
 }
 
 export const Layout = () => {
-  const { isLoading, isSuccess } = useMeQuery()
   return (
     <>
       <Header />
-      {!isLoading && (
         <div className={style.container}>
-          {isSuccess && <Navigate to={'/'} />}
           <Outlet />
         </div>
-      )}
     </>
   )
 }

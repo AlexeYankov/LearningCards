@@ -47,7 +47,7 @@ export const authService = baseApi.injectEndpoints({
                     method: 'Post',
                     body,
                 }),
-                invalidatesTags: ['Me']
+
             }),
             resetPassword: builder.mutation<void, ResetPasswordArgsType>({
                 query: ({token, password}) => ({

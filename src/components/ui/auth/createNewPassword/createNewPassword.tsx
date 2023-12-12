@@ -7,8 +7,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import s from './createNewPassword.module.scss'
-import { useResetPasswordMutation } from '@/api/auth-api/auth.api.ts'
+import {useMeQuery, useResetPasswordMutation} from '@/api/auth-api/auth.api.ts'
 import { Navigate, useParams } from 'react-router-dom'
+import {Loader} from "@/components/ui/loader/loader.tsx";
 
 type FormValues = z.infer<typeof loginSchema>
 const loginSchema = z.object({
@@ -22,7 +23,11 @@ export const CreateNewPassword = () => {
 
   const [newPassword, { isSuccess }] = useResetPasswordMutation()
   const params = useParams<'*'>()
-  if (isSuccess) return <Navigate to={'/login'} replace={true} />
+  const { isLoading} = useMeQuery()
+  if (isLoading) return <Loader/>
+  if (isSuccess) {
+    return <Navigate to={'/login'} replace={true} />
+  }
   const onSubmit = (data: FormValues) => {
     const { password } = data
     const token = params['*']

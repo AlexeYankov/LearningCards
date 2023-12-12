@@ -33,7 +33,7 @@ export const ControlledCheckbox = <TFieldValues extends FieldValues>({
       SelectedIconID={SelectedIconID}
       checkboxId={checkboxId}
       checked={value}
-      label={name}
+      label={label}
       name={name}
       onChange={onChange}
       {...checkboxProps}
