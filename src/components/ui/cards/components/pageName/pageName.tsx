@@ -4,6 +4,7 @@ import { FC } from 'react'
 import { DropDownPackMenu } from '@/components/ui/dropDown/dropDown'
 import { useNavigate } from 'react-router-dom'
 import { AddEditCard } from '@/components/ui/cards/components/addEditCard/addEditCard.tsx'
+import {Button} from "@/components/ui/button";
 
 type PageNameProps = {
   isMyCard?: boolean
@@ -21,7 +22,7 @@ export const PageName: FC<PageNameProps> = ({ id, isMyCard }) => {
         {isMyCard ? 'My Pack' : 'Friend’s Pack'}
         {isMyCard && <DropDownPackMenu/>}
       </Typography>
-      <div>{isMyCard ? <AddEditCard id={id} /> : <button onClick={toLearn}>Learn to pack</button>}</div>
+      <div>{isMyCard ? <AddEditCard id={id} /> : <Button onClick={toLearn}>Learn to pack</Button>}</div>
     </div>
   )
 }
