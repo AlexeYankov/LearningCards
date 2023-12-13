@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Sort } from '@/components/ui/table/types.ts'
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {Sort} from '@/components/ui/table/types.ts'
 
 const initialState = {
   answer: '',
@@ -48,7 +48,6 @@ export default cardsSlice.reducer
 export const {
   changeCardsCurrentPage,
   changeCardsItemsPerPage,
-  resetCardsFilter,
   selectedOptionSlice,
   changeCardOrderBy,
 } = cardsSlice.actions

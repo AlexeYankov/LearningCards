@@ -21,6 +21,8 @@ import {Loader} from '@/components/ui/loader/loader.tsx'
 import {AddEditCard} from "@/components/ui/cards/components/addEditCard/addEditCard.tsx";
 import {DeleteCardModal} from "@/components/ui/cards/components/deleteCardModal/deleteCardModel.tsx";
 import {useDebounce} from "@/hooks/useDebounce.ts";
+import {useGetDecksByIdQuery} from "@/api/decks/decks.api.ts";
+
 
 export const CardsPage = () => {
     const {id} = useParams()
@@ -38,6 +40,8 @@ export const CardsPage = () => {
         question: debouncedSearchValue
     })
     const {data: me} = useMeQuery()
+    const {data: deckById} = useGetDecksByIdQuery(id!)
+
     const resetFilterDecks = () => {
         dispatch(changeCardsCurrentPage({currentPage: 1}))
         dispatch(changeCardsItemsPerPage({itemsPerPage: 10}))
@@ -58,14 +62,7 @@ export const CardsPage = () => {
             })
         )
         if (sort?.direction === `${key}-desc`) {
-            dispatch(
-                changeCardOrderBy({
-                    key,
-                    direction: null,
-                })
-            )
-        }
-    }
+            dispatch(changeCardOrderBy({key, direction: null}))}}
 
     useEffect(() => {
         resetFilterDecks()
@@ -95,11 +92,11 @@ export const CardsPage = () => {
                 Back to Packs List
             </Link>
 
-            {!cards?.items?.length&&!debouncedSearchValue ? (
-                <EmptyPack packTitle={'Name Pack'}/>
+            {!cards?.items?.length && !debouncedSearchValue ? (
+                <EmptyPack packTitle={deckById?.name || 'Name Pack'}/>
             ) : (
                 <>
-                    <PageName isMyCard={isMyCard} id={id}/>
+                    <PageName packTitle={deckById?.name} isMyCard={isMyCard} id={id}/>
                     <PageBar value={searchValue} onChange={searchCards}/>
                     <Root className={s.container__common}>
                         <Head>

@@ -91,6 +91,14 @@ export const decksApi = baseApi.injectEndpoints({
           }
         },
       }),
+      getDecksById: builder.query<ResponseDeckType, string>({
+        providesTags: ['Decks'],
+        query: id => {
+          return {
+            url: `v1/decks/${id}`,
+          }
+        },
+      }),
       createDeck: builder.mutation<ResponseDeckType, CreateDeckArgType>({
         invalidatesTags: ['Decks'],
         query: body => {
@@ -166,6 +174,7 @@ export const decksApi = baseApi.injectEndpoints({
 })
 
 export const {
+  useGetDecksByIdQuery,
   useLearnRandomCardQuery,
   useCreateDeckMutation,
   useGetDecksQuery,

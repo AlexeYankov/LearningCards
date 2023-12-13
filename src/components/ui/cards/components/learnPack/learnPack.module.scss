@@ -2,10 +2,8 @@
   display: flex;
   gap: 4px;
   align-items: center;
-
   width: 100%;
   margin-bottom: 36px;
-
   font-size: 14px;
   font-weight: 400;
   line-height: 1px;
@@ -40,6 +38,10 @@
     margin-bottom: 35px;
     color: #808080;
   }
+  .Image{
+    max-width: 300px;
+    margin-bottom: 15px;
+  }
 
   .Radio {
     gap: 20px;
@@ -48,7 +50,6 @@
 
   .Answer {
     margin-bottom: 12px;
-
     font-size: 16px;
     font-weight: 700;
     font-style: normal;

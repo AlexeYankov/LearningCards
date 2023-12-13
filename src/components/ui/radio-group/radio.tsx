@@ -15,8 +15,8 @@ export type RadioGroupPropsType = RadioGroupLib.RadioGroupProps & {
     defaultValue?: string;
     errorMessage?: string
     className?: string
-    onChange?: (value:any) => void
-    value?:string
+    onChange?: (value: any) => void
+    value?: string
 
 };
 export const Radio = forwardRef<
@@ -35,7 +35,8 @@ export const Radio = forwardRef<
         ref
     ) => {
         return (
-            <RadioGroup.Root onValueChange={onChange} value={value} className={`${s.RadioGroupRoot} ${className}`} disabled={disabled} ref={ref}>
+            <RadioGroup.Root onValueChange={onChange} value={value} className={`${s.RadioGroupRoot} ${className}`}
+                             disabled={disabled} ref={ref}>
                 {options?.map((el) => {
                     return (
                         <div key={el.value} className={s.RadioGroupBlock}>
