@@ -12,61 +12,58 @@ import {useAppDispatch} from '@/api/store.ts'
 import {resetFilter} from '@/api/decks/decks.reducer.ts'
 
 export const Header: FC = () => {
-  const dispatch = useAppDispatch()
-
-  const { data, isSuccess, isLoading } = useMeQuery()
-  const isLoggedIn = isSuccess
-
-  const handleResetFilter = () => {
-    dispatch(resetFilter())
-  }
-  return (
-    <div className={s.container}>
-      <header className={s.header}>
-        <Typography as={Link} to={'/'} tabIndex={0} className={s.logoBox}>
-          <img alt={''} className={s.logo} src={logo} onClick={handleResetFilter} />
-        </Typography>
-        <div className={s.textHeader}>
-          {!isLoading && (
-            <>
-              {isLoggedIn ? (
-                <DropDownMenu
-                  avatar={data?.avatar || userImg}
-                  email={data?.email}
-                  name={data?.name}
-                />
-              ): null}
-              {!isLoggedIn && (
-                <Button
-                  children={
-                    <Typography
-                      className={s.linkSignIn}
-                      as={Link}
-                      to={'/login'}
-                      children={'Sign In'}
-                      variant={'subtitle2'}
-                    />
-                  }
-                  className={s.button}
-                  fullWidth
-                  variant={'primary'}
-                />
-              )}
-            </>
-          )}
+    const dispatch = useAppDispatch()
+    const {data, error, isLoading} = useMeQuery()
+    const handleResetFilter = () => {
+        dispatch(resetFilter())
+    }
+    return (
+        <div className={s.container}>
+            <header className={s.header}>
+                <Typography as={Link} to={'/'} tabIndex={0} className={s.logoBox}>
+                    <img alt={''} className={s.logo} src={logo} onClick={handleResetFilter}/>
+                </Typography>
+                <div className={s.textHeader}>
+                    {!isLoading && (
+                        <>
+                            {!error && (
+                                <DropDownMenu
+                                    avatar={data?.avatar || userImg}
+                                    email={data?.email}
+                                    name={data?.name}
+                                />
+                            )}
+                            {error && (
+                                <Button
+                                    children={
+                                        <Typography
+                                            className={s.linkSignIn}
+                                            as={Link}
+                                            to={'/login'}
+                                            children={'Sign In'}
+                                            variant={'subtitle2'}
+                                        />
+                                    }
+                                    className={s.button}
+                                    fullWidth
+                                    variant={'primary'}
+                                />
+                            )}
+                        </>
+                    )}
+                </div>
+            </header>
         </div>
-      </header>
-    </div>
-  )
+    )
 }
 
 export const Layout = () => {
-  return (
-    <>
-      <Header />
-        <div className={style.container}>
-          <Outlet />
-        </div>
-    </>
-  )
+    return (
+        <>
+            <Header/>
+            <div className={style.container}>
+                <Outlet/>
+            </div>
+        </>
+    )
 }
