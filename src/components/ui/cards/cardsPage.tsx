@@ -77,7 +77,6 @@ export const CardsPage = () => {
         // @ts-ignore
         isMyCard = cards.items[0]?.userId === me?.id
     }
-
     const columns: Column[] = [
         {key: 'question', sortable: true, title: 'Question'},
         {key: 'answer', sortable: true, title: 'Answer'},

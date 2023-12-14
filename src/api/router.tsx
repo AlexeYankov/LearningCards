@@ -87,11 +87,10 @@ export function PrivateRoutes() {
 }
 
 export function PublicRoutes() {
-    const {isSuccess, isUninitialized} = useMeQuery()
-    if (isUninitialized) return <Loader/>
+    const {isSuccess, isFetching} = useMeQuery()
+    if (isFetching) return <Loader/>
     return !isSuccess ? <Outlet/> : <Navigate to="/"/>
 }
-
 export const Router = () => {
     return <RouterProvider router={router}/>
 }

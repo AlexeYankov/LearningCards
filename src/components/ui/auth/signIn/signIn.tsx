@@ -16,21 +16,19 @@ type FormValues = z.infer<typeof loginSchema>
 const loginSchema = z.object({
     email: z.string().email(),
     password: z.string().min(3),
-    rememberMe: z.boolean().default(false),
+    rememberMe: z.boolean().default(true),
 })
 export const SignIn = () => {
     const {handleSubmit, control} = useForm<FormValues>({
         resolver: zodResolver(loginSchema),
     })
-    const [login, {isSuccess, isLoading}] = useLoginMutation()
+    const [login, {isLoading}] = useLoginMutation()
     const navigate = useNavigate()
     if (isLoading) return <Loader/>
-    if (isSuccess) {
-        navigate('/')
-    }
-
     const onSubmit = (data: FormValues) => {
-        login(data)
+        login(data).unwrap().then(()=>{
+            navigate('/')
+        })
     }
 
     return (

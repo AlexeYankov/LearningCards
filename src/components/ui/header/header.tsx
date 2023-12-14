@@ -29,13 +29,13 @@ export const Header: FC = () => {
         <div className={s.textHeader}>
           {!isLoading && (
             <>
-              {isLoggedIn && (
+              {isLoggedIn ? (
                 <DropDownMenu
                   avatar={data?.avatar || userImg}
                   email={data?.email}
                   name={data?.name}
                 />
-              )}
+              ): null}
               {!isLoggedIn && (
                 <Button
                   children={
