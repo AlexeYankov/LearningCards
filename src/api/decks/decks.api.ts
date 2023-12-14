@@ -167,7 +167,7 @@ export const decksApi = baseApi.injectEndpoints({
             body: { cardId: body.cardId, grade: body.grade },
           }
         },
-        invalidatesTags: ['Cards', 'Me'],
+        invalidatesTags: ['Cards'],
       }),
     }
   },

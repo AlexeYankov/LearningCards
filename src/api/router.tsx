@@ -58,10 +58,6 @@ const privateRoutes: RouteObject[] = [
         element: <EditProfile/>,
         path: '/profile',
     },
-    {
-        element: <LearnPack/>,
-        path: '/:id/learn',
-    },
 ]
 
 const router = createBrowserRouter([

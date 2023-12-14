@@ -41,6 +41,10 @@ export const CardsPage = () => {
     })
     const {data: me} = useMeQuery()
     const {data: deckById} = useGetDecksByIdQuery(id!)
+    console.log(deckById?.userId)
+    console.log(me?.id)
+
+    const isMyCard = deckById?.userId === me?.id
 
     const resetFilterDecks = () => {
         dispatch(changeCardsCurrentPage({currentPage: 1}))
@@ -62,7 +66,9 @@ export const CardsPage = () => {
             })
         )
         if (sort?.direction === `${key}-desc`) {
-            dispatch(changeCardOrderBy({key, direction: null}))}}
+            dispatch(changeCardOrderBy({key, direction: null}))
+        }
+    }
 
     useEffect(() => {
         resetFilterDecks()
@@ -71,12 +77,7 @@ export const CardsPage = () => {
     if (isLoading) {
         return <Loader/>
     }
-    let isMyCard: boolean = false
 
-    if (cards) {
-        // @ts-ignore
-        isMyCard = cards.items[0]?.userId === me?.id
-    }
     const columns: Column[] = [
         {key: 'question', sortable: true, title: 'Question'},
         {key: 'answer', sortable: true, title: 'Answer'},
@@ -92,7 +93,7 @@ export const CardsPage = () => {
             </Link>
 
             {!cards?.items?.length && !debouncedSearchValue ? (
-                <EmptyPack packTitle={deckById?.name || 'Name Pack'}/>
+                <EmptyPack isMyCard={isMyCard} packTitle={deckById?.name}/>
             ) : (
                 <>
                     <PageName packTitle={deckById?.name} isMyCard={isMyCard} id={id}/>

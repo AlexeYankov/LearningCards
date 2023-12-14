@@ -20,7 +20,7 @@ export const PageName: FC<PageNameProps> = ({id, isMyCard, packTitle}) => {
     return (
         <div className={f.container__pageName}>
             <Typography as={'h1'} variant={'large'} className={f.textWithIconBox}>
-                {isMyCard ? 'My Pack' : packTitle || 'Friend’s Pack'}
+                {isMyCard ? 'My Pack' : packTitle}
                 {isMyCard && <DropDownPackMenu/>}
             </Typography>
             <div>{isMyCard ? <AddEditCard id={id}/> : <Button onClick={toLearn}>Learn to pack</Button>}</div>
