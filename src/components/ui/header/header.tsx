@@ -1,4 +1,4 @@
-import logo from '@/asserts/Logo.png'
+import logo from '@/asserts/Logo.svg'
 import {Button} from '@/components/ui/button'
 import {DropDownMenu} from '@/components/ui/dropDown/dropDown'
 import {Typography} from '@/components/ui/typography'
