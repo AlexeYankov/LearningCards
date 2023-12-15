@@ -7,7 +7,7 @@ import {z} from 'zod'
 import {Typography} from '@/components/ui/typography'
 import {Button} from '@/components/ui/button'
 import {useRecoverPasswordMutation} from '@/api/auth-api/auth.api.ts'
-import {Link, Navigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {Loader} from '@/components/ui/loader/loader.tsx'
 
 type FormValues = z.infer<typeof loginSchema>
@@ -18,17 +18,17 @@ const loginSchema = z.object({
 const html =
     '<h1>Hi, ##name##</h1><p>Click <a href="http://localhost:5173/createNewPassword/##token##">here</a> to recover your password</p>'
 export const ForgotYourPassword = () => {
+    const navigate = useNavigate()
     const {handleSubmit, control} = useForm<FormValues>({
         resolver: zodResolver(loginSchema),
     })
-
-    const [sendRequest, {isSuccess, isLoading}] = useRecoverPasswordMutation()
+    const [sendRequest, {isLoading}] = useRecoverPasswordMutation()
     if (isLoading) return <Loader/>
-    if (isSuccess) return <Navigate to={'/checkEmail'} replace={true}/>
-
     const onSubmit = (data: FormValues) => {
         const {email} = data
-        sendRequest({email, html})
+        sendRequest({email, html}).unwrap().then(() => {
+            navigate(`/${email}/checkEmail`)
+        })
     }
     return (
         <Card className={s.forgotYourPassword}>

@@ -12,7 +12,6 @@ import {useLoginMutation} from '@/api/auth-api/auth.api.ts'
 import {Loader} from '@/components/ui/loader/loader.tsx'
 
 type FormValues = z.infer<typeof loginSchema>
-
 const loginSchema = z.object({
     email: z.string().email(),
     password: z.string().min(3),

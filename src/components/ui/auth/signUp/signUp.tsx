@@ -10,7 +10,6 @@ import {Link, Navigate} from 'react-router-dom'
 import {useCreateUserMutation} from '@/api/auth-api/auth.api.ts'
 
 type FormValues = z.infer<typeof loginSchema>
-
 const loginSchema = z
     .object({
         email: z.string().email(),
@@ -27,7 +26,6 @@ export const SignUp = () => {
     })
     const [signUp, {isSuccess}] = useCreateUserMutation()
     if (isSuccess) return <Navigate to={'/login'}/>
-
     const onSubmit = (data: FormValues) => {
         const {email, password} = data
         signUp({email, password})

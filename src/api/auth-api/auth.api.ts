@@ -13,7 +13,7 @@ export const authService = baseApi.injectEndpoints({
                     return {
                         url: `v1/auth/me`,
                         method: 'PATCH',
-                        body:body,
+                        body: body,
                     }
                 },
                 invalidatesTags: ['Me']
@@ -47,7 +47,6 @@ export const authService = baseApi.injectEndpoints({
                     method: 'Post',
                     body,
                 }),
-
             }),
             resetPassword: builder.mutation<void, ResetPasswordArgsType>({
                 query: ({token, password}) => ({

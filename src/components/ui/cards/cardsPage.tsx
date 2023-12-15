@@ -41,8 +41,6 @@ export const CardsPage = () => {
     })
     const {data: me} = useMeQuery()
     const {data: deckById} = useGetDecksByIdQuery(id!)
-    console.log(deckById?.userId)
-    console.log(me?.id)
 
     const isMyCard = deckById?.userId === me?.id
 
