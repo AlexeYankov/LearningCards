@@ -11,13 +11,14 @@ import {Photo} from "@/components/ui/editProfile/photo/photo.tsx";
 import {useAppDispatch, useAppSelector} from "@/api/store.ts";
 import {changeEditModeProfile, changeTitleProfile, changeValueProfile} from "@/api/profile/profile.reducer.ts";
 import {NormalMode} from "@/components/ui/editProfile/normalMode/normalMode.tsx";
+import {Progress} from "@/components/ui/loader/loader.tsx";
 
 export const EditProfile = () => {
     const dispatch = useAppDispatch()
     const value = useAppSelector((state) => state.profile.value)
     const title = useAppSelector((state) => state.profile.title)
     const editMode = useAppSelector((state) => state.profile.editMode)
-    const {data} = useMeQuery()
+    const {data, isFetching} = useMeQuery()
     const [update] = useUpdateUserMutation()
     const uploadContent = (event: ChangeEvent<HTMLInputElement>) => {
         const bodyFormData = new FormData()
@@ -39,7 +40,7 @@ export const EditProfile = () => {
         dispatch(changeTitleProfile({title: e.currentTarget.value}))
     }
     const handleClick = (e: FormEvent<HTMLFormElement>) => e.preventDefault()
-
+    if (isFetching) return <Progress/>
     return (
         <>
             <div className={s.boxLink}>
