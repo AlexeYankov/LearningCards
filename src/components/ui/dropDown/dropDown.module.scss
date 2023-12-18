@@ -60,22 +60,21 @@
   display: flex;
   align-items: center;
 
-  padding: 14px 0;
+  padding: 12px 0;
+
+  line-height: var(--line-height-s);
 
   border-bottom: 1px solid var(--color-dark-500);
   outline: none;
-}
 
-.menuItem {
-  display: flex;
+  &:first-child {
+    cursor: default;
+  }
 }
 
 .menuItemIcon {
   display: flex;
   align-items: center;
-
-  min-width: 195px;
-
   color: white;
   text-decoration: none;
 
@@ -97,8 +96,17 @@
 }
 
 .inner {
+  cursor: default;
+
   display: flex;
   align-items: center;
+
+  padding: 12px 0;
+
+  line-height: var(--line-height-s);
+
+  border-bottom: 1px solid var(--color-dark-500);
+  outline: none;
 }
 
 .email {
@@ -125,8 +133,9 @@
   }
 }
 
-.headerName {
+.headerLinkToProfile {
   margin-right: 15px;
+  text-decoration: none;
   border-bottom-style: dashed;
 
   &:focus-visible {

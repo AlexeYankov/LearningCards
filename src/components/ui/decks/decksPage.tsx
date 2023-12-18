@@ -1,5 +1,4 @@
-import { useGetDecksQuery } from '@/api/decks/decks.api'
-
+import {useGetDecksQuery} from '@/api/decks/decks.api'
 import s from './decksPage.module.scss'
 
 import { Pagination } from '../pagination'
@@ -12,9 +11,11 @@ import { Sort } from '@/components/ui/table/types'
 import { DecksPageName } from './components/decksPageName'
 import { DecksHead } from './components/decksHead'
 import { DecksBody } from './components/decksBody'
+import { useSearchParams } from 'react-router-dom'
 
 export const DecksPage = () => {
   const dispatch = useAppDispatch()
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const itemsPerPage = useAppSelector(state => state.decks.itemsPerPage)
   const sort = useAppSelector(state => state.decks.sort)
@@ -44,9 +45,10 @@ export const DecksPage = () => {
 
     if (totalItems) {
       dispatch(changeItemsPerPage({ itemsPerPage: 10 }))
-      dispatch(changeCurrentPage({ currentPage: 1 }))
+      // Обновление значения currentPage в URL при каждом изменении
+      setSearchParams({ ...searchParams, page: String(currentPage) })
     }
-  }, [decks?.pagination?.totalItems, dispatch])
+  }, [currentPage, decks?.pagination?.totalItems, dispatch, setSearchParams, searchParams])
   return (
     <div className={s.container}>
       <DecksPageName />

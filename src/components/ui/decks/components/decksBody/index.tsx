@@ -1,13 +1,13 @@
 import s from '@/components/ui/decks/decksPage.module.scss'
-import { Body, Cell, Row } from '@it-incubator/ui-kit'
-import { Link } from 'react-router-dom'
-import { Typography } from '@/components/ui/typography'
-import { convertedTime } from '@/helpers/convertedTime'
-import { DecksType } from '@/api/decks/decks.api.ts'
-import { useMeQuery } from '@/api/auth-api/auth.api'
-import { EditDeckModal } from '../editDeckModal'
-import { LearnDeckModal } from '../learnDeckModal'
-import { DeleteDeckModal } from '../deleteDeckModal'
+import {Body, Cell, Row} from '@it-incubator/ui-kit'
+import {Link} from 'react-router-dom'
+import {Typography} from '@/components/ui/typography'
+import {convertedTime} from '@/helpers/convertedTime'
+import {DecksType} from '@/api/decks/decks.api.ts'
+import {useMeQuery} from '@/api/auth-api/auth.api'
+import {EditDeckModal} from '../editDeckModal'
+import {LearnDeckModal} from '../learnDeckModal'
+import {DeleteDeckModal} from '../deleteDeckModal'
 
 type DecksBodyProps = {
   decks?: DecksType
@@ -15,7 +15,6 @@ type DecksBodyProps = {
 
 export const DecksBody = ({ decks }: DecksBodyProps) => {
   const { data: me } = useMeQuery()
-
   return (
     <Body>
       {decks?.items?.map(deck => {

@@ -1,25 +1,24 @@
-import { ResponseDeckType, useDeleteDeckMutation } from '@/api/decks/decks.api.ts'
 import { useState } from 'react'
 import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal'
 import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon.tsx'
 import { Typography } from '@/components/ui/typography'
 import s from '@/components/ui/decks/decksPage.module.scss'
 import { Button } from '@/components/ui/button'
+import { CardsResponseType, useDeleteCardMutation } from '@/api/common.api.ts'
 
-type DeleteDeckModalProps = {
-  deck: ResponseDeckType
+type DeleteCardModel = {
+  card: CardsResponseType
 }
 
-export const DeleteDeckModal = ({ deck }: DeleteDeckModalProps) => {
-  const [deleteDeck] = useDeleteDeckMutation()
+export const DeleteCardModal = ({ card }: DeleteCardModel) => {
   const [open, setOpen] = useState(false)
-
+  const [deleteCard] = useDeleteCardMutation()
   const handleCloseModal = () => {
     setOpen(prevState => !prevState)
   }
 
   const handleDeleteDeckClick = () => {
-    deleteDeck(deck.id!)
+    deleteCard(card.id)
     handleCloseModal()
   }
   return (
@@ -32,14 +31,11 @@ export const DeleteDeckModal = ({ deck }: DeleteDeckModalProps) => {
         </button>
       }
     >
-      <ModalTitle title={'Delete Pack'} />
+      <ModalTitle title={'Delete Card'} />
 
       <ModalDescription>
         <Typography variant={'body1'} as={'p'}>
-          Do you really want to remove <span className={s.boldText}>{deck.name}</span>?
-        </Typography>
-        <Typography variant={'body1'} as={'p'}>
-          All cards will be deleted.
+          Do you really want to remove this card?
         </Typography>
       </ModalDescription>
       <div className={`${s.contentBtn} ${s.contentBtns}`}>
@@ -57,7 +53,7 @@ export const DeleteDeckModal = ({ deck }: DeleteDeckModalProps) => {
           variant={'primary'}
           type={'submit'}
         >
-          Delete Pack
+          Delete Card
         </Button>
       </div>
     </Modal>

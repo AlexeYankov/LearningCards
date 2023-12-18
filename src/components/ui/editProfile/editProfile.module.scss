@@ -74,15 +74,26 @@
     color: var(--color-dark-100);
   }
 
-  .button {
-    margin: 0 36px 84px;
-    padding: 6px 28px;
+  .form {
+    width: 100%;
+
+    .button {
+      margin: 0 36px 84px;
+      padding: 6px 28px;
+    }
+
+    .textField {
+      margin-bottom: 15px;
+      padding: 0 36px;
+    }
   }
 
-  .textField {
-    margin-bottom: 15px;
-    padding: 0 36px;
-  }
+}
+
+.boxLink {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .backLink {
@@ -91,9 +102,9 @@
   align-items: center;
   justify-content: flex-start;
 
-  width: 100%;
   margin-bottom: 24px;
 
+  font-size: var(--font-size-s);
   text-decoration: none;
 
   svg {

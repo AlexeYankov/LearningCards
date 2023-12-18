@@ -1,5 +1,4 @@
 import s from './pagination.module.scss'
-
 import { Select } from '../select/select'
 import { Typography } from '../typography'
 import { Pages } from './components/pages/pages'

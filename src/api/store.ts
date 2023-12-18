@@ -7,6 +7,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query/react'
 
 import { baseApi } from './cards.api'
+import profileReducer from "@/api/profile/profile.reducer.ts";
 
 export const store = configureStore({
   middleware: getDefaultMiddleware =>
@@ -15,6 +16,7 @@ export const store = configureStore({
     [baseApi.reducerPath]: baseApi.reducer,
     decks: decksReducer,
     cards: cardsReducer,
+    profile:profileReducer
   },
 })
 
