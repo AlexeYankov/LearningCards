@@ -1,7 +1,5 @@
 import {useGetDecksQuery} from '@/api/decks/decks.api'
-
 import s from './decksPage.module.scss'
-
 import { Pagination } from '../pagination'
 import { DecksPageBar } from './components/decksPageBar'
 import { useAppDispatch, useAppSelector } from '@/api/store'
