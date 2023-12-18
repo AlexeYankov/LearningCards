@@ -9,7 +9,6 @@ const initialState = {
   authorId: '',
   name: '',
   sort: null as Sort,
-
 }
 
 const decksSlice = createSlice({

@@ -5,6 +5,8 @@ import {Typography} from '@/components/ui/typography'
 import s from '@/components/ui/decks/decksPage.module.scss'
 import {Button} from '@/components/ui/button'
 import {CardsResponseType, useDeleteCardMutation} from "@/api/common.api.ts";
+import {toast} from "react-toastify";
+import {ErrorComponent} from "@/utils/toastify/Error.tsx";
 
 type DeleteCardModel = {
     card: CardsResponseType
@@ -18,10 +20,20 @@ export const DeleteCardModal = ({ card }: DeleteCardModel) => {
     }
 
     const handleDeleteDeckClick = () => {
-        deleteCard(card.id!)
+        toast.promise(
+            deleteCard(card.id!),
+            {
+                pending: 'Uploading...',
+                success: 'Your card successfully deleted',
+                error: 'An error occurred while uploading'
+            }
+        )
         handleCloseModal()
     }
     return (
+        <>
+            {/*<Toastify/>*/}
+            <ErrorComponent />
         <Modal
             open={open}
             onOpenChange={setOpen}
@@ -58,5 +70,6 @@ export const DeleteCardModal = ({ card }: DeleteCardModel) => {
                 </Button>
             </div>
         </Modal>
+        </>
     )
 }
