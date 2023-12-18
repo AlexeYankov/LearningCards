@@ -160,7 +160,7 @@ export const AddEditCard: FC<Props> = ({id, editIcon, card}) => {
                                         label={'Question'}
                                         placeholder={'Question'}
                                         errorMessage={errors.question?.message}
-                                        {...register('question', {value: card?.answer})}
+                                        {...register('question', {value: card?.question})}
                                     />
                                     <ImageSelector
                                         selectedImage={editIcon ? selectedEditQuestionImage : selectedQuestionImage}
@@ -178,7 +178,7 @@ export const AddEditCard: FC<Props> = ({id, editIcon, card}) => {
                                 label={'Question'}
                                 placeholder={'Question'}
                                 errorMessage={errors.question?.message}
-                                {...register('question', {value: card?.answer})}
+                                {...register('question', {value: card?.question})}
                             />
                         )}
                         {valueSelect === 'Picture' ? (
