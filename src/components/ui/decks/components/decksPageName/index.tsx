@@ -79,14 +79,14 @@ export const DecksPageName = () => {
   return (
     <div className={f.container__pageName}>
       <Typography as={'h1'} variant={'large'}>
-        Packs list
+        Decks list
       </Typography>
       <Modal
         onOpenChange={handleModalToggle}
         open={open}
         triggerName={
           <Button type={'button'} variant={'primary'}>
-            Add New Pack
+            Add New Deck
           </Button>
         }
       >

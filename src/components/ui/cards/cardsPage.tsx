@@ -68,27 +68,30 @@ export const CardsPage = () => {
         }
     }
 
-    useEffect(() => {
-        resetFilterDecks()
-    }, [])
+  useEffect(() => {
+    resetFilterDecks()
+  }, [])
 
     if (isLoading) {
         return <Loader/>
     }
 
-    const columns: Column[] = [
-        {key: 'question', sortable: true, title: 'Question'},
-        {key: 'answer', sortable: true, title: 'Answer'},
-        {key: 'updated', sortable: true, title: 'Last updated'},
-        {key: 'grade', sortable: true, title: 'Grade'},
-        {key: 'actions', sortable: false, title: ''},
-    ]
-    return (
-        <div className={s.container}>
-            <Link className={s.backLink} to={'/'} onClick={resetFilterDecks}>
-                <ArrowBackIcon/>
-                Back to Packs List
-            </Link>
+  const columns: Column[] = [
+    { key: 'question', sortable: true, title: 'Question' },
+    { key: 'answer', sortable: true, title: 'Answer' },
+    { key: 'updated', sortable: true, title: 'Last updated' },
+    { key: 'grade', sortable: true, title: 'Grade' },
+    { key: 'actions', sortable: false, title: '' },
+  ]
+
+  return (
+    <div className={s.container}>
+      <div className={s.boxLink}>
+        <Link className={s.backLink} to={'/'} onClick={resetFilterDecks}>
+          <ArrowBackIcon />
+          Back to Decks List
+        </Link>
+      </div>
 
             {!cards?.items?.length && !debouncedSearchValue ? (
                 <EmptyPack isMyCard={isMyCard} packTitle={deckById?.name}/>
@@ -125,73 +128,73 @@ export const CardsPage = () => {
                                     () => 'star-outline'
                                 )
 
-                                if (Math.round(card.grade || 0) - 5 < 0) {
-                                    result = starsGrade.concat(emptyStarsGrade)
-                                }
+                if (Math.round(card.grade || 0) - 5 < 0) {
+                  result = starsGrade.concat(emptyStarsGrade)
+                }
 
-                                return (
-                                    <Row key={card.id}>
-                                        <Cell className={s.bodyCell}>
-                                            <div className={s.imageWithNameBox}>
-                                                {card.question && card.questionImg && (
-                                                    <img
-                                                        className={s.image}
-                                                        src={card.questionImg}
-                                                        alt={`${card.questionImg + ' image'}`}
-                                                    />
-                                                )}
-                                                <Typography variant={'body1'} className={s.typography}>
-                                                    {card.question}
-                                                </Typography>
-                                            </div>
-                                        </Cell>
-                                        <Cell className={s.bodyCell}>
-                                            <div className={s.imageWithNameBox}>
-                                                {card.answer && card.answerImg && (
-                                                    <img
-                                                        className={s.image}
-                                                        src={card.answerImg}
-                                                        alt={`${card.answerImg + ' image'}`}
-                                                    />
-                                                )}
-                                                <Typography variant={'body1'} className={s.typography}>
-                                                    {card.answer}
-                                                </Typography>
-                                            </div>
-                                        </Cell>
-                                        <Cell className={s.bodyCell}>{convertedTime(card.updated)}</Cell>
-                                        <Cell className={`${s.bodyCell} `}>
-                                            <div className={s.starsBox}>
-                                                {result.map((star, i) => {
-                                                    return <StarIcon iconId={star} key={i}/>
-                                                })}
-                                            </div>
-                                        </Cell>
-                                        {isMyCard && (
-                                            <Cell className={`${s.bodyCell} `}>
-                                                <div className={s.iconBox}>
-                                                    <AddEditCard editIcon={<EditIcon/>} card={card}/>
-                                                    <DeleteCardModal card={card}/>
-                                                </div>
-                                            </Cell>
-                                        )}
-                                    </Row>
-                                )
-                            })}
-                        </Body>
-                    </Root>
-                </>
-            )}
-            {cards?.pagination?.totalPages! > 1 && (
-                <Pagination
-                    arrowColor={'white'}
-                    arrowID={'arrow-ios-back'}
-                    totalItems={cards?.pagination?.totalItems!}
-                    reversedArrowID={'arrow-ios-forward'}
-                    reversed
-                    totalPages={cards?.pagination?.totalPages!}
-                />
-            )}
-        </div>
-    )
+                return (
+                  <Row key={card.id}>
+                    <Cell className={s.bodyCell}>
+                      <div className={s.imageWithNameBox}>
+                        {card.question && card.questionImg && (
+                          <img
+                            className={s.image}
+                            src={card.questionImg}
+                            alt={`${card.questionImg + ' image'}`}
+                          />
+                        )}
+                        <Typography variant={'body1'} className={s.typography}>
+                          {card.question}
+                        </Typography>
+                      </div>
+                    </Cell>
+                    <Cell className={s.bodyCell}>
+                      <div className={s.imageWithNameBox}>
+                        {card.answer && card.answerImg && (
+                          <img
+                            className={s.image}
+                            src={card.answerImg}
+                            alt={`${card.answerImg + ' image'}`}
+                          />
+                        )}
+                        <Typography variant={'body1'} className={s.typography}>
+                          {card.answer}
+                        </Typography>
+                      </div>
+                    </Cell>
+                    <Cell className={s.bodyCell}>{convertedTime(card.updated)}</Cell>
+                    <Cell className={`${s.bodyCell} `}>
+                      <div className={s.starsBox}>
+                        {result.map((star, i) => {
+                          return <StarIcon iconId={star} key={i} />
+                        })}
+                      </div>
+                    </Cell>
+                    {isMyCard && (
+                      <Cell className={`${s.bodyCell} `}>
+                        <div className={s.iconBox}>
+                          <AddEditCard editIcon={<EditIcon/>} card={card} />
+                          <DeleteCardModal card={card} />
+                        </div>
+                      </Cell>
+                    )}
+                  </Row>
+                )
+              })}
+            </Body>
+          </Root>
+        </>
+      )}
+      {cards?.pagination?.totalPages! > 1 && (
+        <Pagination
+          arrowColor={'white'}
+          arrowID={'arrow-ios-back'}
+          totalItems={cards?.pagination?.totalItems!}
+          reversedArrowID={'arrow-ios-forward'}
+          reversed
+          totalPages={cards?.pagination?.totalPages!}
+        />
+      )}
+    </div>
+  )
 }
