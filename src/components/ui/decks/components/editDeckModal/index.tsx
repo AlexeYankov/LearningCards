@@ -30,7 +30,6 @@ export const EditDeckModal = ({ deck }: EditDeckModalProps) => {
     setValue,
     setError,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<Form>()
 
@@ -47,7 +46,6 @@ export const EditDeckModal = ({ deck }: EditDeckModalProps) => {
     })
   }
   const handleCloseModal = () => {
-    reset()
     setOpen(false)
   }
 
@@ -61,6 +59,7 @@ export const EditDeckModal = ({ deck }: EditDeckModalProps) => {
 
   const onSubmit = handleSubmit(data => {
     const form = new FormData()
+    form.append('name', data.name)
 
     if (data.cover && data.cover.length > 0) {
       form.append('cover', data.cover[0])
@@ -69,7 +68,6 @@ export const EditDeckModal = ({ deck }: EditDeckModalProps) => {
     if (!selectedImage) {
       form.append('cover', selectedImage)
     }
-    form.append('name', data.name)
     form.append('isPrivate', String(isPrivate))
 
     if (data.name.trim() !== '' && data.name.length >= 3) {
