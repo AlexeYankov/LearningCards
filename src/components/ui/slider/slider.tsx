@@ -33,7 +33,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>((props, forwardedR
       <SliderRadix.Root
         className={s.sliderRoot}
         ref={forwardedRef}
-        minStepsBetweenThumbs={0}
+        minStepsBetweenThumbs={1}
         max={61}
         value={values}
         onValueChange={setValues}
