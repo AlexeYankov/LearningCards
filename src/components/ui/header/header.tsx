@@ -10,10 +10,11 @@ import {Link, Outlet} from 'react-router-dom'
 import {useMeQuery} from '@/api/auth-api/auth.api.ts'
 import {useAppDispatch} from '@/api/store.ts'
 import {resetFilter} from '@/api/decks/decks.reducer.ts'
+import {Progress} from "@/components/ui/loader/loader.tsx";
 
 export const Header: FC = () => {
     const dispatch = useAppDispatch()
-    const {data, error, isLoading} = useMeQuery()
+    const {data, error, isLoading, isFetching} = useMeQuery()
     const handleResetFilter = () => {
         dispatch(resetFilter())
     }
@@ -53,6 +54,7 @@ export const Header: FC = () => {
                     )}
                 </div>
             </header>
+            {isFetching && <Progress/>}
         </div>
     )
 }

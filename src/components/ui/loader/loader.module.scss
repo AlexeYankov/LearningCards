@@ -15,8 +15,10 @@
   }
 }
 .loader2 {
+  position: fixed;
   height: 4px;
   width: 100%;
+  top:8%;
   --c: no-repeat linear-gradient(#6100ee,#6100ee);
   background: var(--c), var(--c), #d7b8fc;
   background-size: 60% 100%;

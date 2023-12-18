@@ -5,7 +5,7 @@ import {ChangeEvent} from "react";
 
 
 type Props = {
-    src: string
+    src?: string
     onChange: (event:ChangeEvent<HTMLInputElement>) => void
 }
 export const Photo = ({src, onChange}: Props) => {

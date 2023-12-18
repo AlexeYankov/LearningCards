@@ -10,7 +10,7 @@ import {useLogOutMutation} from "@/api/auth-api/auth.api.ts";
 
 type Props = {
     name: string
-    email: string
+    email?: string
 }
 export const NormalMode = ({name, email}: Props) => {
     const dispatch = useAppDispatch()
