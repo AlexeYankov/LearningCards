@@ -5,6 +5,8 @@ import { Typography } from '@/components/ui/typography'
 import s from '@/components/ui/decks/decksPage.module.scss'
 import { Button } from '@/components/ui/button'
 import { CardsResponseType, useDeleteCardMutation } from '@/api/common.api.ts'
+import {toast} from "react-toastify";
+import {ErrorComponent} from "@/utils/toastify/Error.tsx";
 
 type DeleteCardModel = {
   card: CardsResponseType
@@ -17,21 +19,30 @@ export const DeleteCardModal = ({ card }: DeleteCardModel) => {
     setOpen(prevState => !prevState)
   }
 
-  const handleDeleteDeckClick = () => {
-    deleteCard(card.id)
-    handleCloseModal()
-  }
-  return (
-    <Modal
-      open={open}
-      onOpenChange={setOpen}
-      triggerName={
-        <button>
-          <DeleteIcon />
-        </button>
-      }
-    >
-      <ModalTitle title={'Delete Card'} />
+    const handleDeleteDeckClick = () => {
+        toast.promise(
+            deleteCard(card.id!),
+            {
+                pending: 'Uploading...',
+                success: 'Your card successfully deleted',
+                error: 'An error occurred while uploading'
+            }
+        )
+        handleCloseModal()
+    }
+    return (
+        <>
+            <ErrorComponent />
+        <Modal
+            open={open}
+            onOpenChange={setOpen}
+            triggerName={
+                <button>
+                    <DeleteIcon />
+                </button>
+            }
+        >
+            <ModalTitle title={'Delete Card'} />
 
       <ModalDescription>
         <Typography variant={'body1'} as={'p'}>
@@ -57,5 +68,6 @@ export const DeleteCardModal = ({ card }: DeleteCardModel) => {
         </Button>
       </div>
     </Modal>
+        </>
   )
 }

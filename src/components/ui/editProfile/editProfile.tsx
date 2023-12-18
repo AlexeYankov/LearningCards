@@ -11,6 +11,8 @@ import {Photo} from "@/components/ui/editProfile/photo/photo.tsx";
 import {useAppDispatch, useAppSelector} from "@/api/store.ts";
 import {changeEditModeProfile, changeTitleProfile} from "@/api/profile/profile.reducer.ts";
 import {NormalMode} from "@/components/ui/editProfile/normalMode/normalMode.tsx";
+import {toast} from "react-toastify";
+import {ErrorComponent} from "@/utils/toastify/Error.tsx";
 
 export const EditProfile = () => {
     const dispatch = useAppDispatch()
@@ -21,8 +23,21 @@ export const EditProfile = () => {
     const uploadContent = (event: ChangeEvent<HTMLInputElement>) => {
         const bodyFormData = new FormData()
         if (event.target.files) {
-            bodyFormData.append('avatar', event.target.files[0])
-            update(bodyFormData as UpdateUserArgsType)
+            const file = event.target.files[0];
+            const fileSizeInMB = file.size / (1024 * 1024); // Размер файла в МБ
+            if (fileSizeInMB > 1) {
+                toast.error('Max image size 1MB');
+                return;
+            }
+            bodyFormData.append('avatar', file);
+            toast.promise(
+                update(bodyFormData as UpdateUserArgsType),
+                {
+                    pending: 'Uploading...',
+                    success: 'Your avatar successfully changed',
+                    error: 'An error occurred while uploading'
+                }
+            )
         }
     }
     const activateViewMode = () => {
@@ -30,7 +45,14 @@ export const EditProfile = () => {
         if (!(title.trim() === '')) {
             dispatch(changeTitleProfile({title: title}))
             if (title !== data?.name) {
-                update({name: title})
+                toast.promise(
+                    update({name: title}),
+                    {
+                        pending: 'Uploading...',
+                        success: 'Your name successfully changed',
+                        error: 'An error occurred while uploading'
+                    }
+                )
             }
         }
     }
@@ -40,6 +62,7 @@ export const EditProfile = () => {
     const handleClick = (e: FormEvent<HTMLFormElement>) => e.preventDefault()
     return (
         <>
+            <ErrorComponent/>
             <div className={s.boxLink}>
                 <Link className={s.backLink} to={'/'}>
                     <ArrowBackIcon/>

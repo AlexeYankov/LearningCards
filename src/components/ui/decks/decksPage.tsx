@@ -12,6 +12,7 @@ import { DecksPageName } from './components/decksPageName'
 import { DecksHead } from './components/decksHead'
 import { DecksBody } from './components/decksBody'
 import { useSearchParams } from 'react-router-dom'
+import {ErrorComponent} from "@/utils/toastify/Error.tsx"
 
 export const DecksPage = () => {
   const dispatch = useAppDispatch()
@@ -25,7 +26,7 @@ export const DecksPage = () => {
   const authorId = useAppSelector(state => state.decks.authorId)
   const name = useAppSelector(state => state.decks.name)
 
-  const { data: decks } = useGetDecksQuery({
+  const { data: decks,isError,error } = useGetDecksQuery({
     currentPage,
     itemsPerPage,
     maxCardsCount,
@@ -36,6 +37,7 @@ export const DecksPage = () => {
   })
 
   const isShowPagination = decks?.pagination?.totalItems! >= 10
+  const isDecksEmpty = decks?.pagination?.totalItems === 0
 
   useEffect(() => {
     const savedCurrentPage = localStorage.getItem('page')
@@ -51,21 +53,28 @@ export const DecksPage = () => {
   }, [currentPage, decks?.pagination?.totalItems, dispatch, setSearchParams, searchParams])
   return (
     <div className={s.container}>
+      <ErrorComponent error={error} isError={isError}/>
       <DecksPageName />
       <DecksPageBar />
-      <Root className={s.container__common}>
-        <DecksHead />
-        <DecksBody decks={decks} />
-      </Root>
-      {isShowPagination && decks?.pagination?.totalItems! > 10 && (
-        <Pagination
-          reversed
-          arrowColor="white"
-          arrowID="arrow-ios-back"
-          reversedArrowID="arrow-ios-forward"
-          totalPages={decks?.pagination.totalPages!}
-          totalItems={decks?.pagination.totalItems!}
-        />
+      {isDecksEmpty ? (
+          <div className={s.decksEmpty}>No content with these terms...</div>
+      ):(
+          <>
+            <Root className={s.container__common}>
+              <DecksHead />
+              <DecksBody decks={decks} />
+            </Root>
+            {isShowPagination && decks?.pagination?.totalItems! > 10 && (
+                <Pagination
+                    reversed
+                    arrowColor="white"
+                    arrowID="arrow-ios-back"
+                    reversedArrowID="arrow-ios-forward"
+                    totalPages={decks?.pagination.totalPages!}
+                    totalItems={decks?.pagination.totalItems!}
+                />
+            )}
+          </>
       )}
     </div>
   )
