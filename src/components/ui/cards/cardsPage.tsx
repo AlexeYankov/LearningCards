@@ -101,7 +101,11 @@ export const CardsPage = () => {
       ) : (
         <>
           <PageName packTitle={deckById?.name} isMyCard={isMyCard} id={id} />
+          <div className={s.deckCoverBox}>
+            <img className={s.deckCover} src={deckById?.cover} alt="deck cover" />
+          </div>
           <PageBar value={searchValue} onChange={searchCards} />
+
           <Root className={s.container__common}>
             <Head>
               <Row className={s.cardsRow}>
