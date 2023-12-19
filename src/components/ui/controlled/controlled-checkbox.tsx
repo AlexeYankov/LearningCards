@@ -1,4 +1,4 @@
-import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
+import { FieldValues, useController, UseControllerProps } from 'react-hook-form'
 
 import { CheckBox, CheckBoxProps } from '../checkbox/check-box.tsx'
 
@@ -18,7 +18,7 @@ export const ControlledCheckbox = <TFieldValues extends FieldValues>({
   ...checkboxProps
 }: ControlledCheckboxProps<TFieldValues>) => {
   const {
-    field: { onChange, value=true },
+    field: { onChange, value },
   } = useController({
     control,
     defaultValue,
