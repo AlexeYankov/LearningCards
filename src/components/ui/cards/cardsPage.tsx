@@ -97,7 +97,7 @@ export const CardsPage = () => {
       <div className={s.container__pageName}></div>
       <PageName packTitle={deckById?.name} isMyCard={isMyCard} id={id} />
       <div className={s.deckCoverBox}>
-        <img className={s.deckCover} src={deckById?.cover} alt="deck cover" />
+        {deckById?.cover && <img className={s.deckCover} src={deckById?.cover} alt="deck cover" />}
       </div>
       <PageBar value={searchValue} onChange={searchCards} />
       {!!cards?.items?.length ? (
