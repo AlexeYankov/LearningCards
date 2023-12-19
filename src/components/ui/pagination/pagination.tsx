@@ -1,7 +1,8 @@
 import s from './pagination.module.scss'
-import { Select } from '../select/select'
-import { Typography } from '../typography'
-import { Pages } from './components/pages/pages'
+import {Select} from '../select/select'
+import {Typography} from '../typography'
+import {Pages} from './components/pages/pages'
+import {useAppSelector} from "@/api/store.ts";
 
 type PaginationType = {
   arrowColor: string
@@ -21,6 +22,9 @@ export const Pagination = ({
   totalItems,
   totalPages,
 }: PaginationType) => {
+  const itemsPerPage = useAppSelector(state => state.decks.itemsPerPage)
+
+
   const generateOptions = (total: number) => {
     const dynamicOptions: number[] = []
     for (let i = 10; i <= total && i <= 100; i += 10) {
@@ -30,8 +34,8 @@ export const Pagination = ({
     }
     return dynamicOptions.map(option => option.toString())
   }
-  const options =
-    totalItems! <= 100 ? generateOptions(totalItems!) : ['10', '20', '30', '50', '100']
+
+  const options = totalItems! <= 100 ? generateOptions(totalItems!) : ['10', '20', '30', '50', '100']
 
   return (
     <div className={s.paginationContainer}>

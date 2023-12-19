@@ -97,7 +97,7 @@ export const decksApi = baseApi.injectEndpoints({
             url: `v1/decks/${id}`,
           }
         },
-        providesTags: ['Cards']
+        providesTags: ['Decks']
       }),
       createDeck: builder.mutation<ResponseDeckType, CreateDeckArgType>({
         invalidatesTags: ['Decks'],
