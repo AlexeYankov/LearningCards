@@ -240,8 +240,9 @@
     }
 
     &:hover {
-      color: var(--color-accent-300);
+      color: var(--color-accent-100);
       text-decoration: underline;
+      transition: all 0.3s;
     }
   }
 
@@ -300,7 +301,7 @@
   margin-left: 5px;
 }
 
-.decksEmpty{
+.decksEmpty {
   display: grid;
   place-items: center;
   padding: 60px 0;
