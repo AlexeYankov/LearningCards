@@ -35,6 +35,7 @@ export const DecksPage = () => {
     name,
     orderBy: sort?.direction as Sort,
   })
+  console.log(decks)
 
   const isShowPagination = decks?.pagination?.totalItems! >= 10
   const isDecksEmpty = decks?.pagination?.totalItems === 0
@@ -46,7 +47,7 @@ export const DecksPage = () => {
     const totalItems = decks?.pagination?.totalItems
 
     if (totalItems) {
-      dispatch(changeItemsPerPage({ itemsPerPage: 10 }))
+      dispatch(changeItemsPerPage({ itemsPerPage: itemsPerPage }))
       // Обновление значения currentPage в URL при каждом изменении
       setSearchParams({ ...searchParams, page: String(currentPage) })
     }
