@@ -10,6 +10,12 @@
   border: none;
   border-radius: 50%;
 
+  &:hover {
+    background-color: var(--color-accent-100);
+    box-shadow: 0 0 10px 5px var(--color-accent-100);
+    transition: all 0.3s;
+  }
+
   &:focus-visible {
     outline: 2px solid var(--color-info-500);
   }
@@ -86,11 +92,11 @@
   }
 
   &:hover {
-    color: var(--color-accent-300);
+    color: var(--color-accent-100);
     transition: all 0.3s;
 
     svg {
-      fill: var(--color-accent-300);
+      fill: var(--color-accent-100);
       transition: all 0.3s;
     }
   }
@@ -103,6 +109,12 @@
 
   border: none;
   border-radius: 50%;
+}
+
+.drop {
+  &:hover {
+    box-shadow: rgb(31 31 215 / 20%) 0 7px 29px 0;
+  }
 }
 
 .inner {
@@ -149,14 +161,13 @@
   text-decoration: none;
   border-bottom-style: dashed;
 
+  &:hover {
+    color: var(--color-accent-100);
+    transition: 0.3s;
+  }
+
   &:focus-visible {
     border-radius: 2px;
     outline: 2px solid var(--color-info-500);
-  }
-}
-
-.test {
-  &:hover {
-    background-color: red;
   }
 }
