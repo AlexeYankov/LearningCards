@@ -84,6 +84,16 @@
     margin-right: 6px;
     fill: var(--color-light-100);
   }
+
+  &:hover {
+    color: var(--color-accent-300);
+    transition: all 0.3s;
+
+    svg {
+      fill: var(--color-accent-300);
+      transition: all 0.3s;
+    }
+  }
 }
 
 .img {
@@ -142,5 +152,11 @@
   &:focus-visible {
     border-radius: 2px;
     outline: 2px solid var(--color-info-500);
+  }
+}
+
+.test {
+  &:hover {
+    background-color: red;
   }
 }
