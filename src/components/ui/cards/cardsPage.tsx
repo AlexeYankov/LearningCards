@@ -12,7 +12,6 @@ import { Column, Sort } from '@/components/ui/table/types.ts'
 import { Body, Cell, Head, HeadCell, Root, Row } from '@it-incubator/ui-kit'
 import s from './cardsPage.module.scss'
 import { EditIcon } from '@/asserts/icons/components/EditIcon.tsx'
-import { EmptyPack } from '@/components/ui/cards/components/emptyPack/emptyPack.tsx'
 import { PageName } from '@/components/ui/cards/components/pageName/pageName.tsx'
 import { PageBar } from '@/components/ui/cards/components/pageBar/pageBar.tsx'
 import { ArrowBackIcon } from '@/asserts/icons/components/ArrowBackIcon.tsx'
@@ -95,102 +94,101 @@ export const CardsPage = () => {
           Back to decks list
         </Link>
       </div>
-
-      {!cards?.items?.length && !debouncedSearchValue ? (
-        <EmptyPack isMyCard={isMyCard} packTitle={deckById?.name} />
-      ) : (
-        <>
-          <PageName packTitle={deckById?.name} isMyCard={isMyCard} id={id} />
-          <div className={s.deckCoverBox}>
-            <img className={s.deckCover} src={deckById?.cover} alt="deck cover" />
-          </div>
-          <PageBar value={searchValue} onChange={searchCards} />
-
-          <Root className={s.container__common}>
-            <Head>
-              <Row className={s.cardsRow}>
-                {columns.map(({ title, key, sortable }) => {
-                  if (!isMyCard && key === 'actions') {
-                    return null
-                  }
-                  return (
-                    <HeadCell className={s.headCell} key={key} onClick={() => handleSort(key)}>
-                      {title}
-                      {sort && sort.key === key && sortable && sort.direction && (
-                        <button className={s.sortIcon}>
-                          {sort.direction === `${key}-desc` ? '▲' : '▼'}
-                        </button>
-                      )}
-                    </HeadCell>
-                  )
-                })}
-              </Row>
-            </Head>
-            <Body>
-              {cards?.items?.map(card => {
-                const starsGrade = Array.from({ length: Math.round(card.grade || 0) }, () => 'star')
-                let result = starsGrade
-                const emptyStarsGrade = Array.from(
-                  { length: 5 - Math.round(card.grade || 0) },
-                  () => 'star-outline'
-                )
-
-                if (Math.round(card.grade || 0) - 5 < 0) {
-                  result = starsGrade.concat(emptyStarsGrade)
+      <div className={s.container__pageName}></div>
+      <PageName packTitle={deckById?.name} isMyCard={isMyCard} id={id} />
+      <div className={s.deckCoverBox}>
+        <img className={s.deckCover} src={deckById?.cover} alt="deck cover" />
+      </div>
+      <PageBar value={searchValue} onChange={searchCards} />
+      {!!cards?.items?.length ? (
+        <Root className={s.container__common}>
+          <Head>
+            <Row className={s.cardsRow}>
+              {columns.map(({ title, key, sortable }) => {
+                if (!isMyCard && key === 'actions') {
+                  return null
                 }
-
                 return (
-                  <Row key={card.id}>
-                    <Cell className={s.bodyCell}>
-                      <div className={s.imageWithNameBox}>
-                        {card.question && card.questionImg && (
-                          <img
-                            className={s.image}
-                            src={card.questionImg}
-                            alt={`${card.questionImg + ' image'}`}
-                          />
-                        )}
-                        <Typography variant={'body1'} className={s.typography}>
-                          {card.question}
-                        </Typography>
-                      </div>
-                    </Cell>
-                    <Cell className={s.bodyCell}>
-                      <div className={s.imageWithNameBox}>
-                        {card.answer && card.answerImg && (
-                          <img
-                            className={s.image}
-                            src={card.answerImg}
-                            alt={`${card.answerImg + ' image'}`}
-                          />
-                        )}
-                        <Typography variant={'body1'} className={s.typography}>
-                          {card.answer}
-                        </Typography>
-                      </div>
-                    </Cell>
-                    <Cell className={s.bodyCell}>{convertedTime(card.updated)}</Cell>
-                    <Cell className={`${s.bodyCell} `}>
-                      <div className={s.starsBox}>
-                        {result.map((star, i) => {
-                          return <StarIcon iconId={star} key={i} />
-                        })}
-                      </div>
-                    </Cell>
-                    {isMyCard && (
-                      <Cell className={`${s.bodyCell} `}>
-                        <div className={s.iconBox}>
-                          <AddEditCard editIcon={<EditIcon />} card={card} />
-                          <DeleteCardModal card={card} />
-                        </div>
-                      </Cell>
+                  <HeadCell className={s.headCell} key={key} onClick={() => handleSort(key)}>
+                    {title}
+                    {sort && sort.key === key && sortable && sort.direction && (
+                      <button className={s.sortIcon}>
+                        {sort.direction === `${key}-desc` ? '▲' : '▼'}
+                      </button>
                     )}
-                  </Row>
+                  </HeadCell>
                 )
               })}
-            </Body>
-          </Root>
-        </>
+            </Row>
+          </Head>
+          <Body>
+            {cards?.items?.map(card => {
+              const starsGrade = Array.from({ length: Math.round(card.grade || 0) }, () => 'star')
+              let result = starsGrade
+              const emptyStarsGrade = Array.from(
+                { length: 5 - Math.round(card.grade || 0) },
+                () => 'star-outline'
+              )
+
+              if (Math.round(card.grade || 0) - 5 < 0) {
+                result = starsGrade.concat(emptyStarsGrade)
+              }
+
+              return (
+                <Row key={card.id}>
+                  <Cell className={s.bodyCell}>
+                    <div className={s.imageWithNameBox}>
+                      {card.question && card.questionImg && (
+                        <img
+                          className={s.image}
+                          src={card.questionImg}
+                          alt={`${card.questionImg + ' image'}`}
+                        />
+                      )}
+                      <Typography variant={'body1'} className={s.typography}>
+                        {card.question}
+                      </Typography>
+                    </div>
+                  </Cell>
+                  <Cell className={s.bodyCell}>
+                    <div className={s.imageWithNameBox}>
+                      {card.answer && card.answerImg && (
+                        <img
+                          className={s.image}
+                          src={card.answerImg}
+                          alt={`${card.answerImg + ' image'}`}
+                        />
+                      )}
+                      <Typography variant={'body1'} className={s.typography}>
+                        {card.answer}
+                      </Typography>
+                    </div>
+                  </Cell>
+                  <Cell className={s.bodyCell}>{convertedTime(card.updated)}</Cell>
+                  <Cell className={`${s.bodyCell} `}>
+                    <div className={s.starsBox}>
+                      {result.map((star, i) => {
+                        return <StarIcon iconId={star} key={i} />
+                      })}
+                    </div>
+                  </Cell>
+                  {isMyCard && (
+                    <Cell className={`${s.bodyCell} `}>
+                      <div className={s.iconBox}>
+                        <AddEditCard editIcon={<EditIcon />} card={card} />
+                        <DeleteCardModal card={card} />
+                      </div>
+                    </Cell>
+                  )}
+                </Row>
+              )
+            })}
+          </Body>
+        </Root>
+      ) : (
+        <Typography as={'p'} variant={'body1'} className={s.emptyPack}>
+          No content with these terms...
+        </Typography>
       )}
       {cards?.pagination?.totalPages! > 1 && (
         <Pagination
