@@ -1,6 +1,6 @@
 import { baseApi } from '@/api/cards.api.ts'
 import { CardsResponseType, PaginationResponseType } from '@/api/common.api.ts'
-import { Sort } from '@/components/ui/table/types.ts'
+import { Sort } from '@/components/ui/decks/decksData.ts'
 
 type GetDecksParamsType = {
   authorId?: string
@@ -97,7 +97,7 @@ export const decksApi = baseApi.injectEndpoints({
             url: `v1/decks/${id}`,
           }
         },
-        providesTags: ['Decks']
+        providesTags: ['Decks'],
       }),
       createDeck: builder.mutation<ResponseDeckType, CreateDeckArgType>({
         invalidatesTags: ['Decks'],

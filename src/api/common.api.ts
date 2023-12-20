@@ -1,6 +1,6 @@
 import { baseApi } from './cards.api'
 import { isEmpty } from 'remeda'
-import { Sort } from '@/components/ui/table/types.ts'
+import { Sort } from '@/components/ui/decks/decksData.ts'
 
 export type CardsResponseType = {
   answer: string

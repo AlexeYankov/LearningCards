@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {Sort} from '@/components/ui/table/types.ts'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Sort } from '@/components/ui/decks/decksData.ts'
 
 const initialState = {
   currentPage: 1,

@@ -8,7 +8,6 @@ import {
   changeCardsCurrentPage,
   changeCardsItemsPerPage,
 } from '@/api/cards/cards.ts'
-import { Column, Sort } from '@/components/ui/table/types.ts'
 import { Body, Cell, Head, HeadCell, Root, Row } from '@it-incubator/ui-kit'
 import s from './cardsPage.module.scss'
 import { EditIcon } from '@/asserts/icons/components/EditIcon.tsx'
@@ -25,6 +24,7 @@ import { AddEditCard } from '@/components/ui/cards/components/addEditCard/addEdi
 import { DeleteCardModal } from '@/components/ui/cards/components/deleteCardModal/deleteCardModel.tsx'
 import { useDebounce } from '@/hooks/useDebounce.ts'
 import { useGetDecksByIdQuery } from '@/api/decks/decks.api.ts'
+import { Column, Sort } from '@/components/ui/decks/decksData.ts'
 
 export const CardsPage = () => {
   const { id } = useParams()

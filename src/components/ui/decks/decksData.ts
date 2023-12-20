@@ -1,4 +1,15 @@
-import { Column } from '@/components/ui/table/types.ts'
+export type Column = {
+  title: string
+  key: string
+  sortable?: boolean
+}
+
+export type SortDescriptionType = `${string}-desc` | `${string}-asc` | null
+
+export type Sort = {
+  key: string
+  direction: SortDescriptionType
+} | null
 
 export const columns: Column[] = [
   {

@@ -7,12 +7,12 @@ import { useAppDispatch, useAppSelector } from '@/api/store'
 import { useEffect } from 'react'
 import { changeCurrentPage, changeItemsPerPage } from '@/api/decks/decks.reducer.ts'
 import { Root } from '@it-incubator/ui-kit'
-import { Sort } from '@/components/ui/table/types'
 import { DecksPageName } from './components/decksPageName'
 import { DecksHead } from './components/decksHead'
 import { DecksBody } from './components/decksBody'
 import { useSearchParams } from 'react-router-dom'
 import { ErrorComponent } from '@/utils/toastify/Error.tsx'
+import { Sort } from '@/components/ui/decks/decksData.ts'
 
 export const DecksPage = () => {
   const dispatch = useAppDispatch()
