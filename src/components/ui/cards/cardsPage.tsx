@@ -135,7 +135,7 @@ export const CardsPage = () => {
               }
 
               return (
-                <Row key={card.id}>
+                <Row key={card.id} className={s.rowBox}>
                   <Cell className={s.bodyCell}>
                     <div className={s.imageWithNameBox}>
                       {card.question && card.questionImg && (
