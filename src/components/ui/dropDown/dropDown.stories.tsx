@@ -1,4 +1,4 @@
-import { DropDown, DropDownMenu, DropDownPackMenu } from '@/components/ui/dropDown/dropDown'
+import { DropDown, DropDownMenu, DropDownPackMenu } from '@/components/ui/dropDown'
 import { Meta, StoryObj } from '@storybook/react'
 
 import profileImage from './../../../asserts/profileImage.png'
