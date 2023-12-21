@@ -8,7 +8,7 @@ import { ControlledCheckbox } from '../../controlled/controlled-checkbox'
 import { Button } from '../../button'
 import { Card } from '@/components/ui/card'
 import { Link, useNavigate } from 'react-router-dom'
-import { useLoginMutation } from '@/api/auth-api/auth.api.ts'
+import { useLoginMutation } from '@/api/auth'
 import { Loader } from '@/components/ui/loader'
 
 type FormValues = z.infer<typeof loginSchema>

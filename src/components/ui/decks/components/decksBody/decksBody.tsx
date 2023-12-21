@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Typography } from '@/components/ui/typography'
 import { convertedTime } from '@/helpers/convertedTime'
 import { DecksType } from '@/api/decks/decks.api.ts'
-import { useMeQuery } from '@/api/auth-api/auth.api'
+import { useMeQuery } from '@/api/auth'
 import { DeleteDeckModal, EditDeckModal, LearnDeckModal } from '@/components/ui/decks'
 
 type DecksBodyProps = {

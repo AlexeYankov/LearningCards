@@ -1,15 +1,15 @@
 import { FC, ReactNode, useState } from 'react'
 
-import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon.tsx'
-import { EditIcon } from '@/asserts/icons/components/EditIcon.tsx'
-import { LearnIcon } from '@/asserts/icons/components/LearnIcon.tsx'
-import { ProfileIcon } from '@/asserts/icons/components/ProfileIcon.tsx'
-import { SignOutIcon } from '@/asserts/icons/components/SignOutIcon.tsx'
+import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon'
+import { EditIcon } from '@/asserts/icons/components/EditIcon'
+import { LearnIcon } from '@/asserts/icons/components/LearnIcon'
+import { ProfileIcon } from '@/asserts/icons/components/ProfileIcon'
+import { SignOutIcon } from '@/asserts/icons/components/SignOutIcon'
 import { Typography } from '@/components/ui/typography'
 import * as DropdownRadix from '@radix-ui/react-dropdown-menu'
 import s from './dropDown.module.scss'
-import { MoreIcon } from '@/asserts/icons/components/MoreIcon.tsx'
-import { useLogOutMutation } from '@/api/auth-api/auth.api.ts'
+import { MoreIcon } from '@/asserts/icons/components/MoreIcon'
+import { useLogOutMutation } from '@/api/auth'
 import { Link } from 'react-router-dom'
 
 export type DropDown = {

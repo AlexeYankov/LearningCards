@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/card'
 import { z } from 'zod'
 import { Typography } from '@/components/ui/typography'
 import { Button } from '@/components/ui/button'
-import { useRecoverPasswordMutation } from '@/api/auth-api/auth.api.ts'
+import { useRecoverPasswordMutation } from '@/api/auth'
 import { Link, useNavigate } from 'react-router-dom'
 import { Loader } from '@/components/ui/loader'
 

@@ -3,7 +3,7 @@ import s from './titleElement.module.scss'
 import { Typography } from '../../typography'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { changeCurrentPage, changeShowAuthorTabDecks } from '@/api/decks/decks.reducer.ts'
-import { useMeQuery } from '@/api/auth-api/auth.api'
+import { useMeQuery } from '@/api/auth'
 import { useEffect } from 'react'
 
 type TitleElementType = {

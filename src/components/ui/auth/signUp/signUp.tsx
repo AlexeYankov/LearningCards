@@ -7,7 +7,7 @@ import { ControlledInput } from '../../controlled/controlled-input'
 import { Button } from '../../button'
 import { Card } from '@/components/ui/card'
 import { Link, Navigate } from 'react-router-dom'
-import { useCreateUserMutation } from '@/api/auth-api/auth.api.ts'
+import { useCreateUserMutation } from '@/api/auth'
 
 type FormValues = z.infer<typeof loginSchema>
 const loginSchema = z
