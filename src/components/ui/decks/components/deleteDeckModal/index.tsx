@@ -1,65 +1,73 @@
-import { ResponseDeckType, useDeleteDeckMutation } from '@/api/decks/decks.api.ts'
-import { useState } from 'react'
-import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal'
-import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon.tsx'
-import { Typography } from '@/components/ui/typography'
+import {ResponseDeckType, useDeleteDeckMutation} from '@/api/decks/decks.api.ts'
+import {Modal, ModalDescription, ModalTitle} from '@/components/ui/modal'
+import {DeleteIcon} from '@/asserts/icons/components/DeleteIcon.tsx'
+import {Typography} from '@/components/ui/typography'
 import s from '@/components/ui/decks/decksPage.module.scss'
-import { Button } from '@/components/ui/button'
+import {Button} from '@/components/ui/button'
+import {useNavigate} from "react-router-dom";
 
 type DeleteDeckModalProps = {
-  deck: ResponseDeckType
+    deck: ResponseDeckType
+    open: boolean
+    setOpen: (open: boolean) => void
 }
 
-export const DeleteDeckModal = ({ deck }: DeleteDeckModalProps) => {
-  const [deleteDeck] = useDeleteDeckMutation()
-  const [open, setOpen] = useState(false)
+export const DeleteDeckModal = ({deck, setOpen, open}: DeleteDeckModalProps) => {
 
-  const handleCloseModal = () => {
-    setOpen(prevState => !prevState)
-  }
+    // const openD = useAppSelector(state => state.decks.open)
+    const [deleteDeck] = useDeleteDeckMutation()
+    // const [open, setOpen] = useState(false)
 
-  const handleDeleteDeckClick = () => {
-    deleteDeck(deck.id!)
-    handleCloseModal()
-  }
-  return (
-    <Modal
-      open={open}
-      onOpenChange={setOpen}
-      triggerName={
-        <button>
-          <DeleteIcon />
-        </button>
-      }
-    >
-      <ModalTitle title={'Delete Pack'} />
+    const handleCloseModal = () => {
+        // setOpen(prevState => !prevState)
+        setOpen(false)
+    }
 
-      <ModalDescription>
-        <Typography variant={'body1'} as={'p'}>
-          Do you really want to remove <span className={s.boldText}>{deck.name}</span>?
-        </Typography>
-        <Typography variant={'body1'} as={'p'}>
-          All cards will be deleted.
-        </Typography>
-      </ModalDescription>
-      <div className={`${s.contentBtn} ${s.contentBtns}`}>
-        <Button
-          classNameBtnBox={s.btnBox}
-          onClick={handleCloseModal}
-          variant={'secondary'}
-          type={'button'}
+    const navigate = useNavigate()
+    const handleDeleteDeckClick = () => {
+        deleteDeck(deck.id!)
+        handleCloseModal()
+        navigate('/')
+    }
+    return (
+        <Modal
+            open={open}
+            onOpenChange={setOpen}
+            triggerName={
+                <button>
+                    <DeleteIcon/>
+                </button>
+            }
         >
-          Cancel
-        </Button>
-        <Button
-          classNameBtnBox={s.btnBox}
-          onClick={handleDeleteDeckClick}
-          variant={'primary'}
-          type={'submit'}
-        >
-          Delete Pack
-        </Button>
-      </div>
-    </Modal>
-  )
+            <ModalTitle title={'Delete Pack'}/>
+
+            <ModalDescription>
+                <Typography variant={'body1'} as={'p'}>
+                    Do you really want to remove <span className={s.boldText}>{deck.name}</span>?
+                </Typography>
+                <Typography variant={'body1'} as={'p'}>
+                    All cards will be deleted.
+                </Typography>
+            </ModalDescription>
+            <div className={`${s.contentBtn} ${s.contentBtns}`}>
+                <Button
+                    classNameBtnBox={s.btnBox}
+                    onClick={handleCloseModal}
+                    variant={'secondary'}
+                    type={'button'}
+                >
+                    Cancel
+                </Button>
+                <Button
+                    classNameBtnBox={s.btnBox}
+                    onClick={handleDeleteDeckClick}
+                    variant={'primary'}
+                    type={'submit'}
+                >
+
+                    Delete Pack
+                </Button>
+            </div>
+        </Modal>
+    )
 }

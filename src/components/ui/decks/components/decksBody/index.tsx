@@ -8,6 +8,8 @@ import {useMeQuery} from '@/api/auth-api/auth.api'
 import {EditDeckModal} from '../editDeckModal'
 import {LearnDeckModal} from '../learnDeckModal'
 import {DeleteDeckModal} from '../deleteDeckModal'
+import {useAppDispatch} from "@/api/store.ts";
+import {decks1} from "@/api/decks/decks.reducer.ts";
 
 type DecksBodyProps = {
   decks?: DecksType
@@ -18,6 +20,8 @@ export const DecksBody = ({ decks }: DecksBodyProps) => {
   return (
     <Body>
       {decks?.items?.map(deck => {
+        const dispatch = useAppDispatch()
+        dispatch(decks1(deck))
         const isMyDeck = me?.id === deck.author.id
         return (
           <Row className={s.decksRow} key={deck.id}>
