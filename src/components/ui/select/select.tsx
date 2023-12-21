@@ -6,7 +6,7 @@ import * as SelectRadix from '@radix-ui/react-select'
 
 import s from './selectRadix.module.scss'
 
-import { Label } from '../label'
+import { Label } from '@/components/ui/label'
 import { changeCardsCurrentPage, changeCardsItemsPerPage, selectedOptionSlice } from '@/api/cards'
 
 type SelectItemProps = {

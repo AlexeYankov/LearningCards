@@ -1,4 +1,4 @@
-import s from '@/components/ui/editProfile/editProfile.module.scss'
+import s from './../editProfile.module.scss'
 import userImg from '@/asserts/userImg.png'
 import { EditIcon } from '@/asserts/icons'
 

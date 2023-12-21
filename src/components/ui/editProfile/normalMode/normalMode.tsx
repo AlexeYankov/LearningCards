@@ -1,9 +1,9 @@
-import s from '@/components/ui/editProfile/editProfile.module.scss'
+import s from './../editProfile.module.scss'
 import { Typography } from '@/components/ui/typography'
 import { EditIcon, LogoutIcon } from '@/asserts/icons'
 import { Button } from '@/components/ui/button'
 import { changeEditModeProfile, changeTitleProfile } from '@/api/profile'
-import { useAppDispatch } from '@/api/store.ts'
+import { useAppDispatch } from '@/api/store'
 import { useLogOutMutation } from '@/api/auth'
 
 type Props = {

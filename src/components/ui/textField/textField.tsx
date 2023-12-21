@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 import { CloseIcon, PasswordIcon, SearchIcon } from '@/asserts/icons'
 import s from './textField.module.scss'
-import { Label } from '../label'
+import { Label } from '@/components/ui/label'
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
   const {
