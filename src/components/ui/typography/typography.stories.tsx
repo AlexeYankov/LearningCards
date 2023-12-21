@@ -1,6 +1,6 @@
 import { Typography } from '@/components/ui/typography/typography'
 import { Meta, StoryObj } from '@storybook/react'
-import { ThemeDecorator } from '@/api/storybookDecorators'
+import { ThemeDecorator } from '@/decorators'
 
 const meta = {
   component: Typography,

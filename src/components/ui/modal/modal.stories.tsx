@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import img from '@/asserts/Mask.png'
-import { ImageIcon } from '@/asserts/icons/components/ImageIcon.tsx'
+import { ImageIcon } from '@/asserts/icons/components/ImageIcon'
 import { Typography } from '@/components/ui/typography'
 import { Meta, StoryObj } from '@storybook/react'
 
@@ -13,11 +13,7 @@ import { ScrollBar } from '../scrollbar'
 import { Select } from '../select'
 import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal/modal'
 import { TextField } from '@/components/ui/textField'
-import {
-  BrowserRouterDecorator,
-  ReduxStoreProviderDecorator,
-  ThemeDecorator,
-} from '@/api/storybookDecorators.tsx'
+import { BrowserRouterDecorator, ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
 
 const meta = {
   argTypes: {},

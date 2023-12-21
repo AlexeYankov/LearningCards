@@ -6,7 +6,7 @@ import decksReducer from '@/api/decks/decks.reducer'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query/react'
 
-import { baseApi } from './base.api.ts'
+import { baseApi } from '@/api/base'
 import profileReducer from '@/api/profile/profile.reducer'
 
 export const store = configureStore({

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Label } from './label'
-import { ThemeDecorator } from '@/api/storybookDecorators.tsx'
+import { ThemeDecorator } from '@/decorators'
 
 const meta = {
   component: Label,

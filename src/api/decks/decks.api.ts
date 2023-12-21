@@ -1,4 +1,4 @@
-import { baseApi } from '@/api/base.api.ts'
+import { baseApi } from '@/api/base'
 import { CardsResponseType, PaginationResponseType } from '@/api/cards'
 import { Sort } from '@/components/ui/decks'
 

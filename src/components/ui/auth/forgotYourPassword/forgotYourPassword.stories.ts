@@ -1,11 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { ForgotYourPassword } from '@/components/ui/auth/forgotYourPassword/forgotYourPassword'
-import {
-  BrowserRouterDecorator,
-  ReduxStoreProviderDecorator,
-  ThemeDecorator,
-} from '@/api/storybookDecorators'
+import { BrowserRouterDecorator, ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
 
 const meta = {
   component: ForgotYourPassword,
