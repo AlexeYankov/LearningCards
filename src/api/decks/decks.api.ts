@@ -1,5 +1,5 @@
 import { baseApi } from '@/api/base.api.ts'
-import { CardsResponseType, PaginationResponseType } from '@/api/common.api.ts'
+import { CardsResponseType, PaginationResponseType } from '@/api/cards/cards.api.ts'
 import { Sort } from '@/components/ui/decks'
 
 type GetDecksParamsType = {

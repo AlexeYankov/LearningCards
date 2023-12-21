@@ -8,7 +8,7 @@ import {
   CardsResponseType,
   useCreateCardMutation,
   useUpdateCardMutation,
-} from '@/api/common.api.ts'
+} from '@/api/cards/cards.api.ts'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import s from './addEditCard.module.scss'

@@ -9,14 +9,13 @@ import { CheckEmail } from '@/components/ui/auth/checkEmail'
 import { CreateNewPassword } from '@/components/ui/auth/createNewPassword'
 import { ForgotYourPassword } from '@/components/ui/auth/forgotYourPassword'
 import { SignUp } from '@/components/ui/auth/signUp/signUp'
-import { CardsPage } from '@/components/ui/cards/cardsPage'
+import { CardsPage, LearnPack } from '@/components/ui/cards'
 import { useMeQuery } from '@/api/auth'
-import { Layout } from '@/components/ui/header/header.tsx'
-import { EditProfile } from '@/components/ui/editProfile/editProfile.tsx'
+import { Layout } from '@/components/ui/header/header'
+import { EditProfile } from '@/components/ui/editProfile/editProfile'
 import { SignIn } from '@/components/ui/auth/signIn'
 import { DecksPage } from '@/components/ui/decks'
 import { Loader } from '@/components/ui/loader'
-import { LearnPack } from '@/components/ui/cards'
 
 const publicRoutes: RouteObject[] = [
   {

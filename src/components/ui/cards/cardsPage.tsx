@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { useGetCardsQuery } from '@/api/common.api'
+import { useGetCardsQuery } from '@/api/cards/cards.api.ts'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { resetFilter } from '@/api/decks/decks.reducer.ts'
 import { useEffect, useState } from 'react'

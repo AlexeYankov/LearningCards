@@ -3,7 +3,7 @@ import { Typography } from '@/components/ui/typography'
 import { EditIcon } from '@/asserts/icons/components/EditIcon.tsx'
 import { Button } from '@/components/ui/button'
 import { LogoutIcon } from '@/asserts/icons/components/LogoutIcon.tsx'
-import { changeEditModeProfile, changeTitleProfile } from '@/api/profile/profile.reducer.ts'
+import { changeEditModeProfile, changeTitleProfile } from '@/api/profile'
 import { useAppDispatch } from '@/api/store.ts'
 import { useLogOutMutation } from '@/api/auth'
 

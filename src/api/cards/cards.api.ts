@@ -1,4 +1,4 @@
-import { baseApi } from './base.api.ts'
+import { baseApi } from '../base.api.ts'
 import { isEmpty } from 'remeda'
 import { Sort } from '@/components/ui/decks'
 
