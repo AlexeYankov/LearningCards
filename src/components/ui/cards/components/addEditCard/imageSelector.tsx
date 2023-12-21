@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
-import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon.tsx'
-import { ImageIcon } from '@/asserts/icons/components/ImageIcon.tsx'
+import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon'
+import { ImageIcon } from '@/asserts/icons/components/ImageIcon'
 import s from './addEditCard.module.scss'
 
 type Props = {

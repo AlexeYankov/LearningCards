@@ -1,5 +1,5 @@
 import { ChangeEvent, FC, ReactNode, useState } from 'react'
-import { Button } from '../../../button/button.tsx'
+import { Button } from '../../../button/button'
 import { Select } from '@/components/ui/select'
 import { TextField } from '@/components/ui/textField'
 import { Modal, ModalTitle } from '@/components/ui/modal'
@@ -12,10 +12,9 @@ import {
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import s from './addEditCard.module.scss'
-import { handleFileChange } from '@/components/ui/cards/components/addEditCard/handleFileChange.ts'
-import { EditIcon } from '@/asserts/icons/components/EditIcon.tsx'
-import { ImageSelector } from '@/components/ui/cards/components/addEditCard/ImageSelector.tsx'
-import { ErrorComponent } from '@/utils/toastify/Error.tsx'
+import { handleFileChange, ImageSelector } from '@/components/ui/cards'
+import { EditIcon } from '@/asserts/icons/components/EditIcon'
+import { ErrorComponent } from '@/utils/toastify/Error'
 
 type Props = {
   id?: string

@@ -16,7 +16,7 @@ import { EditProfile } from '@/components/ui/editProfile/editProfile.tsx'
 import { SignIn } from '@/components/ui/auth/signIn'
 import { DecksPage } from '@/components/ui/decks'
 import { Loader } from '@/components/ui/loader'
-import { LearnPack } from '@/components/ui/cards/components/learnPack'
+import { LearnPack } from '@/components/ui/cards'
 
 const publicRoutes: RouteObject[] = [
   {

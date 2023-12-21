@@ -8,8 +8,7 @@ import { Button } from '@/components/ui/button'
 import { TextField } from '@/components/ui/textField'
 import { CheckBox } from '@/components/ui/checkbox'
 import { z } from 'zod'
-import { handleFileChange } from '@/components/ui/cards/components/addEditCard/handleFileChange.ts'
-import { ImageSelector } from '@/components/ui/cards/components/addEditCard/ImageSelector.tsx'
+import { handleFileChange, ImageSelector } from '@/components/ui/cards'
 
 const schema = z.object({
   cover: z.array(z.instanceof(File)),

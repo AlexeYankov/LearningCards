@@ -3,7 +3,7 @@ import s from '../../cardsPage.module.scss'
 import { FC } from 'react'
 import { DropDownPackMenu } from '@/components/ui/dropDown/dropDown'
 import { useNavigate } from 'react-router-dom'
-import { AddEditCard } from '@/components/ui/cards/components/addEditCard/addEditCard.tsx'
+import { AddEditCard } from '@/components/ui/cards'
 import { Button } from '@/components/ui/button'
 
 type PageNameProps = {
