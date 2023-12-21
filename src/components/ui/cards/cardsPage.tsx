@@ -24,7 +24,7 @@ import { AddEditCard } from '@/components/ui/cards/components/addEditCard/addEdi
 import { DeleteCardModal } from '@/components/ui/cards/components/deleteCardModal/deleteCardModel.tsx'
 import { useDebounce } from '@/hooks/useDebounce.ts'
 import { useGetDecksByIdQuery } from '@/api/decks/decks.api.ts'
-import { Column, Sort } from '@/components/ui/decks/decksData.ts'
+import { Column, Sort } from '@/components/ui/decks'
 
 export const CardsPage = () => {
   const { id } = useParams()

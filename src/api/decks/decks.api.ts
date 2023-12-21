@@ -1,6 +1,6 @@
 import { baseApi } from '@/api/cards.api.ts'
 import { CardsResponseType, PaginationResponseType } from '@/api/common.api.ts'
-import { Sort } from '@/components/ui/decks/decksData.ts'
+import { Sort } from '@/components/ui/decks'
 
 type GetDecksParamsType = {
   authorId?: string

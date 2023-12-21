@@ -14,7 +14,7 @@ import { useMeQuery } from '@/api/auth-api/auth.api.ts'
 import { Layout } from '@/components/ui/header/header.tsx'
 import { EditProfile } from '@/components/ui/editProfile/editProfile.tsx'
 import { SignIn } from '@/components/ui/auth/signIn'
-import { DecksPage } from '@/components/ui/decks/decksPage.tsx'
+import { DecksPage } from '@/components/ui/decks'
 import { Loader } from '@/components/ui/loader'
 import { LearnPack } from '@/components/ui/cards/components/learnPack'
 

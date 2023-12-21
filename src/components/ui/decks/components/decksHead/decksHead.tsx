@@ -1,6 +1,6 @@
 import s from '@/components/ui/decks/decksPage.module.scss'
 import { Head, HeadCell, Row } from '@it-incubator/ui-kit'
-import { columns } from '@/components/ui/decks/decksData.ts'
+import { columns } from '@/components/ui/decks'
 import { changeOrderBy } from '@/api/decks/decks.reducer.ts'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 

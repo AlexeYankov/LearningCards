@@ -1,0 +1,7 @@
+export * from './editDeckModal/editDeckModal'
+export * from './learnDeckModal/learnDeckModal'
+export * from './decksPageBar/decksPageBar'
+export * from './decksPageName/decksPageName'
+export * from './decksBody/decksBody'
+export * from './decksHead/decksHead'
+export * from './deleteDeckModal/deleteDeckModal'
