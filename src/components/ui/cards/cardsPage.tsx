@@ -3,11 +3,7 @@ import { useGetCardsQuery } from '@/api/common.api'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { resetFilter } from '@/api/decks/decks.reducer.ts'
 import { useEffect, useState } from 'react'
-import {
-  changeCardOrderBy,
-  changeCardsCurrentPage,
-  changeCardsItemsPerPage,
-} from '@/api/cards/cards.ts'
+import { changeCardOrderBy, changeCardsCurrentPage, changeCardsItemsPerPage } from '@/api/cards'
 import { Body, Cell, Head, HeadCell, Root, Row } from '@it-incubator/ui-kit'
 import s from './cardsPage.module.scss'
 import { EditIcon } from '@/asserts/icons/components/EditIcon'

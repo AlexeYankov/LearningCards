@@ -11,7 +11,7 @@ import { Link, useParams } from 'react-router-dom'
 import { ArrowBackIcon } from '@/asserts/icons/components/ArrowBackIcon.tsx'
 import { Loader } from '@/components/ui/loader'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
-import { showMode } from '@/api/cards/cards.ts'
+import { showMode } from '@/api/cards'
 import { Show } from './show'
 
 export const LearnPack = () => {

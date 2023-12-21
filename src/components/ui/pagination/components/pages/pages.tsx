@@ -4,7 +4,7 @@ import sprite from '@/asserts/sprite.svg'
 
 import s from './pages.module.scss'
 import PagesForRender from './pagesForRender'
-import { changeCardsCurrentPage } from '@/api/cards/cards'
+import { changeCardsCurrentPage } from '@/api/cards'
 
 type PagesType = {
   arrowID: string
