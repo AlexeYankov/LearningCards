@@ -1,6 +1,5 @@
 import { changeCurrentPage, changeItemsPerPage, useGetDecksQuery } from '@/api/decks'
 import s from './decksPage.module.scss'
-
 import { Pagination } from '../pagination'
 import { DecksBody, DecksHead, DecksPageBar, DecksPageName } from './components'
 import { useAppDispatch, useAppSelector } from '@/api/store'

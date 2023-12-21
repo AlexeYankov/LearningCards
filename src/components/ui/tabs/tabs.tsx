@@ -2,8 +2,8 @@ import { useState } from 'react'
 
 import s from './tabs.module.scss'
 
-import { Typography } from '../typography'
-import { TitleElement } from './components/titleElement'
+import { Typography } from '@/components/ui/typography'
+import { TitleElement } from './components'
 
 type TabsType = {
   title: Array<string>

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Radio } from '@/components/ui/radio-group/radio'
+import { Radio } from './radio'
 import { ThemeDecorator } from '@/decorators'
 
 const meta = {

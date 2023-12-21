@@ -1,5 +1,5 @@
 import * as SliderRadix from '@radix-ui/react-slider'
-import { useAppDispatch, useAppSelector } from '@/api/store.ts'
+import { useAppDispatch, useAppSelector } from '@/api/store'
 import { changeCurrentPage, changeMaxCardsCount, changeMinCardsCount } from '@/api/decks'
 import { forwardRef, useEffect, useState } from 'react'
 import s from './slider.module.scss'

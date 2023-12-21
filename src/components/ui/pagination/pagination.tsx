@@ -1,7 +1,7 @@
 import s from './pagination.module.scss'
-import { Select } from '../select/select'
-import { Typography } from '../typography'
-import { Pages } from './components/pages/pages'
+import { Select } from '@/components/ui/select'
+import { Typography } from '@/components/ui/typography'
+import { Pages } from './components/pages'
 
 type PaginationType = {
   arrowColor: string

@@ -1,4 +1,3 @@
-/* reset */
 button {
   all: unset;
 }
@@ -7,61 +6,67 @@ button {
   display: flex;
   flex-direction: column;
   gap: 10px;
-
 }
 
 .RadioGroupItem {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #171717;
+
   width: 14px;
   height: 14px;
-  border-radius: 100%;
+
+  background-color: #171717;
   border: 2px solid var(--color-accent-500);
+  border-radius: 100%;
 }
 
 .RadioGroupItem:hover {
   cursor: pointer;
-  box-shadow: 0 0 0 6px #333;
   background: var(--dark-500, #333);
+  box-shadow: 0 0 0 6px #333;
 }
 
 .RadioGroupItem:focus {
-  box-shadow: 0 0 0 6px #171717;
   background: var(--dark-700, #171717);
+  box-shadow: 0 0 0 6px #171717;
 }
 
 .RadioGroupItem:active {
+  background: #382766;
   box-shadow: 0 0 0 6px #382766;
-  background:  #382766;
 }
 
 .RadioGroupItem[data-disabled],
 .RadioGroupItem[data-disabled]:hover,
 .RadioGroupItem[data-disabled]:active {
   cursor: default;
-  box-shadow: none;
   background-color: transparent;
   border: 2px solid var(--color-accent-900);
+  box-shadow: none;
 }
 
 .RadioGroupIndicator {
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 100%;
   height: 100%;
-  position: relative;
 }
 
 .RadioGroupIndicator::after {
   content: '';
+
   display: block;
-  border-radius: 50%;
+
   width: 10px;
   height: 10px;
+
   background-color: var(--color-accent-500);
+  border-radius: 50%;
 }
 
 .RadioGroupBlock {
