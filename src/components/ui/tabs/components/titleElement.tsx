@@ -22,8 +22,10 @@ export const TitleElement = ({ active, index, length, setActive, title }: TitleE
 
   const handleChangeOrderByClick = (value: number) => {
     dispatch(changeShowAuthorTabDecks({ authorId: data!.id }))
+    localStorage.removeItem('page')
     dispatch(changeCurrentPage({ currentPage: 1 }))
     setActive(value)
+    console.log(value)
     if (value === 1) {
       dispatch(changeShowAuthorTabDecks({ authorId: '' }))
     }
