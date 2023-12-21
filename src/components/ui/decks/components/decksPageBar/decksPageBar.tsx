@@ -8,7 +8,7 @@ import { Typography } from '@/components/ui/typography'
 
 import f from '../../decksPage.module.scss'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { useAppDispatch } from '@/api/store.ts'
+import { useAppDispatch } from '@/api/store'
 import {
   changeCurrentPage,
   changeMaxCardsCount,
@@ -29,6 +29,7 @@ export const DecksPageBar = () => {
     if (debouncedSearchValue) {
       dispatch(searchDeckByName({ name: debouncedSearchValue }))
       dispatch(changeCurrentPage({ currentPage: 1 }))
+      localStorage.removeItem('page')
       dispatch(changeMinCardsCount({ minCardsCount: 0 }))
       dispatch(changeMaxCardsCount({ maxCardsCount: 61 }))
     }

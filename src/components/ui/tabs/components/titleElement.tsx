@@ -2,7 +2,7 @@ import s from './titleElement.module.scss'
 
 import { Typography } from '@/components/ui/typography'
 import { useAppDispatch, useAppSelector } from '@/api/store'
-import { changeCurrentPage, changeShowAuthorTabDecks } from '@/api/decks'
+import { changeShowAuthorTabDecks, resetFilter } from '@/api/decks'
 import { useMeQuery } from '@/api/auth'
 import { useEffect } from 'react'
 
@@ -22,7 +22,8 @@ export const TitleElement = ({ active, index, length, setActive, title }: TitleE
 
   const handleChangeOrderByClick = (value: number) => {
     dispatch(changeShowAuthorTabDecks({ authorId: data!.id }))
-    dispatch(changeCurrentPage({ currentPage: 1 }))
+    localStorage.removeItem('page')
+    dispatch(resetFilter())
     setActive(value)
     if (value === 1) {
       dispatch(changeShowAuthorTabDecks({ authorId: '' }))
