@@ -5,22 +5,24 @@ import {Typography} from '@/components/ui/typography'
 import s from '@/components/ui/decks/decksPage.module.scss'
 import {Button} from '@/components/ui/button'
 import {useNavigate} from "react-router-dom";
+import {useState} from "react";
 
 type DeleteDeckModalProps = {
     deck: ResponseDeckType
-    open: boolean
-    setOpen: (open: boolean) => void
+    open?: boolean
+    setOpen?: (open: boolean) => void
+    hover?: boolean
 }
 
-export const DeleteDeckModal = ({deck, setOpen, open}: DeleteDeckModalProps) => {
+export const DeleteDeckModal = ({deck, setOpen, open, hover}: DeleteDeckModalProps) => {
 
     // const openD = useAppSelector(state => state.decks.open)
     const [deleteDeck] = useDeleteDeckMutation()
-    // const [open, setOpen] = useState(false)
+    const [openLocal, setOpenLocal] = useState(false)
 
     const handleCloseModal = () => {
         // setOpen(prevState => !prevState)
-        setOpen(false)
+        setOpen ? setOpen(false)  :setOpenLocal(prevState => !prevState)
     }
 
     const navigate = useNavigate()
@@ -31,8 +33,9 @@ export const DeleteDeckModal = ({deck, setOpen, open}: DeleteDeckModalProps) => 
     }
     return (
         <Modal
-            open={open}
-            onOpenChange={setOpen}
+            hover={hover}
+            open={open ? open : openLocal}
+            onOpenChange={setOpen ? setOpen : setOpenLocal}
             triggerName={
                 <button>
                     <DeleteIcon/>
