@@ -1,8 +1,8 @@
 import s from './titleElement.module.scss'
 
-import { Typography } from '../../typography'
-import { useAppDispatch, useAppSelector } from '@/api/store.ts'
-import { changeCurrentPage, changeShowAuthorTabDecks } from '@/api/decks/decks.reducer.ts'
+import { Typography } from '@/components/ui/typography'
+import { useAppDispatch, useAppSelector } from '@/api/store'
+import { changeCurrentPage, changeShowAuthorTabDecks } from '@/api/decks'
 import { useMeQuery } from '@/api/auth'
 import { useEffect } from 'react'
 

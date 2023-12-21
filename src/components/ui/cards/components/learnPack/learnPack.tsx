@@ -6,11 +6,11 @@ import {
   useGetDecksByIdQuery,
   useLearnRandomCardQuery,
   useLearnRandomPostMutation,
-} from '@/api/decks/decks.api.ts'
+} from '@/api/decks'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowBackIcon } from '@/asserts/icons/components/ArrowBackIcon.tsx'
+import { ArrowBackIcon } from '@/asserts/icons/components/ArrowBackIcon'
 import { Loader } from '@/components/ui/loader'
-import { useAppDispatch, useAppSelector } from '@/api/store.ts'
+import { useAppDispatch, useAppSelector } from '@/api/store'
 import { showMode } from '@/api/cards'
 import { Show } from './show'
 

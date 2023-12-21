@@ -1,6 +1,6 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
-import { decksApi } from '@/api/decks/decks.api'
+import { decksApi } from '@/api/decks'
 import cardsReducer from '@/api/cards/cards.reducer'
 import decksReducer from '@/api/decks/decks.reducer'
 import { configureStore } from '@reduxjs/toolkit'

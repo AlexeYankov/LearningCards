@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { changeCurrentPage, changeItemsPerPage } from '@/api/decks/decks.reducer.ts'
+import { changeCurrentPage, changeItemsPerPage } from '@/api/decks'
 import { useAppDispatch } from '@/api/store.ts'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as SelectRadix from '@radix-ui/react-select'

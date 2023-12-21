@@ -8,8 +8,8 @@ import userImg from '../../../asserts/userImg.png'
 import { FC } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { useMeQuery } from '@/api/auth'
-import { useAppDispatch } from '@/api/store.ts'
-import { resetFilter } from '@/api/decks/decks.reducer.ts'
+import { useAppDispatch } from '@/api/store'
+import { resetFilter } from '@/api/decks'
 import { Progress } from '@/components/ui/loader'
 
 export const Header: FC = () => {

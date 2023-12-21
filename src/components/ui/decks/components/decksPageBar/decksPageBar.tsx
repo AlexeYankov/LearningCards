@@ -1,4 +1,4 @@
-import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon.tsx'
+import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
@@ -15,7 +15,7 @@ import {
   changeMinCardsCount,
   resetFilter,
   searchDeckByName,
-} from '@/api/decks/decks.reducer.ts'
+} from '@/api/decks'
 import { useDebounce } from '@/hooks/useDebounce'
 
 export const DecksPageBar = () => {

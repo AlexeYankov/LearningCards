@@ -1,16 +1,15 @@
 import { ChangeEvent, useState } from 'react'
-import { CreateDeckArgType, useCreateDeckMutation } from '@/api/decks/decks.api'
+import { CreateDeckArgType, resetFilter, useCreateDeckMutation } from '@/api/decks'
 import { Button } from '@/components/ui/button'
 import { CheckBox } from '@/components/ui/checkbox'
 import { Modal, ModalTitle } from '@/components/ui/modal'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 import f from '../../decksPage.module.scss'
-import { useAppDispatch } from '@/api/store.ts'
+import { useAppDispatch } from '@/api/store'
 import { ImageIcon } from '@/asserts/icons/components/ImageIcon'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { resetFilter } from '@/api/decks/decks.reducer.ts'
 
 const schema = z.object({
   cover: z.array(z.instanceof(File)),

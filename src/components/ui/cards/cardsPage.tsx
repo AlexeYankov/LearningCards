@@ -1,13 +1,17 @@
 import { Link, useParams } from 'react-router-dom'
-import { useGetCardsQuery } from '@/api/cards/cards.api.ts'
-import { useAppDispatch, useAppSelector } from '@/api/store.ts'
-import { resetFilter } from '@/api/decks/decks.reducer.ts'
+import {
+  changeCardOrderBy,
+  changeCardsCurrentPage,
+  changeCardsItemsPerPage,
+  useGetCardsQuery,
+} from '@/api/cards'
+import { useAppDispatch, useAppSelector } from '@/api/store'
+import { resetFilter, useGetDecksByIdQuery } from '@/api/decks'
 import { useEffect, useState } from 'react'
-import { changeCardOrderBy, changeCardsCurrentPage, changeCardsItemsPerPage } from '@/api/cards'
 import { Body, Cell, Head, HeadCell, Root, Row } from '@it-incubator/ui-kit'
 import s from './cardsPage.module.scss'
 import { EditIcon } from '@/asserts/icons/components/EditIcon'
-import { AddEditCard, DeleteCardModal, PageBar, PageName } from '@/components/ui/cards/components'
+import { AddEditCard, DeleteCardModal, PageBar, PageName } from './components'
 import { ArrowBackIcon } from '@/asserts/icons/components/ArrowBackIcon'
 import { Pagination } from '@/components/ui/pagination'
 import { StarIcon } from '@/asserts/icons/components/StarIcon'
@@ -16,7 +20,6 @@ import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/api/auth'
 import { Loader } from '@/components/ui/loader'
 import { useDebounce } from '@/hooks/useDebounce'
-import { useGetDecksByIdQuery } from '@/api/decks/decks.api'
 import { Column, Sort } from '@/components/ui/decks'
 
 export const CardsPage = () => {

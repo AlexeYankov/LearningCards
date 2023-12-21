@@ -1,15 +1,14 @@
-import { useGetDecksQuery } from '@/api/decks/decks.api'
+import { changeCurrentPage, changeItemsPerPage, useGetDecksQuery } from '@/api/decks'
 import s from './decksPage.module.scss'
 
 import { Pagination } from '../pagination'
 import { DecksBody, DecksHead, DecksPageBar, DecksPageName } from './components'
 import { useAppDispatch, useAppSelector } from '@/api/store'
 import { useEffect } from 'react'
-import { changeCurrentPage, changeItemsPerPage } from '@/api/decks/decks.reducer.ts'
 import { Root } from '@it-incubator/ui-kit'
 import { useSearchParams } from 'react-router-dom'
-import { ErrorComponent } from '@/utils/toastify/Error.tsx'
-import { Sort } from './decksData.ts'
+import { ErrorComponent } from '@/utils/toastify/Error'
+import { Sort } from './decksData'
 
 export const DecksPage = () => {
   const dispatch = useAppDispatch()
