@@ -8,7 +8,7 @@ import {
   useLearnRandomPostMutation,
 } from '@/api/decks'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowBackIcon } from '@/asserts/icons/components/ArrowBackIcon'
+import { ArrowBackIcon } from '@/asserts/icons'
 import { Loader } from '@/components/ui/loader'
 import { useAppDispatch, useAppSelector } from '@/api/store'
 import { showMode } from '@/api/cards'

@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon'
-import { LogoutIcon } from '@/asserts/icons/components/LogoutIcon'
+import { DeleteIcon, LogoutIcon } from '@/asserts/icons'
 
 import { Button } from './button'
 import { ThemeDecorator } from '@/decorators'

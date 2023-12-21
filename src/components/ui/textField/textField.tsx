@@ -1,7 +1,5 @@
 import { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
-import { CloseIcon } from '@/asserts/icons/components/CloseIcon.tsx'
-import { PasswordIcon } from '@/asserts/icons/components/PasswordIcon.tsx'
-import { SearchIcon } from '@/asserts/icons/components/SearchIcon.tsx'
+import { CloseIcon, PasswordIcon, SearchIcon } from '@/asserts/icons'
 import s from './textField.module.scss'
 import { Label } from '../label'
 

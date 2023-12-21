@@ -1,14 +1,16 @@
 import { FC, ReactNode, useState } from 'react'
 
-import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon'
-import { EditIcon } from '@/asserts/icons/components/EditIcon'
-import { LearnIcon } from '@/asserts/icons/components/LearnIcon'
-import { ProfileIcon } from '@/asserts/icons/components/ProfileIcon'
-import { SignOutIcon } from '@/asserts/icons/components/SignOutIcon'
+import {
+  DeleteIcon,
+  EditIcon,
+  LearnIcon,
+  MoreIcon,
+  ProfileIcon,
+  SignOutIcon,
+} from '@/asserts/icons'
 import { Typography } from '@/components/ui/typography'
 import * as DropdownRadix from '@radix-ui/react-dropdown-menu'
 import s from './dropDown.module.scss'
-import { MoreIcon } from '@/asserts/icons/components/MoreIcon'
 import { useLogOutMutation } from '@/api/auth'
 import { Link } from 'react-router-dom'
 

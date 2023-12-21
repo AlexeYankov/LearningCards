@@ -13,7 +13,7 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import s from './addEditCard.module.scss'
 import { handleFileChange, ImageSelector } from '@/components/ui/cards'
-import { EditIcon } from '@/asserts/icons/components/EditIcon'
+import { EditIcon } from '@/asserts/icons'
 import { ErrorComponent } from '@/utils/toastify/Error'
 
 type Props = {

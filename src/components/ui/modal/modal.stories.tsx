@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import img from '@/asserts/Mask.png'
-import { ImageIcon } from '@/asserts/icons/components/ImageIcon'
+import { ImageIcon } from '@/asserts/icons'
 import { Typography } from '@/components/ui/typography'
 import { Meta, StoryObj } from '@storybook/react'
 

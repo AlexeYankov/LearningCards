@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal'
-import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon.tsx'
+import { DeleteIcon } from '@/asserts/icons'
 import { Typography } from '@/components/ui/typography'
 import s from '@/components/ui/decks/decksPage.module.scss'
 import { Button } from '@/components/ui/button'
-import { CardsResponseType, useDeleteCardMutation } from '@/api/cards/cards.api.ts'
+import { CardsResponseType, useDeleteCardMutation } from '@/api/cards'
 import { toast } from 'react-toastify'
 import { ErrorComponent } from '@/utils/toastify/Error.tsx'
 

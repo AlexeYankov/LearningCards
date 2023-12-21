@@ -1,7 +1,7 @@
 import { ResponseDeckType, useDeleteDeckMutation } from '@/api/decks'
 import { useState } from 'react'
 import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal'
-import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon'
+import { DeleteIcon } from '@/asserts/icons'
 import { Typography } from '@/components/ui/typography'
 import s from '@/components/ui/decks/decksPage.module.scss'
 import { Button } from '@/components/ui/button'

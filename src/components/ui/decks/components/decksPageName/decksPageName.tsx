@@ -7,7 +7,7 @@ import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 import f from '../../decksPage.module.scss'
 import { useAppDispatch } from '@/api/store'
-import { ImageIcon } from '@/asserts/icons/components/ImageIcon'
+import { ImageIcon } from '@/asserts/icons'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
