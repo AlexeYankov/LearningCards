@@ -34,14 +34,16 @@ export const LearnPack = () => {
       </Link>
       <Card>
         <Typography className={s.Title} variant={'large'}>
-          Learn '{deckById?.name || 'Pack Name'}'
+          Learn {deckById?.name || 'Pack Name'}
         </Typography>
         <div className={s.MainBlock}>
           <Typography className={s.Question} variant={'subtitle1'}>
             Question: <Typography variant={'body1'}>{data?.question || 'NameQuestion'}</Typography>
           </Typography>
           <p className={s.Text}>Количество попыток ответов на вопрос: {data?.shots || ''}</p>
-          {data?.questionImg && <img className={s.Image} src={data?.questionImg} alt="" />}
+          <div className={s.imgBox}>
+            {data?.questionImg && <img className={s.Image} src={data?.questionImg} alt="" />}
+          </div>
         </div>
         {show && (
           <Show

@@ -44,7 +44,9 @@ export const Show = ({ dataId, id, answerImg, answer, learn }: Props) => {
         <p className={s.Answer}>
           Answer: <Typography variant={'body1'}>{answer || ''}</Typography>
         </p>
-        {answerImg && <img className={s.Image} src={answerImg} alt="" />}
+        <div className={s.imgBox}>
+          {answerImg && <img className={s.Image} src={answerImg} alt="" />}
+        </div>
         <p className={s.Rate}>Rate yourself:</p>
         <Radio
           value={valueLearn}
