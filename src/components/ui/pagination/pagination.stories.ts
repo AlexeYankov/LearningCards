@@ -1,11 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Pagination } from '.'
-import {
-  BrowserRouterDecorator,
-  ReduxStoreProviderDecorator,
-  ThemeDecorator,
-} from '@/api/storybookDecorators.tsx'
+import { BrowserRouterDecorator, ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
 
 const meta = {
   argTypes: {

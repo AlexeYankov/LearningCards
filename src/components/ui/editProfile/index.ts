@@ -1,1 +1,1 @@
-export * from './EditProfile.module.scss'
+export * from './editProfile'

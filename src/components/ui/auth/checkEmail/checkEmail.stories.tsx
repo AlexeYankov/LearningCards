@@ -1,11 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 
 import { CheckEmail } from './checkEmail'
-import {
-  BrowserRouterDecorator,
-  ReduxStoreProviderDecorator,
-  ThemeDecorator,
-} from '@/api/storybookDecorators'
+import { BrowserRouterDecorator, ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
 
 const meta = {
   component: CheckEmail,

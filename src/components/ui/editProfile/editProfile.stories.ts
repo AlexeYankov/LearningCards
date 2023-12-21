@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 
 import { EditProfile } from './editProfile'
-import { ReduxStoreProviderDecorator, ThemeDecorator } from '@/api/storybookDecorators.tsx'
+import { ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
 
 const meta = {
   component: EditProfile,

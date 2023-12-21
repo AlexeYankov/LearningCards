@@ -34,6 +34,12 @@
       max-width: 125px;
     }
   }
+
+  &:hover {
+    opacity: 0.8;
+    background-color: var(--color-dark-500);
+    transition: 0.3s;
+  }
 }
 
 .container__pageBar {
@@ -240,8 +246,9 @@
     }
 
     &:hover {
-      color: var(--color-accent-300);
+      color: var(--color-accent-100);
       text-decoration: underline;
+      transition: all 0.3s;
     }
   }
 
@@ -300,7 +307,7 @@
   margin-left: 5px;
 }
 
-.decksEmpty{
+.decksEmpty {
   display: grid;
   place-items: center;
   padding: 60px 0;

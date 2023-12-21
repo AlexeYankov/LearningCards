@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { DeleteIcon } from '@/asserts/icons/components/DeleteIcon.tsx'
-import { LogoutIcon } from '@/asserts/icons/components/LogoutIcon.tsx'
+import { DeleteIcon, LogoutIcon } from '@/asserts/icons'
 
-import { Button } from './button'
-import { ThemeDecorator } from '@/api/storybookDecorators.tsx'
+import { Button } from '@/components/ui/button'
+import { ThemeDecorator } from '@/decorators'
 
 const meta = {
   argTypes: {

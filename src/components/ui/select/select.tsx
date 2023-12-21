@@ -1,17 +1,13 @@
 import React, { useState } from 'react'
-import { changeCurrentPage, changeItemsPerPage } from '@/api/decks/decks.reducer.ts'
+import { changeCurrentPage, changeItemsPerPage } from '@/api/decks'
 import { useAppDispatch } from '@/api/store.ts'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as SelectRadix from '@radix-ui/react-select'
 
 import s from './selectRadix.module.scss'
 
-import { Label } from '../label'
-import {
-  changeCardsCurrentPage,
-  changeCardsItemsPerPage,
-  selectedOptionSlice,
-} from '@/api/cards/cards.ts'
+import { Label } from '@/components/ui/label'
+import { changeCardsCurrentPage, changeCardsItemsPerPage, selectedOptionSlice } from '@/api/cards'
 
 type SelectItemProps = {
   children?: React.ReactNode

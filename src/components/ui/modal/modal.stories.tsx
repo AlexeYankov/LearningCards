@@ -1,23 +1,19 @@
 import { useState } from 'react'
 
 import img from '@/asserts/Mask.png'
-import { ImageIcon } from '@/asserts/icons/components/ImageIcon.tsx'
+import { ImageIcon } from '@/asserts/icons'
 import { Typography } from '@/components/ui/typography'
 import { Meta, StoryObj } from '@storybook/react'
 
 import s from './modal.module.scss'
 
-import { Button } from '../button'
-import { CheckBox } from '../checkbox'
+import { Button } from '@/components/ui/button'
+import { CheckBox } from '@/components/ui/checkbox'
 import { ScrollBar } from '../scrollbar'
-import { Select } from '../select'
+import { Select } from '@/components/ui/select'
 import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal/modal'
 import { TextField } from '@/components/ui/textField'
-import {
-  BrowserRouterDecorator,
-  ReduxStoreProviderDecorator,
-  ThemeDecorator,
-} from '@/api/storybookDecorators.tsx'
+import { BrowserRouterDecorator, ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
 
 const meta = {
   argTypes: {},

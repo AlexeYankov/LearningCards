@@ -1,7 +1,7 @@
 import s from './pagination.module.scss'
-import { Select } from '../select/select'
-import { Typography } from '../typography'
-import { Pages } from './components/pages/pages'
+import { Select } from '@/components/ui/select'
+import { Typography } from '@/components/ui/typography'
+import { Pages } from './components/pages'
 
 type PaginationType = {
   arrowColor: string
@@ -30,6 +30,7 @@ export const Pagination = ({
     }
     return dynamicOptions.map(option => option.toString())
   }
+
   const options =
     totalItems! <= 100 ? generateOptions(totalItems!) : ['10', '20', '30', '50', '100']
 

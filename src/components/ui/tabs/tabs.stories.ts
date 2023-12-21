@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Tabs } from '.'
-import { ReduxStoreProviderDecorator, ThemeDecorator } from '@/api/storybookDecorators.tsx'
+import { ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
 
 const meta = {
   argTypes: {

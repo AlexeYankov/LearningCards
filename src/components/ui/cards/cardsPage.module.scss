@@ -29,23 +29,23 @@
   border: 1px solid var(--color-dark-500);
 }
 
-.nk {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-
-  margin-bottom: 30px;
-
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1px;
-  color: var(--color-light-100);
-  text-decoration: none;
-}
-
 .textWithIconBox {
   display: flex;
   align-items: center;
+}
+
+.dropDownBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    &:hover {
+      background: var(--color-dark-100);
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+  }
 }
 
 .itemBox {
@@ -100,6 +100,14 @@
   }
 }
 
+.rowBox {
+  &:hover {
+    opacity: 0.8;
+    background-color: var(--color-dark-500);
+    transition: 0.3s;
+  }
+}
+
 .bodyCell {
   overflow: hidden;
 
@@ -143,7 +151,7 @@
 
 .iconBox {
   display: flex;
-  gap: 12px;
+  column-gap: 4px;
   align-items: center;
   line-height: 1;
 
@@ -161,6 +169,17 @@
   width: 100%;
 }
 
+.deckCoverBox {
+  display: flex;
+  width: fit-content;
+}
+
+.deckCover {
+  height: 100px;
+  margin-bottom: 24px;
+  object-fit: contain;
+}
+
 .backLink {
   display: flex;
   gap: 5px;
@@ -169,13 +188,28 @@
   margin-bottom: 24px;
 
   font-size: var(--font-size-s);
+  color: var(--color-light-100);
   text-decoration: none;
 
   svg {
     fill: var(--color-light-100);
   }
+
+  &:hover {
+    color: var(--color-accent-100);
+    transition: all 0.3s;
+
+    svg {
+      fill: var(--color-accent-100);
+      transition: all 0.3s;
+    }
+  }
 }
 
 .sortIcon {
   margin-left: 5px;
+}
+
+.emptyPack {
+  text-align: center;
 }

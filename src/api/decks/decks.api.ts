@@ -1,6 +1,6 @@
-import { baseApi } from '@/api/cards.api.ts'
-import { CardsResponseType, PaginationResponseType } from '@/api/common.api.ts'
-import { Sort } from '@/components/ui/table/types.ts'
+import { baseApi } from '@/api/base'
+import { CardsResponseType, PaginationResponseType } from '@/api/cards'
+import { Sort } from '@/components/ui/decks'
 
 type GetDecksParamsType = {
   authorId?: string
@@ -97,7 +97,7 @@ export const decksApi = baseApi.injectEndpoints({
             url: `v1/decks/${id}`,
           }
         },
-        providesTags: ['Cards']
+        providesTags: ['Decks'],
       }),
       createDeck: builder.mutation<ResponseDeckType, CreateDeckArgType>({
         invalidatesTags: ['Decks'],
@@ -108,29 +108,6 @@ export const decksApi = baseApi.injectEndpoints({
             body,
           }
         },
-        // onQueryStarted: async (_, { dispatch, queryFulfilled, getState }) => {
-        //   const result = await queryFulfilled
-        //   const state = getState() as RootState
-        //   const { name, sort, itemsPerPage, currentPage, authorId, minCardsCount, maxCardsCount } =
-        //     state.decks
-        //   dispatch(
-        //     decksApi.util.updateQueryData(
-        //       'getDecks',
-        //       {
-        //         name,
-        //         maxCardsCount,
-        //         minCardsCount,
-        //         authorId,
-        //         currentPage,
-        //         itemsPerPage,
-        //         orderBy: sort?.direction as Sort,
-        //       },
-        //       draft => {
-        //         draft.items?.unshift(result.data)
-        //       }
-        //     )
-        //   )
-        // },
       }),
       deleteDeck: builder.mutation<DeleteDeckResponseType, string>({
         query: id => {

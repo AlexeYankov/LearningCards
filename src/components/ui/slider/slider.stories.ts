@@ -1,11 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 
 import { Slider } from './slider'
-import {
-  BrowserRouterDecorator,
-  ReduxStoreProviderDecorator,
-  ThemeDecorator,
-} from '@/api/storybookDecorators.tsx'
+import { BrowserRouterDecorator, ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
 
 const meta = {
   component: Slider,
