@@ -10,7 +10,7 @@ import { Link, Outlet } from 'react-router-dom'
 import { useMeQuery } from '@/api/auth-api/auth.api.ts'
 import { useAppDispatch } from '@/api/store.ts'
 import { resetFilter } from '@/api/decks/decks.reducer.ts'
-import { Progress } from '@/components/ui/loader/loader.tsx'
+import { Progress } from '@/components/ui/loader'
 
 export const Header: FC = () => {
   const dispatch = useAppDispatch()

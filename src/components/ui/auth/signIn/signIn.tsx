@@ -9,7 +9,7 @@ import { Button } from '../../button'
 import { Card } from '@/components/ui/card'
 import { Link, useNavigate } from 'react-router-dom'
 import { useLoginMutation } from '@/api/auth-api/auth.api.ts'
-import { Loader } from '@/components/ui/loader/loader.tsx'
+import { Loader } from '@/components/ui/loader'
 
 type FormValues = z.infer<typeof loginSchema>
 const loginSchema = z.object({
