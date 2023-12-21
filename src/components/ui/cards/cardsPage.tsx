@@ -89,7 +89,12 @@ export const CardsPage = () => {
         </Link>
       </div>
       <div className={s.container__pageName}></div>
-      <PageName packTitle={deckById?.name} isMyCard={isMyCard} id={id} />
+      <PageName
+        cardsCount={deckById?.cardsCount!}
+        packTitle={deckById?.name}
+        isMyCard={isMyCard}
+        id={id}
+      />
       <div className={s.deckCoverBox}>
         {deckById?.cover && <img className={s.deckCover} src={deckById?.cover} alt="deck cover" />}
       </div>
