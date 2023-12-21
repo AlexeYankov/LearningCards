@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { useState } from 'react'
 
-import { CheckBox } from '.'
 import { ThemeDecorator } from '@/decorators'
+import { CheckBox } from './check-box'
 
 const meta = {
   argTypes: {

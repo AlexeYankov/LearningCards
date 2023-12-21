@@ -1,5 +1,5 @@
 import s from '@/components/ui/auth/forgotYourPassword/forgotYourPassword.module.scss'
-import { ControlledInput } from '@/components/ui/controlled/controlled-input.tsx'
+import { ControlledInput } from '@/components/ui/controlled'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Card } from '@/components/ui/card'

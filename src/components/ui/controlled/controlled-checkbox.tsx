@@ -1,6 +1,6 @@
 import { FieldValues, useController, UseControllerProps } from 'react-hook-form'
 
-import { CheckBox, CheckBoxProps } from '../checkbox/check-box.tsx'
+import { CheckBox, CheckBoxProps } from '../checkbox'
 
 export type ControlledCheckboxProps<TFieldValues extends FieldValues> =
   UseControllerProps<TFieldValues> & CheckBoxProps

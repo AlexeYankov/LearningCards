@@ -6,7 +6,7 @@ import s from '@/components/ui/decks/decksPage.module.scss'
 import { Button } from '@/components/ui/button'
 import { CardsResponseType, useDeleteCardMutation } from '@/api/cards'
 import { toast } from 'react-toastify'
-import { ErrorComponent } from '@/utils/toastify/Error.tsx'
+import { ErrorComponent } from '@/utils/toastify/Error'
 
 type DeleteCardModel = {
   card: CardsResponseType

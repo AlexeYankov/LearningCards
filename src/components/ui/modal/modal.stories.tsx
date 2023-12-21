@@ -7,8 +7,8 @@ import { Meta, StoryObj } from '@storybook/react'
 
 import s from './modal.module.scss'
 
-import { Button } from '../button'
-import { CheckBox } from '../checkbox'
+import { Button } from '@/components/ui/button'
+import { CheckBox } from '@/components/ui/checkbox'
 import { ScrollBar } from '../scrollbar'
 import { Select } from '../select'
 import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal/modal'
