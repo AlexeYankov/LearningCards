@@ -18,6 +18,7 @@ export const Header: FC = () => {
   const handleResetFilter = () => {
     dispatch(resetFilter())
     localStorage.removeItem('searchValue')
+    localStorage.removeItem('page')
   }
   return (
     <div className={s.container}>

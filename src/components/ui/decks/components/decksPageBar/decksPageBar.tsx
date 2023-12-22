@@ -31,7 +31,6 @@ export const DecksPageBar = () => {
     if (debouncedSearchValue) {
       dispatch(searchDeckByName({ name: debouncedSearchValue }))
       dispatch(changeCurrentPage({ currentPage: 1 }))
-      localStorage.removeItem('page')
       dispatch(changeMinCardsCount({ minCardsCount: 0 }))
       dispatch(changeMaxCardsCount({ maxCardsCount: 61 }))
     }
@@ -40,7 +39,9 @@ export const DecksPageBar = () => {
   const handleSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
     const newSearchValue = e.currentTarget.value
     setSearchValue(newSearchValue)
+    localStorage.setItem('page', '1')
     localStorage.setItem('searchValue', newSearchValue)
+    dispatch(changeCurrentPage({ currentPage: 1 }))
   }
 
   const handleClearSearchValueClick = () => {
