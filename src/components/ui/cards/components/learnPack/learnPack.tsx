@@ -30,7 +30,7 @@ export const LearnPack = () => {
   }
   return (
     <>
-      <BackLink title={'Back to Packs List'} to={id!} />
+      <BackLink title={'Back to packs list'} to={id!} />
       <Card>
         <Typography className={s.Title} variant={'large'}>
           Learn {deckById?.name || 'Pack Name'}
