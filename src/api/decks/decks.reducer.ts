@@ -43,7 +43,7 @@ const decksSlice = createSlice({
       state.sort = null
       state.minCardsCount = 0
       state.itemsPerPage = 10
-      // state.authorId = ''
+      state.authorId = ''
     },
   },
 })

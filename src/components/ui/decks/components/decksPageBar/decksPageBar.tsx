@@ -43,7 +43,6 @@ export const DecksPageBar = () => {
     setSearchValue('')
     dispatch(searchDeckByName({ name: '' }))
   }
-
   const handleResetFilter = () => {
     handleClearSearchValueClick()
     dispatch(resetFilter())
