@@ -47,6 +47,7 @@ export const Show = ({ dataId, id, answerImg, answer, learn }: Props) => {
           Answer: <Typography variant={'body1'}>{answer || ''}</Typography>
         </p>
         <Modal
+          hover={false}
           triggerName={
             <div className={s.imgBox}>
               {answerImg && (

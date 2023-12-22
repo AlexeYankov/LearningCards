@@ -43,6 +43,7 @@ export const LearnPack = () => {
           </Typography>
           <p className={s.Text}>Количество попыток ответов на вопрос: {data?.shots || ''}</p>
           <Modal
+            hover={false}
             triggerName={
               <div className={s.imgBox}>
                 {data?.questionImg && (

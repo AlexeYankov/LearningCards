@@ -174,8 +174,6 @@ export const ModalButtons: Story = {
 
 export const ModalAddNewDeck: Story = {
   render: () => {
-    // const [isCheck, setIsCheck] = useState(false)
-
     return (
       <Modal triggerName={<Button>Test</Button>}>
         <ModalTitle title={'Add New Deck'} />
