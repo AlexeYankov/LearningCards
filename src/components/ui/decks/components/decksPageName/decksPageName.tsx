@@ -83,6 +83,7 @@ export const DecksPageName = () => {
       <Modal
         onOpenChange={handleModalToggle}
         open={open}
+        hover={false}
         triggerName={
           <Button type={'button'} variant={'primary'}>
             Add New Deck
