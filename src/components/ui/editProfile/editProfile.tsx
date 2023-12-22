@@ -5,14 +5,13 @@ import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { TextField } from '@/components/ui/textField'
 import { UpdateUserArgsType, useMeQuery, useUpdateUserMutation } from '@/api/auth'
-import { ArrowBackIcon } from '@/asserts/icons'
-import { Link } from 'react-router-dom'
 import { Photo } from './photo'
 import { useAppDispatch, useAppSelector } from '@/api/store'
 import { changeEditModeProfile, changeTitleProfile } from '@/api/profile'
 import { NormalMode } from './normalMode'
 import { toast } from 'react-toastify'
 import { ErrorComponent } from '@/utils/toastify/Error'
+import { BackLink } from '@/components/ui/backLink'
 
 export const EditProfile = () => {
   const dispatch = useAppDispatch()
@@ -61,12 +60,7 @@ export const EditProfile = () => {
   return (
     <>
       <ErrorComponent />
-      <div className={s.boxLink}>
-        <Link className={s.backLink} to={'/'}>
-          <ArrowBackIcon />
-          Back to Packs List
-        </Link>
-      </div>
+      <BackLink title={'Back to decks list'} to={''} />
       <Card>
         <div className={s.cards}>
           <Typography as={'span'} className={s.text} variant={'large'}>

@@ -1,36 +1,3 @@
-.boxLink {
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-}
-
-.backLink {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  justify-content: flex-start;
-
-  margin-bottom: 24px;
-
-  font-size: var(--font-size-s);
-  color: var(--color-light-100);
-  text-decoration: none;
-
-  &:hover {
-    color: var(--color-accent-100);
-    transition: all 0.3s;
-
-    svg {
-      fill: var(--color-accent-100);
-      transition: all 0.3s;
-    }
-  }
-
-  svg {
-    fill: white;
-  }
-}
-
 .Title {
   display: flex;
   align-items: center;

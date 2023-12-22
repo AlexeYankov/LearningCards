@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {
   changeCardOrderBy,
   changeCardsCurrentPage,
@@ -10,7 +10,7 @@ import { resetFilter, useGetDecksByIdQuery } from '@/api/decks'
 import { useEffect, useState } from 'react'
 import { Body, Cell, Head, HeadCell, Root, Row } from '@it-incubator/ui-kit'
 import s from './cardsPage.module.scss'
-import { ArrowBackIcon, EditIcon, StarIcon } from '@/asserts/icons'
+import { EditIcon, StarIcon } from '@/asserts/icons'
 import { AddEditCard, DeleteCardModal, PageBar, PageName } from './components'
 import { Pagination } from '@/components/ui/pagination'
 import { convertedTime } from '@/helpers/convertedTime'
@@ -19,6 +19,7 @@ import { useMeQuery } from '@/api/auth'
 import { Loader } from '@/components/ui/loader'
 import { useDebounce } from '@/hooks/useDebounce'
 import { Column, Sort } from '@/components/ui/decks'
+import { BackLink } from '@/components/ui/backLink'
 
 export const CardsPage = () => {
   const { id } = useParams()
@@ -82,13 +83,7 @@ export const CardsPage = () => {
 
   return (
     <div className={s.container}>
-      <div className={s.boxLink}>
-        <Link className={s.backLink} to={'/'} onClick={resetFilterDecks}>
-          <ArrowBackIcon />
-          Back to decks list
-        </Link>
-      </div>
-      <div className={s.container__pageName}></div>
+      <BackLink title={'Back to decks list'} to={''} onClick={resetFilterDecks} />
       <PageName
         cardsCount={deckById?.cardsCount!}
         packTitle={deckById?.name}
