@@ -20,9 +20,10 @@ import { useDebounce } from '@/hooks/useDebounce'
 
 export const DecksPageBar = () => {
   const dispatch = useAppDispatch()
+  const savedSearchValue = localStorage.getItem('searchValue')
   const name = useAppSelector(state => state.decks.name)
 
-  const [searchValue, setSearchValue] = useState(name)
+  const [searchValue, setSearchValue] = useState(savedSearchValue || name)
 
   const debouncedSearchValue = useDebounce(searchValue, 500)
 
@@ -37,17 +38,30 @@ export const DecksPageBar = () => {
   }, [debouncedSearchValue, dispatch])
 
   const handleSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.currentTarget.value)
+    const newSearchValue = e.currentTarget.value
+    setSearchValue(newSearchValue)
+    localStorage.setItem('searchValue', newSearchValue)
   }
 
   const handleClearSearchValueClick = () => {
     setSearchValue('')
     dispatch(searchDeckByName({ name: '' }))
+    localStorage.removeItem('searchValue')
+    dispatch(changeCurrentPage({ currentPage: 1 }))
+    dispatch(changeMinCardsCount({ minCardsCount: 0 }))
+    dispatch(changeMaxCardsCount({ maxCardsCount: 61 }))
   }
+
   const handleResetFilter = () => {
     handleClearSearchValueClick()
     dispatch(resetFilter())
   }
+
+  useEffect(() => {
+    if (name === '' && savedSearchValue === null) {
+      setSearchValue('')
+    }
+  }, [name])
 
   return (
     <div className={f.container__pageBar}>

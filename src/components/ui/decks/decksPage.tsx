@@ -1,4 +1,9 @@
-import { changeCurrentPage, changeItemsPerPage, useGetDecksQuery } from '@/api/decks'
+import {
+  changeCurrentPage,
+  changeItemsPerPage,
+  searchDeckByName,
+  useGetDecksQuery,
+} from '@/api/decks'
 import s from './decksPage.module.scss'
 import { Pagination } from '../pagination'
 import { DecksBody, DecksHead, DecksPageBar, DecksPageName } from './components'
@@ -49,6 +54,15 @@ export const DecksPage = () => {
       setSearchParams({ ...searchParams, page: String(currentPage) })
     }
   }, [currentPage, decks?.pagination?.totalItems, dispatch, setSearchParams, searchParams])
+
+  useEffect(() => {
+    const savedSearchValue = localStorage.getItem('searchValue')
+    if (savedSearchValue !== null) {
+      dispatch(searchDeckByName({ name: savedSearchValue }))
+    } else {
+      dispatch(searchDeckByName({ name: '' }))
+    }
+  }, [dispatch])
 
   return (
     <div className={s.container}>

@@ -17,6 +17,7 @@ export const Header: FC = () => {
   const { data, error, isLoading, isFetching } = useMeQuery()
   const handleResetFilter = () => {
     dispatch(resetFilter())
+    localStorage.removeItem('searchValue')
   }
   return (
     <div className={s.container}>
