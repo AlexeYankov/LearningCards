@@ -78,7 +78,7 @@ export const DecksPageBar = () => {
           placeholder={'Input search'}
           search
           onClearClick={handleClearSearchValueClick}
-          value={searchValue!}
+          value={searchValue || ''}
           onChange={handleSearchValue}
         />
       </div>
