@@ -12,16 +12,17 @@ import { Typography } from '@/components/ui/typography'
 import * as DropdownRadix from '@radix-ui/react-dropdown-menu'
 import s from './dropDown.module.scss'
 import { useLogOutMutation } from '@/api/auth'
-import { Link } from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
+import {useGetDecksByIdQuery} from "@/api/decks";
 
 export type DropDown = {
-  avatar?: string
-  name?: string
-  align?: 'center' | 'end' | 'start'
-  children: ReactNode
-  className?: string
-  sideOffset?: number
-  trigger?: 'imageAvatar' | 'iconMore'
+    avatar?: string
+    name?: string
+    align?: 'center' | 'end' | 'start'
+    children: ReactNode
+    className?: string
+    sideOffset?: number
+    trigger?: 'imageAvatar' | 'iconMore'
 }
 
 export const DropDown: FC<DropDown> = ({
@@ -142,11 +143,26 @@ export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => 
   )
 }
 export const DropDownPackMenu = () => {
-  return (
-    <DropDown className={s.cardsContent} trigger={'iconMore'}>
-      <ItemWithIcon icon={<LearnIcon />} text={'Learn'} />
-      <ItemWithIcon icon={<EditIcon />} text={'Edit'} />
-      <ItemWithIcon icon={<DeleteIcon />} text={'Delete'} />
-    </DropDown>
-  )
+    const {id} = useParams()
+    const {data: decksById} = useGetDecksByIdQuery(id!)
+    const [openDelete, setOpenDelete] = useState(false)
+    const [opeEdit, setOpenEdit] = useState(false)
+    // const navigate = useNavigate()
+    const handleDeleteDeckClick = () => {
+        setOpenDelete(!openDelete)
+    }
+    const handleEditDeckClick = () => {
+        setOpenEdit(!opeEdit)
+    }
+    return (
+        <>
+            <DropDown className={s.cardsContent} trigger={'iconMore'}>
+                <ItemWithIcon linkTo={`/${id}/learn`} icon={<LearnIcon/>} text={'Learn'}/>
+                <ItemWithIcon icon={<EditIcon/>} onClick={handleEditDeckClick} text={'Edit'}/>
+                <ItemWithIcon icon={<DeleteIcon/>} onClick={handleDeleteDeckClick} text={'Delete'}/>
+            </DropDown>
+            <EditDeckModal hover={false} deck={decksById!} setOpen={setOpenEdit} open={opeEdit}/>
+            <DeleteDeckModal hover={false} deck={decksById!} setOpen={setOpenDelete} open={openDelete}/>
+        </>
+    )
 }
