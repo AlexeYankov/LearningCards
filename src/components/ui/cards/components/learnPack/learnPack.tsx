@@ -29,16 +29,19 @@ export const LearnPack = () => {
   }
   return (
     <>
-      <Link className={s.backLink} to={`/${id}`}>
-        <ArrowBackIcon />
-        Back to Packs List
-      </Link>
+      <div className={s.boxLink}>
+        <Link className={s.backLink} to={`/${id}`}>
+          <ArrowBackIcon />
+          Back to Packs List
+        </Link>
+      </div>
+
       <Card>
         <Typography className={s.Title} variant={'large'}>
           Learn {deckById?.name || 'Pack Name'}
         </Typography>
         <div className={s.MainBlock}>
-          <Typography className={s.Question} variant={'subtitle1'}>
+          <Typography variant={'subtitle1'}>
             Question: <Typography variant={'body1'}>{data?.question || 'NameQuestion'}</Typography>
           </Typography>
           <p className={s.Text}>Количество попыток ответов на вопрос: {data?.shots || ''}</p>
