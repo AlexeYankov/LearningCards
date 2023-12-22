@@ -23,12 +23,13 @@
     cursor: pointer;
     width: fit-content;
     margin: 0 auto;
+    transition: all 3s;
 
     &:hover {
       svg {
         opacity: 1;
         fill: var(--color-accent-900);
-        transition: all 0.3s;
+        transition: all 0.4s;
       }
     }
   }
@@ -56,6 +57,8 @@
       border-radius: 50%;
 
       fill: var(--color-accent-900);
+
+      transition: all 0.4s;
     }
   }
 

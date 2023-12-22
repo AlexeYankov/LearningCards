@@ -129,7 +129,7 @@ export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => 
     <DropDown avatar={avatar} name={name} sideOffset={-1} trigger={'imageAvatar'}>
       <div className={s.inner}>
         <img alt={''} className={s.img} src={avatar} />
-        <div className={s.itemBox}>
+        <div>
           <Typography as={'p'} variant={'subtitle2'}>
             {name}
           </Typography>

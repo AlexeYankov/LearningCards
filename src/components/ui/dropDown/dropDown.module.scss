@@ -10,6 +10,8 @@
   border: none;
   border-radius: 50%;
 
+  transition: all 0.3s;
+
   &:hover {
     background-color: var(--color-accent-100);
     box-shadow: 0 0 10px 5px var(--color-accent-100);
@@ -81,14 +83,20 @@
 .menuItemIcon {
   display: flex;
   align-items: center;
+
   color: white;
   text-decoration: none;
+
+  transition: all 0.3s;
 
   svg {
     width: 16px;
     height: 16px;
     margin-right: 6px;
+
     fill: var(--color-light-100);
+
+    transition: all 0.3s;
   }
 
   &:hover {
@@ -151,9 +159,13 @@
 
 .headerLinkToProfile {
   margin-right: 15px;
+
   color: var(--color-light-100);
   text-decoration: none;
+
   border-bottom-style: dashed;
+
+  transition: 0.3s;
 
   &:hover {
     color: var(--color-accent-100);
@@ -165,5 +177,3 @@
     outline: 2px solid var(--color-info-500);
   }
 }
-
-

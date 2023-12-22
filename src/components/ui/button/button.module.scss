@@ -22,6 +22,8 @@
 
   border-radius: 4px;
 
+  transition: 0.3s;
+
   &:focus-visible {
     outline: 2px solid var(--color-info-700);
   }
@@ -41,9 +43,11 @@
 .primary {
   background: var(--color-accent-500);
   box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+  transition: 0.3s;
 
   &:hover {
     background: var(--color-accent-300);
+    transition: 0.3s;
   }
 
   &:active {
@@ -70,6 +74,7 @@
 
   &:hover {
     background: var(--color-dark-100);
+    transition: 0.3s;
   }
 
   &:active {
@@ -97,6 +102,7 @@
   &:hover {
     background: var(--color-dark-500);
     outline-color: var(--color-accent-700);
+    transition: 0.3s;
   }
 
   &:active {
@@ -115,6 +121,7 @@
 
   &:hover {
     color: var(--color-accent-300);
+    transition: 0.3s;
   }
 
   &:active {
