@@ -46,10 +46,10 @@ export const DecksPage = () => {
 
     if (totalItems) {
       dispatch(changeItemsPerPage({ itemsPerPage: 10 }))
-      // Обновление значения currentPage в URL при каждом изменении
       setSearchParams({ ...searchParams, page: String(currentPage) })
     }
   }, [currentPage, decks?.pagination?.totalItems, dispatch, setSearchParams, searchParams])
+
   return (
     <div className={s.container}>
       <ErrorComponent error={error} isError={isError} />
