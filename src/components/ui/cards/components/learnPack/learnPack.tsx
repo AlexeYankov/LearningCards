@@ -46,7 +46,7 @@ export const LearnPack = () => {
             triggerName={
               <div className={s.imgBox}>
                 {data?.questionImg && (
-                  <div className={s.test}>
+                  <div className={s.imgAndIconInner}>
                     <SearchIcon />
                     <img className={s.Image} src={data?.questionImg} alt="" />
                   </div>

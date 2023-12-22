@@ -21,12 +21,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 33px 0 24px;
+  margin: 15px 0 20px;
 }
 
 .Button {
   width: 100%;
-  margin: 0 36px 36px;
+  margin: 0 36px 15px;
 }
 
 .MainBlock {
@@ -46,14 +46,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 36px;
+    margin-right: 20px;
   }
 
   .Image {
     max-width: 150px;
   }
 
-  .test {
+  .imgAndIconInner {
     position: relative;
     display: flex;
     align-items: center;
@@ -79,10 +79,6 @@
     }
   }
 
-  .Radio {
-    margin-bottom: 24px;
-  }
-
   .Answer {
     margin-bottom: 12px;
 
@@ -93,11 +89,14 @@
   }
 
   .Rate {
-    margin-bottom: 13px;
+    margin-top: 24px;
+    margin-bottom: 10px;
   }
 }
 
 .imgShowModal {
+  width: fit-content;
+  margin: 0 auto;
   background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
 }

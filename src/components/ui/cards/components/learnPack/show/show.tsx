@@ -4,6 +4,8 @@ import { Radio } from '@/components/ui/radio-group'
 import { Button } from '@/components/ui/button'
 import { changeGradeValueLearn, changeValueLearn, showMode } from '@/api/cards'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
+import { SearchIcon } from '@/asserts/icons'
+import { Modal, ModalClose } from '@/components/ui/modal'
 
 const options = [
   { value: 'Did not know' },
@@ -44,9 +46,25 @@ export const Show = ({ dataId, id, answerImg, answer, learn }: Props) => {
         <p className={s.Answer}>
           Answer: <Typography variant={'body1'}>{answer || ''}</Typography>
         </p>
-        <div className={s.imgBox}>
-          {answerImg && <img className={s.Image} src={answerImg} alt="" />}
-        </div>
+        <Modal
+          triggerName={
+            <div className={s.imgBox}>
+              {answerImg && (
+                <div className={s.imgAndIconInner}>
+                  <SearchIcon />
+                  <img className={s.Image} src={answerImg} alt="" />
+                </div>
+              )}
+            </div>
+          }
+        >
+          <div className={s.imgShowModal}>
+            <div className={s.closeBtnBox}>
+              <ModalClose />
+            </div>
+            <div>{answerImg && <img className={s.imgModal} src={answerImg} alt="" />}</div>
+          </div>
+        </Modal>
         <p className={s.Rate}>Rate yourself:</p>
         <Radio
           value={valueLearn}
