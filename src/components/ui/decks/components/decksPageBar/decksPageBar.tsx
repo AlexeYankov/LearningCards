@@ -8,7 +8,7 @@ import { Typography } from '@/components/ui/typography'
 
 import f from '../../decksPage.module.scss'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { useAppDispatch } from '@/api/store'
+import { useAppDispatch, useAppSelector } from '@/api/store'
 import {
   changeCurrentPage,
   changeMaxCardsCount,
@@ -20,8 +20,9 @@ import { useDebounce } from '@/hooks/useDebounce'
 
 export const DecksPageBar = () => {
   const dispatch = useAppDispatch()
+  const name = useAppSelector(state => state.decks.name)
 
-  const [searchValue, setSearchValue] = useState('')
+  const [searchValue, setSearchValue] = useState(name)
 
   const debouncedSearchValue = useDebounce(searchValue, 500)
 
