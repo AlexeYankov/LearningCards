@@ -10,7 +10,7 @@ import { DecksBody, DecksHead, DecksPageBar, DecksPageName } from './components'
 import { useAppDispatch, useAppSelector } from '@/api/store'
 import { useEffect } from 'react'
 import { Root } from '@it-incubator/ui-kit'
-import { useSearchParams } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import { ErrorComponent } from '@/utils/toastify/Error'
 import { Sort } from './decksData'
 
@@ -39,6 +39,7 @@ export const DecksPage = () => {
     name,
     orderBy: sort?.direction as Sort,
   })
+  const location = useLocation()
 
   const isShowPagination = decks?.pagination?.totalItems! >= itemsPerPage
   const isDecksEmpty = decks?.pagination?.totalItems === 0
@@ -62,12 +63,17 @@ export const DecksPage = () => {
 
   useEffect(() => {
     const savedSearchValue = localStorage.getItem('searchValue')
-    if (savedSearchValue !== null) {
-      dispatch(searchDeckByName({ name: savedSearchValue || name }))
+    const urlParams = new URLSearchParams(location.search)
+    const searchValue = urlParams.get('search')
+
+    if (searchValue) {
+      dispatch(searchDeckByName({ name: searchValue }))
+    } else if (savedSearchValue) {
+      dispatch(searchDeckByName({ name: savedSearchValue }))
     } else {
       dispatch(searchDeckByName({ name: '' }))
     }
-  }, [dispatch])
+  }, [dispatch, location.search])
 
   return (
     <div className={s.container}>

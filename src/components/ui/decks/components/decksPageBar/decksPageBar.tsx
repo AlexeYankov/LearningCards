@@ -17,13 +17,19 @@ import {
   searchDeckByName,
 } from '@/api/decks'
 import { useDebounce } from '@/hooks/useDebounce'
+import { useLocation } from 'react-router-dom'
 
 export const DecksPageBar = () => {
   const dispatch = useAppDispatch()
+  const location = useLocation()
+
+  const urlParams = new URLSearchParams(location.search)
+  const searchValueLocation = urlParams.get('search')
+
   const savedSearchValue = localStorage.getItem('searchValue')
   const name = useAppSelector(state => state.decks.name)
 
-  const [searchValue, setSearchValue] = useState(savedSearchValue || name)
+  const [searchValue, setSearchValue] = useState(searchValueLocation || savedSearchValue)
 
   const debouncedSearchValue = useDebounce(searchValue, 500)
 
@@ -72,7 +78,7 @@ export const DecksPageBar = () => {
           placeholder={'Input search'}
           search
           onClearClick={handleClearSearchValueClick}
-          value={searchValue}
+          value={searchValue!}
           onChange={handleSearchValue}
         />
       </div>
