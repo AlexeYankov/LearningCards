@@ -51,14 +51,19 @@ export const DecksPage = () => {
 
     if (totalItems) {
       dispatch(changeItemsPerPage({ itemsPerPage: 10 }))
-      setSearchParams({ ...searchParams, page: String(currentPage), search: name })
+
+      if (name !== '') {
+        setSearchParams({ ...searchParams, page: String(currentPage), search: name })
+      } else {
+        setSearchParams({ ...searchParams, page: String(currentPage) })
+      }
     }
-  }, [currentPage, decks?.pagination?.totalItems, dispatch, setSearchParams, searchParams])
+  }, [currentPage, decks?.pagination?.totalItems, dispatch, setSearchParams, searchParams, name])
 
   useEffect(() => {
     const savedSearchValue = localStorage.getItem('searchValue')
     if (savedSearchValue !== null) {
-      dispatch(searchDeckByName({ name: savedSearchValue }))
+      dispatch(searchDeckByName({ name: savedSearchValue || name }))
     } else {
       dispatch(searchDeckByName({ name: '' }))
     }
