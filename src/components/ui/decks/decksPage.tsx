@@ -51,7 +51,7 @@ export const DecksPage = () => {
 
     if (totalItems) {
       dispatch(changeItemsPerPage({ itemsPerPage: 10 }))
-      setSearchParams({ ...searchParams, page: String(currentPage) })
+      setSearchParams({ ...searchParams, page: String(currentPage), search: name })
     }
   }, [currentPage, decks?.pagination?.totalItems, dispatch, setSearchParams, searchParams])
 
