@@ -54,6 +54,10 @@ export const EditProfile = () => {
     dispatch(changeTitleProfile({ title: e.currentTarget.value }))
   }
   const handleClick = (e: FormEvent<HTMLFormElement>) => e.preventDefault()
+  const handleCloseEditMode = () => {
+    dispatch(changeEditModeProfile({ editMode: false }))
+  }
+
   return (
     <>
       <ErrorComponent />
@@ -80,6 +84,7 @@ export const EditProfile = () => {
                 className={s.textField}
                 value={title}
                 onChange={handleOnchangeTitle}
+                onBlur={handleCloseEditMode}
               />
               <Button
                 type={'submit'}

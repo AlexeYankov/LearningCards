@@ -1,11 +1,16 @@
-import { changeCurrentPage, changeItemsPerPage, useGetDecksQuery } from '@/api/decks'
+import {
+  changeCurrentPage,
+  changeItemsPerPage,
+  searchDeckByName,
+  useGetDecksQuery,
+} from '@/api/decks'
 import s from './decksPage.module.scss'
 import { Pagination } from '../pagination'
 import { DecksBody, DecksHead, DecksPageBar, DecksPageName } from './components'
 import { useAppDispatch, useAppSelector } from '@/api/store'
 import { useEffect } from 'react'
 import { Root } from '@it-incubator/ui-kit'
-import { useSearchParams } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import { ErrorComponent } from '@/utils/toastify/Error'
 import { Sort } from './decksData'
 
@@ -34,6 +39,7 @@ export const DecksPage = () => {
     name,
     orderBy: sort?.direction as Sort,
   })
+  const location = useLocation()
 
   const isShowPagination = decks?.pagination?.totalItems! >= itemsPerPage
   const isDecksEmpty = decks?.pagination?.totalItems === 0
@@ -46,10 +52,29 @@ export const DecksPage = () => {
 
     if (totalItems) {
       dispatch(changeItemsPerPage({ itemsPerPage: 10 }))
-      // Обновление значения currentPage в URL при каждом изменении
-      setSearchParams({ ...searchParams, page: String(currentPage) })
+
+      if (name !== '') {
+        setSearchParams({ ...searchParams, page: String(currentPage), search: name })
+      } else {
+        setSearchParams({ ...searchParams, page: String(currentPage) })
+      }
     }
-  }, [currentPage, decks?.pagination?.totalItems, dispatch, setSearchParams, searchParams])
+  }, [currentPage, decks?.pagination?.totalItems, dispatch, setSearchParams, searchParams, name])
+
+  useEffect(() => {
+    const savedSearchValue = localStorage.getItem('searchValue')
+    const urlParams = new URLSearchParams(location.search)
+    const searchValue = urlParams.get('search')
+
+    if (searchValue) {
+      dispatch(searchDeckByName({ name: searchValue }))
+    } else if (savedSearchValue) {
+      dispatch(searchDeckByName({ name: savedSearchValue }))
+    } else {
+      dispatch(searchDeckByName({ name: '' }))
+    }
+  }, [dispatch, location.search])
+
   return (
     <div className={s.container}>
       <ErrorComponent error={error} isError={isError} />

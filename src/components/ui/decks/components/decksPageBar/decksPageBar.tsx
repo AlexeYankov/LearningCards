@@ -8,7 +8,7 @@ import { Typography } from '@/components/ui/typography'
 
 import f from '../../decksPage.module.scss'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { useAppDispatch } from '@/api/store'
+import { useAppDispatch, useAppSelector } from '@/api/store'
 import {
   changeCurrentPage,
   changeMaxCardsCount,
@@ -17,11 +17,19 @@ import {
   searchDeckByName,
 } from '@/api/decks'
 import { useDebounce } from '@/hooks/useDebounce'
+import { useLocation } from 'react-router-dom'
 
 export const DecksPageBar = () => {
   const dispatch = useAppDispatch()
+  const location = useLocation()
 
-  const [searchValue, setSearchValue] = useState('')
+  const urlParams = new URLSearchParams(location.search)
+  const searchValueLocation = urlParams.get('search')
+
+  const savedSearchValue = localStorage.getItem('searchValue')
+  const name = useAppSelector(state => state.decks.name)
+
+  const [searchValue, setSearchValue] = useState(searchValueLocation || savedSearchValue)
 
   const debouncedSearchValue = useDebounce(searchValue, 500)
 
@@ -29,24 +37,38 @@ export const DecksPageBar = () => {
     if (debouncedSearchValue) {
       dispatch(searchDeckByName({ name: debouncedSearchValue }))
       dispatch(changeCurrentPage({ currentPage: 1 }))
-      localStorage.removeItem('page')
       dispatch(changeMinCardsCount({ minCardsCount: 0 }))
       dispatch(changeMaxCardsCount({ maxCardsCount: 61 }))
     }
   }, [debouncedSearchValue, dispatch])
 
   const handleSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.currentTarget.value)
+    const newSearchValue = e.currentTarget.value
+    setSearchValue(newSearchValue)
+    localStorage.setItem('page', '1')
+    localStorage.setItem('searchValue', newSearchValue)
+    dispatch(changeCurrentPage({ currentPage: 1 }))
   }
 
   const handleClearSearchValueClick = () => {
     setSearchValue('')
     dispatch(searchDeckByName({ name: '' }))
+    localStorage.removeItem('searchValue')
+    dispatch(changeCurrentPage({ currentPage: 1 }))
+    dispatch(changeMinCardsCount({ minCardsCount: 0 }))
+    dispatch(changeMaxCardsCount({ maxCardsCount: 61 }))
   }
+
   const handleResetFilter = () => {
     handleClearSearchValueClick()
     dispatch(resetFilter())
   }
+
+  useEffect(() => {
+    if (name === '' && savedSearchValue === null) {
+      setSearchValue('')
+    }
+  }, [name])
 
   return (
     <div className={f.container__pageBar}>
@@ -56,7 +78,7 @@ export const DecksPageBar = () => {
           placeholder={'Input search'}
           search
           onClearClick={handleClearSearchValueClick}
-          value={searchValue}
+          value={searchValue!}
           onChange={handleSearchValue}
         />
       </div>

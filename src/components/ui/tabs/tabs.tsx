@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import s from './tabs.module.scss'
 
@@ -11,7 +11,18 @@ type TabsType = {
 }
 
 export const Tabs = ({ title }: TabsType) => {
-  const [active, setActive] = useState(1)
+  const [active, setActive] = useState(() => {
+    const savedActive = localStorage.getItem('active')
+    return savedActive ? Number(savedActive) : 1
+  })
+
+  useEffect(() => {
+    localStorage.setItem('active', String(active))
+  }, [active])
+
+  const handleSetActive = (value: number) => {
+    setActive(value)
+  }
 
   return (
     <Typography as={'ul'} className={s.container}>
@@ -22,7 +33,7 @@ export const Tabs = ({ title }: TabsType) => {
             index={i}
             key={i}
             length={title.length}
-            setActive={setActive}
+            setActive={handleSetActive}
             title={el}
           />
         )
