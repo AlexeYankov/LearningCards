@@ -34,10 +34,10 @@ export const Radio = forwardRef<ElementRef<typeof RadioGroupLib.Root>, RadioGrou
         {options?.map(el => {
           return (
             <div key={el.value} className={s.RadioGroupBlock}>
-              <RadioGroup.Item className={s.RadioGroupItem} value={`${el.value}`}>
+              <RadioGroup.Item className={s.RadioGroupItem} value={`${el.value}`} id={el.value}>
                 <RadioGroup.Indicator className={s.RadioGroupIndicator} />
               </RadioGroup.Item>
-              <Label className={s.Label} label={`${el.value}`} />
+              <Label className={s.Label} label={`${el.value}`} htmlFor={el.value} />
             </div>
           )
         })}
