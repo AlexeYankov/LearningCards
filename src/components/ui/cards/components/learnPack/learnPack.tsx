@@ -8,11 +8,12 @@ import {
   useLearnRandomPostMutation,
 } from '@/api/decks'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowBackIcon } from '@/asserts/icons'
+import { ArrowBackIcon, SearchIcon } from '@/asserts/icons'
 import { Loader } from '@/components/ui/loader'
 import { useAppDispatch, useAppSelector } from '@/api/store'
 import { showMode } from '@/api/cards'
 import { Show } from './show'
+import { Modal, ModalClose } from '@/components/ui/modal'
 
 export const LearnPack = () => {
   const dispatch = useAppDispatch()
@@ -41,9 +42,27 @@ export const LearnPack = () => {
             Question: <Typography variant={'body1'}>{data?.question || 'NameQuestion'}</Typography>
           </Typography>
           <p className={s.Text}>Количество попыток ответов на вопрос: {data?.shots || ''}</p>
-          <div className={s.imgBox}>
-            {data?.questionImg && <img className={s.Image} src={data?.questionImg} alt="" />}
-          </div>
+          <Modal
+            triggerName={
+              <div className={s.imgBox}>
+                {data?.questionImg && (
+                  <div className={s.test}>
+                    <SearchIcon />
+                    <img className={s.Image} src={data?.questionImg} alt="" />
+                  </div>
+                )}
+              </div>
+            }
+          >
+            <div className={s.imgShowModal}>
+              <div className={s.closeBtnBox}>
+                <ModalClose />
+              </div>
+              <div>
+                {data?.questionImg && <img className={s.imgModal} src={data?.questionImg} alt="" />}
+              </div>
+            </div>
+          </Modal>
         </div>
         {show && (
           <Show
