@@ -1,7 +1,7 @@
 import { DropDown, DropDownMenu, DropDownPackMenu } from '@/components/ui/dropDown'
 import { Meta, StoryObj } from '@storybook/react'
 
-import profileImage from './../../../asserts/profileImage.png'
+import profileImage from './../../../asserts/userImg.png'
 import { BrowserRouterDecorator, ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
 
 const meta = {
