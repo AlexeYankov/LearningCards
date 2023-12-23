@@ -1,7 +1,7 @@
 import { Card } from '@/components/ui/card/card'
 import { Meta, StoryObj } from '@storybook/react'
 import { ThemeDecorator } from '@/decorators'
-import photo from '@/asserts/profileImage.png'
+import photo from './../../../asserts/userImg.png'
 
 const meta = {
   component: Card,
