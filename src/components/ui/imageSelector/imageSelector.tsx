@@ -1,15 +1,16 @@
+import s from './imageSelector.module.scss'
 import { Button } from '@/components/ui/button'
 import { DeleteIcon, ImageIcon } from '@/asserts/icons'
-import s from './addEditCard.module.scss'
+import { ChangeEvent } from 'react'
 
 type Props = {
-  label?: any
-  selectedImage?: any
-  onChange?: any
-  onImageDelete?: any
-  inputId?: any
-  changeLabel?: any
-  deleteLabel?: any
+  label?: string
+  selectedImage?: string
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
+  onImageDelete?: () => void
+  inputId?: string
+  changeLabel?: string
+  deleteLabel?: string
 }
 export const ImageSelector = ({
   selectedImage,

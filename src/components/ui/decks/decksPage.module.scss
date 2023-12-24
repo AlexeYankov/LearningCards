@@ -127,18 +127,6 @@
   margin-top: -1px;
 }
 
-.inputFile {
-  overflow: hidden;
-
-  width: 0;
-  height: 0;
-  padding: 0;
-
-  line-height: 0;
-
-  opacity: 0;
-}
-
 .changeCover {
   cursor: pointer;
 
@@ -276,21 +264,6 @@
   svg {
     width: 16px;
     height: 16px;
-  }
-}
-
-.btnCoverBox {
-  display: flex;
-  gap: 50px;
-  align-items: center;
-  justify-content: space-around;
-
-  width: 100%;
-
-  svg {
-    width: 20px;
-    height: 20px;
-    fill: var(--color-light-100);
   }
 }
 
