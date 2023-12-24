@@ -12,10 +12,11 @@ import {
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import s from './addEditCard.module.scss'
-import { handleFileChange, ImageSelector } from '@/components/ui/cards'
+import { handleFileChange } from '@/components/ui/cards'
 import { EditIcon } from '@/asserts/icons'
 import { ErrorComponent } from '@/utils/toastify/Error'
 import { selectedOptionSlice } from '@/api/cards'
+import { ImageSelector } from '@/components/ui/imageSelector'
 
 type Props = {
   id?: string
