@@ -27,6 +27,7 @@ export const Primary: Story = {
     variant: 'primary',
     totalItems: 10,
     totalPages: 100,
+    location: 'decks',
   },
 }
 
@@ -39,5 +40,6 @@ export const Secondary: Story = {
     variant: 'secondary',
     totalItems: 10,
     totalPages: 100,
+    location: 'decks',
   },
 }

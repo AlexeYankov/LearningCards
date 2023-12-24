@@ -3,6 +3,8 @@ import { Select } from '@/components/ui/select'
 import { Typography } from '@/components/ui/typography'
 import { Pages } from './components/pages'
 
+export type LocationType = 'decks' | 'cards'
+
 type PaginationType = {
   arrowColor: string
   arrowID: string
@@ -11,6 +13,7 @@ type PaginationType = {
   totalPages: number
   variant?: string
   totalItems: number
+  location: LocationType
 }
 
 export const Pagination = ({
@@ -20,6 +23,7 @@ export const Pagination = ({
   reversedArrowID,
   totalItems,
   totalPages,
+  location,
 }: PaginationType) => {
   const generateOptions = (total: number) => {
     const dynamicOptions: number[] = []
@@ -41,6 +45,7 @@ export const Pagination = ({
         color={arrowColor}
         reversedArrowID={reversedArrowID}
         totalPages={totalPages}
+        location={location}
       />
 
       <div className={s.box}>
