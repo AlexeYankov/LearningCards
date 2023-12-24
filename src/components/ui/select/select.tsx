@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { changeCurrentPage, changeItemsPerPage } from '@/api/decks'
-import { useAppDispatch } from '@/api/store.ts'
+import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as SelectRadix from '@radix-ui/react-select'
 
@@ -56,7 +56,9 @@ const SelectContent = ({ options }: { options: string[] }) => {
 
 export const Select = ({ classname, label, options, reversed, selectId, ...rest }: SelectProps) => {
   const dispatch = useAppDispatch()
-  const [selectedValue, setSelectedValue] = useState(options[0])
+
+  const valueSelect = useAppSelector(state => state.cards.valueSelect)
+  const [selectedValue, setSelectedValue] = useState(valueSelect)
 
   const handleValueChange = (value: string) => {
     if (options.includes(value)) {
