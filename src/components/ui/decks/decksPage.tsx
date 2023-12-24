@@ -96,6 +96,7 @@ export const DecksPage = () => {
               reversedArrowID="arrow-ios-forward"
               totalPages={decks?.pagination.totalPages!}
               totalItems={decks?.pagination.totalItems!}
+              location={'decks'}
             />
           )}
         </>

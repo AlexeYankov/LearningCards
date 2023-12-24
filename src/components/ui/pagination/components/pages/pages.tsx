@@ -5,6 +5,7 @@ import sprite from '@/asserts/sprite.svg'
 import s from './pages.module.scss'
 import PagesForRender from './pagesForRender'
 import { changeCardsCurrentPage } from '@/api/cards'
+import { LocationType } from '@/components/ui/pagination'
 
 type PagesType = {
   arrowID: string
@@ -12,18 +13,33 @@ type PagesType = {
   reversedArrowID: string
   startPagesFrom?: number
   totalPages?: number
+  location: LocationType
 }
 
-export const Pages = ({ arrowID, color, reversedArrowID, totalPages = 10 }: PagesType) => {
+export const Pages = ({
+  arrowID,
+  color,
+  reversedArrowID,
+  totalPages = 10,
+  location,
+}: PagesType) => {
   const dispatch = useAppDispatch()
-  const currentPage = useAppSelector(state => state.decks.currentPage)
 
-  const handlePageChange = (page: number) => {
-    dispatch(changeCurrentPage({ currentPage: page }))
-    dispatch(changeCardsCurrentPage({ currentPage: page }))
-    localStorage.setItem('page', page.toString())
+  let currentPage
+  if (location === 'decks') {
+    currentPage = useAppSelector(state => state.decks.currentPage)
+  } else {
+    currentPage = useAppSelector(state => state.cards.currentPage)
   }
 
+  const handlePageChange = (page: number) => {
+    if (location === 'decks') {
+      dispatch(changeCurrentPage({ currentPage: page }))
+      localStorage.setItem('page', page.toString())
+    } else {
+      dispatch(changeCardsCurrentPage({ currentPage: page }))
+    }
+  }
   const prevPage = currentPage - 1 === 0 ? 1 : currentPage - 1
   const nextPage = currentPage + 1 >= totalPages ? totalPages : currentPage + 1
 

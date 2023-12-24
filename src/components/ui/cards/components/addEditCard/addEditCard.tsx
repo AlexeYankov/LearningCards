@@ -3,7 +3,7 @@ import { Button } from '../../../button/button'
 import { Select } from '@/components/ui/select'
 import { TextField } from '@/components/ui/textField'
 import { Modal, ModalTitle } from '@/components/ui/modal'
-import { useAppSelector } from '@/api/store.ts'
+import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import {
   CardsResponseType,
   useCreateCardMutation,
@@ -15,6 +15,7 @@ import s from './addEditCard.module.scss'
 import { handleFileChange, ImageSelector } from '@/components/ui/cards'
 import { EditIcon } from '@/asserts/icons'
 import { ErrorComponent } from '@/utils/toastify/Error'
+import { selectedOptionSlice } from '@/api/cards'
 
 type Props = {
   id?: string
@@ -32,6 +33,8 @@ const schema = z.object({
 type Form = z.infer<typeof schema>
 
 export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
+  const dispatch = useAppDispatch()
+
   const [selectedQuestionImage, setSelectedQuestionImage] = useState('')
   const [selectedAnswerImage, setSelectedAnswerImage] = useState('')
   const [open, setOpen] = useState(false)
@@ -54,15 +57,23 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
   const deleteCardQuestion = () => {
     setSelectedEditQuestionImage('')
   }
+
   const deleteCardAnswer = () => {
     setSelectedEditAnswerImage('')
   }
+
   const handleModalToggle = () => {
     setOpen(prevState => !prevState)
     reset()
     setSelectedQuestionImage('')
     setSelectedAnswerImage('')
+    if (card?.answerImg || card?.questionImg) {
+      dispatch(selectedOptionSlice({ valueSelect: 'Picture' }))
+    } else {
+      dispatch(selectedOptionSlice({ valueSelect: 'Text' }))
+    }
   }
+
   const handleQuestionFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     handleFileChange({
       setSelectedImage: editIcon ? setSelectedEditQuestionImage : setSelectedQuestionImage,
@@ -141,7 +152,6 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
         }
       >
         {editIcon ? <ModalTitle title={'Edit Card'} /> : <ModalTitle title={'Add New Card'} />}
-
         <div className={s.contentBox}>
           <div className={s.select}>
             <Select
@@ -154,23 +164,21 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
           <form onSubmit={onSubmit}>
             {valueSelect === 'Picture' ? (
               <>
-                <>
-                  <TextField
-                    inputId={'Input1'}
-                    label={'Question'}
-                    placeholder={'Question'}
-                    errorMessage={errors.question?.message}
-                    {...register('question', { value: card?.question })}
-                  />
-                  <ImageSelector
-                    selectedImage={editIcon ? selectedEditQuestionImage : selectedQuestionImage}
-                    deleteLabel={editIcon ? 'Delete Image' : ''}
-                    onChange={handleQuestionFileChange}
-                    changeLabel={'Change Question Image'}
-                    inputId={'question-img-input'}
-                    onImageDelete={deleteCardQuestion}
-                  />
-                </>
+                <TextField
+                  inputId={'Input1'}
+                  label={'Question'}
+                  placeholder={'Question'}
+                  errorMessage={errors.question?.message}
+                  {...register('question', { value: card?.question })}
+                />
+                <ImageSelector
+                  selectedImage={editIcon ? selectedEditQuestionImage : selectedQuestionImage}
+                  deleteLabel={editIcon ? 'Delete Image' : ''}
+                  onChange={handleQuestionFileChange}
+                  changeLabel={'Change Question Image'}
+                  inputId={'question-img-input'}
+                  onImageDelete={deleteCardQuestion}
+                />
               </>
             ) : (
               <TextField

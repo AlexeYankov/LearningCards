@@ -3,10 +3,11 @@ import {
   changeCardOrderBy,
   changeCardsCurrentPage,
   changeCardsItemsPerPage,
+  selectedOptionSlice,
   useGetCardsQuery,
 } from '@/api/cards'
 import { useAppDispatch, useAppSelector } from '@/api/store'
-import { resetFilter, useGetDecksByIdQuery } from '@/api/decks'
+import { useGetDecksByIdQuery } from '@/api/decks'
 import { useEffect, useState } from 'react'
 import { Body, Cell, Head, HeadCell, Root, Row } from '@it-incubator/ui-kit'
 import s from './cardsPage.module.scss'
@@ -24,7 +25,7 @@ import { BackLink } from '@/components/ui/backLink'
 export const CardsPage = () => {
   const { id } = useParams()
   const dispatch = useAppDispatch()
-  const currentPage = useAppSelector(state => state.decks.currentPage)
+  const currentPage = useAppSelector(state => state.cards.currentPage)
   const sort = useAppSelector(state => state.cards.sort)
   const itemsPerPage = useAppSelector(state => state.cards.itemsPerPage)
   const [searchValue, setSearchValue] = useState('')
@@ -40,13 +41,6 @@ export const CardsPage = () => {
   const { data: deckById } = useGetDecksByIdQuery(id!)
 
   const isMyCard = deckById?.userId === me?.id
-
-  const resetFilterDecks = () => {
-    dispatch(changeCardsCurrentPage({ currentPage: 1 }))
-    dispatch(changeCardsItemsPerPage({ itemsPerPage: 10 }))
-    localStorage.setItem('page', '1')
-    dispatch(resetFilter())
-  }
 
   const searchCards = (value: string) => {
     dispatch(changeCardsCurrentPage({ currentPage: 1 }))
@@ -66,7 +60,9 @@ export const CardsPage = () => {
   }
 
   useEffect(() => {
-    resetFilterDecks()
+    dispatch(changeCardsCurrentPage({ currentPage: 1 }))
+    dispatch(changeCardsItemsPerPage({ itemsPerPage: 10 }))
+    dispatch(selectedOptionSlice({ valueSelect: '' }))
   }, [])
 
   if (isLoading) {
@@ -83,7 +79,7 @@ export const CardsPage = () => {
 
   return (
     <div className={s.container}>
-      <BackLink title={'Back to decks list'} to={''} onClick={resetFilterDecks} />
+      <BackLink title={'Back to decks list'} to={''} />
       <PageName
         cardsCount={deckById?.cardsCount!}
         packTitle={deckById?.name}
@@ -192,6 +188,7 @@ export const CardsPage = () => {
           reversedArrowID={'arrow-ios-forward'}
           reversed
           totalPages={cards?.pagination?.totalPages!}
+          location={'cards'}
         />
       )}
     </div>

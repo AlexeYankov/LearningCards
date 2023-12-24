@@ -15,8 +15,10 @@ import { BackLink } from '@/components/ui/backLink'
 
 export const EditProfile = () => {
   const dispatch = useAppDispatch()
+
   const title = useAppSelector(state => state.profile.title)
   const editMode = useAppSelector(state => state.profile.editMode)
+
   const { data } = useMeQuery()
   const [update] = useUpdateUserMutation()
   const uploadContent = (event: ChangeEvent<HTMLInputElement>) => {
@@ -38,8 +40,10 @@ export const EditProfile = () => {
   }
   const activateViewMode = () => {
     dispatch(changeEditModeProfile({ editMode: false }))
+
     if (!(title.trim() === '')) {
-      dispatch(changeTitleProfile({ title: title }))
+      dispatch(changeTitleProfile({ title }))
+
       if (title !== data?.name) {
         toast.promise(update({ name: title }), {
           pending: 'Uploading...',
@@ -53,9 +57,6 @@ export const EditProfile = () => {
     dispatch(changeTitleProfile({ title: e.currentTarget.value }))
   }
   const handleClick = (e: FormEvent<HTMLFormElement>) => e.preventDefault()
-  const handleCloseEditMode = () => {
-    dispatch(changeEditModeProfile({ editMode: false }))
-  }
 
   return (
     <>
@@ -78,7 +79,6 @@ export const EditProfile = () => {
                 className={s.textField}
                 value={title}
                 onChange={handleOnchangeTitle}
-                onBlur={handleCloseEditMode}
               />
               <Button
                 type={'submit'}
