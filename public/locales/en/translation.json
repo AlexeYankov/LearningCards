@@ -21,5 +21,17 @@
   "logout": "Log out",
   "sign_out": "Sign Out",
   "profile": "Profile",
-  "language": "Language"
+  "language": "Language",
+  "learn": "Learn",
+  "edit": "Edit",
+  "delete": "Delete",
+  "question": "Question",
+  "answer": "Answer",
+  "grade": "Grade",
+  "add_new_card": "Add new card",
+  "choose_question_format": "Choose question format",
+  "text": "Text",
+  "picture": "Picture",
+  "error_message": "String must contain at least 3 character(s)",
+  "close": "Close"
 }

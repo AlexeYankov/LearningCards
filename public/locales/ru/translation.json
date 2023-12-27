@@ -21,6 +21,18 @@
   "logout": "Выйти",
   "sign_out": "Выйти",
   "profile": "Профиль",
-  "language": "Язык"
+  "language": "Язык",
+  "learn": "Изучать",
+  "edit": "Редактировать",
+  "delete": "Удалить",
+  "question": "Вопрос",
+  "answer": "Ответ",
+  "grade": "Oценка",
+  "add_new_card": "Добавить карточку",
+  "choose_question_format": "Выберите формат вопроса",
+  "text": "Текст",
+  "picture": "Картинка",
+  "error_message": "Строка должна содержать не менее 3 символов.",
+  "close": "Закрыть"
 }
 

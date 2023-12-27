@@ -159,10 +159,11 @@ export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => 
 }
 export const DropDownPackMenu = () => {
   const { id } = useParams()
+  const { t } = useTranslation()
+
   const { data: decksById } = useGetDecksByIdQuery(id!)
   const [openDelete, setOpenDelete] = useState(false)
   const [opeEdit, setOpenEdit] = useState(false)
-  // const navigate = useNavigate()
   const handleDeleteDeckClick = () => {
     setOpenDelete(!openDelete)
   }
@@ -172,9 +173,9 @@ export const DropDownPackMenu = () => {
   return (
     <>
       <DropDown className={s.cardsContent} trigger={'iconMore'}>
-        <ItemWithIcon linkTo={`/${id}/learn`} icon={<LearnIcon />} text={'Learn'} />
-        <ItemWithIcon icon={<EditIcon />} onClick={handleEditDeckClick} text={'Edit'} />
-        <ItemWithIcon icon={<DeleteIcon />} onClick={handleDeleteDeckClick} text={'Delete'} />
+        <ItemWithIcon linkTo={`/${id}/learn`} icon={<LearnIcon />} text={t('learn')} />
+        <ItemWithIcon icon={<EditIcon />} onClick={handleEditDeckClick} text={t('edit')} />
+        <ItemWithIcon icon={<DeleteIcon />} onClick={handleDeleteDeckClick} text={t('delete')} />
       </DropDown>
       <EditDeckModal hover={false} deck={decksById!} setOpen={setOpenEdit} open={opeEdit} />
       <DeleteDeckModal hover={false} deck={decksById!} setOpen={setOpenDelete} open={openDelete} />

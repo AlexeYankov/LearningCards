@@ -21,10 +21,13 @@ import { Loader } from '@/components/ui/loader'
 import { useDebounce } from '@/hooks/useDebounce'
 import { Column, Sort } from '@/components/ui/decks'
 import { BackLink } from '@/components/ui/backLink'
+import { useTranslation } from 'react-i18next'
 
 export const CardsPage = () => {
   const { id } = useParams()
   const dispatch = useAppDispatch()
+
+  const { t } = useTranslation()
   const currentPage = useAppSelector(state => state.cards.currentPage)
   const sort = useAppSelector(state => state.cards.sort)
   const itemsPerPage = useAppSelector(state => state.cards.itemsPerPage)
@@ -70,16 +73,16 @@ export const CardsPage = () => {
   }
 
   const columns: Column[] = [
-    { key: 'question', sortable: true, title: 'Question' },
-    { key: 'answer', sortable: true, title: 'Answer' },
-    { key: 'updated', sortable: true, title: 'Last updated' },
-    { key: 'grade', sortable: true, title: 'Grade' },
+    { key: 'question', sortable: true, title: t('question') },
+    { key: 'answer', sortable: true, title: t('answer') },
+    { key: 'updated', sortable: true, title: t('last_updated') },
+    { key: 'grade', sortable: true, title: t('grade') },
     { key: 'actions', sortable: false, title: '' },
   ]
 
   return (
     <div className={s.container}>
-      <BackLink title={'Back to decks list'} to={''} />
+      <BackLink title={t('back_to_decks_list')} to={''} />
       <PageName
         cardsCount={deckById?.cardsCount!}
         packTitle={deckById?.name}
