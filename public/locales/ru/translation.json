@@ -18,6 +18,9 @@
   "save_changes": "Сохранить изменения",
   "user_name": "Имя пользователя",
   "back_to_decks_list": "Вернуться к списку колод",
-  "logout": "Выйти"
+  "logout": "Выйти",
+  "sign_out": "Выйти",
+  "profile": "Профиль",
+  "language": "Язык"
 }
 

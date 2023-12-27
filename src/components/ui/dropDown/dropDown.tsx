@@ -146,15 +146,14 @@ export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => 
           <Typography as={'p'} variant={'subtitle2'}>
             {name}
           </Typography>
-
           <Typography className={s.email} variant={'caption'}>
             {email}
           </Typography>
         </div>
       </div>
-      <ItemWithIcon linkTo={'/profile'} icon={<ProfileIcon />} text={'Profile'} />
-      <Button onClick={toggleLanguage}>{t('Language')}</Button>
-      <ItemWithIcon onClick={onClickLogOut} icon={<SignOutIcon />} text={'Sign Out'} />
+      <ItemWithIcon linkTo={'/profile'} icon={<ProfileIcon />} text={t('profile')} />
+      <Button onClick={toggleLanguage}>{t('language')}</Button>
+      <ItemWithIcon onClick={onClickLogOut} icon={<SignOutIcon />} text={t('sign_out')} />
     </DropDown>
   )
 }

@@ -18,5 +18,8 @@
   "save_changes": "Save Changes",
   "user_name": "User Name",
   "back_to_decks_list": "Back to decks list",
-  "logout": "Log out"
+  "logout": "Log out",
+  "sign_out": "Sign Out",
+  "profile": "Profile",
+  "language": "Language"
 }
