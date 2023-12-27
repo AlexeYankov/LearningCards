@@ -33,6 +33,10 @@
   "text": "Text",
   "picture": "Picture",
   "error_message": "String must contain at least 3 character(s)",
-  "close": "Close",
-  "edit_card": "Edit Card"
+  "cancel": "Cancel",
+  "edit_card": "Edit Card",
+  "delete_card": "Delete Card",
+  "message_delete_card": "Do you really want to remove this card?",
+  "change_question_img": "Change question image",
+  "change_answer_img": "Change answer image"
 }

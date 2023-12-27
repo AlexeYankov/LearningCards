@@ -184,7 +184,7 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
                   selectedImage={editIcon ? selectedEditQuestionImage : selectedQuestionImage}
                   deleteLabel={editIcon ? 'Delete Image' : ''}
                   onChange={handleQuestionFileChange}
-                  changeLabel={'Change Question Image'}
+                  changeLabel={t('change_question_img')}
                   inputId={'question-img-input'}
                   onImageDelete={deleteCardQuestion}
                 />
@@ -211,7 +211,7 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
                   selectedImage={editIcon ? selectedEditAnswerImage : selectedAnswerImage}
                   deleteLabel={editIcon ? 'Delete Image' : ''}
                   onChange={handleAnswerFileChange}
-                  changeLabel={'Change Question Image'}
+                  changeLabel={t('change_answer_img')}
                   inputId={'answer-img-input'}
                   onImageDelete={deleteCardAnswer}
                 />
@@ -227,7 +227,7 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
             )}
             <div className={`${s.contentBtn} ${s.contentBtns}`}>
               <Button classNameBtnBox={s.btnBox} onClick={handleModalToggle} variant={'secondary'}>
-                {t('close')}
+                {t('cancel')}
               </Button>
               <Button
                 classNameBtnBox={s.btnBox}
