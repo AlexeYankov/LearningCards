@@ -10,6 +10,7 @@ import { useAppDispatch } from '@/api/store'
 import { ImageIcon } from '@/asserts/icons'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { useTranslation } from 'react-i18next'
 
 const schema = z.object({
   cover: z.array(z.instanceof(File)),
@@ -21,6 +22,8 @@ type Form = z.infer<typeof schema>
 
 export const DecksPageName = () => {
   const dispatch = useAppDispatch()
+  const { t } = useTranslation()
+
   const [selectedImage, setSelectedImage] = useState('')
   const [open, setOpen] = useState(false)
   const [isPrivate, setIsPrivate] = useState(false)
@@ -78,7 +81,7 @@ export const DecksPageName = () => {
   return (
     <div className={f.container__pageName}>
       <Typography as={'h1'} variant={'large'}>
-        Decks list
+        {t('decks_list')}
       </Typography>
       <Modal
         onOpenChange={handleModalToggle}

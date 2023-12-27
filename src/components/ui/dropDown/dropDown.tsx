@@ -15,6 +15,8 @@ import { useLogOutMutation } from '@/api/auth'
 import { Link, useParams } from 'react-router-dom'
 import { useGetDecksByIdQuery } from '@/api/decks'
 import { DeleteDeckModal, EditDeckModal } from '@/components/ui/decks'
+import { Button } from '@/components/ui/button'
+import { useTranslation } from 'react-i18next'
 
 export type DropDown = {
   avatar?: string
@@ -119,10 +121,21 @@ type DropDownMenuProps = {
   name?: string
 }
 
+export enum Lang {
+  EN = 'en',
+  RU = 'ru',
+}
+
 export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => {
   const [logout] = useLogOutMutation()
   const onClickLogOut = () => {
     logout()
+  }
+
+  const { t, i18n } = useTranslation()
+  const toggleLanguage = async () => {
+    const newLang = i18n.language === Lang.RU ? Lang.EN : Lang.RU
+    i18n.changeLanguage(newLang)
   }
 
   return (
@@ -133,12 +146,14 @@ export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => 
           <Typography as={'p'} variant={'subtitle2'}>
             {name}
           </Typography>
+
           <Typography className={s.email} variant={'caption'}>
             {email}
           </Typography>
         </div>
       </div>
       <ItemWithIcon linkTo={'/profile'} icon={<ProfileIcon />} text={'Profile'} />
+      <Button onClick={toggleLanguage}>{t('Language')}</Button>
       <ItemWithIcon onClick={onClickLogOut} icon={<SignOutIcon />} text={'Sign Out'} />
     </DropDown>
   )
