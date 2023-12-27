@@ -6,6 +6,7 @@ import { LearnIcon } from '@/asserts/icons'
 import { Typography } from '@/components/ui/typography'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 type LearnDeckModalProps = {
   deck: ResponseDeckType
@@ -13,6 +14,8 @@ type LearnDeckModalProps = {
 }
 
 export const LearnDeckModal = ({ deck, isMyDeck }: LearnDeckModalProps) => {
+  const { t } = useTranslation()
+
   const [open, setOpen] = useState(false)
 
   const handleCloseModal = () => {
@@ -34,11 +37,10 @@ export const LearnDeckModal = ({ deck, isMyDeck }: LearnDeckModalProps) => {
         </button>
       }
     >
-      <ModalTitle title={'Learn Pack'} />
+      <ModalTitle title={t('learn_deck')} />
       <ModalDescription>
         <Typography variant={'body1'} as={'p'}>
-          Do you really want to move on to learning more about the{' '}
-          <span className={s.boldText}>{deck.name}</span>?
+          {t('learn_message')} <span className={s.boldText}>{deck.name}</span>?
         </Typography>
       </ModalDescription>
       <div className={`${s.contentBtn} ${s.contentBtns}`}>
@@ -48,11 +50,11 @@ export const LearnDeckModal = ({ deck, isMyDeck }: LearnDeckModalProps) => {
           variant={'secondary'}
           type={'button'}
         >
-          Cancel
+          {t('cancel')}
         </Button>
         <Link to={`/${deck.id}/learn`} className={s.link}>
           <Button classNameBtnBox={s.btnBox} variant={'primary'} type={'button'}>
-            Learn Pack
+            {t('learn_deck')}
           </Button>
         </Link>
       </div>

@@ -43,5 +43,7 @@
   "delete_cover": "Delete Cover",
   "change_cover": "Change Cover",
   "name_deck": "Name Deck",
-  "private_deck": "Private deck"
+  "private_deck": "Private deck",
+  "learn_deck": "Learn deck",
+  "learn_message": "Do you really want to move on to learning more about the"
 }
