@@ -9,5 +9,7 @@
   "name": "Name",
   "cards": "Cards",
   "last_updated": "Last Updated",
-  "created_by": "Created by"
+  "created_by": "Created by",
+  "on_page": "on the page",
+  "show_page": "Show"
 }

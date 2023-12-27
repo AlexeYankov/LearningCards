@@ -2,6 +2,7 @@ import s from './pagination.module.scss'
 import { Select } from '@/components/ui/select'
 import { Typography } from '@/components/ui/typography'
 import { Pages } from './components/pages'
+import { useTranslation } from 'react-i18next'
 
 export type LocationType = 'decks' | 'cards'
 
@@ -25,6 +26,8 @@ export const Pagination = ({
   totalPages,
   location,
 }: PaginationType) => {
+  const { t } = useTranslation()
+
   const generateOptions = (total: number) => {
     const dynamicOptions: number[] = []
     for (let i = 10; i <= total && i <= 100; i += 10) {
@@ -47,12 +50,11 @@ export const Pagination = ({
         totalPages={totalPages}
         location={location}
       />
-
       <div className={s.box}>
-        <Typography variant={'body2'}>Show</Typography>
+        <Typography variant={'body2'}>{t('show_page')}</Typography>
         <Select classname={s.select} options={options} reversed={reversed} />
         <Typography variant={'body2'} className={s.typography}>
-          on the page
+          {t('on_page')}
         </Typography>
       </div>
     </div>
