@@ -38,5 +38,10 @@
   "delete_card": "Delete Card",
   "message_delete_card": "Do you really want to remove this card?",
   "change_question_img": "Change question image",
-  "change_answer_img": "Change answer image"
+  "change_answer_img": "Change answer image",
+  "edit_deck": "Edit Pack",
+  "delete_cover": "Delete Cover",
+  "change_cover": "Change Cover",
+  "name_deck": "Name Deck",
+  "private_deck": "Private deck"
 }
