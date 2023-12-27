@@ -160,6 +160,7 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
               options={['Text', 'Picture']}
               reversed
               selectId={'Select-box'}
+              isAddEditCard={true}
             />
           </div>
           <form onSubmit={onSubmit}>

@@ -26,6 +26,7 @@ type SelectProps = {
   reversed?: boolean
   selectId?: string
   variant?: string
+  isAddEditCard?: boolean
 }
 
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
@@ -54,19 +55,29 @@ const SelectContent = ({ options }: { options: string[] }) => {
   )
 }
 
-export const Select = ({ classname, label, options, reversed, selectId, ...rest }: SelectProps) => {
+export const Select = ({
+  classname,
+  label,
+  options,
+  reversed,
+  selectId,
+  isAddEditCard,
+  ...rest
+}: SelectProps) => {
   const dispatch = useAppDispatch()
 
   const valueSelect = useAppSelector(state => state.cards.valueSelect)
+  const itemsPerPage = useAppSelector(state => state.decks.itemsPerPage)
   const [selectedValue, setSelectedValue] = useState(valueSelect)
 
   const handleValueChange = (value: string) => {
     if (options.includes(value)) {
-      setSelectedValue(value)
-      dispatch(selectedOptionSlice({ valueSelect: value }))
+      if (isAddEditCard) {
+        setSelectedValue(value)
+        dispatch(selectedOptionSlice({ valueSelect: value }))
+      }
       dispatch(changeCurrentPage({ currentPage: 1 }))
       dispatch(changeCardsCurrentPage({ currentPage: 1 }))
-
       if (value !== 'Picture' && value !== 'Text') {
         dispatch(changeItemsPerPage({ itemsPerPage: +value }))
         dispatch(changeCardsItemsPerPage({ itemsPerPage: +value }))
@@ -75,7 +86,7 @@ export const Select = ({ classname, label, options, reversed, selectId, ...rest 
   }
 
   return (
-    <SelectRadix.Root defaultValue={selectedValue} onValueChange={handleValueChange} {...rest}>
+    <SelectRadix.Root value={itemsPerPage.toString()} onValueChange={handleValueChange} {...rest}>
       <div className={s.box}>
         <Label className={`${s.label} `} htmlFor={selectId} label={label} />
         <SelectRadix.Trigger
@@ -84,7 +95,7 @@ export const Select = ({ classname, label, options, reversed, selectId, ...rest 
           disabled={options.length === 0}
         >
           <div className={`${s.selectTriggerBox} ${classname}`}>
-            <SelectRadix.Value>{selectedValue}</SelectRadix.Value>
+            <SelectRadix.Value>{isAddEditCard ? selectedValue : itemsPerPage}</SelectRadix.Value>
             <SelectRadix.Icon className={reversed ? s.rotate : s.SelectIcon}>
               <ChevronDownIcon />
             </SelectRadix.Icon>
