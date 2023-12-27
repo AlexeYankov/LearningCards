@@ -45,5 +45,7 @@
   "name_deck": "Name Deck",
   "private_deck": "Private deck",
   "learn_deck": "Learn deck",
-  "learn_message": "Do you really want to move on to learning more about the"
+  "learn_message": "Do you really want to move on to learning more about the",
+  "delete_deck": "Delete Pack",
+  "delete_message": " Do you really want to remove"
 }
