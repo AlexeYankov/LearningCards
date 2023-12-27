@@ -18,10 +18,12 @@ import {
 } from '@/api/decks'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 export const DecksPageBar = () => {
   const dispatch = useAppDispatch()
   const location = useLocation()
+  const { t } = useTranslation()
 
   const urlParams = new URLSearchParams(location.search)
   const searchValueLocation = urlParams.get('search')
@@ -75,7 +77,7 @@ export const DecksPageBar = () => {
       <div>
         <TextField
           className={f.container__textField}
-          placeholder={'Input search'}
+          placeholder={t('input_search')}
           search
           onClearClick={handleClearSearchValueClick}
           value={searchValue || ''}
@@ -84,12 +86,12 @@ export const DecksPageBar = () => {
       </div>
 
       <div>
-        <Label label={'Show decks cards'} />
-        <Tabs title={['My Decks', 'All Decks']} />
+        <Label label={t('show_decks_cards')} />
+        <Tabs title={[t('my_decks'), t('all_decks')]} />
       </div>
 
       <div style={{ position: 'relative', maxWidth: '250px', width: '100%' }}>
-        <Label label={'Number of cards'} style={{ position: 'absolute', top: '-25px' }} />
+        <Label label={t('number_cards')} style={{ position: 'absolute', top: '-25px' }} />
         <Slider />
       </div>
       <div>
@@ -99,7 +101,7 @@ export const DecksPageBar = () => {
           variant={'secondary'}
           onClick={handleResetFilter}
         >
-          <Typography variant={'body2'}>Clear Filter</Typography>
+          <Typography variant={'body2'}>{t('clear_filter')}</Typography>
         </Button>
       </div>
     </div>

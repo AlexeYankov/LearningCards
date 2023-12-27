@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { changeEditModeProfile, changeTitleProfile } from '@/api/profile'
 import { useAppDispatch } from '@/api/store'
 import { useLogOutMutation } from '@/api/auth'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   name: string
@@ -12,6 +13,7 @@ type Props = {
 }
 export const NormalMode = ({ name, email }: Props) => {
   const dispatch = useAppDispatch()
+  const { t } = useTranslation()
   const [logout] = useLogOutMutation()
   const activateEditMode = () => {
     dispatch(changeEditModeProfile({ editMode: true }))
@@ -35,7 +37,7 @@ export const NormalMode = ({ name, email }: Props) => {
         <Button
           onClick={onClickLogOut}
           icon={<LogoutIcon />}
-          children={'Logout'}
+          children={t('logout')}
           variant={'secondary'}
         />
       </div>

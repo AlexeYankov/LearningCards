@@ -1,5 +1,5 @@
 export { handleFileChange, AddEditCard } from './addEditCard'
 export { PageBar } from './pageBar/pageBar'
 export { PageName } from './pageName/pageName'
-export { LearnPack, Show } from './learnPack'
+export { LearnDeck, Show } from './learnPack'
 export { DeleteCardModal } from './deleteCardModal/deleteCardModel'

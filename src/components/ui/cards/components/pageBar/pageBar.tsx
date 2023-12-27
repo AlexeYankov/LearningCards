@@ -3,6 +3,7 @@ import f from '../../cardsPage.module.scss'
 import { ChangeEvent } from 'react'
 import { useAppDispatch } from '@/api/store.ts'
 import { changeCurrentPage } from '@/api/decks'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   onChange: (value: string) => void
@@ -10,6 +11,7 @@ type Props = {
 }
 export const PageBar = ({ onChange, value }: Props) => {
   const dispatch = useAppDispatch()
+  const { t } = useTranslation()
 
   const handleSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e.currentTarget.value)
@@ -24,7 +26,7 @@ export const PageBar = ({ onChange, value }: Props) => {
         value={value}
         onChange={handleSearchValue}
         onClearClick={handleClearSearchValueClick}
-        placeholder={'Input search'}
+        placeholder={t('input_search')}
         search
       />
     </div>

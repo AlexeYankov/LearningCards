@@ -12,9 +12,12 @@ import { NormalMode } from './normalMode'
 import { toast } from 'react-toastify'
 import { ErrorComponent } from '@/utils/toastify/Error'
 import { BackLink } from '@/components/ui/backLink'
+import { useTranslation } from 'react-i18next'
 
 export const EditProfile = () => {
   const dispatch = useAppDispatch()
+
+  const { t } = useTranslation()
 
   const title = useAppSelector(state => state.profile.title)
   const editMode = useAppSelector(state => state.profile.editMode)
@@ -61,20 +64,20 @@ export const EditProfile = () => {
   return (
     <>
       <ErrorComponent />
-      <BackLink title={'Back to decks list'} to={''} />
+      <BackLink title={t('back_to_decks_list')} to={''} />
       <Card>
         <div className={s.cards}>
           <Typography as={'span'} className={s.text} variant={'large'}>
-            Personal Information
+            {t('personal_info')}
           </Typography>
           <Photo src={data?.avatar} onChange={uploadContent} />
-          {!editMode && <NormalMode name={data?.name || 'UserName'} email={data?.email} />}
+          {!editMode && <NormalMode name={data?.name || t('user_name')} email={data?.email} />}
           {editMode && (
             <form className={s.form} onSubmit={handleClick}>
               <TextField
                 maxLength={25}
                 autoFocus
-                label={'Nickname'}
+                label={t('nickname')}
                 type={'text'}
                 className={s.textField}
                 value={title}
@@ -82,7 +85,7 @@ export const EditProfile = () => {
               />
               <Button
                 type={'submit'}
-                children={'Save Changes'}
+                children={t('save_changes')}
                 className={s.button}
                 fullWidth
                 variant={'primary'}

@@ -15,6 +15,8 @@ import { useLogOutMutation } from '@/api/auth'
 import { Link, useParams } from 'react-router-dom'
 import { useGetDecksByIdQuery } from '@/api/decks'
 import { DeleteDeckModal, EditDeckModal } from '@/components/ui/decks'
+import { Button } from '@/components/ui/button'
+import { useTranslation } from 'react-i18next'
 
 export type DropDown = {
   avatar?: string
@@ -119,10 +121,21 @@ type DropDownMenuProps = {
   name?: string
 }
 
+export enum Lang {
+  EN = 'en',
+  RU = 'ru',
+}
+
 export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => {
   const [logout] = useLogOutMutation()
   const onClickLogOut = () => {
     logout()
+  }
+
+  const { t, i18n } = useTranslation()
+  const toggleLanguage = async () => {
+    const newLang = i18n.language === Lang.RU ? Lang.EN : Lang.RU
+    i18n.changeLanguage(newLang)
   }
 
   return (
@@ -138,17 +151,19 @@ export const DropDownMenu: FC<DropDownMenuProps> = ({ avatar, email, name }) => 
           </Typography>
         </div>
       </div>
-      <ItemWithIcon linkTo={'/profile'} icon={<ProfileIcon />} text={'Profile'} />
-      <ItemWithIcon onClick={onClickLogOut} icon={<SignOutIcon />} text={'Sign Out'} />
+      <ItemWithIcon linkTo={'/profile'} icon={<ProfileIcon />} text={t('profile')} />
+      <Button onClick={toggleLanguage}>{t('language')}</Button>
+      <ItemWithIcon onClick={onClickLogOut} icon={<SignOutIcon />} text={t('sign_out')} />
     </DropDown>
   )
 }
 export const DropDownPackMenu = () => {
   const { id } = useParams()
+  const { t } = useTranslation()
+
   const { data: decksById } = useGetDecksByIdQuery(id!)
   const [openDelete, setOpenDelete] = useState(false)
   const [opeEdit, setOpenEdit] = useState(false)
-  // const navigate = useNavigate()
   const handleDeleteDeckClick = () => {
     setOpenDelete(!openDelete)
   }
@@ -158,9 +173,9 @@ export const DropDownPackMenu = () => {
   return (
     <>
       <DropDown className={s.cardsContent} trigger={'iconMore'}>
-        <ItemWithIcon linkTo={`/${id}/learn`} icon={<LearnIcon />} text={'Learn'} />
-        <ItemWithIcon icon={<EditIcon />} onClick={handleEditDeckClick} text={'Edit'} />
-        <ItemWithIcon icon={<DeleteIcon />} onClick={handleDeleteDeckClick} text={'Delete'} />
+        <ItemWithIcon linkTo={`/${id}/learn`} icon={<LearnIcon />} text={t('learn')} />
+        <ItemWithIcon icon={<EditIcon />} onClick={handleEditDeckClick} text={t('edit')} />
+        <ItemWithIcon icon={<DeleteIcon />} onClick={handleDeleteDeckClick} text={t('delete')} />
       </DropDown>
       <EditDeckModal hover={false} deck={decksById!} setOpen={setOpenEdit} open={opeEdit} />
       <DeleteDeckModal hover={false} deck={decksById!} setOpen={setOpenDelete} open={openDelete} />

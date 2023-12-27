@@ -15,9 +15,12 @@ import { showMode } from '@/api/cards'
 import { Show } from './show'
 import { Modal, ModalClose } from '@/components/ui/modal'
 import { BackLink } from '@/components/ui/backLink'
+import { useTranslation } from 'react-i18next'
 
-export const LearnPack = () => {
+export const LearnDeck = () => {
   const dispatch = useAppDispatch()
+  const { t } = useTranslation()
+
   const { id } = useParams()
   const [learn, { isLoading }] = useLearnRandomPostMutation()
   const { data, isFetching } = useLearnRandomCardQuery(id!)
@@ -30,16 +33,19 @@ export const LearnPack = () => {
   }
   return (
     <>
-      <BackLink title={'Back to packs list'} to={id!} />
+      <BackLink title={t('back_to_cards_list')} to={id!} />
       <Card>
         <Typography className={s.Title} variant={'large'}>
-          Learn {deckById?.name || 'Pack Name'}
+          {t('learn')} {deckById?.name || t('name')}
         </Typography>
         <div className={s.MainBlock}>
           <Typography variant={'subtitle1'}>
-            Question: <Typography variant={'body1'}>{data?.question || 'NameQuestion'}</Typography>
+            {t('question')}:{' '}
+            <Typography variant={'body1'}>{data?.question || t('question')}</Typography>
           </Typography>
-          <p className={s.Text}>Количество попыток ответов на вопрос: {data?.shots || ''}</p>
+          <p className={s.Text}>
+            {t('number_shots_question')} {data?.shots || ''}
+          </p>
           <Modal
             hover={false}
             triggerName={
@@ -74,7 +80,7 @@ export const LearnPack = () => {
         )}
         {!show && (
           <Button autoFocus onClick={onShowAnswer} className={s.Button} fullWidth>
-            <Typography variant={'subtitle2'}>Show Answer</Typography>
+            <Typography variant={'subtitle2'}>{t('show_answer')}</Typography>
           </Button>
         )}
       </Card>

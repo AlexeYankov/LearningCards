@@ -10,6 +10,7 @@ import { CheckBox } from '@/components/ui/checkbox'
 import { z } from 'zod'
 import { handleFileChange } from '@/components/ui/cards'
 import { ImageSelector } from '@/components/ui/imageSelector'
+import { useTranslation } from 'react-i18next'
 
 const schema = z.object({
   cover: z.array(z.instanceof(File)),
@@ -27,6 +28,8 @@ export type EditDeckModalProps = {
 }
 
 export const EditDeckModal = ({ deck, open, setOpen, hover }: EditDeckModalProps) => {
+  const { t } = useTranslation()
+
   const [updateDeck] = useUpdateDeckMutation()
   const {
     register,
@@ -81,7 +84,7 @@ export const EditDeckModal = ({ deck, open, setOpen, hover }: EditDeckModalProps
       })
       handleCloseModal()
     } else {
-      setError('name', { message: 'String must contain at least 3 character(s)' })
+      setError('name', { message: t('error_message') })
     }
   })
   return (
@@ -95,34 +98,34 @@ export const EditDeckModal = ({ deck, open, setOpen, hover }: EditDeckModalProps
         </button>
       }
     >
-      <ModalTitle title={'Edit Pack'} />
+      <ModalTitle title={t('edit_deck')} />
       <form onSubmit={onSubmit}>
         <div className={s.contentComponents}>
           <div className={s.imageBtnBox}>
             <ImageSelector
               selectedImage={selectedImage}
-              deleteLabel={'Delete Cover'}
+              deleteLabel={t('delete_cover')}
               onChange={handleEditFileChange}
-              changeLabel={'Change Cover'}
+              changeLabel={t('change_cover')}
               inputId={'input__file'}
               onImageDelete={deleteDeckCover}
             />
           </div>
           <TextField
             className={s.editTextField}
-            inputId={'Name Pack'}
-            label={'Name Pack'}
-            placeholder={'Name'}
+            inputId={t('name_deck')}
+            label={t('name_deck')}
+            placeholder={t('name_deck')}
             errorMessage={errors.name?.message}
             {...register('name', { value: deck.name })}
           />
           <CheckBox
             IconID={'checkbox-unselected'}
             SelectedIconID={'checkbox-selected'}
-            checkboxId={'Private Pack'}
+            checkboxId={'Private deck'}
             disabled={false}
             height={'24'}
-            label={'Private pack'}
+            label={t('private_deck')}
             width={'24'}
             checked={isPrivate}
             onChange={handeCheckedChange}
@@ -135,7 +138,7 @@ export const EditDeckModal = ({ deck, open, setOpen, hover }: EditDeckModalProps
             variant={'secondary'}
             type={'button'}
           >
-            Cancel
+            {t('cancel')}
           </Button>
           <Button
             classNameBtnBox={s.btnBox}
@@ -144,7 +147,7 @@ export const EditDeckModal = ({ deck, open, setOpen, hover }: EditDeckModalProps
             disabled={!!errors.name?.message}
             type={'submit'}
           >
-            Save Changes
+            {t('save_changes')}
           </Button>
         </div>
       </form>

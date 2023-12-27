@@ -17,6 +17,7 @@ import { EditIcon } from '@/asserts/icons'
 import { ErrorComponent } from '@/utils/toastify/Error'
 import { selectedOptionSlice } from '@/api/cards'
 import { ImageSelector } from '@/components/ui/imageSelector'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   id?: string
@@ -35,6 +36,8 @@ type Form = z.infer<typeof schema>
 
 export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
   const dispatch = useAppDispatch()
+
+  const { t } = useTranslation()
 
   const [selectedQuestionImage, setSelectedQuestionImage] = useState('')
   const [selectedAnswerImage, setSelectedAnswerImage] = useState('')
@@ -69,9 +72,9 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
     setSelectedQuestionImage('')
     setSelectedAnswerImage('')
     if (card?.answerImg || card?.questionImg) {
-      dispatch(selectedOptionSlice({ valueSelect: 'Picture' }))
+      dispatch(selectedOptionSlice({ valueSelect: t('picture') }))
     } else {
-      dispatch(selectedOptionSlice({ valueSelect: 'Text' }))
+      dispatch(selectedOptionSlice({ valueSelect: t('text') }))
     }
   }
 
@@ -130,8 +133,8 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
       }
       handleModalToggle()
     } else {
-      setError('question', { message: 'String must contain at least 3 character(s)' })
-      setError('answer', { message: 'String must contain at least 3 character(s)' })
+      setError('question', { message: t('error_message') })
+      setError('answer', { message: t('error_message') })
     }
   })
 
@@ -148,28 +151,32 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
               <EditIcon />
             </button>
           ) : (
-            <Button>Add new card</Button>
+            <Button>{t('add_new_card')}</Button>
           )
         }
       >
-        {editIcon ? <ModalTitle title={'Edit Card'} /> : <ModalTitle title={'Add New Card'} />}
+        {editIcon ? (
+          <ModalTitle title={t('edit_card')} />
+        ) : (
+          <ModalTitle title={t('add_new_card')} />
+        )}
         <div className={s.contentBox}>
           <div className={s.select}>
             <Select
-              label={'Choose question format'}
-              options={['Text', 'Picture']}
+              label={t('choose_question_format')}
+              options={[t('text'), t('picture')]}
               reversed
               selectId={'Select-box'}
               isAddEditCard={true}
             />
           </div>
           <form onSubmit={onSubmit}>
-            {valueSelect === 'Picture' ? (
+            {valueSelect === t('picture') ? (
               <>
                 <TextField
                   inputId={'Input1'}
-                  label={'Question'}
-                  placeholder={'Question'}
+                  label={t('question')}
+                  placeholder={t('question')}
                   errorMessage={errors.question?.message}
                   {...register('question', { value: card?.question })}
                 />
@@ -177,7 +184,7 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
                   selectedImage={editIcon ? selectedEditQuestionImage : selectedQuestionImage}
                   deleteLabel={editIcon ? 'Delete Image' : ''}
                   onChange={handleQuestionFileChange}
-                  changeLabel={'Change Question Image'}
+                  changeLabel={t('change_question_img')}
                   inputId={'question-img-input'}
                   onImageDelete={deleteCardQuestion}
                 />
@@ -185,18 +192,18 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
             ) : (
               <TextField
                 inputId={'Input1'}
-                label={'Question'}
-                placeholder={'Question'}
+                label={t('question')}
+                placeholder={t('question')}
                 errorMessage={errors.question?.message}
                 {...register('question', { value: card?.question })}
               />
             )}
-            {valueSelect === 'Picture' ? (
+            {valueSelect === t('picture') ? (
               <>
                 <TextField
                   inputId={'Input2'}
-                  label={'Answer'}
-                  placeholder={'Answer'}
+                  label={t('answer')}
+                  placeholder={t('answer')}
                   errorMessage={errors.answer?.message}
                   {...register('answer', { value: card?.answer })}
                 />
@@ -204,7 +211,7 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
                   selectedImage={editIcon ? selectedEditAnswerImage : selectedAnswerImage}
                   deleteLabel={editIcon ? 'Delete Image' : ''}
                   onChange={handleAnswerFileChange}
-                  changeLabel={'Change Question Image'}
+                  changeLabel={t('change_answer_img')}
                   inputId={'answer-img-input'}
                   onImageDelete={deleteCardAnswer}
                 />
@@ -212,15 +219,15 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
             ) : (
               <TextField
                 inputId={'Input2'}
-                label={'Answer'}
-                placeholder={'Answer'}
+                label={t('answer')}
+                placeholder={t('answer')}
                 errorMessage={errors.answer?.message}
                 {...register('answer', { value: card?.answer })}
               />
             )}
             <div className={`${s.contentBtn} ${s.contentBtns}`}>
               <Button classNameBtnBox={s.btnBox} onClick={handleModalToggle} variant={'secondary'}>
-                Close
+                {t('cancel')}
               </Button>
               <Button
                 classNameBtnBox={s.btnBox}
@@ -228,7 +235,7 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
                 disabled={!!errors.answer?.message}
                 type={'submit'}
               >
-                {editIcon ? 'Save Changes' : 'Add new card'}
+                {editIcon ? t('save_changes') : t('add_new_card')}
               </Button>
             </div>
           </form>

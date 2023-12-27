@@ -6,14 +6,7 @@ import { changeGradeValueLearn, changeValueLearn, showMode } from '@/api/cards'
 import { useAppDispatch, useAppSelector } from '@/api/store.ts'
 import { SearchIcon } from '@/asserts/icons'
 import { Modal, ModalClose } from '@/components/ui/modal'
-
-const options = [
-  { value: 'Did not know' },
-  { value: 'Forgot' },
-  { value: 'A lot of thought' },
-  { value: 'Сonfused' },
-  { value: 'Knew the answer' },
-]
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   id?: string
@@ -24,6 +17,16 @@ type Props = {
 }
 export const Show = ({ dataId, id, answerImg, answer, learn }: Props) => {
   const dispatch = useAppDispatch()
+  const { t } = useTranslation()
+
+  const options = [
+    { value: t('did_not_know') },
+    { value: t('forgot') },
+    { value: t('a_lot_of_thought') },
+    { value: t('confused') },
+    { value: t('knew_answer') },
+  ]
+
   const valueLearn = useAppSelector(state => state.cards.valueLearn)
   const valueGradeLearn = useAppSelector(state => state.cards.valueGradeLearn)
 
@@ -44,7 +47,7 @@ export const Show = ({ dataId, id, answerImg, answer, learn }: Props) => {
     <>
       <div className={s.MainBlock}>
         <p className={s.Answer}>
-          Answer: <Typography variant={'body1'}>{answer || ''}</Typography>
+          {t('answer')}: <Typography variant={'body1'}>{answer || ''}</Typography>
         </p>
         <Modal
           hover={false}
@@ -66,7 +69,7 @@ export const Show = ({ dataId, id, answerImg, answer, learn }: Props) => {
             <div>{answerImg && <img className={s.imgModal} src={answerImg} alt="" />}</div>
           </div>
         </Modal>
-        <p className={s.Rate}>Rate yourself:</p>
+        <p className={s.Rate}>{t('rate_yourself')}:</p>
         <Radio
           value={valueLearn}
           onChange={e => onChangeValue(e)}
@@ -75,7 +78,7 @@ export const Show = ({ dataId, id, answerImg, answer, learn }: Props) => {
         />
       </div>
       <Button autoFocus onClick={sendHandler} className={s.Button} fullWidth>
-        <Typography variant={'subtitle2'}>Next Question</Typography>
+        <Typography variant={'subtitle2'}>{t('next_question')}</Typography>
       </Button>
     </>
   )

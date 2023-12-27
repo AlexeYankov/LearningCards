@@ -7,12 +7,15 @@ import { Button } from '@/components/ui/button'
 import { CardsResponseType, useDeleteCardMutation } from '@/api/cards'
 import { toast } from 'react-toastify'
 import { ErrorComponent } from '@/utils/toastify/Error'
+import { useTranslation } from 'react-i18next'
 
 type DeleteCardModel = {
   card: CardsResponseType
 }
 
 export const DeleteCardModal = ({ card }: DeleteCardModel) => {
+  const { t } = useTranslation()
+
   const [open, setOpen] = useState(false)
   const [deleteCard] = useDeleteCardMutation()
   const handleCloseModal = () => {
@@ -39,11 +42,11 @@ export const DeleteCardModal = ({ card }: DeleteCardModel) => {
           </button>
         }
       >
-        <ModalTitle title={'Delete Card'} />
+        <ModalTitle title={t('delete_card')} />
 
         <ModalDescription>
           <Typography variant={'body1'} as={'p'}>
-            Do you really want to remove this card?
+            {t('message_delete_card')}
           </Typography>
         </ModalDescription>
         <div className={`${s.contentBtn} ${s.contentBtns}`}>
@@ -53,7 +56,7 @@ export const DeleteCardModal = ({ card }: DeleteCardModel) => {
             variant={'secondary'}
             type={'button'}
           >
-            Cancel
+            {t('cancel')}
           </Button>
           <Button
             classNameBtnBox={s.btnBox}
@@ -61,7 +64,7 @@ export const DeleteCardModal = ({ card }: DeleteCardModel) => {
             variant={'primary'}
             type={'submit'}
           >
-            Delete Card
+            {t('delete_card')}
           </Button>
         </div>
       </Modal>
