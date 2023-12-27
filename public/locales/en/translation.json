@@ -5,5 +5,9 @@
   "my_decks": "My Decks",
   "all_decks": "All Decks",
   "input_search": "Input search",
-  "number_cards": "Number of cards"
+  "number_cards": "Number of cards",
+  "name": "Name",
+  "cards": "Cards",
+  "last_updated": "Last Updated",
+  "created_by": "Created by"
 }

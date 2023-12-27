@@ -1,10 +1,14 @@
 {
   "decks_list": "Список колод",
-  "show_decks_cards": "Показать колоды карт",
+  "show_decks_cards": "Показать карточки",
   "clear_filter": "Очистить фильтр",
   "my_decks": "Мои",
   "all_decks": "Все",
-  "input_search": "Поиск ввода",
-  "number_cards": "Количество карт"
+  "input_search": "Поиск по названию",
+  "number_cards": "Количество карточек",
+  "name": "Название колоды",
+  "cards": "Карточки",
+  "last_updated": "Обновлено",
+  "created_by": "Создано"
 
 }
