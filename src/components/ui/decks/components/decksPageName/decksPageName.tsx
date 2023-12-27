@@ -89,7 +89,7 @@ export const DecksPageName = () => {
         hover={false}
         triggerName={
           <Button type={'button'} variant={'primary'}>
-            Add New Deck
+            {t('add_new_deck')}
           </Button>
         }
       >

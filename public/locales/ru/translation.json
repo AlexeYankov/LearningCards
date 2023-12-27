@@ -11,5 +11,13 @@
   "last_updated": "Обновлено",
   "created_by": "Создано",
   "on_page": "на странице",
-  "show_page": "Показать"
+  "show_page": "Показать",
+  "add_new_deck": "Добавить новую колоду",
+  "personal_info": "Личная информация",
+  "nickname": "Имя пользователя",
+  "save_changes": "Сохранить изменения",
+  "user_name": "Имя пользователя",
+  "back_to_decks_list": "Вернуться к списку колод",
+  "logout": "Выйти"
 }
+

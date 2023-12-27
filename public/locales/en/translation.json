@@ -11,5 +11,12 @@
   "last_updated": "Last Updated",
   "created_by": "Created by",
   "on_page": "on the page",
-  "show_page": "Show"
+  "show_page": "Show",
+  "add_new_deck": "Add New Deck",
+  "personal_info": "Personal Information",
+  "nickname": "Nickname",
+  "save_changes": "Save Changes",
+  "user_name": "User Name",
+  "back_to_decks_list": "Back to decks list",
+  "logout": "Log out"
 }
