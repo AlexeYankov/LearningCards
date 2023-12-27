@@ -33,5 +33,6 @@
   "text": "Text",
   "picture": "Picture",
   "error_message": "String must contain at least 3 character(s)",
-  "close": "Close"
+  "close": "Close",
+  "edit_card": "Edit Card"
 }

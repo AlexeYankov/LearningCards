@@ -72,9 +72,9 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
     setSelectedQuestionImage('')
     setSelectedAnswerImage('')
     if (card?.answerImg || card?.questionImg) {
-      dispatch(selectedOptionSlice({ valueSelect: 'Picture' }))
+      dispatch(selectedOptionSlice({ valueSelect: t('picture') }))
     } else {
-      dispatch(selectedOptionSlice({ valueSelect: 'Text' }))
+      dispatch(selectedOptionSlice({ valueSelect: t('text') }))
     }
   }
 
@@ -155,7 +155,11 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
           )
         }
       >
-        {editIcon ? <ModalTitle title={'Edit Card'} /> : <ModalTitle title={t('add_new_card')} />}
+        {editIcon ? (
+          <ModalTitle title={t('edit_card')} />
+        ) : (
+          <ModalTitle title={t('add_new_card')} />
+        )}
         <div className={s.contentBox}>
           <div className={s.select}>
             <Select
@@ -167,7 +171,7 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
             />
           </div>
           <form onSubmit={onSubmit}>
-            {valueSelect === 'Picture' ? (
+            {valueSelect === t('picture') ? (
               <>
                 <TextField
                   inputId={'Input1'}
@@ -194,7 +198,7 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
                 {...register('question', { value: card?.question })}
               />
             )}
-            {valueSelect === 'Picture' ? (
+            {valueSelect === t('picture') ? (
               <>
                 <TextField
                   inputId={'Input2'}
