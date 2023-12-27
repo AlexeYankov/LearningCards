@@ -18,6 +18,7 @@
   "save_changes": "Сохранить изменения",
   "user_name": "Имя пользователя",
   "back_to_decks_list": "Вернуться к списку колод",
+  "back_to_cards_list": "Вернуться к списку карточек",
   "logout": "Выйти",
   "sign_out": "Выйти",
   "profile": "Профиль",
@@ -48,6 +49,15 @@
   "learn_message": "Вы действительно хотите перейти к изучению",
   "delete_deck": "Удалить колоду",
   "delete_message": "Вы действительно хотите удалить",
-  "delete_message_description": "Все карточки будут удалены."
+  "delete_message_description": "Все карточки будут удалены.",
+  "number_shots_question": "Количество попыток ответов на вопрос:",
+  "show_answer": "Показать ответ",
+  "rate_yourself": "Оценить себя",
+  "next_question": "Следующий вопрос",
+  "did_not_know": "Не знаю",
+  "forgot": "Забыл",
+  "confused": "Сбит с толку",
+  "a_lot_of_thought": "Много мыслей",
+  "knew_answer": "Знал ответ"
 }
 

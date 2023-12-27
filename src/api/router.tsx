@@ -9,7 +9,7 @@ import { CheckEmail } from '@/components/ui/auth/checkEmail'
 import { CreateNewPassword } from '@/components/ui/auth/createNewPassword'
 import { ForgotYourPassword } from '@/components/ui/auth/forgotYourPassword'
 import { SignUp } from '@/components/ui/auth/signUp/signUp'
-import { CardsPage, LearnPack } from '@/components/ui/cards'
+import { CardsPage, LearnDeck } from '@/components/ui/cards'
 import { useMeQuery } from '@/api/auth'
 import { Layout } from '@/components/ui/header'
 import { EditProfile } from '@/components/ui/editProfile'
@@ -42,7 +42,7 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <LearnPack />,
+    element: <LearnDeck />,
     path: '/:id/learn',
   },
   {

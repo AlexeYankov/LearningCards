@@ -5,6 +5,7 @@ import { DropDownPackMenu } from '@/components/ui/dropDown'
 import { useNavigate } from 'react-router-dom'
 import { AddEditCard } from '@/components/ui/cards'
 import { Button } from '@/components/ui/button'
+import { useTranslation } from 'react-i18next'
 
 type PageNameProps = {
   isMyCard?: boolean
@@ -15,6 +16,8 @@ type PageNameProps = {
 
 export const PageName: FC<PageNameProps> = ({ id, cardsCount, isMyCard, packTitle }) => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
+
   const toLearn = () => {
     navigate(`/${id}/learn`)
   }
@@ -29,7 +32,7 @@ export const PageName: FC<PageNameProps> = ({ id, cardsCount, isMyCard, packTitl
         {isMyCard ? (
           <AddEditCard id={id} />
         ) : (
-          cardsCount !== 0 && <Button onClick={toLearn}>Learn to pack</Button>
+          cardsCount !== 0 && <Button onClick={toLearn}>{t('learn_deck')}</Button>
         )}
       </div>
     </div>
