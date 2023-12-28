@@ -3,7 +3,8 @@ import { Head, HeadCell, Row } from '@it-incubator/ui-kit'
 import { changeOrderBy } from '@/api/decks'
 import { useAppDispatch, useAppSelector } from '@/api/store'
 import { useTranslation } from 'react-i18next'
-import { Column } from '@/components/ui/decks'
+
+import { Column } from '@/types/decks'
 
 export const DecksHead = () => {
   const dispatch = useAppDispatch()

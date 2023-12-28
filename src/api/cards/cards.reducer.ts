@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Sort } from '@/components/ui/decks'
+
+import { Sort } from '@/types/decks'
 
 const initialState = {
   answer: '',

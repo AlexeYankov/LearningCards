@@ -7,7 +7,7 @@ import PagesForRender from './pagesForRender'
 import { changeCardsCurrentPage } from '@/api/cards'
 import { LocationType } from '@/components/ui/pagination'
 
-type PagesType = {
+type Props = {
   arrowID: string
   color?: string
   reversedArrowID: string
@@ -16,13 +16,7 @@ type PagesType = {
   location: LocationType
 }
 
-export const Pages = ({
-  arrowID,
-  color,
-  reversedArrowID,
-  totalPages = 10,
-  location,
-}: PagesType) => {
+export const Pages = ({ arrowID, color, reversedArrowID, totalPages = 10, location }: Props) => {
   const dispatch = useAppDispatch()
 
   let currentPage

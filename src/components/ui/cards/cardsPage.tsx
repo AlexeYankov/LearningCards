@@ -19,9 +19,9 @@ import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/api/auth'
 import { Loader } from '@/components/ui/loader'
 import { useDebounce } from '@/hooks/useDebounce'
-import { Column, Sort } from '@/components/ui/decks'
 import { BackLink } from '@/components/ui/backLink'
 import { useTranslation } from 'react-i18next'
+import { Column, Sort } from '@/types/decks'
 
 export const CardsPage = () => {
   const { id } = useParams()

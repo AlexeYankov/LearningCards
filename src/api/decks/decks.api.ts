@@ -1,83 +1,14 @@
 import { baseApi } from '@/api/base'
-import { CardsResponseType, PaginationResponseType } from '@/api/cards'
-import { Sort } from '@/components/ui/decks'
-
-type GetDecksParamsType = {
-  authorId?: string
-  currentPage?: number
-  itemsPerPage?: number
-  maxCardsCount?: number
-  minCardsCount?: number
-  name?: string
-  orderBy?: Sort
-}
-
-export type DecksType = {
-  items: ResponseDeckType[]
-  maxCardsCount: number
-  pagination: PaginationResponseType
-}
-
-export type ResponseDeckTypeItemsAuthor = {
-  id: string
-  name: string
-}
-export type ResponseDeckType = {
-  author: ResponseDeckTypeItemsAuthor
-  id: string
-  userId: string
-  name: string
-  isPrivate: boolean
-  shots: number
-  cover: string
-  rating: number
-  created: string
-  updated: string
-  cardsCount: number
-}
-
-type DeleteDeckResponseType = {
-  id: string
-  userId: string
-  name: string
-  isPrivate: boolean
-  shots: number
-  cover: string
-  rating: number
-  created: string
-  updated: string
-  cardsCount: number
-}
-
-type UpdateDeckResponseType = {
-  author: UpdateDeckResponseTypeAuthor
-  id: string
-  userId: string
-  name: string
-  isPrivate: boolean
-  shots: number
-  cover: string
-  rating: number
-  created: string
-  updated: string
-  cardsCount: number
-}
-export type UpdateDeckResponseTypeAuthor = {
-  id: string
-  name: string
-}
-
-export type CreateDeckArgType = {
-  cover?: File
-  name: string
-  isPrivate?: boolean
-}
-
-export type LearnRandomPostArg = {
-  id?: string
-  cardId?: string
-  grade: number
-}
+import { CardsResponseType } from '@/api/cards'
+import {
+  CreateDeckArgType,
+  DecksType,
+  DeleteDeckResponseType,
+  GetDecksParamsType,
+  LearnRandomPostArg,
+  ResponseDeckType,
+  UpdateDeckResponseType,
+} from '@/types/decks'
 
 export const decksApi = baseApi.injectEndpoints({
   endpoints: builder => {

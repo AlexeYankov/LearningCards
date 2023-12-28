@@ -1,4 +1,4 @@
-import { ResponseDeckType, useDeleteDeckMutation } from '@/api/decks'
+import { useDeleteDeckMutation } from '@/api/decks'
 import { useState } from 'react'
 import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal'
 import { DeleteIcon } from '@/asserts/icons'
@@ -7,6 +7,7 @@ import s from '@/components/ui/decks/decksPage.module.scss'
 import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { ResponseDeckType } from '@/types/decks'
 
 type DeleteDeckModalProps = {
   deck: ResponseDeckType

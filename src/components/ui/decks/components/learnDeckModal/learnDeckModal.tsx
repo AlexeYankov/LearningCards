@@ -1,4 +1,3 @@
-import { ResponseDeckType } from '@/api/decks'
 import { useState } from 'react'
 import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal'
 import s from '@/components/ui/decks/decksPage.module.scss'
@@ -7,6 +6,7 @@ import { Typography } from '@/components/ui/typography'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { ResponseDeckType } from '@/types/decks'
 
 type LearnDeckModalProps = {
   deck: ResponseDeckType
