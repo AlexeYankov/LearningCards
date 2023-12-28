@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react'
-import { CreateDeckArgType, resetFilter, useCreateDeckMutation } from '@/api/decks'
+import { resetFilter, useCreateDeckMutation } from '@/api/decks'
 import { Button } from '@/components/ui/button'
 import { CheckBox } from '@/components/ui/checkbox'
 import { Modal, ModalTitle } from '@/components/ui/modal'
@@ -11,6 +11,7 @@ import { ImageIcon } from '@/asserts/icons'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { useTranslation } from 'react-i18next'
+import { CreateDeckArgType } from '@/types/decks'
 
 const schema = z.object({
   cover: z.array(z.instanceof(File)),

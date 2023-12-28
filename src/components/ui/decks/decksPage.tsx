@@ -12,7 +12,8 @@ import { useEffect } from 'react'
 import { Root } from '@it-incubator/ui-kit'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { ErrorComponent } from '@/utils/toastify/Error'
-import { Sort } from './decksData'
+
+import { Sort } from '@/types/decks'
 
 export const DecksPage = () => {
   const dispatch = useAppDispatch()

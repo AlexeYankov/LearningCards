@@ -3,9 +3,9 @@ import { Body, Cell, Row } from '@it-incubator/ui-kit'
 import { Link } from 'react-router-dom'
 import { Typography } from '@/components/ui/typography'
 import { convertedTime } from '@/helpers/convertedTime'
-import { DecksType } from '@/api/decks'
 import { useMeQuery } from '@/api/auth'
 import { DeleteDeckModal, EditDeckModal, LearnDeckModal } from '@/components/ui/decks'
+import { DecksType } from '@/types/decks'
 
 type DecksBodyProps = {
   decks?: DecksType

@@ -1,4 +1,4 @@
-import { ResponseDeckType, useUpdateDeckMutation } from '@/api/decks'
+import { useUpdateDeckMutation } from '@/api/decks'
 import { useForm } from 'react-hook-form'
 import { ChangeEvent, useState } from 'react'
 import { Modal, ModalTitle } from '@/components/ui/modal'
@@ -11,6 +11,7 @@ import { z } from 'zod'
 import { handleFileChange } from '@/components/ui/cards'
 import { ImageSelector } from '@/components/ui/imageSelector'
 import { useTranslation } from 'react-i18next'
+import { ResponseDeckType } from '@/types/decks'
 
 const schema = z.object({
   cover: z.array(z.instanceof(File)),
