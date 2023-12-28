@@ -7,11 +7,11 @@ import { useMeQuery } from '@/api/auth'
 import { DeleteDeckModal, EditDeckModal, LearnDeckModal } from '@/components/ui/decks'
 import { DecksType } from '@/types/decks'
 
-type DecksBodyProps = {
+type Props = {
   decks?: DecksType
 }
 
-export const DecksBody = ({ decks }: DecksBodyProps) => {
+export const DecksBody = ({ decks }: Props) => {
   const { data: me } = useMeQuery()
   return (
     <Body>

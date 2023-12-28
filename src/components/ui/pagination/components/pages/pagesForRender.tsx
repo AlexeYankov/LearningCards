@@ -2,13 +2,13 @@ import { Typography } from '@/components/ui/typography'
 
 import { Page } from '../page'
 
-type PagesForRenderType = {
+type Props = {
   page: number
   pages: number
   setPage: (value: number) => void
 }
 
-const PagesForRender = ({ page, pages, setPage }: PagesForRenderType) => {
+const PagesForRender = ({ page, pages, setPage }: Props) => {
   const allPages = Array.from({ length: pages }, (_, i) => i + 1)
 
   delete allPages[0]

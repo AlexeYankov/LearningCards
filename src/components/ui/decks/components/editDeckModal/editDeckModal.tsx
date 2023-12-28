@@ -21,14 +21,14 @@ const schema = z.object({
 
 type Form = z.infer<typeof schema>
 
-export type EditDeckModalProps = {
+type Props = {
   deck: ResponseDeckType
   open?: boolean
   setOpen?: (open: boolean) => void
   hover?: boolean
 }
 
-export const EditDeckModal = ({ deck, open, setOpen, hover }: EditDeckModalProps) => {
+export const EditDeckModal = ({ deck, open, setOpen, hover }: Props) => {
   const { t } = useTranslation()
 
   const [updateDeck] = useUpdateDeckMutation()

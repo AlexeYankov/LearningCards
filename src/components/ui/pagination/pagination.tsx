@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 
 export type LocationType = 'decks' | 'cards'
 
-type PaginationType = {
+type Props = {
   arrowColor: string
   arrowID: string
   reversed?: boolean
@@ -25,7 +25,7 @@ export const Pagination = ({
   totalItems,
   totalPages,
   location,
-}: PaginationType) => {
+}: Props) => {
   const { t } = useTranslation()
 
   const generateOptions = (total: number) => {
