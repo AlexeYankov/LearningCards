@@ -3,7 +3,6 @@
   flex-direction: column;
   gap: 2.25rem;
   align-items: center;
-
   width: 100%;
   margin-bottom: 35px;
   padding-bottom: 0;
@@ -16,9 +15,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  width: 100%;
-  max-width: 1250px;
+  width: 70%;
+  //max-width: 1250px;
   height: 3.75rem;
 
   .textHeader {
@@ -33,11 +31,8 @@
     line-height: var(--line-height-m);
     color: var(-color--light-100);
   }
-  .switch{
-    padding: 5px;
-  }
   .logo {
-    padding: 125px;
+    //padding: 125px;
     cursor: pointer;
     display: flex;
   }

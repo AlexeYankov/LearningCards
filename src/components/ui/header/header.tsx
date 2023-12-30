@@ -11,7 +11,6 @@ import {useMeQuery} from '@/api/auth'
 import {useAppDispatch} from '@/api/store'
 import {resetFilter} from '@/api/decks'
 import {Progress} from '@/components/ui/loader'
-import {SwitchLang} from "@/components/ui/switch/switch.tsx";
 
 export const Header: FC = () => {
     const dispatch = useAppDispatch()
@@ -31,16 +30,11 @@ export const Header: FC = () => {
                     {!isLoading && (
                         <>
                             {!error && (
-                                <><DropDownMenu
+                                <DropDownMenu
                                     avatar={data?.avatar || userImg}
                                     email={data?.email}
                                     name={data?.name}
                                 />
-                                    <div className={s.switch}>
-                                        <SwitchLang/>
-                                    </div>
-                                </>
-
                             )}
                             {error && (
                                 <Button

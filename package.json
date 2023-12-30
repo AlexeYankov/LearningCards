@@ -29,6 +29,7 @@
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slider": "^1.1.2",
     "@radix-ui/react-switch": "^1.0.3",
+    "@radix-ui/react-toggle": "^1.0.3",
     "@reduxjs/toolkit": "^1.9.7",
     "async-mutex": "^0.4.0",
     "i18next": "^23.7.11",
