@@ -209,7 +209,7 @@ export const AddEditCard: FC<Props> = ({ id, editIcon, card }) => {
                 />
                 <ImageSelector
                   selectedImage={editIcon ? selectedEditAnswerImage : selectedAnswerImage}
-                  deleteLabel={editIcon ? 'Delete Image' : ''}
+                  deleteLabel={editIcon ? t('delete_image') : ''}
                   onChange={handleAnswerFileChange}
                   changeLabel={t('change_answer_img')}
                   inputId={'answer-img-input'}
