@@ -38,8 +38,8 @@
   "edit_card": "Редактировать карточку",
   "delete_card": "Удалить карточку",
   "message_delete_card": "Вы действительно хотите удалить эту карточку?",
-  "change_question_img": "Изменить изображение вопроса",
-  "change_answer_img": "Изменить изображение ответа",
+  "change_question_img": "Изменить картинку",
+  "change_answer_img": "Изменить картинку",
   "edit_deck": "Редактирование колоды",
   "delete_cover": "Удалить картинку",
   "change_cover": "Изменить картинку",
@@ -58,6 +58,7 @@
   "forgot": "Забыл",
   "confused": "Сбит с толку",
   "a_lot_of_thought": "Много мыслей",
-  "knew_answer": "Знал ответ"
+  "knew_answer": "Знал ответ",
+  "delete_image": "Удалить картинку"
 }
 
