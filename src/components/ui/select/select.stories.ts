@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Select } from '.'
 import { BrowserRouterDecorator, ReduxStoreProviderDecorator } from '@/decorators'
+
+import { Select } from '.'
 
 const meta = {
   argTypes: {
@@ -11,9 +12,9 @@ const meta = {
     },
   },
   component: Select,
+  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator],
   tags: ['autodocs'],
   title: 'Components/Select',
-  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator],
 } satisfies Meta<typeof Select>
 
 export default meta
@@ -21,7 +22,6 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
-    label: 'Select-box Primary',
     options: ['Select-box', 'Select-box', 'Select-box'],
     reversed: true,
     selectId: 'Select-box Primary',
@@ -30,7 +30,6 @@ export const Primary: Story = {
 }
 export const Secondary: Story = {
   args: {
-    label: 'Select-box Secondary',
     // width: "24",
     options: ['Select-box', 'Select-box', 'Select-box'],
     reversed: true,
@@ -42,7 +41,6 @@ export const Secondary: Story = {
 export const Thirtery: Story = {
   args: {
     disabled: true,
-    label: 'Select-box Thirtery',
     options: ['Select-box', 'Select-box', 'Select-box'],
     reversed: true,
     selectId: 'Select-box Thirtery',

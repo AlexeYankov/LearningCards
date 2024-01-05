@@ -88,7 +88,6 @@ export const ModalWithComponentsDemo: Story = {
       <Modal className={s.contentComponents} triggerName={<Button>Test</Button>}>
         <Select
           classname={s.select}
-          label={'Select-box'}
           options={['Select item 1', 'Select item 2', 'Select item 3']}
           reversed
           selectId={'Select-box'}
@@ -113,7 +112,6 @@ export const ModalWithImageDemo: Story = {
     <Modal className={s.contentComponents} triggerName={<Button>Test</Button>}>
       <Select
         classname={s.select}
-        label={'Select-box'}
         options={['Select item 1', 'Select item 2', 'Select item 3']}
         reversed
         selectId={'Select-box'}
@@ -214,7 +212,6 @@ export const ModalAddNewCard: Story = {
       <div className={s.contentComponents}>
         <Select
           classname={s.select}
-          label={'Choose a question format'}
           options={['Select item 1', 'Select item 2', 'Select item 3']}
           reversed
           selectId={'newCardSelectId'}

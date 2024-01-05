@@ -21,7 +21,6 @@ type SelectProps = {
   disabled?: boolean
   isAddEditCard?: boolean
   itemsPerPage?: number
-  label?: string
   options: Array<string>
   reversed?: boolean
   selectId?: string
@@ -57,7 +56,6 @@ const SelectContent = ({ options }: { options: string[] }) => {
 export const Select = ({
   classname,
   isAddEditCard,
-  label,
   options,
   reversed,
   selectId,
