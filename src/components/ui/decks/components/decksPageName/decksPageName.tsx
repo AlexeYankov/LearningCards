@@ -1,22 +1,25 @@
 import { ChangeEvent, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
+
 import { resetFilter, useCreateDeckMutation } from '@/api/decks'
+import { useAppDispatch } from '@/api/store'
+import { ImageIcon } from '@/asserts/icons'
 import { Button } from '@/components/ui/button'
 import { CheckBox } from '@/components/ui/checkbox'
 import { Modal, ModalTitle } from '@/components/ui/modal'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
-import f from '../../decksPage.module.scss'
-import { useAppDispatch } from '@/api/store'
-import { ImageIcon } from '@/asserts/icons'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { useTranslation } from 'react-i18next'
 import { CreateDeckArgType } from '@/types/decks'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+
+import s from '../../decksPage.module.scss'
 
 const schema = z.object({
-  cover: z.array(z.instanceof(File)),
-  name: z.string().min(3),
-  isPrivate: z.boolean().default(false),
+  cover: z.any(),
+  name: z.string().nonempty('Field is required').min(3).max(30),
 })
 
 type Form = z.infer<typeof schema>
@@ -29,13 +32,19 @@ export const DecksPageName = () => {
   const [open, setOpen] = useState(false)
   const [isPrivate, setIsPrivate] = useState(false)
   const {
-    register,
-    setValue,
-    setError,
-    handleSubmit,
-    reset,
     formState: { errors },
-  } = useForm<Form>()
+    handleSubmit,
+    register,
+    reset,
+    setValue,
+  } = useForm<Form>({
+    defaultValues: {
+      name: '',
+    },
+    mode: 'onSubmit',
+    resolver: zodResolver(schema),
+  })
+
   const [createDeck] = useCreateDeckMutation()
 
   const handleModalToggle = () => {
@@ -54,6 +63,7 @@ export const DecksPageName = () => {
 
     if (file) {
       const imageUrl = URL.createObjectURL(file)
+
       setSelectedImage(imageUrl)
       setValue('cover', [file])
     } else {
@@ -64,30 +74,37 @@ export const DecksPageName = () => {
 
   const onSubmit = handleSubmit(data => {
     const form = new FormData()
-    if (data.cover && data.cover.length > 0) {
-      form.append('cover', data.cover[0])
+    const { cover, name } = data
+
+    if (cover && cover.length > 0) {
+      form.append('cover', cover[0])
     }
-    form.append('name', data.name)
+    form.append('name', name.trim())
     form.append('isPrivate', String(isPrivate))
 
-    if (data.name.trim() !== '' && data.name.length >= 3) {
+    if (name.trim() !== '' && name.length >= 3) {
       createDeck(form as unknown as CreateDeckArgType)
-      handleModalToggle()
+        .unwrap()
+        .then(() => {
+          handleModalToggle()
+        })
+        .catch(err => {
+          toast.error(err.data.errorMessages[0].message)
+        })
     } else {
-      setError('name', { message: 'String must contain at least 3 character(s)' })
       setOpen(true)
     }
   })
 
   return (
-    <div className={f.container__pageName}>
+    <div className={s.container__pageName}>
       <Typography as={'h1'} variant={'large'}>
         {t('decks_list')}
       </Typography>
       <Modal
+        hover={false}
         onOpenChange={handleModalToggle}
         open={open}
-        hover={false}
         triggerName={
           <Button type={'button'} variant={'primary'}>
             {t('add_new_deck')}
@@ -96,50 +113,49 @@ export const DecksPageName = () => {
       >
         <ModalTitle title={'Add New Pack'} />
         <form onSubmit={onSubmit}>
-          <div className={f.contentComponents}>
-            <img alt={''} className={f.img} src={selectedImage || ''} />
-            <label htmlFor="input__file" className={f.changeCover}>
+          <div className={s.contentComponents}>
+            <img alt={''} className={s.img} src={selectedImage || ''} />
+            <label className={s.changeCover} htmlFor={'input__file'}>
               <ImageIcon />
               Change Cover
             </label>
             <input
-              className={f.inputFile}
+              className={s.inputFile}
               id={'input__file'}
-              type="file"
               onChange={handleFileChange}
+              type={'file'}
             />
             <TextField
+              errorMessage={errors.name && errors.name?.message}
               inputId={'Name Pack'}
               label={'Name Pack'}
               placeholder={'Name'}
-              errorMessage={errors.name?.message}
               {...register('name')}
             />
             <CheckBox
               IconID={'checkbox-unselected'}
               SelectedIconID={'checkbox-selected'}
-              checkboxId={'Private Pack'}
+              checked={isPrivate}
               height={'24'}
               label={'Private pack'}
-              width={'24'}
-              checked={isPrivate}
               onChange={handeCheckedChange}
+              width={'24'}
             />
           </div>
-          <div className={`${f.contentBtn} ${f.contentBtns}`}>
+          <div className={`${s.contentBtn} ${s.contentBtns}`}>
             <Button
-              classNameBtnBox={f.btnBox}
+              classNameBtnBox={s.btnBox}
               onClick={handleModalToggle}
-              variant={'secondary'}
               type={'button'}
+              variant={'secondary'}
             >
               Cancel
             </Button>
             <Button
-              classNameBtnBox={f.btnBox}
-              variant={'primary'}
+              classNameBtnBox={s.btnBox}
               disabled={!!errors.name?.message}
               type={'submit'}
+              variant={'primary'}
             >
               Add New Pack
             </Button>

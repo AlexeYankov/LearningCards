@@ -15,7 +15,7 @@ import { Layout } from '@/components/ui/header'
 import { EditProfile } from '@/components/ui/editProfile'
 import { SignIn } from '@/components/ui/auth/signIn'
 import { DecksPage } from '@/components/ui/decks'
-import { Loader } from '@/components/ui/loader'
+import { Progress } from '@/components/ui/loader'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -77,13 +77,13 @@ const router = createBrowserRouter([
 
 export function PrivateRoutes() {
   const { error, isLoading } = useMeQuery()
-  if (isLoading) return <Loader />
+  if (isLoading) return <Progress />
   return !error ? <Outlet /> : <Navigate to="/login" />
 }
 
 export function PublicRoutes() {
   const { isSuccess, isFetching } = useMeQuery()
-  if (isFetching) return <Loader />
+  if (isFetching) return <Progress />
   return !isSuccess ? <Outlet /> : <Navigate to="/" />
 }
 

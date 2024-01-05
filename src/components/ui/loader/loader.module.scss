@@ -1,38 +1,34 @@
 .loader {
-  width: 30px;
-  height: 30px;
+  --c: no-repeat linear-gradient(#6100ee, #6100ee);
 
-  border: 5px solid var(--color-accent-500);
-  border-top-color: var(--color-light-300);
-  border-radius: 50%;
-
-  animation: spin 1s infinite linear;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-.loader2 {
   position: fixed;
-  height: 4px;
+  top: 8%;
+
   width: 100%;
-  top:8%;
-  --c: no-repeat linear-gradient(#6100ee,#6100ee);
+  height: 4px;
+
   background: var(--c), var(--c), #d7b8fc;
   background-size: 60% 100%;
+
   animation: l16 3s infinite;
 }
 
 @keyframes l16 {
   0% {
-    background-position: -150% 0, -150% 0
+    background-position:
+      -150% 0,
+      -150% 0;
   }
+
   66% {
-    background-position: 250% 0, -150% 0
+    background-position:
+      250% 0,
+      -150% 0;
   }
+
   100% {
-    background-position: 250% 0, 250% 0
+    background-position:
+      250% 0,
+      250% 0;
   }
 }

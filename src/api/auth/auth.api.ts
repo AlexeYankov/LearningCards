@@ -3,85 +3,84 @@ import { baseApi } from '@/api/base'
 export const authService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      me: builder.query<AuthMeResponseType, void>({
-        query: () => `v1/auth/me`,
-        providesTags: ['Me'],
-      }),
-      updateUser: builder.mutation<AuthMeResponseType, UpdateUserArgsType>({
-        query: body => {
-          return {
-            url: `v1/auth/me`,
-            method: 'PATCH',
-            body: body,
-          }
-        },
-        invalidatesTags: ['Me'],
-      }),
       createUser: builder.mutation<SignUpResponseType, SignUpArgsType>({
         query: body => ({
+          body,
+          method: 'Post',
           url: `v1/auth/sign-up`,
-          method: 'Post',
-          body,
         }),
-        invalidatesTags: ['Me'],
-      }),
-      login: builder.mutation<LoginResponseType, LoginArgsType>({
-        query: body => ({
-          url: `v1/auth/login`,
-          method: 'Post',
-          body,
-        }),
-        invalidatesTags: ['Me'],
       }),
       logOut: builder.mutation<void, void>({
-        query: () => ({
-          url: `v1/auth/logout`,
-          method: 'Post',
-        }),
         invalidatesTags: ['Me'],
+        query: () => ({
+          method: 'Post',
+          url: `v1/auth/logout`,
+        }),
+      }),
+      login: builder.mutation<LoginResponseType, LoginArgsType>({
+        invalidatesTags: ['Me'],
+        query: body => ({
+          body,
+          method: 'Post',
+          url: `v1/auth/login`,
+        }),
+      }),
+      me: builder.query<AuthMeResponseType, void>({
+        providesTags: ['Me'],
+        query: () => `v1/auth/me`,
       }),
       recoverPassword: builder.mutation<void, RecoverPasswordArgsType>({
         query: body => ({
-          url: `v1/auth/recover-password`,
-          method: 'Post',
           body,
+          method: 'Post',
+          url: `v1/auth/recover-password`,
         }),
       }),
       resetPassword: builder.mutation<void, ResetPasswordArgsType>({
-        query: ({ token, password }) => ({
-          url: `v1/auth/reset-password/${token}`,
-          method: 'Post',
-          body: { password },
-        }),
         invalidatesTags: ['Me'],
+        query: ({ password, token }) => ({
+          body: { password },
+          method: 'Post',
+          url: `v1/auth/reset-password/${token}`,
+        }),
+      }),
+      updateUser: builder.mutation<AuthMeResponseType, UpdateUserArgsType>({
+        invalidatesTags: ['Me'],
+        query: body => {
+          return {
+            body: body,
+            method: 'PATCH',
+            url: `v1/auth/me`,
+          }
+        },
       }),
     }
   },
 })
 
 export const {
-  useMeQuery,
   useCreateUserMutation,
-  useUpdateUserMutation,
-  useLoginMutation,
-  useRecoverPasswordMutation,
   useLogOutMutation,
+  useLoginMutation,
+  useMeQuery,
+  useRecoverPasswordMutation,
   useResetPasswordMutation,
+  useUpdateUserMutation,
 } = authService
 
 export type AuthMeResponseType = {
   avatar: string
-  id: string
+  created: string
   email: string
+  id: string
   isEmailVerified: boolean
   name: string
-  created: string
   updated: string
 }
 
 export type LoginArgsType = {
-  password: string
   email: string
+  password: string
   rememberMe?: boolean
 }
 
@@ -90,37 +89,37 @@ export type LoginResponseType = {
 }
 
 export type SignUpArgsType = {
+  email: string
   html?: string
   name?: string
   password: string
-  email: string
-  subject?: string
   sendConfirmationEmail?: boolean
+  subject?: string
 }
 
 export type SignUpResponseType = {
   avatar: string
-  id: string
+  created?: string
   email: string
+  id: string
   isEmailVerified: boolean
   name: string
-  created?: string
   updated?: string
 }
 
 export type RecoverPasswordArgsType = {
-  html?: string
   email: string
+  html?: string
   subject?: string
 }
 
 export type ResetPasswordArgsType = {
-  token?: string
   password: string
+  token?: string
 }
 
 export type UpdateUserArgsType = {
   avatar?: File
-  name?: string
   email?: string
+  name?: string
 }

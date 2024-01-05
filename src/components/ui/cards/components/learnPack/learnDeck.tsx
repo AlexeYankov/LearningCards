@@ -9,7 +9,7 @@ import {
 } from '@/api/decks'
 import { useParams } from 'react-router-dom'
 import { SearchIcon } from '@/asserts/icons'
-import { Loader } from '@/components/ui/loader'
+import { Progress } from '@/components/ui/loader'
 import { useAppDispatch, useAppSelector } from '@/api/store'
 import { showMode } from '@/api/cards'
 import { Show } from './show'
@@ -19,18 +19,23 @@ import { useTranslation } from 'react-i18next'
 
 export const LearnDeck = () => {
   const dispatch = useAppDispatch()
+  const { id } = useParams()
   const { t } = useTranslation()
 
-  const { id } = useParams()
   const [learn, { isLoading }] = useLearnRandomPostMutation()
   const { data, isFetching } = useLearnRandomCardQuery(id!)
   const { data: deckById } = useGetDecksByIdQuery(id!)
+
   const show = useAppSelector(state => state.cards.show)
-  if (isFetching) return <Loader />
-  if (isLoading) return <Loader />
+
   const onShowAnswer = () => {
     dispatch(showMode({ show: true }))
   }
+
+  if (isFetching || isLoading) {
+    return <Progress />
+  }
+
   return (
     <>
       <BackLink title={t('back_to_cards_list')} to={id!} />

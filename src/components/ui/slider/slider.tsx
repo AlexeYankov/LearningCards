@@ -1,9 +1,11 @@
-import * as SliderRadix from '@radix-ui/react-slider'
-import { useAppDispatch, useAppSelector } from '@/api/store'
-import { changeCurrentPage, changeMaxCardsCount, changeMinCardsCount } from '@/api/decks'
 import { forwardRef, useEffect, useState } from 'react'
+
+import { changeCurrentPage, changeMaxCardsCount, changeMinCardsCount } from '@/api/decks'
+import { useAppDispatch, useAppSelector } from '@/api/store'
+import { Typography } from '@/components/ui/typography'
+import * as SliderRadix from '@radix-ui/react-slider'
+
 import s from './slider.module.scss'
-import { Label } from '@/components/ui/label'
 
 type SliderProps = {}
 
@@ -27,15 +29,17 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>((props, forwardedR
 
   return (
     <div className={s.container}>
-      <Label label={values[0].toString()} className={s.label} />
+      <Typography className={s.label} variant={'body2'}>
+        {values[0].toString()}
+      </Typography>
       <SliderRadix.Root
         className={s.sliderRoot}
-        ref={forwardedRef}
-        minStepsBetweenThumbs={1}
         max={61}
-        value={values}
+        minStepsBetweenThumbs={1}
         onValueChange={setValues}
         onValueCommit={onValuesCountChange}
+        ref={forwardedRef}
+        value={values}
         {...props}
       >
         <SliderRadix.Track className={s.sliderTrack}>
@@ -44,7 +48,9 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>((props, forwardedR
         <SliderRadix.Thumb className={s.sliderThumb} />
         <SliderRadix.Thumb className={s.sliderThumb} />
       </SliderRadix.Root>
-      <Label label={values[1].toString()} className={s.label} />
+      <Typography className={s.label} variant={'body2'}>
+        {values[1].toString()}
+      </Typography>
     </div>
   )
 })

@@ -1,7 +1,9 @@
 import { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+
 import { CloseIcon, PasswordIcon, SearchIcon } from '@/asserts/icons'
-import s from './textField.module.scss'
 import { Label } from '@/components/ui/label'
+
+import s from './textField.module.scss'
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
   const {
@@ -29,6 +31,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 
   const isShowClearButton = onClearClick && search && rest.value?.length! > 0
   const passwordIcon = valueType === 'password' ? 'eye-off-outline' : 'eye-outline'
+
   return (
     <div className={`${s.box} ${className}`}>
       <Label className={`${s.label} ${disabledLabelClass}`} htmlFor={inputId} label={label} />
@@ -54,8 +57,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
         {password && (
           <button
             className={`${s.iconEnd} ${disabledIconClass}`}
-            type={'button'}
             onClick={handleChangeInputType}
+            type={'button'}
           >
             <PasswordIcon iconId={passwordIcon} size={20} />
           </button>
@@ -69,7 +72,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 })
 
 export type TextFieldProps = {
-  errorMessage?: null | string
+  errorMessage?: string
   inputId?: string
   label?: string
   onClearClick?: () => void

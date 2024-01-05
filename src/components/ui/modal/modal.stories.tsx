@@ -2,25 +2,25 @@ import { useState } from 'react'
 
 import img from '@/asserts/Mask.png'
 import { ImageIcon } from '@/asserts/icons'
+import { Button } from '@/components/ui/button'
+import { CheckBox } from '@/components/ui/checkbox'
+import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal/modal'
+import { Select } from '@/components/ui/select'
+import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
+import { BrowserRouterDecorator, ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
 import { Meta, StoryObj } from '@storybook/react'
 
 import s from './modal.module.scss'
 
-import { Button } from '@/components/ui/button'
-import { CheckBox } from '@/components/ui/checkbox'
 import { ScrollBar } from '../scrollbar'
-import { Select } from '@/components/ui/select'
-import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal/modal'
-import { TextField } from '@/components/ui/textField'
-import { BrowserRouterDecorator, ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
 
 const meta = {
   argTypes: {},
   component: Modal,
+  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator, ThemeDecorator],
   tags: ['autodocs'],
   title: 'Components/Modal',
-  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator, ThemeDecorator],
 } satisfies Meta<typeof Modal>
 
 export default meta
@@ -81,13 +81,13 @@ export const ModalScrollbarDescriptionDemo: Story = {
 
 export const ModalWithComponentsDemo: Story = {
   render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [isCheck, setIsCheck] = useState(false)
 
     return (
       <Modal className={s.contentComponents} triggerName={<Button>Test</Button>}>
         <Select
           classname={s.select}
-          label={'Select-box'}
           options={['Select item 1', 'Select item 2', 'Select item 3']}
           reversed
           selectId={'Select-box'}
@@ -97,7 +97,6 @@ export const ModalWithComponentsDemo: Story = {
         <CheckBox
           IconID={'checkbox-unselected'}
           SelectedIconID={'checkbox-selected'}
-          checkboxId={'checkboxIdSecondary'}
           checked={isCheck}
           label={'checkBox'}
           onChange={() => setIsCheck(!isCheck)}
@@ -112,7 +111,6 @@ export const ModalWithImageDemo: Story = {
     <Modal className={s.contentComponents} triggerName={<Button>Test</Button>}>
       <Select
         classname={s.select}
-        label={'Select-box'}
         options={['Select item 1', 'Select item 2', 'Select item 3']}
         reversed
         selectId={'Select-box'}
@@ -135,7 +133,6 @@ export const ModalWithImageDemo: Story = {
       <CheckBox
         IconID={'checkbox-unselected'}
         SelectedIconID={'checkbox-selected'}
-        checkboxId={'Check-box'}
         disabled={false}
         height={'24'}
         label={'Check-box'}
@@ -186,7 +183,6 @@ export const ModalAddNewDeck: Story = {
           <CheckBox
             IconID={'checkbox-unselected'}
             SelectedIconID={'checkbox-selected'}
-            checkboxId={'Private Deck'}
             disabled={false}
             height={'24'}
             label={'Private Deck'}
@@ -213,7 +209,6 @@ export const ModalAddNewCard: Story = {
       <div className={s.contentComponents}>
         <Select
           classname={s.select}
-          label={'Choose a question format'}
           options={['Select item 1', 'Select item 2', 'Select item 3']}
           reversed
           selectId={'newCardSelectId'}

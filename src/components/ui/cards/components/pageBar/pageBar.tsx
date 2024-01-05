@@ -1,9 +1,11 @@
-import { TextField } from '@/components/ui/textField'
-import f from '../../cardsPage.module.scss'
 import { ChangeEvent } from 'react'
-import { useAppDispatch } from '@/api/store.ts'
-import { changeCurrentPage } from '@/api/decks'
 import { useTranslation } from 'react-i18next'
+
+import { changeCurrentPage } from '@/api/decks'
+import { useAppDispatch } from '@/api/store'
+import { TextField } from '@/components/ui/textField'
+
+import f from '../../cardsPage.module.scss'
 
 type Props = {
   onChange: (value: string) => void
@@ -20,14 +22,16 @@ export const PageBar = ({ onChange, value }: Props) => {
   const handleClearSearchValueClick = () => {
     onChange('')
   }
+
   return (
     <div className={f.container__pageBar}>
       <TextField
-        value={value}
+        inputId={'PageBarSearchCardInput'}
         onChange={handleSearchValue}
         onClearClick={handleClearSearchValueClick}
         placeholder={t('input_search')}
         search
+        value={value}
       />
     </div>
   )

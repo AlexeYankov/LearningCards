@@ -1,95 +1,119 @@
-import s from './signUp.module.scss'
-import { Typography } from '@/components/ui/typography'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { ControlledInput } from '@/components/ui/controlled'
-import { Button } from '../../button'
-import { Card } from '@/components/ui/card'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+
 import { useCreateUserMutation } from '@/api/auth'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Progress } from '@/components/ui/loader'
+import { TextField } from '@/components/ui/textField'
+import { Typography } from '@/components/ui/typography'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+
+import s from './signUp.module.scss'
 
 type FormValues = z.infer<typeof loginSchema>
 const loginSchema = z
   .object({
+    confirmPassword: z.string().min(3).max(30),
     email: z.string().email(),
     password: z.string().min(3).max(30),
-    confirmPassword: z.string().min(3).max(30),
   })
   .refine(data => data.password === data.confirmPassword, {
     message: "Passwords don't match",
     path: ['confirmPassword'],
   })
+
 export const SignUp = () => {
-  const { handleSubmit, control } = useForm<FormValues>({
+  const navigate = useNavigate()
+
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+  } = useForm<FormValues>({
+    defaultValues: {
+      confirmPassword: '',
+      email: '',
+      password: '',
+    },
+    mode: 'onSubmit',
     resolver: zodResolver(loginSchema),
   })
-  const [signUp, { isSuccess }] = useCreateUserMutation()
-  if (isSuccess) return <Navigate to={'/login'} />
+
+  const [signUp, { isLoading }] = useCreateUserMutation()
+
   const onSubmit = (data: FormValues) => {
     const { email, password } = data
-    signUp({ email, password })
-  }
-  return (
-    <Card className={s.signUp}>
-      <Typography className={s.label} children={'Sign Up'} variant={'large'} />
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <ControlledInput
-          placeholder={'Email'}
-          control={control}
-          name={'email'}
-          type={'text'}
-          label={'Email'}
-          inputId={'inputEmail'}
-        />
-        <ControlledInput
-          placeholder={'Password'}
-          control={control}
-          name={'password'}
-          type={'password'}
-          label={'Password'}
-          password
-          inputId={'inputPassword'}
-        />
-        <ControlledInput
-          className={s.inputConfirmPassword}
-          placeholder={'Confirm Password'}
-          control={control}
-          name={'confirmPassword'}
-          type={'password'}
-          label={'Confirm Password'}
-          password
-          inputId={'inputConfirmPassword'}
-        />
-        <Button
-          className={s.button}
-          type={'submit'}
-          variant={'primary'}
-          fullWidth
-          children={<Typography children={'Sign Up'} variant={'subtitle2'} as={'p'} />}
-        />
-      </form>
 
-      <Typography
-        className={s.linkAlreadyHaveAccount}
-        children={'Already have an account?'}
-        variant={'body2'}
-        as={'p'}
-      />
-      <Button
-        className={s.btnSignIn}
-        type={'button'}
-        variant={'link'}
-        children={
-          <Typography
-            className={s.linkSignIn}
-            children={'Sign In'}
-            variant={'subtitle2'}
-            as={Link}
-            to={'/login'}
+    signUp({ email, password })
+      .unwrap()
+      .then(() => {
+        navigate('/login')
+      })
+      .catch(err => {
+        toast.error(err.data.errorMessages[0])
+      })
+  }
+
+  return (
+    <>
+      {isLoading && <Progress />}
+      <Card className={s.signUp}>
+        <Typography className={s.label} variant={'large'}>
+          Sign Up
+        </Typography>
+        <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+          <TextField
+            errorMessage={errors.email && errors.email?.message}
+            inputId={'inputEmail'}
+            label={'Email'}
+            placeholder={'Email'}
+            type={'text'}
+            {...register('email')}
           />
-        }
-      />
-    </Card>
+          <TextField
+            errorMessage={errors.password && errors.password?.message}
+            inputId={'inputPassword'}
+            label={'Password'}
+            password
+            placeholder={'Password'}
+            type={'password'}
+            {...register('password')}
+          />
+          <TextField
+            className={s.inputConfirmPassword}
+            errorMessage={errors.confirmPassword && errors.confirmPassword?.message}
+            inputId={'inputConfirmPassword'}
+            label={'Confirm Password'}
+            password
+            placeholder={'Confirm Password'}
+            type={'password'}
+            {...register('confirmPassword')}
+          />
+          <Button
+            className={s.button}
+            disabled={isLoading}
+            fullWidth
+            type={'submit'}
+            variant={'primary'}
+          >
+            <Typography as={'p'} variant={'subtitle2'}>
+              Sign Up
+            </Typography>
+          </Button>
+        </form>
+
+        <Typography as={'p'} className={s.linkAlreadyHaveAccount} variant={'body2'}>
+          Already have an account?
+        </Typography>
+        <Button className={s.btnSignIn} type={'button'} variant={'link'}>
+          <Typography as={Link} className={s.linkSignIn} to={'/login'} variant={'subtitle2'}>
+            Sign In
+          </Typography>
+        </Button>
+      </Card>
+    </>
   )
 }

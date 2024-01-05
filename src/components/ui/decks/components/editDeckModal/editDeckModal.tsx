@@ -1,56 +1,62 @@
-import { useUpdateDeckMutation } from '@/api/decks'
-import { useForm } from 'react-hook-form'
 import { ChangeEvent, useState } from 'react'
-import { Modal, ModalTitle } from '@/components/ui/modal'
-import { EditIcon } from '@/asserts/icons'
-import s from '@/components/ui/decks/decksPage.module.scss'
-import { Button } from '@/components/ui/button'
-import { TextField } from '@/components/ui/textField'
-import { CheckBox } from '@/components/ui/checkbox'
-import { z } from 'zod'
-import { handleFileChange } from '@/components/ui/cards'
-import { ImageSelector } from '@/components/ui/imageSelector'
+import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
+
+import { useUpdateDeckMutation } from '@/api/decks'
+import { EditIcon } from '@/asserts/icons'
+import { Button } from '@/components/ui/button'
+import { handleFileChange } from '@/components/ui/cards'
+import { CheckBox } from '@/components/ui/checkbox'
+import { ImageSelector } from '@/components/ui/imageSelector'
+import { Modal, ModalTitle } from '@/components/ui/modal'
+import { TextField } from '@/components/ui/textField'
 import { ResponseDeckType } from '@/types/decks'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+
+import s from '@/components/ui/decks/decksPage.module.scss'
 
 const schema = z.object({
-  cover: z.array(z.instanceof(File)),
-  name: z.string().min(3),
-  isPrivate: z.boolean().default(false),
+  cover: z.any(),
+  name: z.string().nonempty('Field is required').min(3).max(30),
 })
 
 type Form = z.infer<typeof schema>
 
 type Props = {
   deck: ResponseDeckType
+  hover?: boolean
   open?: boolean
   setOpen?: (open: boolean) => void
-  hover?: boolean
 }
 
-export const EditDeckModal = ({ deck, open, setOpen, hover }: Props) => {
+export const EditDeckModal = ({ deck, hover, open, setOpen }: Props) => {
   const { t } = useTranslation()
 
   const [updateDeck] = useUpdateDeckMutation()
-  const {
-    register,
-    setValue,
-    setError,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Form>()
 
   const [selectedImage, setSelectedImage] = useState(deck.cover)
   const [isPrivate, setIsPrivate] = useState(false)
 
   const [openLocal, setOpenLocal] = useState(false)
 
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+    setValue,
+  } = useForm<Form>({
+    mode: 'onSubmit',
+    resolver: zodResolver(schema),
+  })
+
   const handleEditFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     handleFileChange({
       event: event,
-      setSelectedImage: setSelectedImage,
-      setValue: setValue,
       inputName: 'cover',
+      setSelectedImage: setSelectedImage,
+      setValue,
     })
   }
   const handleCloseModal = () => {
@@ -66,11 +72,12 @@ export const EditDeckModal = ({ deck, open, setOpen, hover }: Props) => {
   }
 
   const onSubmit = handleSubmit(data => {
+    const { cover, name } = data
     const form = new FormData()
-    form.append('name', data.name)
 
-    if (data.cover && data.cover.length > 0) {
-      form.append('cover', data.cover[0])
+    form.append('name', name)
+    if (cover && cover.length > 0) {
+      form.append('cover', cover[0])
     }
 
     if (!selectedImage) {
@@ -78,21 +85,28 @@ export const EditDeckModal = ({ deck, open, setOpen, hover }: Props) => {
     }
     form.append('isPrivate', String(isPrivate))
 
-    if (data.name.trim() !== '' && data.name.length >= 3) {
+    if (name.trim() !== '' && name.length >= 3) {
       updateDeck({
-        id: deck.id,
         form,
+        id: deck.id,
       })
-      handleCloseModal()
+        .unwrap()
+        .then(() => {
+          handleCloseModal()
+        })
+        .catch(err => {
+          toast.error(err.data.errorMessages[0].message)
+        })
     } else {
-      setError('name', { message: t('error_message') })
+      setOpenLocal(true)
     }
   })
+
   return (
     <Modal
       hover={hover}
-      open={open ? open : openLocal}
       onOpenChange={setOpen ? setOpen : setOpenLocal}
+      open={open ? open : openLocal}
       triggerName={
         <button>
           <EditIcon />
@@ -100,53 +114,51 @@ export const EditDeckModal = ({ deck, open, setOpen, hover }: Props) => {
       }
     >
       <ModalTitle title={t('edit_deck')} />
-      <form onSubmit={onSubmit}>
+      <form id={'editDeckModal'} name={'editDeckModal'} onSubmit={onSubmit}>
         <div className={s.contentComponents}>
           <div className={s.imageBtnBox}>
             <ImageSelector
-              selectedImage={selectedImage}
-              deleteLabel={t('delete_cover')}
-              onChange={handleEditFileChange}
               changeLabel={t('change_cover')}
+              deleteLabel={t('delete_cover')}
               inputId={'input__file'}
+              onChange={handleEditFileChange}
               onImageDelete={deleteDeckCover}
+              selectedImage={selectedImage}
             />
           </div>
           <TextField
             className={s.editTextField}
+            errorMessage={errors.name?.message}
             inputId={t('name_deck')}
             label={t('name_deck')}
             placeholder={t('name_deck')}
-            errorMessage={errors.name?.message}
-            {...register('name', { value: deck.name })}
+            {...register('name', { value: deck.name.replace(/\s+/g, ' ') })}
           />
           <CheckBox
             IconID={'checkbox-unselected'}
             SelectedIconID={'checkbox-selected'}
-            checkboxId={'Private deck'}
-            disabled={false}
+            checked={isPrivate}
             height={'24'}
             label={t('private_deck')}
-            width={'24'}
-            checked={isPrivate}
             onChange={handeCheckedChange}
+            width={'24'}
           />
         </div>
         <div className={`${s.contentBtn} ${s.contentBtns}`}>
           <Button
             classNameBtnBox={s.btnBox}
             onClick={handleCloseModal}
-            variant={'secondary'}
             type={'button'}
+            variant={'secondary'}
           >
             {t('cancel')}
           </Button>
           <Button
             classNameBtnBox={s.btnBox}
-            onSubmit={onSubmit}
-            variant={'primary'}
             disabled={!!errors.name?.message}
+            onSubmit={onSubmit}
             type={'submit'}
+            variant={'primary'}
           >
             {t('save_changes')}
           </Button>
