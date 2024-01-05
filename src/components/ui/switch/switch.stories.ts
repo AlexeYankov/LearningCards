@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Switch } from './switch'
 import { BrowserRouterDecorator, ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
+import { SwitchLang } from './switch'
 
 const meta = {
-  component: Switch,
+  component: SwitchLang,
   tags: ['autodocs'],
   title: 'Components/Switch',
   decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator, ThemeDecorator],
-} satisfies Meta<typeof Switch>
+} satisfies Meta<typeof SwitchLang>
 
 export default meta
 type Story = StoryObj<typeof meta>
