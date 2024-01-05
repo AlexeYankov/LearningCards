@@ -49,6 +49,7 @@
   "learn_message": "Do you really want to move on to learning more about the",
   "delete_deck": "Delete Pack",
   "delete_message": " Do you really want to remove",
+  "delete_message_description": "All cards will be deleted.",
   "number_shots_question": "Number of attempts to answer the question:",
   "show_answer": "Show Answer",
   "rate_yourself": "Rate yourself:",
