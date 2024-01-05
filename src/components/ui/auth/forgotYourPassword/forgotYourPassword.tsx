@@ -1,5 +1,4 @@
 import s from '@/components/ui/auth/forgotYourPassword/forgotYourPassword.module.scss'
-import { ControlledInput } from '@/components/ui/controlled'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Card } from '@/components/ui/card'
@@ -8,7 +7,9 @@ import { Typography } from '@/components/ui/typography'
 import { Button } from '@/components/ui/button'
 import { useRecoverPasswordMutation } from '@/api/auth'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { Progress } from '@/components/ui/loader'
+import { TextField } from '@/components/ui/textField'
 
 type FormValues = z.infer<typeof loginSchema>
 const loginSchema = z.object({
@@ -17,12 +18,23 @@ const loginSchema = z.object({
 
 const html =
   '<h1>Hi, ##name##</h1><p>Click <a href="http://localhost:5173/createNewPassword/##token##">here</a> to recover your password</p>'
+
 export const ForgotYourPassword = () => {
   const navigate = useNavigate()
-  const { handleSubmit, control } = useForm<FormValues>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
+    mode: 'onSubmit',
+    defaultValues: {
+      email: '',
+    },
   })
-  const [sendRequest, { isLoading }] = useRecoverPasswordMutation()
+
+  const [sendRequest, { isError, isLoading }] = useRecoverPasswordMutation()
+
   const onSubmit = (data: FormValues) => {
     const { email } = data
     sendRequest({ email, html })
@@ -30,47 +42,50 @@ export const ForgotYourPassword = () => {
       .then(() => {
         navigate(`/${email}/checkEmail`)
       })
-  }
-
-  if (isLoading) {
-    return <Progress />
+      .catch(err => {
+        isError && toast.error(err.data.message)
+      })
   }
 
   return (
-    <Card className={s.forgotYourPassword}>
-      <Typography className={s.label} children={'Forgot your password?'} variant={'large'} />
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <ControlledInput
-          className={s.inputEmail}
-          placeholder={'Email'}
-          control={control}
-          name={'email'}
-          type={'text'}
-          label={'Email'}
-          inputId={'inputEmailSignUp'}
+    <>
+      {isLoading && <Progress />}
+
+      <Card className={s.forgotYourPassword}>
+        <Typography className={s.label} children={'Forgot your password?'} variant={'large'} />
+        <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+          <TextField
+            className={s.inputEmail}
+            placeholder={'Email'}
+            type={'text'}
+            label={'Email'}
+            inputId={'inputEmailSignUp'}
+            errorMessage={errors.email && errors.email?.message}
+            {...register('email')}
+          />
+          <Typography as={'p'} className={s.text} variant={'body2'}>
+            Enter your email address and we will send you further instructions
+          </Typography>
+          <Button
+            className={s.button}
+            type={'submit'}
+            variant={'primary'}
+            fullWidth
+            children={<Typography children={'Send Instructions'} variant={'subtitle2'} as={'p'} />}
+          />
+        </form>
+        <Typography
+          className={s.rememberYourPassword}
+          children={'Did you remember your password?'}
+          variant={'body2'}
+          as={'p'}
         />
-        <Typography as={'p'} className={s.text} variant={'body2'}>
-          Enter your email address and we will send you further instructions
-        </Typography>
-        <Button
-          className={s.button}
-          type={'submit'}
-          variant={'primary'}
-          fullWidth
-          children={<Typography children={'Send Instructions'} variant={'subtitle2'} as={'p'} />}
-        />
-      </form>
-      <Typography
-        className={s.rememberYourPassword}
-        children={'Did you remember your password?'}
-        variant={'body2'}
-        as={'p'}
-      />
-      <Button className={s.btnTryLoggingIn} variant={'link'}>
-        <Typography className={s.tryLoggingIn} as={Link} to={'/login'} variant={'subtitle2'}>
-          Try logging in
-        </Typography>
-      </Button>
-    </Card>
+        <Button className={s.btnTryLoggingIn} variant={'link'}>
+          <Typography className={s.tryLoggingIn} as={Link} to={'/login'} variant={'subtitle2'}>
+            Try logging in
+          </Typography>
+        </Button>
+      </Card>
+    </>
   )
 }
