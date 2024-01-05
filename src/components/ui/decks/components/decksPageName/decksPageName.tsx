@@ -92,7 +92,6 @@ export const DecksPageName = () => {
           toast.error(err.data.errorMessages[0].message)
         })
     } else {
-      // setError('name', { message: 'String must contain at least 3 character(s)' })
       setOpen(true)
     }
   })

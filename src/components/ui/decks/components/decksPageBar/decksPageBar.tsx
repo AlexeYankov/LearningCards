@@ -1,14 +1,7 @@
-import { DeleteIcon } from '@/asserts/icons'
-import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
-import { Slider } from '@/components/ui/slider'
-import { Tabs } from '@/components/ui/tabs'
-import { TextField } from '@/components/ui/textField'
-import { Typography } from '@/components/ui/typography'
-
-import f from '../../decksPage.module.scss'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '@/api/store'
+import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
+
 import {
   changeCurrentPage,
   changeMaxCardsCount,
@@ -16,9 +9,16 @@ import {
   resetFilter,
   searchDeckByName,
 } from '@/api/decks'
+import { useAppDispatch, useAppSelector } from '@/api/store'
+import { DeleteIcon } from '@/asserts/icons'
+import { Button } from '@/components/ui/button'
+import { Slider } from '@/components/ui/slider'
+import { Tabs } from '@/components/ui/tabs'
+import { TextField } from '@/components/ui/textField'
+import { Typography } from '@/components/ui/typography'
 import { useDebounce } from '@/hooks/useDebounce'
-import { useLocation } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+
+import f from '../../decksPage.module.scss'
 
 export const DecksPageBar = () => {
   const dispatch = useAppDispatch()
@@ -46,6 +46,7 @@ export const DecksPageBar = () => {
 
   const handleSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
     const newSearchValue = e.currentTarget.value
+
     setSearchValue(newSearchValue)
     localStorage.setItem('page', '1')
     localStorage.setItem('searchValue', newSearchValue)
@@ -77,29 +78,32 @@ export const DecksPageBar = () => {
       <div>
         <TextField
           className={f.container__textField}
+          inputId={'searchInputDecks'}
+          onChange={handleSearchValue}
+          onClearClick={handleClearSearchValueClick}
           placeholder={t('input_search')}
           search
-          onClearClick={handleClearSearchValueClick}
           value={searchValue || ''}
-          onChange={handleSearchValue}
         />
       </div>
 
       <div>
-        <Label label={t('show_decks_cards')} />
+        <Typography variant={'body2'}>{t('show_decks_cards')}</Typography>
         <Tabs title={[t('my_decks'), t('all_decks')]} />
       </div>
 
-      <div style={{ position: 'relative', maxWidth: '250px', width: '100%' }}>
-        <Label label={t('number_cards')} style={{ position: 'absolute', top: '-25px' }} />
+      <div className={f.pagebar__box_slider}>
+        <Typography className={f.typography__slider} variant={'body2'}>
+          {t('number_cards')}
+        </Typography>
         <Slider />
       </div>
       <div>
         <Button
           className={f.button}
           icon={<DeleteIcon />}
-          variant={'secondary'}
           onClick={handleResetFilter}
+          variant={'secondary'}
         >
           <Typography variant={'body2'}>{t('clear_filter')}</Typography>
         </Button>

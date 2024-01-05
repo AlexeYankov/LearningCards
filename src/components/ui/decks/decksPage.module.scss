@@ -280,3 +280,14 @@
   place-items: center;
   padding: 60px 0;
 }
+
+.pagebar__box_slider {
+  position: relative;
+  width: 100%;
+  max-width: 250px;
+
+  .typography__slider {
+    position: absolute;
+    top: -25px;
+  }
+}
