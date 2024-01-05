@@ -2,25 +2,25 @@ import { useState } from 'react'
 
 import img from '@/asserts/Mask.png'
 import { ImageIcon } from '@/asserts/icons'
+import { Button } from '@/components/ui/button'
+import { CheckBox } from '@/components/ui/checkbox'
+import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal/modal'
+import { Select } from '@/components/ui/select'
+import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
+import { BrowserRouterDecorator, ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
 import { Meta, StoryObj } from '@storybook/react'
 
 import s from './modal.module.scss'
 
-import { Button } from '@/components/ui/button'
-import { CheckBox } from '@/components/ui/checkbox'
 import { ScrollBar } from '../scrollbar'
-import { Select } from '@/components/ui/select'
-import { Modal, ModalDescription, ModalTitle } from '@/components/ui/modal/modal'
-import { TextField } from '@/components/ui/textField'
-import { BrowserRouterDecorator, ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
 
 const meta = {
   argTypes: {},
   component: Modal,
+  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator, ThemeDecorator],
   tags: ['autodocs'],
   title: 'Components/Modal',
-  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator, ThemeDecorator],
 } satisfies Meta<typeof Modal>
 
 export default meta
@@ -81,6 +81,7 @@ export const ModalScrollbarDescriptionDemo: Story = {
 
 export const ModalWithComponentsDemo: Story = {
   render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [isCheck, setIsCheck] = useState(false)
 
     return (
