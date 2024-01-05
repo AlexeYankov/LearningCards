@@ -3,11 +3,11 @@ import { Typography } from '@/components/ui/typography'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ControlledInput } from '@/components/ui/controlled'
 import { Button } from '../../button'
 import { Card } from '@/components/ui/card'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useCreateUserMutation } from '@/api/auth'
+import { TextField } from '@/components/ui/textField'
 
 type FormValues = z.infer<typeof loginSchema>
 const loginSchema = z
@@ -20,46 +20,62 @@ const loginSchema = z
     message: "Passwords don't match",
     path: ['confirmPassword'],
   })
+
 export const SignUp = () => {
-  const { handleSubmit, control } = useForm<FormValues>({
+  const navigate = useNavigate()
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
+    mode: 'onSubmit',
+    defaultValues: {
+      email: '',
+      confirmPassword: '',
+      password: '',
+    },
   })
-  const [signUp, { isSuccess }] = useCreateUserMutation()
-  if (isSuccess) return <Navigate to={'/login'} />
+
+  const [signUp] = useCreateUserMutation()
+
   const onSubmit = (data: FormValues) => {
     const { email, password } = data
-    signUp({ email, password })
+    signUp({ email, password }).then(() => {
+      navigate('/login')
+    })
   }
   return (
     <Card className={s.signUp}>
       <Typography className={s.label} children={'Sign Up'} variant={'large'} />
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <ControlledInput
+        <TextField
           placeholder={'Email'}
-          control={control}
-          name={'email'}
           type={'text'}
           label={'Email'}
           inputId={'inputEmail'}
+          errorMessage={errors.email && errors.email?.message}
+          {...register('email')}
         />
-        <ControlledInput
+        <TextField
           placeholder={'Password'}
-          control={control}
-          name={'password'}
           type={'password'}
           label={'Password'}
           password
           inputId={'inputPassword'}
+          errorMessage={errors.password && errors.password?.message}
+          {...register('password')}
         />
-        <ControlledInput
+        <TextField
           className={s.inputConfirmPassword}
           placeholder={'Confirm Password'}
-          control={control}
-          name={'confirmPassword'}
           type={'password'}
           label={'Confirm Password'}
           password
           inputId={'inputConfirmPassword'}
+          errorMessage={errors.confirmPassword && errors.confirmPassword?.message}
+          {...register('confirmPassword')}
         />
         <Button
           className={s.button}

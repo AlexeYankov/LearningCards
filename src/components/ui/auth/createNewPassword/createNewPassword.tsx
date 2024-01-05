@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { ControlledInput } from '@/components/ui/controlled'
 import { Typography } from '@/components/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import s from './createNewPassword.module.scss'
 import { useResetPasswordMutation } from '@/api/auth'
 import { useNavigate, useParams } from 'react-router-dom'
+import { TextField } from '@/components/ui/textField'
 
 type FormValues = z.infer<typeof loginSchema>
 const loginSchema = z.object({
@@ -15,12 +15,22 @@ const loginSchema = z.object({
 })
 
 export const CreateNewPassword = () => {
-  const { control, handleSubmit } = useForm<FormValues>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
+    mode: 'onSubmit',
+    defaultValues: {
+      password: '',
+    },
   })
+
   const [newPassword] = useResetPasswordMutation()
   const params = useParams<'*'>()
   const navigate = useNavigate()
+
   const onSubmit = (data: FormValues) => {
     const { password } = data
     const token = params['*']
@@ -38,15 +48,15 @@ export const CreateNewPassword = () => {
         Create new password
       </Typography>
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <ControlledInput
+        <TextField
           className={s.inputPassword}
-          control={control}
           inputId={'inputCreateNewPassword'}
           label={'Password'}
-          name={'password'}
           password
           placeholder={'Create New Password'}
           type={'password'}
+          errorMessage={errors.password && errors.password?.message}
+          {...register('password')}
         />
         <Typography as={'p'} className={s.text} variant={'body2'}>
           Create new password and we will send you further instructions to email

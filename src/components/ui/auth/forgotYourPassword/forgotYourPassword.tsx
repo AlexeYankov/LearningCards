@@ -21,6 +21,7 @@ const html =
 
 export const ForgotYourPassword = () => {
   const navigate = useNavigate()
+
   const {
     handleSubmit,
     register,

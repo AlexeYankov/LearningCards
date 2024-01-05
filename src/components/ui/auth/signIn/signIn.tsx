@@ -3,25 +3,36 @@ import { Typography } from '@/components/ui/typography'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ControlledCheckbox, ControlledInput } from '@/components/ui/controlled'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Link, useNavigate } from 'react-router-dom'
 import { useLoginMutation } from '@/api/auth'
 import { Progress } from '@/components/ui/loader'
+import { TextField } from '@/components/ui/textField'
+import { CheckBox } from '@/components/ui/checkbox'
 
 type FormValues = z.infer<typeof loginSchema>
 
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(3),
-  rememberMe: z.boolean().default(true),
+  rememberMe: z.boolean().default(false),
 })
 export const SignIn = () => {
   const navigate = useNavigate()
 
-  const { handleSubmit, control } = useForm<FormValues>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
+    mode: 'onSubmit',
+    defaultValues: {
+      email: '',
+      password: '',
+      rememberMe: false,
+    },
   })
 
   const [login, { isLoading }] = useLoginMutation()
@@ -40,27 +51,25 @@ export const SignIn = () => {
     <Card className={s.signIn}>
       <Typography className={s.label} children={'Sign In'} variant={'large'} />
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <ControlledInput
+        <TextField
           placeholder={'Email'}
-          control={control}
-          name={'email'}
           type={'text'}
           label={'Email'}
           inputId={'inputEmailSignUp'}
+          errorMessage={errors.email && errors.email?.message}
+          {...register('email')}
         />
-        <ControlledInput
+        <TextField
           placeholder={'Password'}
-          control={control}
-          name={'password'}
           type={'password'}
           label={'Password'}
           password
           inputId={'inputPasswordSignUp'}
+          errorMessage={errors.password && errors.password?.message}
+          {...register('password')}
         />
         <div className={s.checkboxContainer}>
-          <ControlledCheckbox
-            control={control}
-            name={'rememberMe'}
+          <CheckBox
             className={s.checkbox}
             width={'24'}
             height={'24'}
@@ -68,6 +77,7 @@ export const SignIn = () => {
             SelectedIconID={'checkbox-selected'}
             label={'Remember me'}
             checkboxId={'ControlledCheckboxSignIn'}
+            {...register('rememberMe')}
           />
         </div>
         <div className={s.linkContainer}>
