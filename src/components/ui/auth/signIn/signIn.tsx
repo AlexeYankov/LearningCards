@@ -8,27 +8,32 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Link, useNavigate } from 'react-router-dom'
 import { useLoginMutation } from '@/api/auth'
-import { Loader } from '@/components/ui/loader'
+import { Progress } from '@/components/ui/loader'
 
 type FormValues = z.infer<typeof loginSchema>
+
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(3),
   rememberMe: z.boolean().default(true),
 })
 export const SignIn = () => {
+  const navigate = useNavigate()
+
   const { handleSubmit, control } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
   })
+
   const [login, { isLoading }] = useLoginMutation()
-  const navigate = useNavigate()
-  if (isLoading) return <Loader />
+
   const onSubmit = (data: FormValues) => {
-    login(data)
-      .unwrap()
-      .then(() => {
-        navigate('/')
-      })
+    login(data).then(() => {
+      navigate('/')
+    })
+  }
+
+  if (isLoading) {
+    return <Progress />
   }
 
   return (

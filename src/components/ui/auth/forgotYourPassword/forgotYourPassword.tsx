@@ -8,7 +8,7 @@ import { Typography } from '@/components/ui/typography'
 import { Button } from '@/components/ui/button'
 import { useRecoverPasswordMutation } from '@/api/auth'
 import { Link, useNavigate } from 'react-router-dom'
-import { Loader } from '@/components/ui/loader'
+import { Progress } from '@/components/ui/loader'
 
 type FormValues = z.infer<typeof loginSchema>
 const loginSchema = z.object({
@@ -23,7 +23,6 @@ export const ForgotYourPassword = () => {
     resolver: zodResolver(loginSchema),
   })
   const [sendRequest, { isLoading }] = useRecoverPasswordMutation()
-  if (isLoading) return <Loader />
   const onSubmit = (data: FormValues) => {
     const { email } = data
     sendRequest({ email, html })
@@ -32,6 +31,11 @@ export const ForgotYourPassword = () => {
         navigate(`/${email}/checkEmail`)
       })
   }
+
+  if (isLoading) {
+    return <Progress />
+  }
+
   return (
     <Card className={s.forgotYourPassword}>
       <Typography className={s.label} children={'Forgot your password?'} variant={'large'} />

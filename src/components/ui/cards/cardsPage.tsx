@@ -17,7 +17,6 @@ import { Pagination } from '@/components/ui/pagination'
 import { convertedTime } from '@/helpers/convertedTime'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/api/auth'
-import { Loader } from '@/components/ui/loader'
 import { useDebounce } from '@/hooks/useDebounce'
 import { BackLink } from '@/components/ui/backLink'
 import { useTranslation } from 'react-i18next'
@@ -33,7 +32,7 @@ export const CardsPage = () => {
   const itemsPerPage = useAppSelector(state => state.cards.itemsPerPage)
   const [searchValue, setSearchValue] = useState('')
   const debouncedSearchValue = useDebounce(searchValue, 500)
-  const { data: cards, isLoading } = useGetCardsQuery({
+  const { data: cards } = useGetCardsQuery({
     id: id!,
     currentPage,
     itemsPerPage,
@@ -68,10 +67,6 @@ export const CardsPage = () => {
     dispatch(selectedOptionSlice({ valueSelect: '' }))
   }, [])
 
-  if (isLoading) {
-    return <Loader />
-  }
-
   const columns: Column[] = [
     { key: 'question', sortable: true, title: t('question') },
     { key: 'answer', sortable: true, title: t('answer') },
@@ -81,119 +76,124 @@ export const CardsPage = () => {
   ]
 
   return (
-    <div className={s.container}>
-      <BackLink title={t('back_to_decks_list')} to={''} />
-      <PageName
-        cardsCount={deckById?.cardsCount!}
-        packTitle={deckById?.name}
-        isMyCard={isMyCard}
-        id={id}
-      />
-      <div className={s.deckCoverBox}>
-        {deckById?.cover && <img className={s.deckCover} src={deckById?.cover} alt="deck cover" />}
-      </div>
-      <PageBar value={searchValue} onChange={searchCards} />
-      {!!cards?.items?.length ? (
-        <Root className={s.container__common}>
-          <Head>
-            <Row className={s.cardsRow}>
-              {columns.map(({ title, key, sortable }) => {
-                if (!isMyCard && key === 'actions') {
-                  return null
-                }
-                return (
-                  <HeadCell className={s.headCell} key={key} onClick={() => handleSort(key)}>
-                    {title}
-                    {sort && sort.key === key && sortable && sort.direction && (
-                      <button className={s.sortIcon}>
-                        {sort.direction === `${key}-desc` ? '▲' : '▼'}
-                      </button>
-                    )}
-                  </HeadCell>
+    <>
+      {/*{isLoading && <div>123123123123123123123</div>}*/}
+      <div className={s.container}>
+        <BackLink title={t('back_to_decks_list')} to={''} />
+        <PageName
+          cardsCount={deckById?.cardsCount!}
+          packTitle={deckById?.name}
+          isMyCard={isMyCard}
+          id={id}
+        />
+        <div className={s.deckCoverBox}>
+          {deckById?.cover && (
+            <img className={s.deckCover} src={deckById?.cover} alt="deck cover" />
+          )}
+        </div>
+        <PageBar value={searchValue} onChange={searchCards} />
+        {!!cards?.items?.length ? (
+          <Root className={s.container__common}>
+            <Head>
+              <Row className={s.cardsRow}>
+                {columns.map(({ title, key, sortable }) => {
+                  if (!isMyCard && key === 'actions') {
+                    return null
+                  }
+                  return (
+                    <HeadCell className={s.headCell} key={key} onClick={() => handleSort(key)}>
+                      {title}
+                      {sort && sort.key === key && sortable && sort.direction && (
+                        <button className={s.sortIcon}>
+                          {sort.direction === `${key}-desc` ? '▲' : '▼'}
+                        </button>
+                      )}
+                    </HeadCell>
+                  )
+                })}
+              </Row>
+            </Head>
+            <Body>
+              {cards?.items?.map(card => {
+                const starsGrade = Array.from({ length: Math.round(card.grade || 0) }, () => 'star')
+                let result = starsGrade
+                const emptyStarsGrade = Array.from(
+                  { length: 5 - Math.round(card.grade || 0) },
+                  () => 'star-outline'
                 )
-              })}
-            </Row>
-          </Head>
-          <Body>
-            {cards?.items?.map(card => {
-              const starsGrade = Array.from({ length: Math.round(card.grade || 0) }, () => 'star')
-              let result = starsGrade
-              const emptyStarsGrade = Array.from(
-                { length: 5 - Math.round(card.grade || 0) },
-                () => 'star-outline'
-              )
 
-              if (Math.round(card.grade || 0) - 5 < 0) {
-                result = starsGrade.concat(emptyStarsGrade)
-              }
+                if (Math.round(card.grade || 0) - 5 < 0) {
+                  result = starsGrade.concat(emptyStarsGrade)
+                }
 
-              return (
-                <Row key={card.id} className={s.rowBox}>
-                  <Cell className={s.bodyCell}>
-                    <div className={s.imageWithNameBox}>
-                      {card.question && card.questionImg && (
-                        <img
-                          className={s.image}
-                          src={card.questionImg}
-                          alt={`${card.questionImg + ' image'}`}
-                        />
-                      )}
-                      <Typography variant={'body1'} className={s.typography}>
-                        {card.question}
-                      </Typography>
-                    </div>
-                  </Cell>
-                  <Cell className={s.bodyCell}>
-                    <div className={s.imageWithNameBox}>
-                      {card.answer && card.answerImg && (
-                        <img
-                          className={s.image}
-                          src={card.answerImg}
-                          alt={`${card.answerImg + ' image'}`}
-                        />
-                      )}
-                      <Typography variant={'body1'} className={s.typography}>
-                        {card.answer}
-                      </Typography>
-                    </div>
-                  </Cell>
-                  <Cell className={s.bodyCell}>{convertedTime(card.updated)}</Cell>
-                  <Cell className={`${s.bodyCell} `}>
-                    <div className={s.starsBox}>
-                      {result.map((star, i) => {
-                        return <StarIcon iconId={star} key={i} />
-                      })}
-                    </div>
-                  </Cell>
-                  {isMyCard && (
-                    <Cell className={`${s.bodyCell} `}>
-                      <div className={s.iconBox}>
-                        <AddEditCard editIcon={<EditIcon />} card={card} />
-                        <DeleteCardModal card={card} />
+                return (
+                  <Row key={card.id} className={s.rowBox}>
+                    <Cell className={s.bodyCell}>
+                      <div className={s.imageWithNameBox}>
+                        {card.question && card.questionImg && (
+                          <img
+                            className={s.image}
+                            src={card.questionImg}
+                            alt={`${card.questionImg + ' image'}`}
+                          />
+                        )}
+                        <Typography variant={'body1'} className={s.typography}>
+                          {card.question}
+                        </Typography>
                       </div>
                     </Cell>
-                  )}
-                </Row>
-              )
-            })}
-          </Body>
-        </Root>
-      ) : (
-        <Typography as={'p'} variant={'body1'} className={s.emptyPack}>
-          No content with these terms...
-        </Typography>
-      )}
-      {cards?.pagination?.totalPages! > 1 && (
-        <Pagination
-          arrowColor={'white'}
-          arrowID={'arrow-ios-back'}
-          totalItems={cards?.pagination?.totalItems!}
-          reversedArrowID={'arrow-ios-forward'}
-          reversed
-          totalPages={cards?.pagination?.totalPages!}
-          location={'cards'}
-        />
-      )}
-    </div>
+                    <Cell className={s.bodyCell}>
+                      <div className={s.imageWithNameBox}>
+                        {card.answer && card.answerImg && (
+                          <img
+                            className={s.image}
+                            src={card.answerImg}
+                            alt={`${card.answerImg + ' image'}`}
+                          />
+                        )}
+                        <Typography variant={'body1'} className={s.typography}>
+                          {card.answer}
+                        </Typography>
+                      </div>
+                    </Cell>
+                    <Cell className={s.bodyCell}>{convertedTime(card.updated)}</Cell>
+                    <Cell className={`${s.bodyCell} `}>
+                      <div className={s.starsBox}>
+                        {result.map((star, i) => {
+                          return <StarIcon iconId={star} key={i} />
+                        })}
+                      </div>
+                    </Cell>
+                    {isMyCard && (
+                      <Cell className={`${s.bodyCell} `}>
+                        <div className={s.iconBox}>
+                          <AddEditCard editIcon={<EditIcon />} card={card} />
+                          <DeleteCardModal card={card} />
+                        </div>
+                      </Cell>
+                    )}
+                  </Row>
+                )
+              })}
+            </Body>
+          </Root>
+        ) : (
+          <Typography as={'p'} variant={'body1'} className={s.emptyPack}>
+            No content with these terms...
+          </Typography>
+        )}
+        {cards?.pagination?.totalPages! > 1 && (
+          <Pagination
+            arrowColor={'white'}
+            arrowID={'arrow-ios-back'}
+            totalItems={cards?.pagination?.totalItems!}
+            reversedArrowID={'arrow-ios-forward'}
+            reversed
+            totalPages={cards?.pagination?.totalPages!}
+            location={'cards'}
+          />
+        )}
+      </div>
+    </>
   )
 }

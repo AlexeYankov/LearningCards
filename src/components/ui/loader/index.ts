@@ -1,1 +1,1 @@
-export { Loader, Progress } from './loader'
+export { Progress } from './loader'
