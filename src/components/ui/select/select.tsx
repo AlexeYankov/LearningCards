@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
+
+import { changeCardsCurrentPage, changeCardsItemsPerPage, selectedOptionSlice } from '@/api/cards'
 import { changeCurrentPage, changeItemsPerPage } from '@/api/decks'
-import { useAppDispatch, useAppSelector } from '@/api/store.ts'
+import { useAppDispatch, useAppSelector } from '@/api/store'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as SelectRadix from '@radix-ui/react-select'
 
 import s from './selectRadix.module.scss'
-
-import { Label } from '@/components/ui/label'
-import { changeCardsCurrentPage, changeCardsItemsPerPage, selectedOptionSlice } from '@/api/cards'
 
 type SelectItemProps = {
   children?: React.ReactNode
@@ -20,13 +19,13 @@ type SelectItemProps = {
 type SelectProps = {
   classname?: string
   disabled?: boolean
+  isAddEditCard?: boolean
   itemsPerPage?: number
   label?: string
   options: Array<string>
   reversed?: boolean
   selectId?: string
   variant?: string
-  isAddEditCard?: boolean
 }
 
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
@@ -57,11 +56,11 @@ const SelectContent = ({ options }: { options: string[] }) => {
 
 export const Select = ({
   classname,
+  isAddEditCard,
   label,
   options,
   reversed,
   selectId,
-  isAddEditCard,
   ...rest
 }: SelectProps) => {
   const dispatch = useAppDispatch()
@@ -86,13 +85,12 @@ export const Select = ({
   }
 
   return (
-    <SelectRadix.Root value={itemsPerPage.toString()} onValueChange={handleValueChange} {...rest}>
+    <SelectRadix.Root onValueChange={handleValueChange} value={itemsPerPage.toString()} {...rest}>
       <div className={s.box}>
-        <Label className={`${s.label} `} htmlFor={selectId} label={label} />
         <SelectRadix.Trigger
           className={s.SelectTrigger + ' ' + `${reversed ? s.hoverActive : ''} `}
-          id={selectId}
           disabled={options.length === 0}
+          id={selectId}
         >
           <div className={`${s.selectTriggerBox} ${classname}`}>
             <SelectRadix.Value>{isAddEditCard ? selectedValue : itemsPerPage}</SelectRadix.Value>
