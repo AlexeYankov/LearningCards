@@ -62,13 +62,13 @@ export type Sort = {
   direction: SortDescriptionType
 } | null
 export type GetDecksParamsType = {
-  authorId?: string
-  currentPage?: number
-  itemsPerPage?: number
-  maxCardsCount?: number
-  minCardsCount?: number
-  name?: string
-  orderBy?: Sort
+  authorId: string
+  currentPage: number
+  itemsPerPage: number
+  maxCardsCount: number
+  minCardsCount: number
+  name: string
+  orderBy: Sort
 }
 export type CreateDeckArgType = {
   cover?: File
@@ -76,7 +76,7 @@ export type CreateDeckArgType = {
   isPrivate?: boolean
 }
 export type LearnRandomPostArg = {
-  id?: string
-  cardId?: string
+  id: string
+  cardId: string
   grade: number
 }
