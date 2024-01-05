@@ -4,7 +4,6 @@ export const authService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       createUser: builder.mutation<SignUpResponseType, SignUpArgsType>({
-        invalidatesTags: ['Me'],
         query: body => ({
           body,
           method: 'Post',
