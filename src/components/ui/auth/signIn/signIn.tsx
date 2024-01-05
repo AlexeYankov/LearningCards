@@ -84,7 +84,6 @@ export const SignIn = () => {
             <CheckBox
               IconID={'checkbox-unselected'}
               SelectedIconID={'checkbox-selected'}
-              checkboxId={'ControlledCheckboxSignIn'}
               checked={isPrivate}
               className={s.checkbox}
               height={'24'}

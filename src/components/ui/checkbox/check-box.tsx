@@ -40,7 +40,6 @@ export const CheckBox = <T extends ElementType = 'input'>(
     <div
       className={`${s.checkboxContainer} ${className}`}
       onClick={() => (onChange ? onChange(!checked) : '')}
-      style={disabled ? { cursor: 'not-allowed', opacity: '0.7', pointerEvents: 'none' } : {}}
     >
       <div className={s.checkboxIconContainer}>
         <div className={s.checkboxUnselected}>
@@ -49,26 +48,9 @@ export const CheckBox = <T extends ElementType = 'input'>(
           </svg>
         </div>
 
-        <Component
-          className={`${fullWidth ? s.fullWidth : ''} ${className}`}
-          htmlFor={label}
-          id={label}
-          style={{
-            display: 'flex',
-            position: 'absolute',
-            width: '0px',
-            zIndex: '-10',
-          }}
-          type={'checkbox'}
-          {...rest}
-        />
+        <Component className={`${s.checkboxComponent} ${className}`} type={'checkbox'} {...rest} />
       </div>
-      {label && (
-        <>
-          <Label htmlFor={label} label={label} />
-          <span id={label}></span>
-        </>
-      )}
+      {label && <Label label={label} />}
     </div>
   )
 }

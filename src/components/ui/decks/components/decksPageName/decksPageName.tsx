@@ -135,7 +135,6 @@ export const DecksPageName = () => {
             <CheckBox
               IconID={'checkbox-unselected'}
               SelectedIconID={'checkbox-selected'}
-              checkboxId={'Private Pack'}
               checked={isPrivate}
               height={'24'}
               label={'Private pack'}

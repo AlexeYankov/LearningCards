@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 
 import { ThemeDecorator } from '@/decorators'
+
 import { CheckBox } from './check-box'
 
 const meta = {
@@ -13,9 +14,9 @@ const meta = {
     },
   },
   component: CheckBox,
+  decorators: [ThemeDecorator],
   tags: ['autodocs'],
   title: 'Components/CheckBox',
-  decorators: [ThemeDecorator],
 } satisfies Meta<typeof CheckBox>
 
 export default meta
@@ -35,7 +36,6 @@ export const Primary: Story = {
         <CheckBox
           IconID={'checkbox-unselected'}
           SelectedIconID={'checkbox-selected'}
-          checkboxId={'checkboxId'}
           checked={isCheck}
           onChange={() => setIsCheck(!isCheck)}
           {...args}
@@ -60,7 +60,6 @@ export const Secondary: Story = {
         <CheckBox
           IconID={'checkbox-unselected'}
           SelectedIconID={'checkbox-selected'}
-          checkboxId={'checkboxIdSecondary'}
           checked={isCheck}
           onChange={() => setIsCheck(!isCheck)}
           {...args}

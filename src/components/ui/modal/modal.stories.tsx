@@ -97,7 +97,6 @@ export const ModalWithComponentsDemo: Story = {
         <CheckBox
           IconID={'checkbox-unselected'}
           SelectedIconID={'checkbox-selected'}
-          checkboxId={'checkboxIdSecondary'}
           checked={isCheck}
           label={'checkBox'}
           onChange={() => setIsCheck(!isCheck)}
@@ -134,7 +133,6 @@ export const ModalWithImageDemo: Story = {
       <CheckBox
         IconID={'checkbox-unselected'}
         SelectedIconID={'checkbox-selected'}
-        checkboxId={'Check-box'}
         disabled={false}
         height={'24'}
         label={'Check-box'}
@@ -185,7 +183,6 @@ export const ModalAddNewDeck: Story = {
           <CheckBox
             IconID={'checkbox-unselected'}
             SelectedIconID={'checkbox-selected'}
-            checkboxId={'Private Deck'}
             disabled={false}
             height={'24'}
             label={'Private Deck'}

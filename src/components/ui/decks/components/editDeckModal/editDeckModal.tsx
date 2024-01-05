@@ -137,7 +137,6 @@ export const EditDeckModal = ({ deck, hover, open, setOpen }: Props) => {
           <CheckBox
             IconID={'checkbox-unselected'}
             SelectedIconID={'checkbox-selected'}
-            checkboxId={'private_deck'}
             checked={isPrivate}
             height={'24'}
             label={t('private_deck')}
