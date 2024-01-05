@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { useLoginMutation } from '@/api/auth'
 import { Button } from '@/components/ui/button'
@@ -25,7 +26,7 @@ export const SignIn = () => {
   const navigate = useNavigate()
 
   const {
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
     register,
   } = useForm<FormValues>({
@@ -33,25 +34,30 @@ export const SignIn = () => {
       email: '',
       password: '',
     },
-    mode: 'onSubmit',
     resolver: zodResolver(loginSchema),
   })
 
   const [login, { isLoading }] = useLoginMutation()
   const [isPrivate, setIsPrivate] = useState(false)
+
   const handeCheckedChange = () => {
     setIsPrivate(prevState => !prevState)
   }
 
   const onSubmit = (data: FormValues) => {
-    login(data).then(() => {
-      navigate('/')
-    })
+    login(data)
+      .unwrap()
+      .then(() => {
+        navigate('/')
+      })
+      .catch(() => {
+        toast.error('Incorrect login or password')
+      })
   }
 
   return (
     <>
-      {isLoading && Progress}
+      {isLoading && <Progress />}
       <Card className={s.signIn}>
         <Typography className={s.label} variant={'large'}>
           Sign In
@@ -97,7 +103,13 @@ export const SignIn = () => {
               Forgot Password?
             </Typography>
           </div>
-          <Button className={s.button} fullWidth type={'submit'} variant={'primary'}>
+          <Button
+            className={s.button}
+            disabled={isSubmitting || isLoading}
+            fullWidth
+            type={'submit'}
+            variant={'primary'}
+          >
             <Typography as={'p'} variant={'subtitle2'}>
               Sign In
             </Typography>
