@@ -9,7 +9,6 @@ import { Label } from '../label'
 type Props<T extends ElementType = 'input'> = {
   IconID?: string
   SelectedIconID?: string
-  checkboxId?: string
   className?: string
   fullWidth?: boolean
   height?: string
@@ -24,7 +23,6 @@ export const CheckBox = <T extends ElementType = 'input'>(
     IconID,
     SelectedIconID,
     as: Component = 'input',
-    checkboxId,
     checked,
     className,
     disabled = false,
@@ -53,6 +51,8 @@ export const CheckBox = <T extends ElementType = 'input'>(
 
         <Component
           className={`${fullWidth ? s.fullWidth : ''} ${className}`}
+          htmlFor={label}
+          id={label}
           style={{
             display: 'flex',
             position: 'absolute',
@@ -63,7 +63,12 @@ export const CheckBox = <T extends ElementType = 'input'>(
           {...rest}
         />
       </div>
-      {label && <Label htmlFor={'checkboxId'} label={label} />}
+      {label && (
+        <>
+          <Label htmlFor={label} label={label} />
+          <span id={label}></span>
+        </>
+      )}
     </div>
   )
 }

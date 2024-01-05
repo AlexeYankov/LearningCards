@@ -114,7 +114,7 @@ export const EditDeckModal = ({ deck, hover, open, setOpen }: Props) => {
       }
     >
       <ModalTitle title={t('edit_deck')} />
-      <form onSubmit={onSubmit}>
+      <form id={'editDeckModal'} name={'editDeckModal'} onSubmit={onSubmit}>
         <div className={s.contentComponents}>
           <div className={s.imageBtnBox}>
             <ImageSelector
@@ -137,7 +137,7 @@ export const EditDeckModal = ({ deck, hover, open, setOpen }: Props) => {
           <CheckBox
             IconID={'checkbox-unselected'}
             SelectedIconID={'checkbox-selected'}
-            checkboxId={'Private deck'}
+            checkboxId={'private_deck'}
             checked={isPrivate}
             height={'24'}
             label={t('private_deck')}
