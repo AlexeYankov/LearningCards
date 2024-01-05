@@ -18,7 +18,7 @@ import { z } from 'zod'
 import s from '../../decksPage.module.scss'
 
 const schema = z.object({
-  cover: z.array(z.instanceof(File)),
+  cover: z.any(),
   name: z.string().nonempty('Field is required').min(3).max(30),
 })
 
@@ -39,7 +39,6 @@ export const DecksPageName = () => {
     setValue,
   } = useForm<Form>({
     defaultValues: {
-      cover: undefined,
       name: '',
     },
     mode: 'onSubmit',
@@ -75,14 +74,15 @@ export const DecksPageName = () => {
 
   const onSubmit = handleSubmit(data => {
     const form = new FormData()
+    const { cover, name } = data
 
-    if (data.cover && data.cover.length > 0) {
-      form.append('cover', data.cover[0])
+    if (cover && cover.length > 0) {
+      form.append('cover', cover[0])
     }
-    form.append('name', data.name)
+    form.append('name', name.trim())
     form.append('isPrivate', String(isPrivate))
 
-    if (data.name.trim() !== '' && data.name.length >= 3) {
+    if (name.trim() !== '' && name.length >= 3) {
       createDeck(form as unknown as CreateDeckArgType)
         .unwrap()
         .then(() => {
