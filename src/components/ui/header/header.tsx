@@ -9,6 +9,7 @@ import userImg from '@/asserts/userImg.png'
 import { Button } from '@/components/ui/button'
 import { DropDownMenu } from '@/components/ui/dropDown'
 import { Progress } from '@/components/ui/loader'
+import { SwitchLang } from '@/components/ui/switchLang'
 import { Typography } from '@/components/ui/typography'
 
 import s from './header.module.scss'
@@ -33,6 +34,7 @@ export const Header: FC = () => {
         <div className={s.textHeader}>
           {!isLoading && (
             <>
+              <SwitchLang />
               {!error && (
                 <DropDownMenu
                   avatar={data?.avatar || userImg}
