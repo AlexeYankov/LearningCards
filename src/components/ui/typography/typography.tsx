@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementType, forwardRef, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ElementType, ReactNode, forwardRef } from 'react'
 
 import s from './typography.module.scss'
 
