@@ -18,8 +18,8 @@ import s from './signIn.module.scss'
 type FormValues = z.infer<typeof loginSchema>
 
 const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(3),
+  email: z.string().nonempty('Field is required').email(),
+  password: z.string().nonempty('Field is required').min(3),
 })
 
 export const SignIn = () => {
@@ -34,6 +34,7 @@ export const SignIn = () => {
       email: '',
       password: '',
     },
+    mode: 'onSubmit',
     resolver: zodResolver(loginSchema),
   })
 
