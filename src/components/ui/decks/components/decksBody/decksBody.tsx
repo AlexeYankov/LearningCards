@@ -21,35 +21,34 @@ export const DecksBody = ({ decks, isFetching }: Props) => {
   return (
     <Body>
       {decks?.items?.map(deck => {
-        const isMyDeck = me?.id === deck.author.id
+        const { author, cardsCount, cover, id, isPrivate, name, updated } = deck
+        const isMyDeck = me?.id === author.id
 
         return (
-          <Row className={s.decksRow} key={deck.id}>
-            <Cell className={`${s.bodyCell} ${deck.isPrivate && s.isPrivate}`}>
+          <Row className={s.decksRow} key={id}>
+            <Cell className={`${s.bodyCell} ${isPrivate && s.isPrivate}`}>
               {isFetching ? (
                 <SkeletonC width={60} />
               ) : (
-                <Link className={s.deckNameWithImgBox} to={deck.id || ''}>
-                  {deck.cover && (
-                    <img alt={`${deck.cover + ' image'}`} className={s.image} src={deck.cover} />
-                  )}
+                <Link className={s.deckNameWithImgBox} to={id || ''}>
+                  {cover && <img alt={`${cover + ' image'}`} className={s.image} src={cover} />}
 
-                  {deck.name && (
+                  {name && (
                     <Typography className={s.deckName} variant={'body1'}>
-                      {deck.name}
+                      {name}
                     </Typography>
                   )}
                 </Link>
               )}
             </Cell>
             <Cell className={s.bodyCell}>
-              {isFetching ? <SkeletonC width={20} /> : deck.cardsCount < 0 ? 0 : deck.cardsCount}
+              {isFetching ? <SkeletonC width={20} /> : cardsCount < 0 ? 0 : cardsCount}
             </Cell>
             <Cell className={s.bodyCell}>
-              {isFetching ? <SkeletonC width={90} /> : convertedTime(deck.updated)}
+              {isFetching ? <SkeletonC width={90} /> : convertedTime(updated)}
             </Cell>
             <Cell className={s.bodyCell}>
-              {isFetching ? <SkeletonC width={40} /> : deck.author.name}
+              {isFetching ? <SkeletonC width={40} /> : author.name}
             </Cell>
             <Cell className={`${s.bodyCell}`}>
               {isFetching ? (
