@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { DropDown, ItemWithIcon } from '@/components/ui/dropDown'
@@ -12,8 +13,17 @@ export enum Lang {
 export const SwitchLang = () => {
   const { i18n } = useTranslation()
 
-  const toggleLanguage = async (newLang: any) => {
+  useEffect(() => {
+    const storedLang = localStorage.getItem('lang')
+
+    if (storedLang) {
+      i18n.changeLanguage(storedLang)
+    }
+  }, [])
+
+  const toggleLanguage = async (newLang: Lang) => {
     i18n.changeLanguage(newLang)
+    localStorage.setItem('lang', newLang)
   }
 
   return (

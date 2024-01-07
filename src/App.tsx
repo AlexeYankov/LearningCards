@@ -1,22 +1,23 @@
-import { Router } from '@/api/router'
 import { ToastContainer } from 'react-toastify'
+
+import { Router } from '@/api/router'
 
 export function App() {
   return (
     <>
       <Router />
       <ToastContainer
-        position="bottom-left"
         autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
         closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
         draggable
-        pauseOnHover
-        theme="dark"
+        hideProgressBar={false}
         limit={1}
+        newestOnTop={false}
+        pauseOnFocusLoss
+        pauseOnHover
+        position={'bottom-left'}
+        rtl={false}
+        theme={'dark'}
       />
     </>
   )
