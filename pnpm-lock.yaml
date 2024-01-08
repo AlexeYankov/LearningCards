@@ -62,6 +62,9 @@ dependencies:
   async-mutex:
     specifier: ^0.4.0
     version: 0.4.0
+  classnames:
+    specifier: ^2.5.1
+    version: 2.5.1
   i18next:
     specifier: ^23.7.11
     version: 23.7.11
@@ -6986,8 +6989,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /classnames@2.3.2:
-    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
+  /classnames@2.5.1:
+    resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
     dev: false
 
   /clean-stack@2.2.0:
@@ -10632,7 +10635,7 @@ packages:
       react-dom: ^16.9.0 || ^17 || ^18
     dependencies:
       '@popperjs/core': 2.11.8
-      classnames: 2.3.2
+      classnames: 2.5.1
       date-fns: 2.30.0
       prop-types: 15.8.1
       react: 18.2.0
