@@ -12,6 +12,7 @@ import {
   ProfileIcon,
   SignOutIcon,
 } from '@/asserts/icons'
+import { TranslateIcon } from '@/asserts/icons/components/TranslateIcon'
 import { DeleteDeckModal, EditDeckModal } from '@/components/ui/decks'
 import { Typography } from '@/components/ui/typography'
 import * as DropdownRadix from '@radix-ui/react-dropdown-menu'
@@ -25,7 +26,7 @@ type DropDownProps = {
   className?: string
   name?: string
   sideOffset?: number
-  trigger?: 'iconMore' | 'imageAvatar'
+  trigger?: 'iconMore' | 'imageAvatar' | 'languagesIcon'
 }
 
 export const DropDown: FC<DropDownProps> = ({
@@ -41,6 +42,15 @@ export const DropDown: FC<DropDownProps> = ({
   const handleCloseDropdown = () => {
     setOpen(false)
   }
+  const handleTriggerIcon = () => {
+    if (trigger === 'imageAvatar') {
+      return <img alt={''} className={s.triggerImg} src={avatar} tabIndex={0} />
+    } else if (trigger === 'iconMore') {
+      return <MoreIcon />
+    } else if (trigger === 'languagesIcon') {
+      return <TranslateIcon />
+    }
+  }
 
   return (
     <DropdownRadix.Root onOpenChange={setOpen} open={open}>
@@ -51,11 +61,12 @@ export const DropDown: FC<DropDownProps> = ({
         asChild
         className={`${trigger === 'imageAvatar' ? s.trigger : s.triggerIcon}`}
       >
-        {trigger === 'imageAvatar' ? (
-          <img alt={''} className={s.triggerImg} src={avatar} tabIndex={0} />
-        ) : (
-          <MoreIcon />
-        )}
+        {handleTriggerIcon()}
+        {/*{trigger === 'imageAvatar' ? (*/}
+        {/*  <img alt={''} className={s.triggerImg} src={avatar} tabIndex={0} />*/}
+        {/*) : (*/}
+        {/*  <MoreIcon />*/}
+        {/*)}*/}
       </DropdownRadix.Trigger>
       <DropdownRadix.Portal>
         <DropdownRadix.Content
