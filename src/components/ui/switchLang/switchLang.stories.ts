@@ -1,7 +1,7 @@
 import { BrowserRouterDecorator, ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { SwitchLang } from './switchLang.tsx'
+import { SwitchLang } from './switchLang'
 
 const meta = {
   component: SwitchLang,
