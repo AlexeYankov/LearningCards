@@ -1,13 +1,13 @@
+import { BrowserRouterDecorator, ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { BrowserRouterDecorator, ReduxStoreProviderDecorator, ThemeDecorator } from '@/decorators'
-import { SwitchLang } from './switch'
+import { SwitchLang } from './switchLang.tsx'
 
 const meta = {
   component: SwitchLang,
+  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator, ThemeDecorator],
   tags: ['autodocs'],
   title: 'Components/Switch',
-  decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator, ThemeDecorator],
 } satisfies Meta<typeof SwitchLang>
 
 export default meta
