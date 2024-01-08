@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { FlagEnIcon } from '@/asserts/icons/components/FlagEnIcon'
+import { FlagRuIcon } from '@/asserts/icons/components/FlagRuIcon'
 import { Button } from '@/components/ui/button'
-import { Typography } from '@/components/ui/typography'
 
 import s from './switchLang.module.scss'
 
@@ -33,10 +34,9 @@ export const SwitchLang = () => {
   }
 
   return (
-    <div className={'SelectContainer'}>
-      <Button className={s.button} onClick={toggleLanguage} variant={'link'}>
-        {currentLang}
-      </Button>
-    </div>
+    <Button className={s.buttonContainer} onClick={toggleLanguage} variant={'link'}>
+      {(currentLang === Lang.RU && <FlagRuIcon />) || <FlagEnIcon />}
+      {currentLang}
+    </Button>
   )
 }
