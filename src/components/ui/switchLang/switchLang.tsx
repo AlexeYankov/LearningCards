@@ -59,7 +59,7 @@ export enum Lang {
   EN = 'en',
   RU = 'ru',
 }
-export const SelectDemo = () => {
+export const SwitchLang = () => {
   const { i18n } = useTranslation()
 
   useEffect(() => {
