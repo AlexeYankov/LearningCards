@@ -1,1 +1,1 @@
-export { SwitchLang } from './switchLang.tsx'
+export { SwitchLang } from './switchLang'
