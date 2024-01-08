@@ -1,1 +1,0 @@
-export { SwitchLang } from './switch'
