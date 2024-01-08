@@ -111,13 +111,13 @@ export const DecksPageName = () => {
           </Button>
         }
       >
-        <ModalTitle title={'Add New Pack'} />
+        <ModalTitle title={t('add_new_deck')} />
         <form onSubmit={onSubmit}>
           <div className={s.contentComponents}>
             <img alt={''} className={s.img} src={selectedImage || ''} />
             <label className={s.changeCover} htmlFor={'input__file'}>
               <ImageIcon />
-              Change Cover
+              {t('change_cover')}
             </label>
             <input
               className={s.inputFile}
@@ -128,8 +128,8 @@ export const DecksPageName = () => {
             <TextField
               errorMessage={errors.name && errors.name?.message}
               inputId={'Name Pack'}
-              label={'Name Pack'}
-              placeholder={'Name'}
+              label={t('name')}
+              placeholder={t('name')}
               {...register('name')}
             />
             <CheckBox
@@ -137,7 +137,7 @@ export const DecksPageName = () => {
               SelectedIconID={'checkbox-selected'}
               checked={isPrivate}
               height={'24'}
-              label={'Private pack'}
+              label={t('private_deck')}
               onChange={handeCheckedChange}
               width={'24'}
             />
@@ -149,7 +149,7 @@ export const DecksPageName = () => {
               type={'button'}
               variant={'secondary'}
             >
-              Cancel
+              {t('cancel')}
             </Button>
             <Button
               classNameBtnBox={s.btnBox}
@@ -157,7 +157,7 @@ export const DecksPageName = () => {
               type={'submit'}
               variant={'primary'}
             >
-              Add New Pack
+              {t('add_new_deck')}
             </Button>
           </div>
         </form>

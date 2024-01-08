@@ -1,15 +1,11 @@
-import { Ref, forwardRef } from 'react'
-
-export const flagRuIcon = forwardRef<SVGSVGElement, any>((props, ref: Ref<SVGSVGElement>) => {
+export const FlagRuIcon = () => {
   return (
     <svg
       fill={'none'}
-      height={'800px'}
-      ref={ref}
+      height={'20px'}
       viewBox={'0 -4 28 28'}
-      width={'800px'}
+      width={'20px'}
       xmlns={'http://www.w3.org/2000/svg'}
-      {...props}
     >
       <g clipPath={'url(#clip0_503_2726)'}>
         <rect
@@ -26,7 +22,6 @@ export const flagRuIcon = forwardRef<SVGSVGElement, any>((props, ref: Ref<SVGSVG
           height={'20'}
           id={'mask0_503_2726'}
           maskUnits={'userSpaceOnUse'}
-          style={{ maskType: 'alpha' }}
           width={'28'}
           x={'0'}
           y={'0'}
@@ -64,4 +59,4 @@ export const flagRuIcon = forwardRef<SVGSVGElement, any>((props, ref: Ref<SVGSVG
       </defs>
     </svg>
   )
-})
+}
