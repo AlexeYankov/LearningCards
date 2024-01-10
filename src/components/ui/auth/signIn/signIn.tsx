@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -24,7 +25,7 @@ const loginSchema = z.object({
 
 export const SignIn = () => {
   const navigate = useNavigate()
-
+  const { t } = useTranslation()
   const {
     formState: { errors, isSubmitting },
     handleSubmit,
@@ -61,7 +62,7 @@ export const SignIn = () => {
       {isLoading && <Progress />}
       <Card className={s.signIn}>
         <Typography className={s.label} variant={'large'}>
-          Sign In
+          {t('sign_in')}
         </Typography>
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
           <TextField
@@ -88,7 +89,7 @@ export const SignIn = () => {
               checked={isPrivate}
               className={s.checkbox}
               height={'24'}
-              label={'Remember me'}
+              label={t('remember_me')}
               onChange={handeCheckedChange}
               width={'24'}
             />
@@ -100,7 +101,7 @@ export const SignIn = () => {
               to={'/forgotYourPassword'}
               variant={'body2'}
             >
-              Forgot Password?
+              {t('forgot_password')}
             </Typography>
           </div>
           <Button
@@ -111,17 +112,17 @@ export const SignIn = () => {
             variant={'primary'}
           >
             <Typography as={'p'} variant={'subtitle2'}>
-              Sign In
+              {t('sign_in')}
             </Typography>
           </Button>
         </form>
 
         <Typography as={'p'} className={s.linkDontHaveAccount} variant={'body2'}>
-          Don&apos;t have an account?
+          {t(`don't_have_an_account?`)}
         </Typography>
         <Button className={s.btnSignUp} type={'button'} variant={'link'}>
           <Typography as={Link} className={s.linkSignUp} to={'/signUp'} variant={'subtitle2'}>
-            Sign Up
+            {t('sign_up')}
           </Typography>
         </Button>
       </Card>

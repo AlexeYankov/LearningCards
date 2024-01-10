@@ -1,4 +1,5 @@
 import { FC, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link, Outlet, useSearchParams } from 'react-router-dom'
 
 import { useMeQuery } from '@/api/auth'
@@ -18,7 +19,7 @@ import style from '@/app.module.scss'
 export const Header: FC = () => {
   const dispatch = useAppDispatch()
   const { data, error, isFetching, isLoading } = useMeQuery()
-
+  const { t } = useTranslation()
   const handleResetFilter = () => {
     dispatch(resetFilter())
     localStorage.removeItem('searchValue')
@@ -50,7 +51,7 @@ export const Header: FC = () => {
                     to={'/login'}
                     variant={'subtitle2'}
                   >
-                    Sign In
+                    {t('sign_in')}
                   </Typography>
                 </Button>
               )}
