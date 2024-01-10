@@ -1,5 +1,5 @@
-import { FC } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { FC, useEffect } from 'react'
+import { Link, Outlet, useSearchParams } from 'react-router-dom'
 
 import { useMeQuery } from '@/api/auth'
 import { resetFilter } from '@/api/decks'
@@ -34,7 +34,6 @@ export const Header: FC = () => {
         <div className={s.textHeader}>
           {!isLoading && (
             <>
-              {/*<SwitchLang />*/}
               <SwitchLang />
               {!error && (
                 <DropDownMenu
@@ -65,6 +64,16 @@ export const Header: FC = () => {
 }
 
 export const Layout = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  useEffect(() => {
+    setSearchParams({
+      ...searchParams,
+      lang: localStorage.getItem('lang') || '',
+      page: localStorage.getItem('page') || '1',
+    })
+  }, [searchParams, setSearchParams])
+
   return (
     <>
       <Header />

@@ -97,14 +97,5 @@ export function PublicRoutes() {
 }
 
 export const Router = () => {
-  // const navigate = useNavigate()
-  // const location = useLocation()
-  //
-  // const currentPath = location.pathname
-  //
-  // const newPath = `/${localStorage.getItem('lang')}${currentPath}`
-  //
-  // navigate(newPath)
-
   return <RouterProvider router={router} />
 }

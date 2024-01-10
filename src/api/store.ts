@@ -1,21 +1,20 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
-import { decksApi } from '@/api/decks'
+import { baseApi } from '@/api/base'
 import cardsReducer from '@/api/cards/cards.reducer'
+import { decksApi } from '@/api/decks'
 import decksReducer from '@/api/decks/decks.reducer'
+import profileReducer from '@/api/profile/profile.reducer'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query/react'
-
-import { baseApi } from '@/api/base'
-import profileReducer from '@/api/profile/profile.reducer'
 
 export const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(baseApi.middleware).concat(decksApi.middleware),
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
-    decks: decksReducer,
     cards: cardsReducer,
+    decks: decksReducer,
     profile: profileReducer,
   },
 })
