@@ -59,6 +59,11 @@
   "confused": "Сбит с толку",
   "a_lot_of_thought": "Много мыслей",
   "knew_answer": "Знал ответ",
-  "delete_image": "Удалить картинку"
+  "delete_image": "Удалить картинку",
+  "sign_in": "Войти",
+  "remember_me": "Запомнить меня",
+ "forgot_password" : "Забыли пароль?",
+  "don't_have_an_account?": "У вас нет аккаунта?",
+  "sign_up": "Зарегистрироваться"
 }
 

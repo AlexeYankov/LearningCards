@@ -59,5 +59,10 @@
   "confused": "Confused",
   "a_lot_of_thought": "A lot of thought",
   "knew_answer": "Knew the answer",
-  "delete_image": "Delete image"
+  "delete_image": "Delete image",
+  "sign_in": "Sign in",
+  "remember_me": "Remember me",
+  "forgot_password": "Forgot Password?",
+  "don't_have_an_account?" : "Don't have an account?",
+  "sign_up": "Sign Up"
 }
