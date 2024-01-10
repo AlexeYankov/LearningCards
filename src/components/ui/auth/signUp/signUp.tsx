@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -27,7 +28,7 @@ const loginSchema = z
 
 export const SignUp = () => {
   const navigate = useNavigate()
-
+  const { t } = useTranslation()
   const {
     formState: { errors },
     handleSubmit,
@@ -62,23 +63,23 @@ export const SignUp = () => {
       {isLoading && <Progress />}
       <Card className={s.signUp}>
         <Typography className={s.label} variant={'large'}>
-          Sign Up
+          {t('sign_up')}
         </Typography>
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
           <TextField
             errorMessage={errors.email && errors.email?.message}
             inputId={'inputEmail'}
-            label={'Email'}
-            placeholder={'Email'}
+            label={t('email')}
+            placeholder={t('email')}
             type={'text'}
             {...register('email')}
           />
           <TextField
             errorMessage={errors.password && errors.password?.message}
             inputId={'inputPassword'}
-            label={'Password'}
+            label={t('password')}
             password
-            placeholder={'Password'}
+            placeholder={t('password')}
             type={'password'}
             {...register('password')}
           />
@@ -86,25 +87,25 @@ export const SignUp = () => {
             className={s.inputConfirmPassword}
             errorMessage={errors.confirmPassword && errors.confirmPassword?.message}
             inputId={'inputConfirmPassword'}
-            label={'Confirm Password'}
+            label={t('confirm_password')}
             password
-            placeholder={'Confirm Password'}
+            placeholder={t('confirm_password')}
             type={'password'}
             {...register('confirmPassword')}
           />
           <Button className={s.button} disabled={isLoading} type={'submit'} variant={'primary'}>
             <Typography as={'p'} variant={'subtitle2'}>
-              Sign Up
+              {t('sign_up')}
             </Typography>
           </Button>
         </form>
 
         <Typography as={'p'} className={s.linkAlreadyHaveAccount} variant={'body2'}>
-          Already have an account?
+          {t('already_have_an_account')}
         </Typography>
         <Button className={s.btnSignIn} type={'button'} variant={'link'}>
           <Typography as={Link} className={s.linkSignIn} to={'/login'} variant={'subtitle2'}>
-            Sign In
+            {t('sign_in')}
           </Typography>
         </Button>
       </Card>

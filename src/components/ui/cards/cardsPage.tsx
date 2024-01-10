@@ -185,7 +185,7 @@ export const CardsPage = () => {
           </Root>
         ) : (
           <Typography as={'p'} className={s.emptyPack} variant={'body1'}>
-            No content with these terms...
+            {t('no_content_with_these_terms')}
           </Typography>
         )}
         {cards?.pagination?.totalPages! > 1 && (

@@ -1,6 +1,6 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link, Outlet, useSearchParams } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 import { useMeQuery } from '@/api/auth'
 import { resetFilter } from '@/api/decks'
@@ -65,15 +65,14 @@ export const Header: FC = () => {
 }
 
 export const Layout = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-
-  useEffect(() => {
-    setSearchParams({
-      ...searchParams,
-      lang: localStorage.getItem('lang') || '',
-      page: localStorage.getItem('page') || '1',
-    })
-  }, [searchParams, setSearchParams])
+  // const [searchParams, setSearchParams] = useSearchParams()
+  //
+  // useEffect(() => {
+  //   setSearchParams({
+  //     ...searchParams,
+  //     lang: localStorage.getItem('lang') || '',
+  //   })
+  // }, [searchParams, setSearchParams])
 
   return (
     <>

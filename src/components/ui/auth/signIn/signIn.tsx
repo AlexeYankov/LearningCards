@@ -17,15 +17,14 @@ import { z } from 'zod'
 import s from './signIn.module.scss'
 
 type FormValues = z.infer<typeof loginSchema>
-
 const loginSchema = z.object({
   email: z.string().nonempty('Field is required').email(),
   password: z.string().nonempty('Field is required').min(3),
 })
 
 export const SignIn = () => {
-  const navigate = useNavigate()
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const {
     formState: { errors, isSubmitting },
     handleSubmit,
@@ -53,7 +52,7 @@ export const SignIn = () => {
         navigate('/')
       })
       .catch(() => {
-        toast.error('Incorrect login or password')
+        toast.error(t('incorrect_login_or_password'))
       })
   }
 
@@ -68,17 +67,17 @@ export const SignIn = () => {
           <TextField
             errorMessage={errors.email && errors.email?.message}
             inputId={'inputEmailSignUp'}
-            label={'Email'}
-            placeholder={'Email'}
+            label={t('email')}
+            placeholder={t('email')}
             type={'text'}
             {...register('email')}
           />
           <TextField
             errorMessage={errors.password && errors.password?.message}
             inputId={'inputPasswordSignUp'}
-            label={'Password'}
+            label={t('password')}
             password
-            placeholder={'Password'}
+            placeholder={t('password')}
             type={'password'}
             {...register('password')}
           />

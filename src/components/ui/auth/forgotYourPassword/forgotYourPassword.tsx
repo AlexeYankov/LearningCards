@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -23,7 +24,7 @@ const html =
 
 export const ForgotYourPassword = () => {
   const navigate = useNavigate()
-
+  const { t } = useTranslation()
   const {
     formState: { errors },
     handleSubmit,
@@ -57,33 +58,33 @@ export const ForgotYourPassword = () => {
 
       <Card className={s.forgotYourPassword}>
         <Typography className={s.label} variant={'large'}>
-          Forgot your password?
+          {t('forgot_your_password')}
         </Typography>
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
           <TextField
             className={s.inputEmail}
             errorMessage={errors.email && errors.email?.message}
             inputId={'inputEmailSignUp'}
-            label={'Email'}
-            placeholder={'Email'}
+            label={t('email')}
+            placeholder={t('email')}
             type={'text'}
             {...register('email')}
           />
           <Typography as={'p'} className={s.text} variant={'body2'}>
-            Enter your email address and we will send you further instructions
+            {t('Enter_email_address_further_instructions')}
           </Typography>
           <Button className={s.button} type={'submit'} variant={'primary'}>
             <Typography as={'p'} variant={'subtitle2'}>
-              Send Instructions
+              {t('send_instructions')}
             </Typography>
           </Button>
         </form>
         <Typography as={'p'} className={s.rememberYourPassword} variant={'body2'}>
-          Did you remember your password?
+          {t('did_you_remember_your_password')}
         </Typography>
         <Button className={s.btnTryLoggingIn} variant={'link'}>
           <Typography as={Link} className={s.tryLoggingIn} to={'/login'} variant={'subtitle2'}>
-            Try logging in
+            {t('try_logging_in')}
           </Typography>
         </Button>
       </Card>

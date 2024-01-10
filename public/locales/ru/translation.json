@@ -62,8 +62,26 @@
   "delete_image": "Удалить картинку",
   "sign_in": "Войти",
   "remember_me": "Запомнить меня",
- "forgot_password" : "Забыли пароль?",
+  "forgot_password": "Забыли пароль?",
   "don't_have_an_account?": "У вас нет аккаунта?",
-  "sign_up": "Зарегистрироваться"
+  "sign_up": "Зарегистрироваться",
+  "forgot_your_password": "Забыли пароль?",
+  "Enter_email_address_further_instructions": "Введите свой адрес электронной почты, и мы вышлем вам дальнейшие инструкции",
+  "send_instructions": "Отправить инсрукцию",
+  "did_you_remember_your_password": "Вы не забыли свой пароль?",
+  "try_logging_in": "Попробуйте войти",
+  "email": "Почта",
+  "password": "Пароль",
+  "confirm_password": "Подтвердите пароль",
+  "already_have_an_account": "У вас уже есть аккаунт?",
+  "check_email": "Проверьте электронную почту",
+  "back_to_sign_in": "Bернуться, чтобы зарегистрироваться",
+  "Weve_sent_Email_instructions": "Мы отправили электронное письмо с инструкциями на ",
+  "invalid_email": "Некоректная почта",
+  "field_is_required": "Поле обязательно",
+  "incorrect_login_or_password": "Неправильный пароль или почта",
+  "create_new_password": "Создать новый пароль",
+  "Create_new_password_instructions_to_email": "Создайте новый пароль, и мы вышлем вам дальнейшие инструкции на электронную почту.",
+  "no_content_with_these_terms":  "Нет контента с заданной темы..."
 }
 

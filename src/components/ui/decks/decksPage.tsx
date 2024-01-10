@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useLocation, useSearchParams } from 'react-router-dom'
 
 import {
@@ -30,7 +31,7 @@ export const DecksPage = () => {
   const minCardsCount = useAppSelector(state => state.decks.minCardsCount)
   const authorId = useAppSelector(state => state.decks.authorId)
   const name = useAppSelector(state => state.decks.name)
-
+  const { t } = useTranslation()
   const {
     data: decks,
     error,
@@ -89,7 +90,7 @@ export const DecksPage = () => {
         <DecksPageName />
         <DecksPageBar />
         {isDecksEmpty ? (
-          <div className={s.decksEmpty}>No content with these terms...</div>
+          <div className={s.decksEmpty}> {t('no_content_with_these_terms')}</div>
         ) : (
           <>
             <Root className={s.container__common}>
