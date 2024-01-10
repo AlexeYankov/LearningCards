@@ -1,12 +1,15 @@
 import { Link, useParams } from 'react-router-dom'
+
 import { EmailIcon } from '@/asserts/icons'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
+
 import s from './checkEmail.module.scss'
 
 export const CheckEmail = () => {
   const { email } = useParams()
+
   return (
     <Card className={s.box}>
       <Typography as={'span'} className={s.title} variant={'large'}>

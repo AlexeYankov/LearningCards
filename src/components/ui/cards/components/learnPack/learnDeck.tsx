@@ -1,21 +1,24 @@
-import { Card } from '@/components/ui/card'
-import { Typography } from '@/components/ui/typography'
-import s from './learnPack.module.scss'
-import { Button } from '@/components/ui/button'
+import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
+
+import { showMode } from '@/api/cards'
 import {
   useGetDecksByIdQuery,
   useLearnRandomCardQuery,
   useLearnRandomPostMutation,
 } from '@/api/decks'
-import { useParams } from 'react-router-dom'
-import { SearchIcon } from '@/asserts/icons'
-import { Progress } from '@/components/ui/loader'
 import { useAppDispatch, useAppSelector } from '@/api/store'
-import { showMode } from '@/api/cards'
-import { Show } from './show'
-import { Modal, ModalClose } from '@/components/ui/modal'
+import { SearchIcon } from '@/asserts/icons'
 import { BackLink } from '@/components/ui/backLink'
-import { useTranslation } from 'react-i18next'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Progress } from '@/components/ui/loader'
+import { Modal, ModalClose } from '@/components/ui/modal'
+import { Typography } from '@/components/ui/typography'
+
+import s from './learnPack.module.scss'
+
+import { Show } from './show'
 
 export const LearnDeck = () => {
   const dispatch = useAppDispatch()
@@ -58,7 +61,7 @@ export const LearnDeck = () => {
                 {data?.questionImg && (
                   <div className={s.imgAndIconInner}>
                     <SearchIcon />
-                    <img className={s.Image} src={data?.questionImg} alt="" />
+                    <img alt={''} className={s.Image} src={data?.questionImg} />
                   </div>
                 )}
               </div>
@@ -69,22 +72,24 @@ export const LearnDeck = () => {
                 <ModalClose />
               </div>
               <div>
-                {data?.questionImg && <img className={s.imgModal} src={data?.questionImg} alt="" />}
+                {data?.questionImg && (
+                  <img alt={''} className={s.imgModal} src={data?.questionImg} />
+                )}
               </div>
             </div>
           </Modal>
         </div>
         {show && (
           <Show
-            id={id}
-            dataId={data?.id}
-            answerImg={data?.answerImg}
             answer={data?.answer}
+            answerImg={data?.answerImg}
+            dataId={data?.id}
+            id={id}
             learn={learn}
           />
         )}
         {!show && (
-          <Button autoFocus onClick={onShowAnswer} className={s.Button} fullWidth>
+          <Button autoFocus className={s.Button} onClick={onShowAnswer}>
             <Typography variant={'subtitle2'}>{t('show_answer')}</Typography>
           </Button>
         )}

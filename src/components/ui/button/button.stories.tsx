@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { DeleteIcon, LogoutIcon } from '@/asserts/icons'
-
 import { Button } from '@/components/ui/button'
 import { ThemeDecorator } from '@/decorators'
 
@@ -13,9 +12,9 @@ const meta = {
     },
   },
   component: Button,
+  decorators: [ThemeDecorator],
   tags: ['autodocs'],
   title: 'Components/Button',
-  decorators: [ThemeDecorator],
 } satisfies Meta<typeof Button>
 
 export default meta
