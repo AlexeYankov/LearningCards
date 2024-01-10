@@ -93,13 +93,7 @@ export const SignUp = () => {
             type={'password'}
             {...register('confirmPassword')}
           />
-          <Button
-            className={s.button}
-            disabled={isLoading}
-            fullWidth
-            type={'submit'}
-            variant={'primary'}
-          >
+          <Button className={s.button} disabled={isLoading} type={'submit'} variant={'primary'}>
             <Typography as={'p'} variant={'subtitle2'}>
               {t('sign_up')}
             </Typography>

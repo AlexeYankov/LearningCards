@@ -73,7 +73,7 @@ export const ForgotYourPassword = () => {
           <Typography as={'p'} className={s.text} variant={'body2'}>
             {t('Enter_email_address_further_instructions')}
           </Typography>
-          <Button className={s.button} fullWidth type={'submit'} variant={'primary'}>
+          <Button className={s.button} type={'submit'} variant={'primary'}>
             <Typography as={'p'} variant={'subtitle2'}>
               {t('send_instructions')}
             </Typography>

@@ -15,19 +15,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
   } = props
 
   return (
-    <div className={`${s.box} ${classNameBtnBox ? classNameBtnBox : ''}`}>
-      <Component
-        className={`${s.button} ${s[variant]} ${fullWidth ? s.fullWidth : ''} ${
-          className ? className : ''
-        }`}
-        ref={ref}
-        type={'button'}
-        {...rest}
-      >
-        {icon && <div className={s.buttonIcon}>{icon}</div>}
-        {children}
-      </Component>
-    </div>
+    <Component
+      className={`${s.button} ${s[variant]} ${fullWidth ? s.fullWidth : ''} ${
+        className ? className : ''
+      }`}
+      ref={ref}
+      type={'button'}
+      {...rest}
+    >
+      {icon && <div className={s.buttonIcon}>{icon}</div>}
+      {children}
+    </Component>
   )
 })
 

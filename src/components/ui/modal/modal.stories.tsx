@@ -109,12 +109,14 @@ export const ModalWithComponentsDemo: Story = {
 export const ModalWithImageDemo: Story = {
   render: () => (
     <Modal className={s.contentComponents} triggerName={<Button>Test</Button>}>
-      <Select
-        classname={s.select}
-        options={['Select item 1', 'Select item 2', 'Select item 3']}
-        reversed
-        selectId={'Select-box'}
-      />
+      <div className={s.selectBox}>
+        <Select
+          classname={s.select}
+          options={['Select item 1', 'Select item 2', 'Select item 3']}
+          reversed
+          selectId={'Select-box'}
+        />
+      </div>
       <Typography as={'p'} variant={'subtitle2'}>
         Question:
       </Typography>

@@ -1,11 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
-
 import { EmailIcon } from '@/asserts/icons'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
-
 import s from './checkEmail.module.scss'
 
 export const CheckEmail = () => {

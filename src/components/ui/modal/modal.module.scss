@@ -124,7 +124,11 @@
   }
 }
 
-button.select {
+.selectBox {
+  width: 100%;
+}
+
+.select {
   height: unset;
   margin-top: 1px;
   padding: 8px 0;
@@ -143,6 +147,10 @@ button.select[data-state='open'] {
   :nth-child(2) {
     padding-left: 10px;
   }
+}
+
+.buttonModal {
+  padding: 6px 0;
 }
 
 button.select[data-placeholder] {
