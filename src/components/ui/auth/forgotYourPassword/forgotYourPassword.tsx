@@ -72,7 +72,7 @@ export const ForgotYourPassword = () => {
           <Typography as={'p'} className={s.text} variant={'body2'}>
             Enter your email address and we will send you further instructions
           </Typography>
-          <Button className={s.button} fullWidth type={'submit'} variant={'primary'}>
+          <Button className={s.button} type={'submit'} variant={'primary'}>
             <Typography as={'p'} variant={'subtitle2'}>
               Send Instructions
             </Typography>

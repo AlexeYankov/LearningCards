@@ -1,24 +1,26 @@
-import s from './imageSelector.module.scss'
-import { Button } from '@/components/ui/button'
-import { DeleteIcon, ImageIcon } from '@/asserts/icons'
 import { ChangeEvent } from 'react'
 
+import { DeleteIcon, ImageIcon } from '@/asserts/icons'
+import { Button } from '@/components/ui/button'
+
+import s from './imageSelector.module.scss'
+
 type Props = {
-  label?: string
-  selectedImage?: string
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
-  onImageDelete?: () => void
-  inputId?: string
   changeLabel?: string
   deleteLabel?: string
+  inputId?: string
+  label?: string
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
+  onImageDelete?: () => void
+  selectedImage?: string
 }
 export const ImageSelector = ({
-  selectedImage,
-  onChange,
-  onImageDelete,
-  inputId,
   changeLabel,
   deleteLabel,
+  inputId,
+  onChange,
+  onImageDelete,
+  selectedImage,
 }: Props) => {
   return (
     <>
@@ -26,19 +28,19 @@ export const ImageSelector = ({
       <div className={s.btnCoverBox}>
         {deleteLabel
           ? selectedImage && (
-              <Button variant={'secondary'} className={s.changeCover} onClick={onImageDelete}>
+              <Button className={s.changeCover} onClick={onImageDelete} variant={'secondary'}>
                 <DeleteIcon />
                 {deleteLabel}
               </Button>
             )
           : ''}
         {}
-        <label htmlFor={inputId} className={s.changeCover}>
+        <label className={s.changeCover} htmlFor={inputId}>
           <ImageIcon />
           {changeLabel}
         </label>
       </div>
-      <input className={s.inputFile} id={inputId} type="file" onChange={onChange} />
+      <input className={s.inputFile} id={inputId} onChange={onChange} type={'file'} />
     </>
   )
 }

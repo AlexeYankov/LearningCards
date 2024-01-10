@@ -107,7 +107,6 @@ export const SignIn = () => {
           <Button
             className={s.button}
             disabled={isSubmitting || isLoading}
-            fullWidth
             type={'submit'}
             variant={'primary'}
           >
