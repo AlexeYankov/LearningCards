@@ -1,18 +1,20 @@
 .container {
+  position: fixed;
   display: flex;
   flex-direction: column;
   gap: 2.25rem;
   align-items: center;
-
+  z-index: 999;
   width: 100%;
   margin-bottom: 35px;
   padding-bottom: 0;
-
   background: var(--color-dark-700);
   border-bottom: 1px solid var(--color-dark-500);
 }
 
 .header {
+  //position: fixed;
+
   display: flex;
   align-items: center;
   justify-content: space-between;

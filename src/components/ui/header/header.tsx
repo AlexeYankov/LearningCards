@@ -16,6 +16,8 @@ import { Typography } from '@/components/ui/typography'
 import s from './header.module.scss'
 import style from '@/app.module.scss'
 
+import up from '../../../asserts/up.png'
+
 export const Header: FC = () => {
   const dispatch = useAppDispatch()
   const { data, error, isFetching, isLoading } = useMeQuery()
@@ -65,20 +67,21 @@ export const Header: FC = () => {
 }
 
 export const Layout = () => {
-  // const [searchParams, setSearchParams] = useSearchParams()
-  //
-  // useEffect(() => {
-  //   setSearchParams({
-  //     ...searchParams,
-  //     lang: localStorage.getItem('lang') || '',
-  //   })
-  // }, [searchParams, setSearchParams])
+  const scrollToTop = () => {
+    window.scrollTo({
+      behavior: 'smooth',
+      top: 0,
+    })
+  }
 
   return (
     <>
       <Header />
       <div className={style.container}>
         <Outlet />
+      </div>
+      <div className={style.arrow} onClick={scrollToTop}>
+        <img alt={''} src={up} />
       </div>
     </>
   )
