@@ -6,7 +6,6 @@ export function App() {
   return (
     <>
       <Router />
-      {/*<AppRouter />*/}
       <ToastContainer
         autoClose={3000}
         closeOnClick
