@@ -7,6 +7,7 @@ import { resetFilter } from '@/api/decks'
 import { useAppDispatch } from '@/api/store'
 import logo from '@/asserts/Logo.svg'
 import userImg from '@/asserts/userImg.png'
+import up from '@/asserts/userImg.png'
 import { Button } from '@/components/ui/button'
 import { DropDownMenu } from '@/components/ui/dropDown'
 import { Progress } from '@/components/ui/loader'
@@ -15,8 +16,6 @@ import { Typography } from '@/components/ui/typography'
 
 import s from './header.module.scss'
 import style from '@/app.module.scss'
-
-import up from '../../../asserts/up.png'
 
 export const Header: FC = () => {
   const dispatch = useAppDispatch()
@@ -81,7 +80,7 @@ export const Layout = () => {
         <Outlet />
       </div>
       <div className={style.arrow} onClick={scrollToTop}>
-        <img alt={''} src={up} />
+        {/* <img alt={''} src={up} /> */}
       </div>
     </>
   )

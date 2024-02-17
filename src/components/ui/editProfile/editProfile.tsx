@@ -87,7 +87,6 @@ export const EditProfile = () => {
                 type={'submit'}
                 children={t('save_changes')}
                 className={s.button}
-                fullWidth
                 variant={'primary'}
                 onClick={activateViewMode}
               />

@@ -75,16 +75,19 @@
   }
 
   .form {
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    padding: 0 36px;
 
     .button {
-      margin: 0 36px 84px;
-      padding: 6px 28px;
+      margin-bottom: 30px;
     }
 
     .textField {
+      display: flex;
+      position: relative;
       margin-bottom: 15px;
-      padding: 0 36px;
     }
   }
 }
